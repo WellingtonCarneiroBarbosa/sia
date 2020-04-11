@@ -56,10 +56,10 @@
                             </button>
                         </div>
                         @endif
-
+                
                         @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> Ops...</strong>
+                            <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> {{ __("Opps") }}...</strong>
                                 <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -77,7 +77,7 @@
                             <small>{{ __("Fill in the details below to proceed") }}</small>
                         </div>
                         <!-- form reset password -->
-                        <form id="form" method="POST" action="{{ route('password.update') }}">
+                        <form class="form-loader" method="POST" action="{{ route('password.update') }}">
                         @csrf
                         <input type="hidden" name="token" value="{{ $token }}">
 

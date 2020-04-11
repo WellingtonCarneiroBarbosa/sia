@@ -26,10 +26,10 @@
                             </button>
                         </div>
                         @endif
-
+                
                         @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> Ops...</strong>
+                            <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> {{ __("Opps") }}...</strong>
                                 <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -48,7 +48,7 @@
                         <div class="text-center text-muted mb-4">
                             <small>{{ __("Fill in the details below to proceed") }}</small>
                         </div>
-                        <form method="POST" action="{{ route('password.email') }}" id="form">
+                        <form class="form-loader" method="POST" action="{{ route('password.email') }}">
                             @csrf
                             <div class="form-group mb-3">
                                 <div class="input-group input-group-alternative">

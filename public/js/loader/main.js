@@ -7,7 +7,7 @@ $(document).ready(function() {
      * If has any submit 
      * 
      */
-    $("#form").on("submit", function() {
+    $(".form-loader").on("submit", function() {
         /**
          * upload the page loader
          * 

@@ -37,7 +37,7 @@
                         <div class="text-center text-muted mb-4">
                             <small>{{ __("Fill in the details below to proceed") }}</small>
                         </div>
-                        <form id="form" method="POST" action="{{ route('login') }}">
+                        <form class="form-loader" method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="form-group mb-3">
                                 <div class="input-group input-group-alternative">

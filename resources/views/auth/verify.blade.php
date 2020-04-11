@@ -14,18 +14,18 @@
                     </div>
                     @endif
                     @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> Ops...</strong>
-                                <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                                </ul>
-                            </span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> {{ __("Opps") }}...</strong>
+                            <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                            </ul>
+                        </span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
                     @endif
                     <div class="card">
                         <div class="card-header">{{ __("Please activate your account.") }}</div>
@@ -33,7 +33,7 @@
                             <span>{{  __("A verification link has been sent to")  }}</span> <strong>{{auth()->user()->email}}</strong>
                             <br>
                             <span>{{ __("If you haven't received any emails, or if the link has expired,") }}</span>
-                            <a id="form" class="text-primary" href="{{ route('verification.resend') }}">{{ __('click here to request another') }}.</a>
+                            <a class="text-primary form-loader" href="{{ route('verification.resend') }}">{{ __('click here to request another') }}.</a>
                         </div>
                     </div>
                 </div>
