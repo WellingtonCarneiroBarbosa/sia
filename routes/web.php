@@ -19,6 +19,15 @@ Route::get('/', function (){
 
 Auth::routes();
 
-Route::get('/dash', 'HomeController@index')->name('home');
+Route::get('dash/configs/lang/{locale}', 'LocalizationController@index')->name('config.language');
 
-Route::get('lang/{locale}', 'LocalizationController@index');
+Route::group(['middleware' => ['auth']], function () {
+    //
+    Route::group(['prefix' => 'dash'], function () {
+        Route::get('/', 'HomeController@index')->name('home');
+    });
+    //
+});
+
+
+

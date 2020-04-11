@@ -80,21 +80,16 @@
                         </li>
                     </ul>
                 </div>
-                {{-- 
-                    @if(request()->routeIs('inicio'))
-                    <div class="navbar-collapse collapse">
-                        <ul>
-                            <li class="nav-item">
-                                <a class="nav-link" title="Click here to change the language" href="{{ config('app.url') }}en">{{ __("English") }}</a>
-                            </li>
-                            
-                            <li class="nav-item">
-                                <a class="nav-link" title="Clique aqui para alterar o idioma" href="{{ config('app.url') }}pt-BR">{{ __("Portuguese") }}</a>
-                            </li>
-                        </ul>
-                    </div> 
-                    @endif
-                --}}
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" title="{{ __("Click here to change the language") }}" href="{{ route('config.language', ['locale' => 'en']) }}">{{ __("English") }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" title="{{ __("Click here to change the language") }}" href="{{ route('config.language', ['locale' => 'pt-BR']) }}">{{ __("Portuguese") }}</a>
+                        </li>
+                    </ul>
+                </div> 
             </div>
         </nav>
 
