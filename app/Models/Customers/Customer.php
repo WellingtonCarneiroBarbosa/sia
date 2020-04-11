@@ -4,6 +4,8 @@ namespace App\Models\Customers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Schedules\Schedule;
+use Illuminate\Database\Eloquent\Relations\hasMany;
 
 class Customer extends Model
 {
@@ -26,4 +28,13 @@ class Customer extends Model
 
     public $timestamps = true;
     protected $softDelete = true;
+
+    /***
+     * Scheduling Customers
+     * 
+     */
+    public function schedulingCustomers()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }

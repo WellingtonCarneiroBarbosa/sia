@@ -80,11 +80,15 @@
                                 <tbody class="list">
                                     <!-- inicio corpo da tabela -->
                                     @if ($hasSchedules)
+                                    
+                                    @foreach($schedules as $schedule)
                                     <tr>
                                         <td>
                                             <div class="media align-items-center">
                                                 <div class="media-body">
-                                                    <span class="name mb-0 text-sm">{{ __("Without Data") }}</span>
+                                                    <span class="name mb-0 text-sm">
+                                                        {{ $schedule->schedulingPlace['name'] }}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </td>
@@ -92,22 +96,33 @@
                                         <td>
                                             <div class="media align-items-center">
                                                 <div class="media-body">
-                                                    <span class="name mb-0 text-sm">{{ __("Without Data") }}</span>
+                                                    <span class="name mb-0 text-sm">
+                                                        {{ dateBrazilianFormat($schedule->start_date) }} {{ timeBrazilianFormat($schedule->start_time) }} 
+                                                        |
+                                                        {{ dateBrazilianFormat($schedule->end_date) }} {{ timeBrazilianFormat($schedule->end_time) }}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </td>
 
                                         <td>
                                             <span class="badge badge-dot mr-4">
-                          <i class="bg-danger"></i>
-                          <span class="status">{{ __("Without Data") }}</span>
+
+                                                @if($schedule == null)
+                                                <i class="bg-danger"></i>
+                                                <span class="status">{{ __("Waiting confirmation") }}</span>
+                                                @else
+                                                <i class="bg-success"></i>
+                                                <span class="status">{{ __("Confirmed") }}</span>
+                                                @endif
+                                                
                                             </span>
                                         </td>
 
                                         <td>
                                             <div class="media align-items-center">
                                                 <div class="media-body">
-                                                    <span class="name mb-0 text-sm">{{ __("Without Data") }}</span>
+                                                    <span class="name mb-0 text-sm">{{ $schedule->schedulingCustomer['corporation'] }}</span>
                                                 </div>
                                             </div>
                                         </td>
@@ -123,10 +138,10 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <!-- fim do agendamento 01 -->
+                                    @endforeach
 
                                     @else
-                                    <!-- se houver agendamentos -->
+                                    <!-- se nao houver agendamentos -->
 
                                     <tr>
                                         <td class="budget">
@@ -137,8 +152,8 @@
                                         </td>
                                         <td>
                                             <span class="badge badge-dot mr-4">
-                            <i class="bg-danger"></i>
-                            <span class="status">{{ __("Without Data") }}</span>
+                                                <i class="bg-danger"></i>
+                                                <span class="status">{{ __("Without Data") }}</span>
                                             </span>
                                         </td>
                                         <td>

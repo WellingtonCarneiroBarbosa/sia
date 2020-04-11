@@ -4,6 +4,9 @@ namespace App\Models\Schedules;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Customers\Customer;
+use App\Models\Places\Place;
+use Illuminate\Database\Eloquent\Relations\belongsTo;
 
 class Schedule extends Model
 {
@@ -28,4 +31,22 @@ class Schedule extends Model
 
     public $timestamps = true;
     protected $softDelete = true;
+
+    /***
+     * Scheduling Customer
+     * 
+     */
+    public function schedulingCustomer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
+
+    /***
+     * Scheduling Place
+     * 
+     */
+    public function schedulingPlace()
+    {
+        return $this->belongsTo(Place::class, 'place_id', 'id');
+    }
 }

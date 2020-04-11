@@ -4,6 +4,8 @@ namespace App\Models\Places;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Schedules\Schedule;
+use Illuminate\Database\Eloquent\Relations\hasMany;
 
 class Place extends Model
 {
@@ -26,4 +28,13 @@ class Place extends Model
 
     public $timestamps = true;
     protected $softDelete = true;
+
+    /***
+     * Scheduling Places
+     * 
+     */
+    public function schedulingPlaces()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }
