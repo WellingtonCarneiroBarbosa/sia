@@ -1,12 +1,10 @@
-# Sistema de Gerenciamento de Eventos
+# Sistema Interno de Gerenciamento de Eventos
 Um projeto desenvolvido com _Laravel, Vue, Bootstrap e Jquery_
 <br>
 Você pode visualizá-lo em http://siaeventos.nbalarmes.com
 <br>
 Para obter um login de testes entre em contato com **carneirobarbosawellington@gmail.com**
-
-### Sistema Interno de Gerenciamento de Eventos
-<img src="https://github.com/WellingtonCarneiroBarbosa/sia/blob/master/public/dashboard/assets/img/brand/siaLogo.png" alt="SIA Eventos">
+<img src="https://github.com/WellingtonCarneiroBarbosa/sia/blob/master/public/dashboard/assets/img/brand/siaLogo.png" alt="SIA Eventos" style="widht: 0.9rem; height: 0.9rem;" >
 
 # Getting Started
 1. Primeiro, clone o repositório
