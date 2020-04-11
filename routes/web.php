@@ -19,15 +19,36 @@ Route::get('/', function (){
 
 Auth::routes();
 
+/***
+ * Change the app language
+ * 
+ */
 Route::get('dash/configs/lang/{locale}', 'LocalizationController@index')->name('config.language');
 
+/***
+ * Start
+ * Authenticated routes
+ * 
+ */
 Route::group(['middleware' => ['auth']], function () {
-    //
+    /***
+     * Start
+     * Dashboard routes
+     * 
+     */
     Route::group(['prefix' => 'dash'], function () {
         Route::get('/', 'HomeController@index')->name('home');
     });
-    //
+    /***
+     * End
+     * Dashboard routes
+     * 
+     */
 });
-
+/***
+ * End
+ * Authenticated routes
+ * 
+ */
 
 
