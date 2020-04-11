@@ -211,7 +211,7 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade active show" id="form-intervalo-data" role="tabpanel" aria-labelledby="form-intervalo-data">
                                     <h3>{{ __("Search by date range") }}</h3>
-                                    <form action="{{route('schedules.findPer.date')}}" onsubmit="loader()" method="POST">
+                                    <form action="{{route('schedules.findPer.date')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -220,7 +220,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="Fill this field" required name="inicio" class="form-control dateTop" placeholder="{{ __(" From ") }}" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="inicio" class="form-control dateTop" placeholder="{{ __(" From ") }}" type="date">
                                                     </div>
                                                 </div>
                                             </div>
@@ -230,22 +230,22 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="Fill this field" required name="fim" class="form-control dateTop" placeholder="{{ __(" To ") }}" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="fim" class="form-control dateTop" placeholder="{{ __(" To ") }}" type="date">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- btn pesquisar -->
                                         <div class="float-right">
-                                            <button title="{{ __("Click to Search") }}" class="btn btn-primary" type="submit">
-                                {{ __("Search") }}
-                              </button>
+                                            <button title="{{ __(" Click to Search ") }}" class="btn btn-primary" type="submit">
+                                                {{ __("Search") }}
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="form-data-local" role="tabpanel" aria-labelledby="form-data-local-tab">
                                     <h3>{{ __("Search by date and place") }}</h3>
-                                    <form action="{{route('schedules.findPer.dateAndPlace')}}" onsubmit="loader()" method="POST">
+                                    <form action="{{route('schedules.findPer.dateAndPlace')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -254,7 +254,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="Fill this field" required name="inicio" placeholder="{{ __(" From ") }}" class="form-control dateTop" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="inicio" placeholder="{{ __(" From ") }}" class="form-control dateTop" type="date">
                                                     </div>
                                                 </div>
                                             </div>
@@ -264,7 +264,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="Fill this field" required name="fim" class="form-control dateTop" placeholder="{{ __(" To ") }}" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="fim" class="form-control dateTop" placeholder="{{ __(" To ") }}" type="date">
                                                     </div>
                                                 </div>
                                             </div>
@@ -285,7 +285,7 @@
                                             <div class="col-6">
                                                 <div class="espaco"></div>
                                                 <div class="float-right">
-                                                    <button title="{{ __("Click to Search") }}" class="btn btn-primary" type="submit">
+                                                    <button title="{{ __(" Click to Search ") }}" class="btn btn-primary" type="submit">
                                             {{ __("Search") }}
                                         </button>
                                                 </div>
@@ -295,7 +295,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="form-unica-data" role="tabpanel" aria-labelledby="form-unica-data">
                                     <h3>{{ __("Search by single date") }}</h3>
-                                    <form action="{{route('schedules.findPer.specificDate')}}" onsubmit="loader()" method="POST">
+                                    <form action="{{route('schedules.findPer.specificDate')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -304,7 +304,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="Fill this field" required name="data" id="unica_data" class="form-control dateTop" placeholder="{{ __(" Date ") }}" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="data" id="unica_data" class="form-control dateTop" placeholder="{{ __(" Date ") }}" type="date">
                                                     </div>
                                                 </div>
                                             </div>
@@ -312,7 +312,7 @@
                                                 <div class="form-group">
                                                     <!-- btn pesquisar -->
                                                     <div class="float-right">
-                                                        <button title="{{ __("Click to Search") }}" class="btn btn-primary" type="submit">
+                                                        <button title="{{ __(" Click to Search ") }}" class="btn btn-primary" type="submit">
                                                     {{ __("Search") }}
                                                 </button>
                                                     </div>
@@ -335,6 +335,156 @@
         </div>
     </div>
     <!-- fim do modal filtros -->
+
+    <!-- modal create -->
+    <div class="col-md-4">
+        <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <div class="card bg-secondary shadow border-0">
+                            <div class="card-body px-lg-10 py-lg-10">
+                                <div class="text-center">
+                                    <h3>{{ __("Schedule Event") }}</h3>
+                                </div>
+                                <div class="text-center text-muted mb-4">
+                                    <small>{{ __("Fill in the details below to proceed") }}</small>
+                                </div>
+                                <form method="POST" action="{{ route('schedules.create') }}" class="form-loader">
+                                    @csrf
+                                    <!-- titulo do agendamento -->
+                                    <div class="form-group mb-3">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="ni ni-tag"></i></span>
+                                            </div>
+                                            <input id="title" title="{{ __("Fill this field") }}"  placeholder="{{ __("Schedule title") }}" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autofocus> 
+                                        </div>
+                                    </div>
+                                    <!-- fim do titulo do agendamento -->
+
+                                    <!-- local do agendamento -->
+                                    <div class="form-group mb-3">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text text-sm"><i class="fa fa-map mr-2"></i>{{ __("Place") }}</span>
+                                            </div>
+                                            @if ($hasPlaces)
+                                            <select name="local" id="local" class="form-control @error('local') is-invalid @enderror" required>
+                                                @foreach ($places as $place)
+                                                    <option value="{{$place->id}}">{{$place->name}}</option>
+                                                @endforeach
+                                            </select> 
+                                            @else
+                                            <select name="local" id="local" disabled class="form-control @error('local') is-invalid @enderror" required>
+                                                <option selected>{{ __("Please register a place") }}</option>
+                                            </select>
+                                            @endif 
+
+                                        </div>
+                                    </div>
+                                    <!-- fim local do agendamento -->
+
+                                    <!-- data inicial do agendamento -->
+                                    <div class="form-group focused">
+                                        <label for="date-final">{{ __("Start DateTime") }}</label>
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                            <input title="{{ __("Fill this field") }}"  id="start_date" type="date" class="form-control" name="start_date" required> 
+
+                                            <!--hora inicial do agendamento-->
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-clock"></i></span>
+                                            </div>
+
+                                            <input title="{{ __("Fill this field") }}"  id="start_time" type="time" class="form-control " name="start_time" required> 
+                                        </div>
+                                    </div>
+                                    <!-- fim da data inicial do agendamento -->
+
+                                    <!-- data final do agendamento -->
+                                    <div class="form-group focused">
+                                        <label for="date-final">{{ __("End DateTime") }}</label>
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                            <input title="{{ __("Fill this field") }}"  id="end_date" type="date" class="form-control" name="end_date" required> 
+
+                                            <!--hora final do agendamento-->
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-clock"></i></span>
+                                            </div>
+
+                                            <input title="{{ __("Fill this field") }}"  id="end_time" type="time" class="form-control " name="end_time" required>
+                                        </div>
+                                    </div>
+                                    <!-- fim da data final do agendamento -->
+
+                                    <!-- cliente do agendamento -->
+                                    <div class="form-group mb-3">
+                                        <div class="input-group input-group-alternative">
+
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="ni ni-single-02 mr-2"></i>{{ __("Customer") }}</span>
+                                            </div>
+
+                                            @if ($hasCustomers)
+                                            <select name="cliente" id="cliente" class="form-control @error('cliente') is-invalid @enderror" required>
+                                                @foreach ($customers as $customer)
+                                                  <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                                @endforeach
+                                              </select>
+                                            @else
+                                            <select name="cliente" id="cliente" disabled class="form-control @error('cliente') is-invalid @enderror" required>
+                                                <option selected>{{ __("Please register a customer") }}</option>
+                                            </select> 
+                                            @endif 
+                                            
+                                        </div>
+                                    </div>
+                                    <!-- fim do cliente do agendamento -->
+
+                                    <!-- detalhes do agendamento -->
+                                    <div class="form-group mb-3">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="ni ni-align-left-2"></i></span>
+                                            </div>
+                                            <textarea title="{{ __("Fill this field") }}"  id="detalhes" placeholder="Detalhes do Agendamento" class="form-control @error('detalhes') is-invalid @enderror" name="detalhes" value="{{ old('detalhes') }}"></textarea> 
+                                        </div>
+                                    </div>
+                                    <!-- fim do detalhes do agendamento -->
+
+                                    <!-- pendente ou nao -->
+
+                                    <div class="custom-control custom-control-alternative custom-checkbox">
+                                        <input class="custom-control-input" id="customCheckLogin" name="status" type="checkbox">
+                                        <label class="custom-control-label" for="customCheckLogin"><span>{{ __("Waiting confirmation") }}</span></label>
+                                    </div>
+                                    <!-- fim do pendente ou nao -->
+
+                                    <!-- submit button -->
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-outline-primary  ml-auto" data-dismiss="modal">{{ __("Cancel") }}</button>
+                                        @if($hasPlaces && $hasCustomers)
+                                        <button type="submit" id="agendar-submit" disabled class="btn btn-primary my-4">{{ __("Schedule") }}</button> 
+                                        @else
+                                        <button type="submit" class="btn btn-primary my-4" disabled>{{ __("Schedule") }}</button>
+                                        @endif
+                                    </div>
+                                    <!-- fim do submit button -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- fim do modal create -->
 
 
     @endsection
