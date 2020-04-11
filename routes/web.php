@@ -44,6 +44,66 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', 'HomeController@index')->name('home');
 
         /***
+         * Group for schedules routes
+         * 
+         */
+        Route::group(['prefix' => 'schedules'], function () {
+
+            Route::get('/create', function (){
+                return 'ok';
+            })->name('schedules.create');
+
+            /***
+             * Group for canceled 
+             * schedules
+             * 
+             */
+            Route::group(['prefix' => 'canceled'], function () {
+                Route::get('/', function () {
+                    return 'ok';
+                })->name('schedules.canceled.index');
+            });
+
+            /***
+             * Group for confirm 
+             * actions
+             * 
+             */
+            Route::group(['prefix' => 'confirm'], function () {
+                Route::get('/cancel', function (){
+                    return 'ok';
+                })->name('schedules.confirm.cancel');
+            });
+
+            /***
+             * Group for filters
+             * 
+             */
+            Route::group(['prefix' => 'find'], function () {
+                /***
+                 * Specific filter
+                 * 
+                 */
+                Route::group(['prefix' => 'per'], function () {
+                    
+                    Route::get('/date', function () {
+                        return 'ok';
+                    })->name('schedules.findPer.date');
+
+                    Route::get('/date-and-place', function () {
+                        return 'ok';
+                    })->name('schedules.findPer.dateAndPlace');
+
+                    Route::get('/specific-date', function (){
+                        return 'ok';
+                    })->name('schedules.findPer.specificDate');
+
+                });
+            });
+            //
+        });
+
+        /***
          * Group for users routes
          * 
          */
@@ -64,23 +124,23 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         /***
-         * Group for locations routes
+         * Group for places routes
          * 
          */
-        Route::group(['prefix' => 'locations'], function () {
+        Route::group(['prefix' => 'places'], function () {
             Route::get('/create', function (){
                 return 'ok';
-            })->name('locations.create');
+            })->name('places.create');
         });
 
         /***
-         * Group for clients routes
+         * Group for customers routes
          * 
          */
-        Route::group(['prefix' => 'clients'], function () {
+        Route::group(['prefix' => 'customers'], function () {
             Route::get('/create', function (){
                 return 'ok';
-            })->name('clients.create');
+            })->name('customers.create');
         });
 
         /***

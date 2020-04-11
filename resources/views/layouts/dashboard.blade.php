@@ -76,16 +76,16 @@
 
                             <!--Locais - left -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('locations.create') }}">
+                                <a class="nav-link" href="{{ route('places.create') }}">
                                     <i class="fa fa-map text-primary"></i>
-                                    <span title="{{ __("Click to manage the locations") }}" class="nav-link-text">{{ __("Register Location") }}</span>
+                                    <span title="{{ __("Click to manage the places") }}" class="nav-link-text">{{ __("Register Place") }}</span>
                                 </a>
                             </li>
                             <!-- Fim Locais - left -->
 
                             <!--clientes - left -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('clients.create') }}">
+                                <a class="nav-link" href="{{ route('customer.create') }}">
                                     <i class="ni ni-briefcase-24 text-primary"></i>
                                     <span title="{{ __("Click to manage the customers") }}" class="nav-link-text">{{ __("Register Customer") }}</span>
                                 </a>

@@ -12,7 +12,7 @@
 
                 <div class="col-lg-6 col-5 text-right">
                     <a href="#" class="btn btn-sm btn-neutral mb-2" id="novo-agendamento" data-toggle="modal" data-target="#modal-form">Novo</a>
-                    <a href="{{route('agendamentos-cancelados')}}" class="btn btn-sm btn-neutral mb-2">Cancelados</a>
+                    <a href="{{route('schedules.canceled.index')}}" class="btn btn-sm btn-neutral mb-2">Cancelados</a>
                     <a href="#" data-toggle="modal" data-target="#modal-filter" id="filtros-agendamento" class="btn btn-sm btn-neutral mb-2 mr-2">Filtros</a>
                 </div>
               </div>
@@ -325,7 +325,7 @@
                     <div class="text-center text-muted mb-4">
                         <small>Preencha os dados abaixo para prosseguir</small>
                     </div>
-                    <form method="POST" action="{{ route('criar-agendamento') }}" onsubmit="loader()" role="form">
+                    <form method="POST" action="{{ route('schedules.create') }}" onsubmit="loader()" role="form">
                     @csrf
                     <!-- titulo do agendamento -->
                     <div class="form-group mb-3">
@@ -551,7 +551,7 @@
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade active show" id="form-intervalo-data" role="tabpanel" aria-labelledby="form-intervalo-data">
                       <h3>Pesquisar por intervalo de data</h3>
-                      <form action="{{route('buscar-por-data')}}" onsubmit="loader()" method="POST">
+                      <form action="{{route('schedules.findPer.date')}}" onsubmit="loader()" method="POST">
                         @csrf
                             <div class="row">
                                 <div class="col-6">
@@ -585,7 +585,7 @@
                     </div>
                     <div class="tab-pane fade" id="form-data-local" role="tabpanel" aria-labelledby="form-data-local-tab">
                         <h3>Pesquisar por data e local</h3>
-                        <form action="{{route('buscar-por-data-e-local')}}" onsubmit="loader()" method="POST">
+                        <form action="{{route('schedules.findPer.dateAndPlace')}}" onsubmit="loader()" method="POST">
                           @csrf
                             <div class="row">
                                 <div class="col-6">
@@ -647,7 +647,7 @@
                     </div>
                     <div class="tab-pane fade" id="form-unica-data" role="tabpanel" aria-labelledby="form-unica-data">
                         <h3>Pesquisar por única data</h3>
-                        <form action="{{route('buscar-por-data-unica')}}" onsubmit="loader()" method="POST">
+                        <form action="{{route('schedules.findPer.specificDate')}}" onsubmit="loader()" method="POST">
                           @csrf
                               <div class="row">
                                   <div class="col-6">
