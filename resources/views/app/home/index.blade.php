@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('title', 'Iníco')
+@section('title', 'Início')
 
 <!-- inicio do header -->
 @section('content')
