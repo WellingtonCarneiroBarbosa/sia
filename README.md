@@ -4,7 +4,9 @@ Um projeto desenvolvido com _Laravel, Vue, Bootstrap e Jquery_
 Você pode visualizá-lo em http://siaeventos.nbalarmes.com
 <br>
 Para obter um login de testes entre em contato com **carneirobarbosawellington@gmail.com**
-<img src="https://github.com/WellingtonCarneiroBarbosa/sia/blob/master/public/dashboard/assets/img/brand/siaLogo.png" alt="SIA Eventos" style="widht: 0.9rem; height: 0.9rem;" >
+
+## Logo
+<img src="https://github.com/WellingtonCarneiroBarbosa/sia/blob/master/public/dashboard/assets/img/brand/siaLogo.png" alt="SIA Eventos" style="widht: 0.5rem; height: 0.5rem;" >
 
 # Getting Started
 1. Primeiro, clone o repositório
