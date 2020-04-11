@@ -20,3 +20,5 @@ Route::get('/', function (){
 Auth::routes();
 
 Route::get('/dash', 'HomeController@index')->name('home');
+
+Route::get('lang/{locale}', 'LocalizationController@index');
