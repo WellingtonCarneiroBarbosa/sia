@@ -5,7 +5,7 @@ Você pode visualizá-lo em http://siaeventos.nbalarmes.com
 <br>
 Para obter um login de testes entre em contato com **carneirobarbosawellington@gmail.com**
 
-# SIA Eventos - Sistema Interno de Gerenciamento de Eventos
+### Sistema Interno de Gerenciamento de Eventos
 <img src="https://github.com/WellingtonCarneiroBarbosa/sia/blob/master/public/dashboard/assets/img/brand/siaLogo.png" alt="SIA Eventos">
 
 # Getting Started
