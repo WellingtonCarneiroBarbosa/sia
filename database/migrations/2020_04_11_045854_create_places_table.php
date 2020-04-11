@@ -15,7 +15,9 @@ class CreatePlacesTable extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->tinyIncrements('id');
+            $table->string('name', 60);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

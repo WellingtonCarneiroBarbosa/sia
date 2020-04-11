@@ -127,9 +127,8 @@ Route::group(['middleware' => ['auth']], function () {
          * 
          */
         Route::group(['prefix' => 'places'], function () {
-            Route::get('/create', function (){
-                return 'ok';
-            })->name('places.create');
+            Route::get('/create', 'Places\PlaceController@create')->name('places.create');
+            Route::post('/store',  'Places\PlaceController@store')->name('places.store');
         });
 
         /***
@@ -137,9 +136,8 @@ Route::group(['middleware' => ['auth']], function () {
          * 
          */
         Route::group(['prefix' => 'customers'], function () {
-            Route::get('/create', function (){
-                return 'ok';
-            })->name('customers.create');
+            Route::get('/create', 'Customers\CustomerController@create')->name('customers.create');
+            Route::post('/store', 'Customers\CustomerController@store')->name('customers.store');
         });
 
         /***

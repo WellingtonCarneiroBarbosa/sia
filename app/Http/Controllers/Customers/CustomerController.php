@@ -1,14 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Schedules;
+namespace App\Http\Controllers\Customers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Schedules\Schedule;
+use App\Models\Customers\Customer;
 use Illuminate\Support\Facades\Lang;
 
-class ScheduleController extends Controller
+class CustomerController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('app.dashboard.customers.create');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -17,15 +37,16 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        $data    = $request->all();
-        $create  = Schedule::create($data);
+        $data   = $request->all();
+
+        $create = Customer::create($data);
 
         if(!$create){
             return redirect()
                      ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
         }
 
-        return redirect()->back()->with(['status' => Lang::get('Scheduling Created')]);
+        return redirect()->back()->with(['status' => Lang::get('Registered Customer')]);
     }
 
     /**

@@ -136,10 +136,10 @@
     "Schedule title": "Título do agendamento",
     "Please register a customer": "Por favor, cadastre um cliente",
     "Waiting confirmation": "Aguardando confirmação",
-    "": "",
-    "": "",
-    "": "",
-    "": "",
-    "": "",
+    "Corporation": "Corporação",
+    "Click to register this customer": "Clique para cadastrar essse cliente",
+    "Registered Customer": "Cliente Cadastrado",
+    "Registered Place": "Local Cadastrado",
+    "Click to register this place": "Clique para cadastrar essse local",
     "": ""
 }

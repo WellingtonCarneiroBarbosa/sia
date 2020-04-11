@@ -1,14 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Schedules;
+namespace App\Http\Controllers\Places;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Schedules\Schedule;
+use App\Models\Places\Place;
 use Illuminate\Support\Facades\Lang;
 
-class ScheduleController extends Controller
+class PlaceController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('app.dashboard.places.create');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -17,15 +37,16 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        $data    = $request->all();
-        $create  = Schedule::create($data);
+        $data   = $request->all();
+
+        $create = Place::create($data);
 
         if(!$create){
             return redirect()
                      ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
         }
 
-        return redirect()->back()->with(['status' => Lang::get('Scheduling Created')]);
+        return redirect()->back()->with(['status' => Lang::get('Registered Place')]);
     }
 
     /**

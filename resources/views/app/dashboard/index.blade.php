@@ -370,13 +370,13 @@
                                                 <span class="input-group-text text-sm"><i class="fa fa-map mr-2"></i>{{ __("Place") }}</span>
                                             </div>
                                             @if ($hasPlaces)
-                                            <select name="local" id="local" class="form-control @error('local') is-invalid @enderror" required>
+                                            <select name="place_id" id="place_id" class="form-control @error('place_id') is-invalid @enderror" required>
                                                 @foreach ($places as $place)
                                                     <option value="{{$place->id}}">{{$place->name}}</option>
                                                 @endforeach
                                             </select> 
                                             @else
-                                            <select name="local" id="local" disabled class="form-control @error('local') is-invalid @enderror" required>
+                                            <select name="place_id" id="place_id" disabled class="form-control @error('place_id') is-invalid @enderror" required>
                                                 <option selected>{{ __("Please register a place") }}</option>
                                             </select>
                                             @endif 
@@ -432,13 +432,13 @@
                                             </div>
 
                                             @if ($hasCustomers)
-                                            <select name="cliente" id="cliente" class="form-control @error('cliente') is-invalid @enderror" required>
+                                            <select name="customer_id" id="customer_id" class="form-control @error('customer_id') is-invalid @enderror" required>
                                                 @foreach ($customers as $customer)
-                                                  <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                                  <option value="{{$customer->id}}">{{$customer->corporation}}</option>
                                                 @endforeach
                                               </select>
                                             @else
-                                            <select name="cliente" id="cliente" disabled class="form-control @error('cliente') is-invalid @enderror" required>
+                                            <select name="customer_id" id="customer_id" disabled class="form-control @error('customer_id') is-invalid @enderror" required>
                                                 <option selected>{{ __("Please register a customer") }}</option>
                                             </select> 
                                             @endif 
@@ -470,7 +470,7 @@
                                     <div class="text-center">
                                         <button type="button" class="btn btn-outline-primary  ml-auto" data-dismiss="modal">{{ __("Cancel") }}</button>
                                         @if($hasPlaces && $hasCustomers)
-                                        <button type="submit" id="agendar-submit" disabled class="btn btn-primary my-4">{{ __("Schedule") }}</button> 
+                                        <button type="submit" id="agendar-submit" class="btn btn-primary my-4">{{ __("Schedule") }}</button> 
                                         @else
                                         <button type="submit" class="btn btn-primary my-4" disabled>{{ __("Schedule") }}</button>
                                         @endif
