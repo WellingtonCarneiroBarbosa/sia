@@ -69,39 +69,32 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#" role="button">
                                 <i class="ni ni-atom d-lg-none"></i>
-                                <span class="nav-link-inner--text" title="{{ __("Click to know more about the system") }}">{{ __("About the project") }}</span>
+                                <span class="nav-link-inner--text" title="{{ __("Click to know more about the system") }}">{{ __("About the Project") }}</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link" role="button">
                                 <i class="ni ni-collection d-lg-none"></i>
-                                <span class="nav-link-inner--text" title="{{ __("Click to view usage documentation") }}">{{ __("How to use") }}?</span>
+                                <span class="nav-link-inner--text" title="{{ __("Click to view usage documentation") }}">{{ __("How To Use") }}?</span>
                             </a>
                         </li>
                     </ul>
                 </div>
-                @if(request()->routeIs('inicio'))
-                @php
-                    $locale = session()->get('locale');
-                @endphp
-                <div class="navbar-collapse collapse">
-                    <ul class="navbar-nav ml-auto">
-                        @switch($locale)
-                        @case('us')
-                        <li class="nav-item">
-                            <a class="nav-link" title="Click here to change the language" href="{{ config('app.url') }}en">{{ __("English") }}</a>
-                        </li>
-                        @break
-                        
-                        @case('pt-BR')
-                        <li class="nav-item">
-                            <a class="nav-link" title="Clique aqui para alterar o idioma" href="{{ config('app.url') }}pt-BR">{{ __("Portuguese") }}</a>
-                        </li>
-                        @break
-                        @endswitch
-                    </ul>
-                </div> 
-                @endif
+                {{-- 
+                    @if(request()->routeIs('inicio'))
+                    <div class="navbar-collapse collapse">
+                        <ul>
+                            <li class="nav-item">
+                                <a class="nav-link" title="Click here to change the language" href="{{ config('app.url') }}en">{{ __("English") }}</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" title="Clique aqui para alterar o idioma" href="{{ config('app.url') }}pt-BR">{{ __("Portuguese") }}</a>
+                            </li>
+                        </ul>
+                    </div> 
+                    @endif
+                --}}
             </div>
         </nav>
 
