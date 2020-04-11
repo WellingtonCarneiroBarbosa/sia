@@ -1,4 +1,4 @@
-# Sistema Interno de Gerenciamento de Eventos
+# Sistema Interno de Agendamento de Eventos
 Um projeto desenvolvido com _Laravel, Vue, Bootstrap e Jquery_
 <br>
 Você pode visualizá-lo em http://siaeventos.nbalarmes.com
