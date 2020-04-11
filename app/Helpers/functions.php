@@ -147,8 +147,6 @@
         return $date;
     }
 
-
-
     /***
      * Clean any cpf or cnpj 
      * 
