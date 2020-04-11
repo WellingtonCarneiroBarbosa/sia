@@ -67,7 +67,7 @@
                             @if(auth()->user()->role_id == 5)
                             <!--Usuários - left -->
                             <li class="nav-item">
-                                <a class="nav-link {{request()->routeIs('usuarios.index') ? 'active' : ''}}" href="{{route('usuarios.index')}}">
+                                <a class="nav-link {{request()->routeIs('users.index') ? 'active' : ''}}" href="{{route('users.index')}}">
                                     <i class="ni ni-circle-08 text-primary"></i>
                                     <span title="{{ __("Click to manage the users") }}" class="nav-link-text">{{ __("Users") }}</span>
                                 </a>
@@ -76,7 +76,7 @@
 
                             <!--Locais - left -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('locais.create') }}">
+                                <a class="nav-link" href="{{ route('locations.create') }}">
                                     <i class="fa fa-map text-primary"></i>
                                     <span title="{{ __("Click to manage the locations") }}" class="nav-link-text">{{ __("Register Location") }}</span>
                                 </a>
@@ -85,7 +85,7 @@
 
                             <!--clientes - left -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('empresa.create') }}">
+                                <a class="nav-link" href="{{ route('clients.create') }}">
                                     <i class="ni ni-briefcase-24 text-primary"></i>
                                     <span title="{{ __("Click to manage the customers") }}" class="nav-link-text">{{ __("Register Customer") }}</span>
                                 </a>
@@ -93,7 +93,7 @@
                             <!-- Fim clientes - left -->
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('estatisticas') }}">
+                                <a class="nav-link" href="{{ route('statistics') }}">
                                     <i class="fa fa-chart-line text-primary"></i>
                                     <span title="{{ __("Click to go to the statistics") }}" class="nav-link-text">{{ __("Statistics") }}</span>
                                 </a>
@@ -235,7 +235,7 @@
                                     <div class="dropdown-header noti-title">
                                         <h6 class="text-overflow m-0">{{ __("Hello!") }}</h6>
                                     </div>
-                                    <a href="{{route('meu-perfil')}}" class="dropdown-item">
+                                    <a href="{{route('myProfile.index')}}" class="dropdown-item">
                                         <i class="ni ni-single-02"></i>
                                         <span title="{{ __("Click to go to the your profile page") }}">{{ __("My Profile") }}</span>
                                     </a>
@@ -243,7 +243,7 @@
                                         <i class="ni ni-settings-gear-65"></i>
                                         <span {{ __("Click to go to the settings page") }}>{{ __("Settings") }}</span>
                                     </a>
-                                    <a href="{{ route('minhasatividades') }}" class="dropdown-item">
+                                    <a href="{{ route('myLogs') }}" class="dropdown-item">
                                         <i class="ni ni-calendar-grid-58"></i>
                                         <span title="{{ __("Click to go to your logs page") }}">{{ __("Logs") }}</span>
                                     </a>
@@ -322,7 +322,7 @@
                                         <div class="text-center text-muted mb-4">
                                             <small>{{ __("Help us understand how your system experience is going. If an error has occurred, please describe it.") }}</small>
                                         </div>
-                                        <form id="form" method="POST" action="{{ route('feedbackSistema.create') }}" role="form">
+                                        <form id="form" method="POST" action="{{ route('feedback.create') }}" role="form">
                                             @csrf
                                             <!-- Nome de quem esta reportando o erro -->
 
