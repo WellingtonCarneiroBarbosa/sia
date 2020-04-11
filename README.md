@@ -11,7 +11,7 @@ git clone https://github.com/WellingtonCarneiroBarbosa/sistema-de-gerenciamento-
 composer install
 npm install
 ```
-3. Na pasta do projeto, clone o arquivo **_.env.exemple_** e atualize com suas variáveis de ambiente. Após, crie um banco de dados com o nome configurado no **_.env_**.
+3. Na pasta do projeto, clone o arquivo **_.env.exemple_** e renome-o para **.env**. Então, atualize com suas variáveis de ambiente. Após, crie um banco de dados com o nome configurado no **_.env_**.
 Então, gere a chave da aplicação e publique as alterações
 ``` 
 php artisan key:generate
