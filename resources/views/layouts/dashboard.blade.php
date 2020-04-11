@@ -45,7 +45,7 @@
                 <!-- Brand -->
                 <div class="sidenav-header align-items-center" style="margin-bottom: 2em;">
                     <a class="navbar-brand" href="{{route('home')}}">
-                        <img src="{{asset('dashboard/assets/img/brand/siaLogo.png')}}" class="navbar-brand-img" alt="{{ config('app.name', 'Laravel') }}">{{ config('app.name', 'Laravel') }}
+                        <img src="{{asset('dashboard/assets/img/brand/siaLogo.png')}}" class="navbar-brand-img" alt="{{ config('app.name', 'Laravel') }}"><span class="ml-2">{{ config('app.name', 'Laravel') }}</span>
                     </a>
                 </div>
                 <!-- Divider -->
@@ -85,7 +85,7 @@
 
                             <!--clientes - left -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('customer.create') }}">
+                                <a class="nav-link" href="{{ route('customers.create') }}">
                                     <i class="ni ni-briefcase-24 text-primary"></i>
                                     <span title="{{ __("Click to manage the customers") }}" class="nav-link-text">{{ __("Register Customer") }}</span>
                                 </a>
@@ -360,8 +360,7 @@
     </div>
 
     <!-- Core -->
-    <script src="{{ asset('dashboard/assets/vendor/jquery/dist/jquery.min.js')  }}"></script>
-    <script src="{{ asset('dashboard/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')  }}"></script>
+    <script src="{{ asset('home/assets/js/core/bootstrap.min.js') }}"></script>
     <!--  JS -->
     <script src="{{ asset('dashboard/assets/js/argon.js?v=1.2.0')  }}"></script>
     <script src="{{ asset('js/loader/main.min.js') }}"></script>
