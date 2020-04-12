@@ -18,6 +18,11 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $data    = $request->all();
+
+        if($request->status){
+            $data['status'] = null;
+        }
+
         $create  = Schedule::create($data);
 
         if(!$create){

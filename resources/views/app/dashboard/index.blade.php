@@ -108,7 +108,7 @@
                                         <td>
                                             <span class="badge badge-dot mr-4">
 
-                                                @if($schedule == null)
+                                                @if(!$schedule->status)
                                                 <i class="bg-danger"></i>
                                                 <span class="status">{{ __("Waiting confirmation") }}</span>
                                                 @else
@@ -178,15 +178,14 @@
                                     @endif
                                 </tbody>
                                 <!-- fim do corpo da tabela -->
-                                <div class="float-right">
-                                    {{ $schedules->links() }}
-                                </div>
-
                                 <br>
                             </table>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="float-right">
+                {{ $schedules->links() }}
             </div>
         </div>
     </div>
@@ -468,10 +467,10 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="ni ni-align-left-2"></i></span>
                                             </div>
-                                            <textarea title="{{ __("Fill this field") }}"  id="detalhes" placeholder="Detalhes do Agendamento" class="form-control @error('detalhes') is-invalid @enderror" name="detalhes" value="{{ old('detalhes') }}"></textarea> 
+                                            <textarea title="{{ __("Fill this field") }}"  id="details" placeholder="{{ __("Scheduling Details") }}" class="form-control @error('details') is-invalid @enderror" name="details" value="{{ old('details') }}"></textarea> 
                                         </div>
                                     </div>
-                                    <!-- fim do detalhes do agendamento -->
+                                    <!-- fim do details do agendamento -->
 
                                     <!-- pendente ou nao -->
 
