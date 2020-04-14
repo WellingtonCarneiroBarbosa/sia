@@ -2,7 +2,7 @@
     "Name": "Nome",
     "E-Mail Address": "Email",
     "New password": "Nova senha",
-    "Confirm Password": "Confirmação de senha",
+    "Confirm Password": "Confirmar Senha",
     "Remember Me": "Mantenha-me conectado",
     "Forgot Your Password?": "Esqueceu sua senha?",
     "Login": "Entrar",
@@ -144,5 +144,9 @@
     "at": "às",
     "confirmed": "confirmado",
     "Scheduling Details": "Detalhes do Agendamento",
-    "Select a time": "Selecione um horário"
+    "Select a time": "Selecione um horário",
+    "Confirm": "Confirmar",
+    "Password": "Senha",
+    "Click to confirm your password": "Clique para confirmar sua senha",
+    "Come Back": "Voltar"
 }
