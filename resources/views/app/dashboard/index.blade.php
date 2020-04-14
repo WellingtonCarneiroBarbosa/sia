@@ -237,7 +237,7 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade active show" id="form-intervalo-data" role="tabpanel" aria-labelledby="form-intervalo-data">
                                     <h3>{{ __("Search by date range") }}</h3>
-                                    <form action="{{route('schedules.findPer.date')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.findPer.dateRange')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -246,7 +246,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="inicio" class="form-control dateTop" placeholder="{{ __(" From ") }}" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="start_date" class="form-control dateTop" placeholder="{{ __(" From ") }}" type="date">
                                                     </div>
                                                 </div>
                                             </div>
@@ -256,7 +256,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="fim" class="form-control dateTop" placeholder="{{ __(" To ") }}" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="end_date" class="form-control dateTop" placeholder="{{ __(" To ") }}" type="date">
                                                     </div>
                                                 </div>
                                             </div>
@@ -305,6 +305,19 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-map"></i></span>
                                                         </div>
+
+                                                        @if ($hasPlaces)
+                                                        <select name="place_id" id="place_id" class="form-control @error('place_id') is-invalid @enderror" required>
+                                                            @foreach ($places as $place)
+                                                                <option value="{{$place->id}}">{{$place->name}}</option>
+                                                            @endforeach
+                                                        </select> 
+                                                        @else
+                                                        <select name="place_id" id="place_id" disabled class="form-control @error('place_id') is-invalid @enderror" required>
+                                                            <option selected>{{ __("Please register a place") }}</option>
+                                                        </select>
+                                                        @endif 
+
                                                     </div>
                                                 </div>
                                             </div>
