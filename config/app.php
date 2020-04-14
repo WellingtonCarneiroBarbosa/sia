@@ -134,6 +134,12 @@ return [
     |
     */
 
+    /**
+     * PAGINATE LIMIT
+     * 
+     */
+    'paginate_limit' => env('PAGINATE_LIMIT'),
+
     'providers' => [
 
         /*

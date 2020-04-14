@@ -88,7 +88,7 @@ Route::group(['middleware' => ['auth']], function () {
                  */
                 Route::group(['prefix' => 'per'], function () {
                     
-                    Route::post('/date-range', 'Schedules\FindScheduleController@dateRange')
+                    Route::any('/date-range', 'Schedules\FindScheduleController@dateRange')
                                                       ->name('schedules.findPer.dateRange');
 
                     Route::get('/date-and-place', function () {

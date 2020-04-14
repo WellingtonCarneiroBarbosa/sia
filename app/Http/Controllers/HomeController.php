@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         $schedules      = Schedule::with('schedulingCustomer')
                                      ->with('schedulingPlace')
-                                                 ->paginate(5);   
+                      ->paginate(config('app.paginate_limit'));   
         $places         = Place::get();
 
         $hasPlaces      = hasData($places);

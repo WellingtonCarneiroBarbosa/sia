@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="col-lg-6 col-5 text-right">
-                    <a href="#" onclick="comeBack();" class="btn btn-sm btn-neutral mb-2">{{ __("Come Back") }}</a>
+                    <a href="{{ route('home') }}" class="btn btn-sm btn-neutral mb-2">{{ __("Come back to schedules") }}</a>
                 </div>
             </div>
             <!-- fim do header -->
@@ -22,16 +22,9 @@
 <div class="container-fluid mt--6">
     <!-- conteudo da pagina -->
 
-    @if($hasSchedules)
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <span class="alert-inner--text"><i class="ni ni-like-2"></i><strong>{{  __("Success") }}!</strong>{{ $response }}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-    </div>
-    @else 
+    @if(!$hasSchedules)
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> {{ __("Opps") }}...</strong>{{ $response }}</span>
+        <span class="alert-inner--text"><i class="fas fa-thumbs-down mr-2"></i><strong> {{ __("Opps") }}...</strong>{{ $response }}</span>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">×</span>
         </button>
@@ -179,7 +172,7 @@
                 </div>
             </div>
             <div class="float-right">
-                {{ $schedules->links() }}
+                {{ $schedules->appends($data)->links() }}
             </div>
         </div>
     </div>

@@ -11,14 +11,13 @@ use DB;
 
 class FindScheduleController extends Controller
 {
-
     /**
      * Find a schedule by date range
      * 
      */
 
     public function dateRange(Request $request){
-        $data       = $request->all();
+        $data       = $request->except('_token');
 
         $start_date = $data['start_date'];
         $end_date   = $data['end_date'];
@@ -33,21 +32,20 @@ class FindScheduleController extends Controller
                     ->orWhere('end_date', $end_date)
                     ->orWhereBetween('start_date', [$start_date, $end_date])
                     ->orWhereBetween('end_date',   [$start_date, $end_date])
-                    ->paginate(5);
+                    ->paginate(config('app.paginate_limit'));
 
-        $hasSchedules       = hasData($schedules);
-        $howManySchedules   = count($schedules);
+        $hasSchedules = hasData($schedules);
 
-        if($hasSchedules){
-            $response = Lang::get(' We found ') . $howManySchedules . Lang::get(' bookings');
-        }else{
+        if(!$hasSchedules){
             $response = Lang::get(" We didn't find any schedule");
+        }else{
+            $response = null;
         }
         
         return view('app.dashboard.schedules.find', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
-            'response'  => $response
+            'response'  => $response,  'data'         => $data
         ]);
     }
 }
