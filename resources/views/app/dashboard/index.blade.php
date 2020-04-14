@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="col-lg-6 col-5 text-right">
-                    <a href="#" class="btn btn-sm btn-neutral mb-2" id="novo-agendamento" data-toggle="modal" data-target="#modal-form">{{ __("New") }}</a>
+                    <a href="{{ route('schedules.create') }}" class="btn btn-sm btn-neutral mb-2" id="novo-agendamento">{{ __("New") }}</a>
                     <a href="{{route('schedules.canceled.index')}}" class="btn btn-sm btn-neutral mb-2">{{ __("Canceled") }}</a>
                     <a href="#" data-toggle="modal" data-target="#modal-filter" id="filtros-agendamento" class="btn btn-sm btn-neutral mb-2 mr-2">{{ __("Filters") }}</a>
                 </div>
@@ -28,10 +28,12 @@
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <span class="alert-inner--text"><i class="ni ni-like-2"></i><strong>{{  __("Success") }}!</strong> {{session('status')}}</span>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
+            <span aria-hidden="true">×</span>
+        </button>
     </div>
-    @endif @if ($errors->any())
+    @endif
+    
+    @if ($errors->any())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> {{ __("Opps") }}...</strong>
                 <ul>
@@ -41,15 +43,17 @@
                 </ul>
             </span>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
+            <span aria-hidden="true">×</span>
+        </button>
     </div>
-    @endif @if(session('error'))
+    @endif
+    
+    @if(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> {{ __("Opps") }}...</strong>{{session('error')}}</span>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+            <span aria-hidden="true">×</span>
+        </button>
     </div>
     @endif
 
@@ -85,6 +89,10 @@
                                     <tr>
                                         <td>
                                             <div class="media align-items-center">
+                                                <a href="#" class="avatar avatar-md rounded-circle mr-3">
+                                                  <img alt="Image placeholder" src="https://via.placeholder.com/150">
+                                                </a>
+
                                                 <div class="media-body">
                                                     <span class="name mb-0 text-sm">
                                                         {{ $schedule->schedulingPlace['name'] }}
@@ -121,6 +129,10 @@
 
                                         <td>
                                             <div class="media align-items-center">
+                                                <a href="#" class="avatar avatar-sm rounded-circle mr-3">
+                                                  <img alt="Image placeholder" src="https://via.placeholder.com/150">
+                                                </a>
+
                                                 <div class="media-body">
                                                     <span class="name mb-0 text-sm">{{ $schedule->schedulingCustomer['corporation'] }}</span>
                                                 </div>
@@ -349,156 +361,4 @@
         </div>
     </div>
     <!-- fim do modal filtros -->
-
-    <!-- modal create -->
-    <div class="col-md-4">
-        <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-                <div class="modal-content">
-                    <div class="modal-body p-0">
-                        <div class="card bg-secondary shadow border-0">
-                            <div class="card-body px-lg-10 py-lg-10">
-                                <div class="text-center">
-                                    <h3>{{ __("Schedule Event") }}</h3>
-                                </div>
-                                <div class="text-center text-muted mb-4">
-                                    <small>{{ __("Fill in the details below to proceed") }}</small>
-                                </div>
-                                <form method="POST" action="{{ route('schedules.create') }}" class="form-loader">
-                                    @csrf
-                                    <!-- titulo do agendamento -->
-                                    <div class="form-group mb-3">
-                                        <div class="input-group input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-tag"></i></span>
-                                            </div>
-                                            <input id="title" title="{{ __("Fill this field") }}"  placeholder="{{ __("Schedule title") }}" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autofocus> 
-                                        </div>
-                                    </div>
-                                    <!-- fim do titulo do agendamento -->
-
-                                    <!-- local do agendamento -->
-                                    <div class="form-group mb-3">
-                                        <div class="input-group input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text text-sm"><i class="fa fa-map mr-2"></i>{{ __("Place") }}</span>
-                                            </div>
-                                            @if ($hasPlaces)
-                                            <select name="place_id" id="place_id" class="form-control @error('place_id') is-invalid @enderror" required>
-                                                @foreach ($places as $place)
-                                                    <option value="{{$place->id}}">{{$place->name}}</option>
-                                                @endforeach
-                                            </select> 
-                                            @else
-                                            <select name="place_id" id="place_id" disabled class="form-control @error('place_id') is-invalid @enderror" required>
-                                                <option selected>{{ __("Please register a place") }}</option>
-                                            </select>
-                                            @endif 
-
-                                        </div>
-                                    </div>
-                                    <!-- fim local do agendamento -->
-
-                                    <!-- data inicial do agendamento -->
-                                    <div class="form-group focused">
-                                        <label for="date-final">{{ __("Start DateTime") }}</label>
-                                        <div class="input-group input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                            </div>
-                                            <input title="{{ __("Fill this field") }}"  id="start_date" type="date" class="form-control" name="start_date" required> 
-
-                                            <!--hora inicial do agendamento-->
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-clock"></i></span>
-                                            </div>
-
-                                            <input title="{{ __("Fill this field") }}"  id="start_time" type="time" class="form-control " name="start_time" required> 
-                                        </div>
-                                    </div>
-                                    <!-- fim da data inicial do agendamento -->
-
-                                    <!-- data final do agendamento -->
-                                    <div class="form-group focused">
-                                        <label for="date-final">{{ __("End DateTime") }}</label>
-                                        <div class="input-group input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                            </div>
-                                            <input title="{{ __("Fill this field") }}"  id="end_date" type="date" class="form-control" name="end_date" required> 
-
-                                            <!--hora final do agendamento-->
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-clock"></i></span>
-                                            </div>
-
-                                            <input title="{{ __("Fill this field") }}"  id="end_time" type="time" class="form-control " name="end_time" required>
-                                        </div>
-                                    </div>
-                                    <!-- fim da data final do agendamento -->
-
-                                    <!-- cliente do agendamento -->
-                                    <div class="form-group mb-3">
-                                        <div class="input-group input-group-alternative">
-
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-single-02 mr-2"></i>{{ __("Customer") }}</span>
-                                            </div>
-
-                                            @if ($hasCustomers)
-                                            <select name="customer_id" id="customer_id" class="form-control @error('customer_id') is-invalid @enderror" required>
-                                                @foreach ($customers as $customer)
-                                                  <option value="{{$customer->id}}">{{$customer->corporation}}</option>
-                                                @endforeach
-                                              </select>
-                                            @else
-                                            <select name="customer_id" id="customer_id" disabled class="form-control @error('customer_id') is-invalid @enderror" required>
-                                                <option selected>{{ __("Please register a customer") }}</option>
-                                            </select> 
-                                            @endif 
-                                            
-                                        </div>
-                                    </div>
-                                    <!-- fim do cliente do agendamento -->
-
-                                    <!-- detalhes do agendamento -->
-                                    <div class="form-group mb-3">
-                                        <div class="input-group input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-align-left-2"></i></span>
-                                            </div>
-                                            <textarea title="{{ __("Fill this field") }}"  id="details" placeholder="{{ __("Scheduling Details") }}" class="form-control @error('details') is-invalid @enderror" name="details" value="{{ old('details') }}"></textarea> 
-                                        </div>
-                                    </div>
-                                    <!-- fim do details do agendamento -->
-
-                                    <!-- pendente ou nao -->
-
-                                    <div class="custom-control custom-control-alternative custom-checkbox">
-                                        <input class="custom-control-input" id="customCheckLogin" name="status" type="checkbox">
-                                        <label class="custom-control-label" for="customCheckLogin"><span>{{ __("Waiting confirmation") }}</span></label>
-                                    </div>
-                                    <!-- fim do pendente ou nao -->
-
-                                    <!-- submit button -->
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-outline-primary  ml-auto" data-dismiss="modal">{{ __("Cancel") }}</button>
-                                        @if($hasPlaces && $hasCustomers)
-                                        <button type="submit" id="agendar-submit" class="btn btn-primary my-4">{{ __("Schedule") }}</button> 
-                                        @else
-                                        <button type="submit" class="btn btn-primary my-4" disabled>{{ __("Schedule") }}</button>
-                                        @endif
-                                    </div>
-                                    <!-- fim do submit button -->
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- fim do modal create -->
-
-
-    @endsection
+@endsection

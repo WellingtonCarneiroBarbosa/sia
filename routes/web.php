@@ -49,8 +49,11 @@ Route::group(['middleware' => ['auth']], function () {
          */
         Route::group(['prefix' => 'schedules'], function () {
 
-            Route::post('/create', 'Schedules\ScheduleController@store')
+            Route::get('/create', 'Schedules\ScheduleController@create')
                                               ->name('schedules.create');
+
+            Route::post('/store', 'Schedules\ScheduleController@store')
+                                              ->name('schedules.store');
 
             /***
              * Group for canceled 

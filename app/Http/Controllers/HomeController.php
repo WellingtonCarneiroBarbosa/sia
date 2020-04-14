@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Schedules\Schedule;
-use App\Models\Places\Place;
-use App\Models\Customers\Customer;
+
 
 class HomeController extends Controller
 {
@@ -29,21 +28,12 @@ class HomeController extends Controller
         $schedules      = Schedule::with('schedulingCustomer')
                                         ->with('schedulingPlace')
                                                     ->paginate(5);
-        $places         = Place::get();
-
-        $customers      = Customer::get();
 
         $hasSchedules   = hasData($schedules);
 
-        $hasPlaces      = hasData($places);
-
-        $hasCustomers   = hasData($customers);
-
         return view('app.dashboard.index',
         [
-            'schedules' => $schedules,  'hasSchedules' => $hasSchedules,
-            'places'    => $places,     'hasPlaces'    => $hasPlaces,
-            'customers' => $customers,  'hasCustomers' => $hasCustomers
+            'schedules' => $schedules,  'hasSchedules' => $hasSchedules
         ]);
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Customers\Customer;
 use App\Models\Places\Place;
+use App\Models\Schedules\ScheduleLog;
 use Illuminate\Database\Eloquent\Relations\belongsTo;
 
 class Schedule extends Model
@@ -48,5 +49,10 @@ class Schedule extends Model
     public function schedulingPlace()
     {
         return $this->belongsTo(Place::class, 'place_id', 'id');
+    }
+
+    public function schedule_logs()
+    {
+        return $this->belongsTo(ScheduleLog::class);
     }
 }

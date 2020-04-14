@@ -83,7 +83,7 @@ section {
 
 body,
 html {
-    height: 100%;
+    min-height: 100%;
 }
 
 body {
@@ -98,6 +98,14 @@ body {
     transform: scale(1.0);
     transform-origin: 0 0;
 }
+
+::-webkit-datetime-edit-second-field {
+    background: #fff;
+    color: transparent;
+    margin-left: -3px;
+    position: absolute;
+    width: 1px;
+  }
 
 [tabindex='-1']:focus:not(:focus-visible) {
     outline: 0 !important;
