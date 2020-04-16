@@ -118,7 +118,7 @@
 
                                                 @if(!$schedule->status)
                                                 <i class="bg-danger"></i>
-                                                <span class="status">{{ __("Waiting confirmation") }}</span>
+                                                <span class="status">{{ __("On budget") }}</span>
                                                 @else
                                                 <i class="bg-success"></i>
                                                 <span class="status">{{ __("Confirmed") }}</span>
@@ -144,8 +144,9 @@
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
                                                     <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("Edit") }}</a>
+                                                    <a class="dropdown-item" href="{{ route('schedules.confirm.cancel', ['id' => $schedule->id]) }}">{{ __("Cancel") }}</a>
                                                 </div>
                                             </div>
                                         </td>

@@ -83,7 +83,8 @@ section {
 
 body,
 html {
-    min-height: 100%;
+    min-height: 100vh;
+    max-height: 500vh;
 }
 
 body {
@@ -657,6 +658,7 @@ pre code {
 
 .container {
     width: 100%;
+    min-height: 100%;
     margin-right: auto;
     margin-left: auto;
     padding-right: 15px;

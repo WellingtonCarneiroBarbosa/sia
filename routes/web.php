@@ -61,6 +61,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('/update/{id}', 'Schedules\ScheduleController@update')
                                                    ->name('schedules.update');
 
+            Route::delete('/cancel/{id}', 'Schedules\ScheduleController@cancel')
+                                                      ->name('schedules.cancel');
+
             /***
              * Group for canceled 
              * schedules
@@ -78,9 +81,10 @@ Route::group(['middleware' => ['auth']], function () {
              * 
              */
             Route::group(['prefix' => 'confirm'], function () {
-                Route::get('/cancel', function (){
-                    return 'ok';
-                })->name('schedules.confirm.cancel');
+                
+                Route::get('/cancel/{id}', 'Schedules\ScheduleController@confirmCancel')
+                                                      ->name('schedules.confirm.cancel');
+
             });
 
             /***

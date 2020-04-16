@@ -27,8 +27,9 @@ class HomeController extends Controller
     public function index()
     {
         $schedules      = Schedule::with('schedulingCustomer')
-                                     ->with('schedulingPlace')
-                      ->paginate(config('app.paginate_limit'));   
+                          ->with('schedulingPlace')
+                          ->paginate(config('app.paginate_limit'));   
+                          
         $places         = Place::get();
 
         $hasPlaces      = hasData($places);
