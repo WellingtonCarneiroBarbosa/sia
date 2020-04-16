@@ -48,14 +48,14 @@
                         <div class="text-center text-muted mb-4">
                             <small>{{ __("Fill in the details below to proceed") }}</small>
                         </div>
-                        <form class="form-loader" method="POST" action="{{ route('password.confirm') }}">
+                        <form class="form-loader" method="POST" action="{{ route('schedules.update') }}">
                             @csrf
                             <div class="form-group mb-3">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-lock"></i></span>
                                     </div>
-                                    <input id="password" title="{{ __("Fill this field") }}" placeholder="{{ __('Password') }}" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                    <input autofocus id="password" title="{{ __("Fill this field") }}" placeholder="{{ __('Password') }}" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                 </div>
                             </div>
                             <div class="text-center">

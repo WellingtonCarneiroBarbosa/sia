@@ -55,6 +55,12 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/store', 'Schedules\ScheduleController@store')
                                               ->name('schedules.store');
 
+            Route::get('/edit/{id}', 'Schedules\ScheduleController@edit')
+                                                 ->name('schedules.edit');
+                                                 
+            Route::put('/update/{id}', 'Schedules\ScheduleController@update')
+                                                   ->name('schedules.update');
+
             /***
              * Group for canceled 
              * schedules
@@ -91,14 +97,11 @@ Route::group(['middleware' => ['auth']], function () {
                     Route::any('/date-range', 'Schedules\FindScheduleController@dateRange')
                                                       ->name('schedules.findPer.dateRange');
 
-                    Route::get('/date-and-place', function () {
-                        return 'ok';
-                    })->name('schedules.findPer.dateAndPlace');
+                    Route::any('/date-and-place', 'Schedules\FindScheduleController@dateRangeAndPlace')
+                                                        ->name('schedules.findPer.dateAndPlace');
 
-                    Route::get('/specific-date', function (){
-                        return 'ok';
-                    })->name('schedules.findPer.specificDate');
-
+                    Route::any('/specific-date', 'Schedules\FindScheduleController@uniqueDate')
+                                                       ->name('schedules.findPer.specificDate');
                 });
             });
             //
@@ -129,12 +132,14 @@ Route::group(['middleware' => ['auth']], function () {
          * 
          */
         Route::group(['prefix' => 'places'], function () {
+
             Route::get('/create', 'Places\PlaceController@create')
                                   ->middleware('password.confirm')
                                            ->name('places.create');
 
             Route::post('/store',  'Places\PlaceController@store')
                                             ->name('places.store');
+
         });
 
         /***

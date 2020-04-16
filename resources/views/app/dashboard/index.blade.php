@@ -145,7 +145,7 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="#!">{{ __("No Options Available") }}</a>
+                                                    <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("Edit") }}</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -280,7 +280,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="inicio" placeholder="{{ __(" From ") }}" class="form-control dateTop" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="start_date" placeholder="{{ __(" From ") }}" class="form-control dateTop" type="date">
                                                     </div>
                                                 </div>
                                             </div>
@@ -290,7 +290,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="fim" class="form-control dateTop" placeholder="{{ __(" To ") }}" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="end_date" class="form-control dateTop" placeholder="{{ __(" To ") }}" type="date">
                                                     </div>
                                                 </div>
                                             </div>
@@ -325,8 +325,8 @@
                                                 <div class="espaco"></div>
                                                 <div class="float-right">
                                                     <button title="{{ __(" Click to Search ") }}" class="btn btn-primary" type="submit">
-                                            {{ __("Search") }}
-                                        </button>
+                                                        {{ __("Search") }}
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -343,7 +343,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="data" id="unica_data" class="form-control dateTop" placeholder="{{ __(" Date ") }}" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="date" id="unica_data" class="form-control dateTop" placeholder="{{ __(" Date ") }}" type="date">
                                                     </div>
                                                 </div>
                                             </div>

@@ -46,6 +46,15 @@ class ScheduleController extends Controller
             $data['status'] = null;
         }
 
+        /**
+         * checks if the date entered
+         * is in the past
+         * 
+         */
+
+         /**something here that cheks it */
+        
+
         $create  = Schedule::create($data);
 
         $log     =
@@ -88,7 +97,16 @@ class ScheduleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $schedule   = Schedule::with('schedulingCustomer')->with('schedulingPlace')->findOrFail($id);
+
+        $places     = Place::get();
+        $customers  = Customer::get();
+
+        return view('app.dashboard.schedules.edit', [
+            'schedule'      => $schedule,
+            'places'        => $places,
+            'customers'     => $customers
+        ]);
     }
 
     /**
@@ -100,6 +118,23 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data    = $request->all();
+
+        if($request->status){
+            $data['status'] = null;
+        }
+
+        /**
+         * checks if the date entered
+         * is in the past
+         * 
+         */
+
+         /**something here that cheks it */
+        
+
+        $update  = Schedule::find($id)->update($data);
+
         $log     =
         [
             'schedule_id'   => $id,
@@ -108,6 +143,17 @@ class ScheduleController extends Controller
         ];
 
         $createLog = ScheduleLog::create($log);
+
+        if(!$createLog){
+            return abort(500);
+        }
+
+        if(!$update){
+            return redirect()
+                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+        }
+
+        return redirect()->back()->with(['status' => Lang::get('Updated schedule')]);
     }
 
     /**
@@ -126,5 +172,9 @@ class ScheduleController extends Controller
         ];
 
         $createLog = ScheduleLog::create($log);
+
+        if(!$createLog){
+            return abort(500);
+        }
     }
 }

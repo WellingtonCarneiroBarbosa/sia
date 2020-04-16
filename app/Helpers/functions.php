@@ -234,3 +234,29 @@
             return false;
         }
     }
+
+    /***
+     * Validade dates
+     * 
+     */
+    function isDate01BiggerThanDate02($date01, $date02){
+        $date01 = strtotime($date01);
+        $date02 = strtotime($date02);
+
+        if($date01 > $date02){
+            return true;
+        }
+
+        return false;
+    }
+
+    function isDate01EqualsDate02($date01, $date02){
+        $date01 = strtotime($date01);
+        $date02 = strtotime($date02);
+
+        if($date01 === $date02){
+            return true;
+        }
+
+        return false;
+    }
