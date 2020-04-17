@@ -75,7 +75,7 @@ class ScheduleController extends Controller
                      ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
         }
 
-        return redirect()->back()->with(['status' => Lang::get('Scheduling Created')]);
+        return redirect()->route('home')->with(['status' => Lang::get('Scheduling Created')]);
     }
 
     /**

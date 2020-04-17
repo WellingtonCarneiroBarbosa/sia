@@ -1,16 +1,15 @@
-@extends('layouts.dashboard') @section('title', 'Dashboard') @section('content')
+@extends('layouts.dashboard') @section('title', 'Agendamentos Cancelados') @section('content')
 <!-- Header -->
 <div class="header bg-primary pb-6">
     <div class="container-fluid">
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Schedules") }}</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Canceled Schedules") }}</h6>
                 </div>
 
                 <div class="col-lg-6 col-5 text-right">
-                    <a href="{{ route('schedules.create') }}" class="btn btn-sm btn-neutral mb-2" id="novo-agendamento">{{ __("New") }}</a>
-                    <a href="{{route('schedules.canceled')}}" class="btn btn-sm btn-neutral mb-2">{{ __("Canceled") }}</a>
+                    <a href="{{route('home')}}" class="btn btn-sm btn-neutral mb-2">{{ __("Back to confirmed appointments") }}</a>
                     <a href="#" data-toggle="modal" data-target="#modal-filter" id="filtros-agendamento" class="btn btn-sm btn-neutral mb-2 mr-2">{{ __("Filters") }}</a>
                 </div>
             </div>
@@ -65,7 +64,7 @@
                     <div class="row align-items-center">
                         <!-- inicio cabecalho da tabela -->
                         <div class="col">
-                            <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Schedule's Table") }}</h5>
+                            <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Canceled Schedule's Table") }}</h5>
                         </div>
                         <div class="table-responsive">
                             <table class="table align-items-center table-dark table-flush">
@@ -83,9 +82,9 @@
                                 <!-- fim do cabeçalho da tabela -->
                                 <tbody class="list">
                                     <!-- inicio corpo da tabela -->
-                                    @if ($hasSchedules)
+                                    @if ($hasCanceledSchedules)
                                     
-                                    @foreach($schedules as $schedule)
+                                    @foreach($canceledSchedules as $schedule)
                                     <tr>
                                         <td>
                                             <div class="media align-items-center">
@@ -145,8 +144,8 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
-                                                    <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("Edit") }}</a>
-                                                    <a class="dropdown-item" href="{{ route('schedules.confirm.cancel', ['id' => $schedule->id]) }}">{{ __("Cancel") }}</a>
+                                                    <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("View more") }}</a>
+                                                    <a class="dropdown-item" href="{{ route('schedules.confirm.cancel', ['id' => $schedule->id]) }}">{{ __("Reschedule") }}</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -198,7 +197,7 @@
                 </div>
             </div>
             <div class="float-right">
-                {{ $schedules->links() }}
+                {{ $canceledSchedules->links() }}
             </div>
         </div>
     </div>
@@ -238,7 +237,7 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade active show" id="form-intervalo-data" role="tabpanel" aria-labelledby="form-intervalo-data">
                                     <h3>{{ __("Search by date range") }}</h3>
-                                    <form action="{{route('schedules.findPer.dateRange')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.canceled.findPer.dateRange')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -272,7 +271,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="form-data-local" role="tabpanel" aria-labelledby="form-data-local-tab">
                                     <h3>{{ __("Search by date and place") }}</h3>
-                                    <form action="{{route('schedules.findPer.dateAndPlace')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.canceled.findPer.dateAndPlace')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -335,7 +334,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="form-unica-data" role="tabpanel" aria-labelledby="form-unica-data">
                                     <h3>{{ __("Search by single date") }}</h3>
-                                    <form action="{{route('schedules.findPer.specificDate')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.canceled.findPer.specificDate')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">

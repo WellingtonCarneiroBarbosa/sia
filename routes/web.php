@@ -70,9 +70,25 @@ Route::group(['middleware' => ['auth']], function () {
              * 
              */
             Route::group(['prefix' => 'canceled'], function () {
-                Route::get('/', function () {
-                    return 'ok';
-                })->name('schedules.canceled.index');
+                Route::get('/', 'Schedules\CanceledSchedulesController@index')
+                                                  ->name('schedules.canceled');
+
+                /***
+                 * Specific filter
+                 * 
+                 */
+                Route::group(['prefix' => 'find/per'], function () {
+                    
+                    Route::any('/date-range', 'Schedules\FindCanceledScheduleController@dateRange')
+                                                      ->name('schedules.canceled.findPer.dateRange');
+
+                    Route::any('/date-and-place', 'Schedules\FindCanceledScheduleController@dateRangeAndPlace')
+                                                        ->name('schedules.canceled.findPer.dateAndPlace');
+
+                    Route::any('/specific-date', 'Schedules\FindCanceledScheduleController@uniqueDate')
+                                                       ->name('schedules.canceled.findPer.specificDate');
+                });
+
             });
 
             /***

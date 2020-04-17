@@ -172,5 +172,10 @@
     "End": "Término",
     "Details": "Detalhes",
     "Scheduling details": "Detalhes do agendamento",
-    "Confirmed": "Confirmado"
+    "Confirmed": "Confirmado",
+    "Back to confirmed appointments": "Voltar para agendamentos confirmados",
+    "View more": "Ver mais",
+    "Reschedule": "Reagendar",
+    "Canceled Schedules": "Agendamentos Cancelados",
+    "Canceled Schedule's Table": "Tabela de Agendamentos Cancelados"
 }

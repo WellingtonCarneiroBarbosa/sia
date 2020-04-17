@@ -173,10 +173,9 @@
                         <!-- fim do details do agendamento -->
 
                         <!-- pendente ou nao -->
-
-                        <div class="custom-control custom-control-alternative custom-checkbox">
-                            <input class="custom-control-input" id="customCheckLogin" name="status" type="checkbox">
-                            <label class="custom-control-label" for="customCheckLogin"><span>{{ __("Waiting confirmation") }}</span></label>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="status" id="status">
+                            <label class="custom-control-label" for="status">{{ __("On budget") }}</label>
                         </div>
                         <!-- fim do pendente ou nao -->
 
