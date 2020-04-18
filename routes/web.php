@@ -154,7 +154,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => 'places'], function () {
 
             Route::get('/create', 'Places\PlaceController@create')
-                                  ->middleware('password.confirm')
                                            ->name('places.create');
 
             Route::post('/store',  'Places\PlaceController@store')
@@ -169,7 +168,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => 'customers'], function () {
 
             Route::get('/create', 'Customers\CustomerController@create')
-                                        ->middleware('password.confirm')
+
                                               ->name('customers.create');
 
             Route::post('/store', 'Customers\CustomerController@store')

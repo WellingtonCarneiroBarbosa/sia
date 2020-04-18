@@ -19,8 +19,7 @@ class Schedule extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'place_id', 'start_date', 'start_time',
-        'end_date', 'end_time', 'customer_id', 'details',
+        'title', 'place_id', 'start', 'end', 'customer_id', 'details',
         'status',
     ];
 

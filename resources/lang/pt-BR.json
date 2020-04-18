@@ -121,8 +121,8 @@
     "Filters": "Filtros",
     "Schedule's Table": "Tabela de Agendamentos",
     "Table": "Tabela",
-    "Start DateTime": "Data-Hora Inicial",
-    "End DateTime": "Data-Hora Final",
+    "Start Datetime": "Data-Hora Inicial",
+    "End Datetime": "Data-Hora Final",
     "Status": "Status",
     "Customer": "Cliente",
     "Actions": "Ações",
@@ -177,5 +177,7 @@
     "View more": "Ver mais",
     "Reschedule": "Reagendar",
     "Canceled Schedules": "Agendamentos Cancelados",
-    "Canceled Schedule's Table": "Tabela de Agendamentos Cancelados"
+    "Canceled Schedule's Table": "Tabela de Agendamentos Cancelados",
+    "End date must be later than or equal to start date": "A data de término deve ser posterior ou igual à data de início",
+    "The start date must be before or equal to the end date": "A data de início deve ser anterior ou igual a data de término"
 }

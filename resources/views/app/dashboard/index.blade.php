@@ -73,7 +73,7 @@
                                     <tr>
                                         <!-- agendamento 01 -->
                                         <th scope="col" class="sort" data-sort="name">{{ __("Place") }}</th>
-                                        <th scope="col" class="sort" data-sort="budget">{{ __("Start DateTime") }} / {{ __("End DateTime") }}</th>
+                                        <th scope="col" class="sort" data-sort="budget">{{ __("Start Datetime") }} / {{ __("End Datetime") }}</th>
                                         <th scope="col" class="sort" data-sort="status">{{ __("Status") }}</th>
                                         <th scope="col">{{ __("Customer") }}</th>
                                         <th scope="col" class="sort" data-sort="completion">{{ __("Actions") }}</th>
@@ -105,9 +105,9 @@
                                             <div class="media align-items-center">
                                                 <div class="media-body">
                                                     <span class="name mb-0 text-sm">
-                                                        {{ dateBrazilianFormat($schedule->start_date) }} {{ timeBrazilianFormat($schedule->start_time) }} 
+                                                        {{ dateTimeBrazilianFormat($schedule->start) }} 
                                                         |
-                                                        {{ dateBrazilianFormat($schedule->end_date) }} {{ timeBrazilianFormat($schedule->end_time) }}
+                                                        {{ dateTimeBrazilianFormat($schedule->end) }}
                                                     </span>
                                                 </div>
                                             </div>

@@ -40,20 +40,49 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        $data    = $request->all();
+        /**validate before
+         * store it
+         * 
+         */
+
+        $messages  = [
+            'before_or_equal' => Lang::get('The start date must be before or equal to the end date'),
+            'after_or_equal'  => Lang::get('End date must be later than or equal to start date'),
+        ];
+
+        $request->validate([
+            'title'          => ['required', 'max:40'],
+            'start'          => ['required', 'before_or_equal:end'],
+            'end'            => ['required', 'after_or_equal:start'],
+        ], $messages);
+
+        $data = $request->all();
+
+        $data['start'] = date_create_from_format('d/m/Y G:i', $data['start']);
+        $data['end']   = date_create_from_format('d/m/Y G:i', $data['end']);
 
         if($request->status){
             $data['status'] = null;
         }
 
         /**
-         * checks if the date entered
-         * is in the past
+         * verify if the place is reserved
          * 
          */
 
-         /**something here that cheks it */
-        
+         /**
+          * nao ta 100%, mas ta 75%
+          */
+
+        $reserved    = Schedule::where('start', '<=', $data['start'])->where('end', '>=', $data['end'])
+                       ->orWhere('start', '>=', $data['start'])->where('end', '<=', $data['end'])->get();
+
+        $isReserved  = hasData($reserved);
+
+        if($isReserved){
+            return redirect()
+                     ->back()->with(['error' => Lang::get(' Esse local não está disponível nestas datas')]);
+        }
 
         $create  = Schedule::create($data);
 

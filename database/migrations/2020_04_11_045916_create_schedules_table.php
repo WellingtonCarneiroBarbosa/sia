@@ -18,10 +18,8 @@ class CreateSchedulesTable extends Migration
             $table->string('title', 40);
             $table->unsignedTinyInteger('place_id')->nullable();
             $table->foreign('place_id')->references('id')->on('places')->onUpdate('set null')->onDelete('set null');
-            $table->date('start_date');
-            $table->time('start_time');
-            $table->date('end_date');
-            $table->time('end_time');
+            $table->timestamp('start')->nullable();
+            $table->timestamp('end')->nullable();
             $table->foreignId('customer_id')->nullable()->constrained()->onUpdate('set null')->onDelete('set null');
             $table->text('details', 100)->nullable();
             /***
