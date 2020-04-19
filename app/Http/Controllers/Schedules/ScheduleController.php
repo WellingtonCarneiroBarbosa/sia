@@ -9,6 +9,7 @@ use App\Models\Schedules\ScheduleLog;
 use App\Models\Places\Place;
 use App\Models\Customers\Customer;
 use Illuminate\Support\Facades\Lang;
+use DB;
 
 class ScheduleController extends Controller
 {
@@ -40,22 +41,32 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        /**validate before
-         * store it
+
+        /**
+         * Custom messages for 
+         * exceptions
          * 
          */
-
         $messages  = [
-            'before_or_equal' => Lang::get('The start date must be before or equal to the end date'),
-            'after_or_equal'  => Lang::get('End date must be later than or equal to start date'),
+            'before' => Lang::get('The start date and time must be before the end date and time'),
+            'after'  => Lang::get('The end date and time must be after the start date and time'),
+            'date'   => Lang::get('The date entered is not a valid date')
         ];
 
+        /**
+         * Validate request
+         * 
+         */
         $request->validate([
-            'title'          => ['required', 'max:40'],
-            'start'          => ['required', 'before_or_equal:end'],
-            'end'            => ['required', 'after_or_equal:start'],
+            'title'          => ['required', 'max:40',      'string'],
+            'start'          => ['required', 'before:end',  'date'],
+            'end'            => ['required', 'after:start', 'date'],
         ], $messages);
 
+        /**
+         * Validated data
+         * 
+         */
         $data = $request->all();
 
         $data['start'] = date_create_from_format('d/m/Y G:i', $data['start']);
@@ -65,23 +76,45 @@ class ScheduleController extends Controller
             $data['status'] = null;
         }
 
-        /**
-         * verify if the place is reserved
-         * 
-         */
 
          /**
-          * nao ta 100%, mas ta 75%
-          */
+          * Validate if the place is avaible
+          * to schedule
+          *
+          * LOGICS FOR VALIDATION
+          
 
-        $reserved    = Schedule::where('start', '<=', $data['start'])->where('end', '>=', $data['end'])
-                       ->orWhere('start', '>=', $data['start'])->where('end', '<=', $data['end'])->get();
+          *$isReserved    = Schedule::where('start', '>', $data['start'])->where('start', '>', $data['end'])
+          *                    ->orWhere('end',   '<', $data['start'])->where('end',   '<', $data['end'])
+          *                    ->count();
+        */
 
-        $isReserved  = hasData($reserved);
+        
+
+
+
+        $isReserved       = DB::select(
+            'select * from schedules where 
+            ? between start and end
+            or
+            ? between start and end
+            or
+            start > ? and end < ?
+            or
+            ? = start and ? = end',
+
+            [$data['start'], $data['end'],
+            
+            $data['start'], $data['end'],
+
+            $data['start'], $data['end']]
+        );
+
+        $isReserved = hasData($isReserved);
 
         if($isReserved){
             return redirect()
-                     ->back()->with(['error' => Lang::get(' Esse local não está disponível nestas datas')]);
+                     ->back()->with(['error' => Lang::get(' This location is not available on these dates')]);
         }
 
         $create  = Schedule::create($data);
