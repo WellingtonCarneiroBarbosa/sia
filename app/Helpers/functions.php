@@ -73,7 +73,7 @@
      * 
      * return @date
      */
-    function dateTimeBrazilianFormat($value, $format='d/m/Y G:i')
+    function dateTimeBrazilianFormat($value, $format='d/m/Y H:i')
     {
         return date($format, strtotime($value));
     }

@@ -69,8 +69,8 @@ class ScheduleController extends Controller
          */
         $data = $request->all();
 
-        $data['start'] = date_create_from_format('d/m/Y G:i', $data['start']);
-        $data['end']   = date_create_from_format('d/m/Y G:i', $data['end']);
+        $data['start'] = date_create_from_format('d/m/Y H:i', $data['start']);
+        $data['end']   = date_create_from_format('d/m/Y H:i', $data['end']);
 
         if($request->status){
             $data['status'] = null;

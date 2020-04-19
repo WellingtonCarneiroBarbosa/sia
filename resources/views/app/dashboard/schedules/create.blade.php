@@ -106,7 +106,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                 </div>
-                                <input title="{{ __("Fill this field") }}" placeholder="dd/mm/aaaa hh:mm"  id="start" type="text" class="form-control" name="start" required> 
+                                <input title="{{ __("Fill this field") }}" placeholder="dd/mm/aaaa hh:mm"  id="start" type="text" class="form-control datetime" name="start" required> 
 
 
                             </div>
@@ -120,7 +120,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                 </div>
-                                <input title="{{ __("Fill this field") }}" placeholder="dd/mm/aaaa hh:mm" id="end" type="text" class="form-control" name="end" required> 
+                                <input title="{{ __("Fill this field") }}" placeholder="dd/mm/aaaa hh:mm" id="end" type="text" class="form-control datetime" name="end" required> 
                             </div>
                         </div>
                         <!-- fim da data final do agendamento -->
@@ -186,6 +186,21 @@
 @endsection
 
 @section('scripts')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+
+<script>
+    (function( $ ) {
+        $(function() {
+
+            $('.datetime').mask('00/00/0000 00:00');
+        
+        });
+    })(jQuery);
+
+
+</script>
+
 <script>
     $(document).ready(function (){
         $(".timepicker").timepicker({
@@ -194,5 +209,6 @@
         });
     });
 </script>
+
 
 @endsection
