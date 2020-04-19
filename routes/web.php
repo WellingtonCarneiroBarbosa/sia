@@ -132,9 +132,10 @@ Route::group(['middleware' => ['auth']], function () {
          * 
          */
         Route::group(['prefix' => 'users'], function () {
-            Route::get('/', function () {
-                return 'ok';
-            })->name('users.index');
+
+            Route::get('/', 'Users\SystemUserController@index')
+                                          ->name('users.index');
+
 
             /***
              * Group for authenticated user
