@@ -89,28 +89,26 @@ class ScheduleController extends Controller
           * de horário. 
           */
 
-        $isReserved       = DB::select(
-            'select * from schedules where 
-            ? between start and end
-            or
-            ? between start and end
-            or
-            start > ? and end < ?
-            or
-            ? = start and ? = end',
+        $isReserved  = DB::select(
+            "SELECT * FROM schedules WHERE place_id = ? AND (
+                ? BETWEEN start AND end
+                OR ? BETWEEN start AND end
+                OR ( start > ? AND end < ? ) 
+                OR ( ? = start AND ? = end ) 
+            )",[$data['place_id'],
+                $data['start'], $data['end'],
+                $data['start'], $data['end'],
+                $data['start'], $data['end']
+                ]
+            );
 
-            [$data['start'], $data['end'],
-            
-            $data['start'], $data['end'],
-
-            $data['start'], $data['end']]
-        );
 
         $isReserved = hasData($isReserved);
 
         if($isReserved){
             return redirect()
-                     ->back()->with(['error' => Lang::get(' This location is not available on these dates')]);
+                     ->back()->with(['error' => Lang::get(' This location is not available on these dates')])
+                     ->withInput();
         }
 
         $create  = Schedule::create($data);
@@ -130,7 +128,8 @@ class ScheduleController extends Controller
 
         if(!$create){
             return redirect()
-                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')])
+                     ->withInput();
         }
 
         return redirect()->route('home')->with(['status' => Lang::get('Scheduling Created')]);
