@@ -82,16 +82,12 @@ class ScheduleController extends Controller
           * to schedule
           *
           * LOGICS FOR VALIDATION
-          
-
-          *$isReserved    = Schedule::where('start', '>', $data['start'])->where('start', '>', $data['end'])
-          *                    ->orWhere('end',   '<', $data['start'])->where('end',   '<', $data['end'])
-          *                    ->count();
-        */
-
-        
-
-
+          *
+          * Considero que já existe um conflito
+          * com um outro compromisso quando a data é a mesma,
+          * ou existe uma sobreposição
+          * de horário. 
+          */
 
         $isReserved       = DB::select(
             'select * from schedules where 
