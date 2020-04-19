@@ -192,22 +192,9 @@
 <script>
     (function( $ ) {
         $(function() {
-
             $('.datetime').mask('00/00/0000 00:00');
-        
         });
     })(jQuery);
-
-
-</script>
-
-<script>
-    $(document).ready(function (){
-        $(".timepicker").timepicker({
-            timeFormat: 'HH:mm',
-            interval: 30
-        });
-    });
 </script>
 
 

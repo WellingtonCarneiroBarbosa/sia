@@ -16,7 +16,6 @@
     <link href="{{ asset('dashboard/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/assets/css/argon.css?v=1.2.0') }}" rel="stylesheet">
     <link href="{{ asset('css/loading.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/timepicker.min.css') }}" rel="stylesheet" >
 
     <!--
     -- Favicon

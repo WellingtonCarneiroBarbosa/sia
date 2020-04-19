@@ -30,9 +30,3 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
-
-/***
- * Load timepicker plugin
- * 
- */
-require('./timepicker/jquery.timepicker');
