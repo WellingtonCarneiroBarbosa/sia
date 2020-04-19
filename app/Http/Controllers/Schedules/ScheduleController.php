@@ -41,15 +41,14 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-
         /**
          * Custom messages for 
          * exceptions
          * 
          */
         $messages  = [
-            'before' => Lang::get('The start date and time must be before the end date and time'),
-            'after'  => Lang::get('The end date and time must be after the start date and time'),
+            'before' => Lang::get('The date entered is not a valid date'),
+            'after'  => Lang::get('The date entered is not a valid date'),
             'date'   => Lang::get('The date entered is not a valid date')
         ];
 
@@ -57,10 +56,15 @@ class ScheduleController extends Controller
          * Validate request
          * 
          */
+
+         /**
+          * dates must be between 1998 and 2050
+          *
+          */
         $request->validate([
             'title'          => ['required', 'max:40',      'string'],
-            'start'          => ['required', 'before:end',  'date'],
-            'end'            => ['required', 'after:start', 'date'],
+            'start'          => ['required', 'date', 'before:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'            => ['required', 'date', 'after:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
         ], $messages);
 
         /**

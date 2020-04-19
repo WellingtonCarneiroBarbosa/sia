@@ -140,6 +140,10 @@ return [
      */
     'paginate_limit' => env('PAGINATE_LIMIT'),
 
+    'min_schedule_date' => env('MIN_SCHEDULE_DATE'),
+
+    'max_schedule_date' => env('MAX_SCHEDULE_DATE'),
+
     'providers' => [
 
         /*
