@@ -58,7 +58,7 @@ class ScheduleController extends Controller
          */
 
         $request->validate([
-            'title'          => ['required', 'max:40', 'string'],
+            'title'          => ['required', 'string', 'max:40',],
             'start'          => ['required', 'date', 'before:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
             'end'            => ['required', 'date', 'after:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
         ], $messages);
