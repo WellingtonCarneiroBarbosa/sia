@@ -9,7 +9,9 @@ use App\Models\Schedules\ScheduleLog;
 use App\Models\Places\Place;
 use App\Models\Customers\Customer;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Validator;
 use DB;
+use DateTime;
 
 class ScheduleController extends Controller
 {
@@ -56,21 +58,29 @@ class ScheduleController extends Controller
          * Validate request
          * 
          */
-
-        $request->validate([
-            'title'          => ['required', 'string', 'max:40',],
-            'start'          => ['required', 'date', 'before:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
-            'end'            => ['required', 'date', 'after:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
-        ], $messages);
-
-        /**
-         * Validated data
-         * 
-         */
         $data = $request->all();
 
-        $data['start'] = date_create_from_format('d/m/Y H:i', $data['start']);
-        $data['end']   = date_create_from_format('d/m/Y H:i', $data['end']);
+        $data['start'] = DateTime::createFromFormat('d/m/Y H:i', $data['start']);
+        $data['end']   = DateTime::createFromFormat('d/m/Y H:i', $data['end']);
+
+        $validator = Validator::make($data, [
+            'title'   => ['required', 'string', 'max:40',],
+            'start'   => ['required', 'date', 'before:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'     => ['required', 'date', 'after:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+        ], $messages);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        /**
+         * validate completed
+         * 
+         */
 
         if($request->status){
             $data['status'] = null;
@@ -113,6 +123,12 @@ class ScheduleController extends Controller
 
         $create  = Schedule::create($data);
 
+        if(!$create){
+            return redirect()
+                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')])
+                     ->withInput();
+        }
+
         $log     =
         [
             'schedule_id'   => $create->id,
@@ -124,12 +140,6 @@ class ScheduleController extends Controller
 
         if(!$createLog){
             return abort(500);
-        }
-
-        if(!$create){
-            return redirect()
-                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')])
-                     ->withInput();
         }
 
         return redirect()->route('home')->with(['status' => Lang::get('Scheduling Created')]);
@@ -175,7 +185,44 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data    = $request->all();
+        /**
+         * Custom messages for 
+         * exceptions
+         * 
+         */
+        $messages  = [
+            'before' => Lang::get('The date entered is not a valid date'),
+            'after'  => Lang::get('The date entered is not a valid date'),
+            'date'   => Lang::get('The date entered is not a valid date')
+        ];
+
+        /**
+         * Validate request
+         * 
+         */
+        $data = $request->all();
+
+        $data['start'] = DateTime::createFromFormat('d/m/Y H:i', $data['start']);
+        $data['end']   = DateTime::createFromFormat('d/m/Y H:i', $data['end']);
+
+        $validator = Validator::make($data, [
+            'title'   => ['required', 'string', 'max:40',],
+            'start'   => ['required', 'date', 'before:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'     => ['required', 'date', 'after:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+        ], $messages);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        /**
+         * validate completed
+         * 
+         */
 
         if($request->status){
             $data['status'] = null;
@@ -187,10 +234,15 @@ class ScheduleController extends Controller
          * 
          */
 
-         /**something here that cheks it */
+         /**something here that checks it */
         
 
         $update  = Schedule::findOrFail($id)->update($data);
+
+        if(!$update){
+            return redirect()
+                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+        }
 
         $log     =
         [
@@ -203,11 +255,6 @@ class ScheduleController extends Controller
 
         if(!$createLog){
             return abort(500);
-        }
-
-        if(!$update){
-            return redirect()
-                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
         }
 
         return redirect()->back()->with(['status' => Lang::get('Updated schedule')]);
@@ -319,7 +366,7 @@ class ScheduleController extends Controller
 
         if(!$schedule){
             return redirect()
-            ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+                   ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
         }
 
         $log     =
@@ -336,5 +383,46 @@ class ScheduleController extends Controller
         }
 
         return redirect()->route('home')->with(['status' => Lang::get('Rescheduled')]);
+    }
+
+    /**
+     * Confirm before delete
+     * 
+     */
+    public function confirmPermanentlyDelete($id){
+        $schedule = Schedule::with('schedulingCustomer')->with('schedulingPlace')
+                    ->onlyTrashed()->findOrFail($id);
+
+        return view('app.dashboard.schedules.confirm.deletePermanently', [
+            'schedule'  => $schedule
+        ]);
+    }
+
+    /**
+     * Delete
+     * 
+     */
+    public function permanentlyDelete($id){
+        $delete =  Schedule::onlyTrashed()->findOrFail($id)->forceDelete();
+
+        if(!$delete){
+            return redirect()
+                    ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+        }
+
+        $log     =
+        [
+            'schedule_id'   => null,
+            'user_id'       => auth()->user()->id,
+            'action'        => '5'
+        ];
+
+        $createLog = ScheduleLog::create($log);
+
+        if(!$createLog){
+            return abort(500);
+        }
+
+        return redirect()->route('schedules.canceled')->with(['status' => Lang::get('Permanently deleted')]);
     }
 }

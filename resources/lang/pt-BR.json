@@ -159,7 +159,7 @@
     "Do you really want to reschedule this appointment": "Deseja realmente reagendar este agendamento",
     "No, go back to canceled appointments": "Não, voltar para agendamentos cancelados",
     "Caution": "Cuidado",
-    "Canceling an appointment changes the statistics for canceled appointments": "O cancelamento de um agendamento modifica a estatística de agendamentos cancelados",
+    "Canceling changes the statistics for new and canceled schedules": "O cancelamento modifica a estatística de agendamentos novos e cancelados",
     "Besides that": "Além disso",
     "will stay": "ficará",
     "available": "disponível",
@@ -187,5 +187,16 @@
     "Another Search": "Outra Busca",
     "Confirm Cancellation": "Confirmar Cancelamento",
     "Rescheduled": "Reagendado",
-    "Permanently delete": "Deletar permanentemente"
+    "Delete Permanently": "Deletar permanentemente",
+    "Rescheduling modifies the statistics for new and canceled schedules": "O reagendamento modifica a estatística de agendamentos novos e cancelados",
+    "unavaible": "indisponível",
+    "Do you really want to delete permanently this scheduling": "Deseja realmente excluir permanentemente este agendamento",
+    "Besides that, it will be ": "Além disso, será ",
+    "impossible": "impossível",
+    "to restore this schedule and see his logs": "restaurar este agendamento e visualizar os logs do mesmo",
+    "I understand the consequences": "Compreendo as consequências",
+    "Permanently delete modifies the statistics for canceled schedules": "Excluir permanentemente modifica as estatísticas para agendamentos cancelados",
+    "canceled": "Cancelado",
+    "Permanently deleted": "Deletado permanentemente"
+    
 }

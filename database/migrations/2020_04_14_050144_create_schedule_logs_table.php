@@ -15,9 +15,9 @@ class CreateScheduleLogsTable extends Migration
     {
         Schema::create('schedule_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('schedule_id')->nullable()->constrained()->onUpdate('set null')->onDelete('set null');
+            $table->foreignId('schedule_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->unsignedTinyInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('set null')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
             /**
              * Captions for action
              * 

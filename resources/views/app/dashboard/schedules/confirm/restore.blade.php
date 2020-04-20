@@ -52,10 +52,10 @@
                     <strong>
                         *
                         <span class="text-muted">
-                            {{ __("Canceling an appointment changes the statistics for canceled appointments") }}.
+                            {{ __("Rescheduling modifies the statistics for new and canceled schedules") }}.
                             <br>
                             <br>
-                            {{ __("Besides that") }}, <u>{{ $schedule->schedulingPlace['name'] }}</u> {{ __("will stay") }} <u class="text-danger">{{ __("available") }}</u>
+                            {{ __("Besides that") }}, <u>{{ $schedule->schedulingPlace['name'] }}</u> {{ __("will stay") }} <u class="text-danger">{{ __("unavaible") }}</u>
                             {{ __("for new appointments between") }}
                             <u> {{dateBrazilianFormat($schedule->start)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->start) }}</u> {{ __("and") }}
                             <u> {{dateBrazilianFormat($schedule->end)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->end) }}</u>.
@@ -104,7 +104,9 @@
                     <!-- status -->
                     <div class="form-group mb-3">
                         <span>{{ __("Status") }}:</span>
-                        @if ($schedule->status == null)
+                        @if($schedule->deleted_at != null)
+                            <strong>{{ __("canceled") }}</strong>
+                        @elseif ($schedule->status == null)
                             <strong>{{ __("On budget") }}</strong>
                         @elseif($schedule->status == 1)
                             <strong>{{ __("Confirmed") }}</strong>
@@ -144,7 +146,7 @@
                     @method('PUT')
                     <button onclick="comeBack();" type="button" class="btn btn-outline-success">{{ __("Come Back") }}</button>
                     <button type="submit" class="btn btn-primary">{{ __("Reschedule") }}</button>
-              </form>
+                </form>
             </div>
         </div>
     </div>

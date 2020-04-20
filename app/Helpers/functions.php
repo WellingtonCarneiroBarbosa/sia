@@ -79,6 +79,17 @@
     }
 
     /***
+     * Convert any brazilian datetime to
+     * server format
+     * 
+     * return @date
+     */
+    function dateTimeServerFormat($value, $format='Y/d/m H:i')
+    {
+        return date($format, strtotime($value));
+    }
+
+    /***
      * performs the interval calculation
      * between two dates
      * 

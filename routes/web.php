@@ -67,6 +67,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('/restore/{id}', 'Schedules\ScheduleController@restore')
                                                     ->name('schedules.restore');
 
+            Route::delete('/permanently/delete/{id}', 'Schedules\ScheduleController@permanentlyDelete')
+                                                                  ->name('schedules.permanentlyDelete');
+
             /***
              * Group for canceled 
              * schedules
@@ -107,6 +110,9 @@ Route::group(['middleware' => ['auth']], function () {
 
                 Route::get('/restore/{id}', 'Schedules\ScheduleController@confirmRestore')
                                                        ->name('schedules.confirm.restore');
+
+                Route::get('/permanently/delete/{id}', 'Schedules\ScheduleController@confirmPermanentlyDelete')
+                                                                  ->name('schedules.confirm.permanentlyDelete');                                                       
 
             });
 

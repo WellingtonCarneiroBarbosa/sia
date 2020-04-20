@@ -8,10 +8,10 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Do you really want to cancel this appointment") }}?</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Do you really want to delete permanently this scheduling") }}?</h6>
                 </div>
                 <div class="col-lg-6 col-5 text-right">
-                    <a onclick="comeBack();" class="btn btn-sm btn-neutral">{{ __("No, go back to appointments") }}</a>
+                    <a onclick="comeBack();" class="btn btn-sm btn-neutral">{{ __("No, go back to canceled appointments") }}</a>
                 </div>
             </div>
         <!-- fim do header -->
@@ -52,13 +52,11 @@
                     <strong>
                         *
                         <span class="text-muted">
-                            {{ __("Canceling changes the statistics for new and canceled schedules") }}.
+                            {{ __("Permanently delete modifies the statistics for canceled schedules") }}.
                             <br>
                             <br>
-                            {{ __("Besides that") }}, <u>{{ $schedule->schedulingPlace['name'] }}</u> {{ __("will stay") }} <u class="text-danger">{{ __("available") }}</u>
-                            {{ __("for new appointments between") }}
-                            <u> {{dateBrazilianFormat($schedule->start)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->start) }}</u> {{ __("and") }}
-                            <u> {{dateBrazilianFormat($schedule->end)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->end) }}</u>.
+                            {{ __("Besides that, it will be ") }}<u class="text-danger">{{ __("impossible") }}</u>
+                            {{ __("to restore this schedule and see his logs") }}
                         </span>
                         *
                     </strong>
@@ -141,12 +139,12 @@
 
                 </div>
 
-                <form action="{{ route('schedules.cancel', $schedule->id)}}" class="form-loader"  method="POST">
+                <form action="{{ route('schedules.permanentlyDelete', $schedule->id)}}" class="form-loader"  method="POST">
                     @csrf
                     @method('DELETE')
                     <button onclick="comeBack();" type="button" class="btn btn-outline-success">{{ __("Come Back") }}</button>
-                    <button type="submit" class="btn btn-danger">{{ __("Confirm Cancellation") }}</button>
-              </form>
+                    <button type="submit" class="btn btn-danger">{{ __("I understand the consequences") }}</button>
+                </form>
             </div>
         </div>
     </div>

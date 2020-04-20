@@ -17,10 +17,10 @@ class CreateSchedulesTable extends Migration
             $table->id();
             $table->string('title', 40);
             $table->unsignedTinyInteger('place_id')->nullable();
-            $table->foreign('place_id')->references('id')->on('places')->onUpdate('set null')->onDelete('set null');
+            $table->foreign('place_id')->references('id')->on('places')->onUpdate('cascade')->onDelete('set null');
             $table->timestamp('start')->nullable();
             $table->timestamp('end')->nullable();
-            $table->foreignId('customer_id')->nullable()->constrained()->onUpdate('set null')->onDelete('set null');
+            $table->foreignId('customer_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->text('details', 100)->nullable();
             /***
              * Define if the shedule is confirmed or not

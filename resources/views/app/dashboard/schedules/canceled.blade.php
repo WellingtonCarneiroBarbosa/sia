@@ -64,7 +64,7 @@
                     <div class="row align-items-center">
                         <!-- inicio cabecalho da tabela -->
                         <div class="col">
-                            <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Schedule's Table") }}</h5>
+                            <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Canceled Schedule's Table") }}</h5>
                         </div>
                         <div class="table-responsive">
                             <table class="table align-items-center table-dark table-flush">
@@ -115,12 +115,12 @@
                                         <td>
                                             <span class="badge badge-dot mr-4">
 
-                                                @if(!$schedule->status)
-                                                <i class="bg-danger"></i>
-                                                <span class="status">{{ __("On budget") }}</span>
-                                                @else
-                                                <i class="bg-success"></i>
-                                                <span class="status">{{ __("Confirmed") }}</span>
+                                                @if($schedule->deleted_at != null)
+                                                    <strong>{{ __("canceled") }}</strong>
+                                                @elseif ($schedule->status == null)
+                                                    <strong>{{ __("On budget") }}</strong>
+                                                @elseif($schedule->status == 1)
+                                                    <strong>{{ __("Confirmed") }}</strong>
                                                 @endif
                                                 
                                             </span>
@@ -144,8 +144,10 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
-                                                    <a class="dropdown-item" href="{{ route('schedules.confirm.cancel',  ['id' => $schedule->id]) }}">{{ __("Permanently delete") }}</a>
-                                                    <a class="dropdown-item" href="{{ route('schedules.confirm.restore', ['id' => $schedule->id]) }}">{{ __("Reschedule") }}</a>
+                                                    @if(auth()->user()->role_id == 5)
+                                                    <a class="dropdown-item" href="{{ route('schedules.confirm.permanentlyDelete',  ['id' => $schedule->id]) }}">{{ __("Delete Permanently") }}</a>
+                                                    @endif
+                                                    <a class="dropdown-item" href="{{ route('schedules.confirm.restore',            ['id' => $schedule->id]) }}">{{ __("Reschedule") }}</a>
                                                 </div>
                                             </div>
                                         </td>
