@@ -197,5 +197,4 @@
     })(jQuery);
 </script>
 
-
 @endsection

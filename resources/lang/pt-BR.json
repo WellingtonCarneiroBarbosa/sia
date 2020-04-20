@@ -181,5 +181,6 @@
     "The end date and time must be after the start date and time": "A data e hora de término deve ser posterior à data e hora de início",
     "The start date and time must be before the end date and time": "A data e hora de início deve ser anterior à data e hora de término",
     "The date entered is not a valid date": "A data digitada não é uma data válida",
-    " This location is not available on these dates": " Esse local não está disponível nestas datas"
+    " This location is not available on these dates": " Esse local não está disponível nestas datas",
+    "Another Search": "Outra Busca"
 }

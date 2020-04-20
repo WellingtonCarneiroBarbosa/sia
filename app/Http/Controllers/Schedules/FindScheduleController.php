@@ -17,26 +17,44 @@ class FindScheduleController extends Controller
      */
 
     public function dateRange(Request $request){
+        /**
+         * Custom messages for 
+         * exceptions
+         * 
+         */
+        $messages  = [
+            'before_or_equal' => Lang::get('The date entered is not a valid date'),
+            'after_or_equal'  => Lang::get('The date entered is not a valid date'),
+            'date'   => Lang::get('The date entered is not a valid date')
+        ];
+
+        /**
+         * Validate request
+         * 
+         */
+        $request->validate([
+            'start'          => ['required', 'date', 'before_or_equal:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'            => ['required', 'date', 'after_or_equal:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+        ], $messages);
+
+        /**
+         * Validated data
+         * 
+         */
         $data       = $request->except('_token');
 
-        $start_date = $data['start_date'];
-        $end_date   = $data['end_date'];
+        $data['start'] = dateAmericanFormat($data['start']);
+        $data['end']   = dateAmericanFormat($data['end']);
 
         /**
          * get all the schedules by data range
          * 
          */
-
-        /***
-         * Select where start_date or end_date === $anyDate
-         * or start_date or end_date between $date01 $date02
-         * 
-         */
-        $schedules = Schedule::with('schedulingCustomer')
-                    ->with('schedulingPlace')
-                    ->WhereBetween('start_date', [$start_date, $end_date])
-                    ->orWhereBetween('end_date',   [$start_date, $end_date])
-                    ->paginate(config('app.paginate_limit'));
+        $schedules = Schedule::where(DB::raw('DATE(start)'), '>=', $data['start'])
+                             ->where(DB::raw('DATE(end)'),   '<=', $data['end'])
+                             ->with('schedulingCustomer')
+                             ->with('schedulingPlace')
+                             ->paginate(config('app.paginate_limit'));
 
         $hasSchedules = hasData($schedules);
 
@@ -45,11 +63,16 @@ class FindScheduleController extends Controller
         }else{
             $response = null;
         }
+
+        $places         = Place::get();
+
+        $hasPlaces      = hasData($places);
         
         return view('app.dashboard.schedules.find', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
-            'response'  => $response,  'data'         => $data
+            'response'  => $response,  'data'         => $data,
+            'places'    => $places,    'hasPlaces'    => $hasPlaces
         ]);
     }
 
@@ -61,28 +84,46 @@ class FindScheduleController extends Controller
     public function dateRangeAndPlace(Request $request){
         $data       = $request->except('_token');
 
-        $start_date = $data['start_date'];
-        $end_date   = $data['end_date'];
-        $place      = $data['place_id'];
+        /**
+         * Custom messages for 
+         * exceptions
+         * 
+         */
+        $messages  = [
+            'before_or_equal' => Lang::get('The date entered is not a valid date'),
+            'after_or_equal'  => Lang::get('The date entered is not a valid date'),
+            'date'   => Lang::get('The date entered is not a valid date')
+        ];
+
+        /**
+         * Validate request
+         * 
+         */
+        $request->validate([
+            'start'          => ['required', 'date', 'before_or_equal:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'            => ['required', 'date', 'after_or_equal:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+        ], $messages);
+
+        /**
+         * Validated data
+         * 
+         */
+        $data       = $request->except('_token');
+
+        $data['start'] = dateAmericanFormat($data['start']);
+        $data['end']   = dateAmericanFormat($data['end']);
 
         /**
          * get all the schedules by data range
+         * and specific place
          * 
          */
-
-        /***
-         * Select where start_date or end_date === $anyDate
-         * or start_date or end_date between $date01 $date02
-         * and place === $place
-         * 
-         */
-        $schedules = Schedule::with('schedulingCustomer')
-                    ->with('schedulingPlace')
-                    ->where('place_id', $place)
-                    ->WhereBetween('start_date', [$start_date, $end_date])
-                    ->orWhereBetween('end_date',   [$start_date, $end_date])
-                    ->where('place_id', $place)
-                    ->paginate(config('app.paginate_limit'));
+        $schedules = Schedule::where(DB::raw('DATE(start)'), '>=', $data['start'])
+                             ->where(DB::raw('DATE(end)'),   '<=', $data['end'])
+                             ->where('place_id', $data['place_id'])
+                             ->with('schedulingCustomer')
+                             ->with('schedulingPlace')
+                             ->paginate(config('app.paginate_limit'));
 
         $hasSchedules = hasData($schedules);
 
@@ -92,10 +133,16 @@ class FindScheduleController extends Controller
             $response = null;
         }
         
+
+        $places         = Place::get();
+
+        $hasPlaces      = hasData($places);
+        
         return view('app.dashboard.schedules.find', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
-            'response'  => $response,  'data'         => $data
+            'response'  => $response,  'data'         => $data,
+            'places'    => $places,    'hasPlaces'    => $hasPlaces
         ]);
     }
 
@@ -106,22 +153,43 @@ class FindScheduleController extends Controller
     public function uniqueDate(Request $request){
         $data       = $request->except('_token');
 
-        $date       = $data['date'];
-
         /**
-         * get all the schedules by unique date
+         * Custom messages for 
+         * exceptions
+         * 
+         */
+        $messages  = [
+            'before' => Lang::get('The date entered is not a valid date'),
+            'after'  => Lang::get('The date entered is not a valid date'),
+            'date'   => Lang::get('The date entered is not a valid date')
+        ];
+        /**
+         * Validate request
          * 
          */
 
+        $request->validate([
+            'date'          => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],
+        ], $messages);
+
         /**
-         * Select where start_date or end_date === $date
+         * Validated data
          * 
          */
-        $schedules = Schedule::with('schedulingCustomer')
-                    ->with('schedulingPlace')
-                    ->where('start_date', $date)
-                    ->orWhere('end_date', $date)
-                    ->paginate(config('app.paginate_limit'));
+        $data       = $request->except('_token');
+
+        $data['date'] = dateAmericanFormat($data['date']);
+
+        /**
+         * Select where start or
+         * end_date === $anyDate
+         * 
+         */
+        $schedules = Schedule::where(DB::raw('DATE(start)'), $data['date'])
+                             ->orWhere(DB::raw('DATE(end)'), $data['date'])
+                             ->with('schedulingCustomer')
+                             ->with('schedulingPlace')
+                             ->paginate(config('app.paginate_limit'));
 
         $hasSchedules = hasData($schedules);
 
@@ -130,11 +198,17 @@ class FindScheduleController extends Controller
         }else{
             $response = null;
         }
+    
+   
+        $places         = Place::get();
+
+        $hasPlaces      = hasData($places);
         
         return view('app.dashboard.schedules.find', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
-            'response'  => $response,  'data'         => $data
+            'response'  => $response,  'data'         => $data,
+            'places'    => $places,    'hasPlaces'    => $hasPlaces
         ]);
     }
 }

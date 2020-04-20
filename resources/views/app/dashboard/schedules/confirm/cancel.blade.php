@@ -57,8 +57,8 @@
                             <br>
                             {{ __("Besides that") }}, <u>{{ $schedule->schedulingPlace['name'] }}</u> {{ __("will stay") }} <u class="text-danger">{{ __("available") }}</u>
                             {{ __("for new appointments between") }}
-                            <u> {{dateBrazilianFormat($schedule->start_date)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->start_time) }}</u> {{ __("and") }}
-                            <u> {{dateBrazilianFormat($schedule->end_date)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->end_time) }}</u>.
+                            <u> {{ dateTimeBrazilianFormat($schedule->start) }} {{ __("and") }} </u>
+                            <u> {{ dateTimeBrazilianFormat($schedule->end) }} </u>.
                         </span>
                         *
                     </strong>

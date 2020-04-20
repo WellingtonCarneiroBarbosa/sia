@@ -101,41 +101,30 @@
 
                         <!-- data inicial do agendamento -->
                         <div class="form-group focused">
-                            <label for="date-final">{{ __("Start DateTime") }}</label>
+                            <label for="start">{{ __("Start Datetime") }}</label>
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                 </div>
-                                <input value="{{ $schedule->start_date }}" title="{{ __("Fill this field") }}"  id="start_date" type="date" class="form-control" name="start_date" required> 
 
-                                <!--hora inicial do agendamento-->
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-clock"></i></span>
-                                </div>
+                                <input type="text" class="datetime form-control" id="start" name="start" placeholder="dd/mm/aaaa hh:mm" value="{{ dateTimeBrazilianFormat($schedule->start) }}" required>
 
-                                <input value="{{ $schedule->start_time }}" title="{{ __("Fill this field") }}" placeholder="{{ __("Select a time") }}" id="start_time" type="text" class="form-control timepicker" name="start_time" required> 
                             </div>
                         </div>
                         <!-- fim da data inicial do agendamento -->
 
                         <!-- data final do agendamento -->
                         <div class="form-group focused">
-                            <label for="date-final">{{ __("End DateTime") }}</label>
+                            <label for="date-final">{{ __("End Datetime") }}</label>
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                 </div>
-                                <input value="{{ $schedule->end_date }}" title="{{ __("Fill this field") }}"  id="end_date" type="date" class="form-control" name="end_date" required> 
 
-                                <!--hora final do agendamento-->
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-clock"></i></span>
-                                </div>
-
-                                <input value="{{ $schedule->end_time }}" title="{{ __("Fill this field") }}" placeholder="{{ __("Select a time") }}"  id="end_time" type="text" class="form-control timepicker" name="end_time" required>
+                                <input type="text" class="datetime form-control" id="end" name="end" placeholder="dd/mm/aaaa hh:mm" value="{{ dateTimeBrazilianFormat($schedule->end) }}" required>
                             </div>
                         </div>
-                        <!-- fim da data final do agendamento -->
+                            <!-- fim da data final do agendamento -->
 
                         <!-- cliente do agendamento -->
                         <div class="form-group mb-3">
@@ -183,7 +172,7 @@
                             unchecked
                             @endif
                             >
-                            <label class="custom-control-label" for="customCheckLogin"><span>{{ __("Waiting confirmation") }}</span></label>
+                            <label class="custom-control-label" for="customCheckLogin"><span>{{ __("On budget") }}</span></label>
                         </div>
                         <!-- fim do pendente ou nao -->
 
@@ -204,13 +193,15 @@
 @endsection
 
 @section('scripts')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+
 <script>
-    $(document).ready(function (){
-        $(".timepicker").timepicker({
-            timeFormat: 'HH:mm',
-            interval: 30
+    (function( $ ) {
+        $(function() {
+            $('.datetime').mask('00/00/0000 00:00');
         });
-    });
+    })(jQuery);
 </script>
 
 @endsection

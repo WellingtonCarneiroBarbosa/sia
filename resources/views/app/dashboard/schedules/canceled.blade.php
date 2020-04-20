@@ -64,7 +64,7 @@
                     <div class="row align-items-center">
                         <!-- inicio cabecalho da tabela -->
                         <div class="col">
-                            <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Canceled Schedule's Table") }}</h5>
+                            <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Schedule's Table") }}</h5>
                         </div>
                         <div class="table-responsive">
                             <table class="table align-items-center table-dark table-flush">
@@ -72,7 +72,7 @@
                                     <tr>
                                         <!-- agendamento 01 -->
                                         <th scope="col" class="sort" data-sort="name">{{ __("Place") }}</th>
-                                        <th scope="col" class="sort" data-sort="budget">{{ __("Start DateTime") }} / {{ __("End DateTime") }}</th>
+                                        <th scope="col" class="sort" data-sort="budget">{{ __("Start Datetime") }} / {{ __("End Datetime") }}</th>
                                         <th scope="col" class="sort" data-sort="status">{{ __("Status") }}</th>
                                         <th scope="col">{{ __("Customer") }}</th>
                                         <th scope="col" class="sort" data-sort="completion">{{ __("Actions") }}</th>
@@ -82,9 +82,9 @@
                                 <!-- fim do cabeçalho da tabela -->
                                 <tbody class="list">
                                     <!-- inicio corpo da tabela -->
-                                    @if ($hasCanceledSchedules)
+                                    @if ($hasSchedules)
                                     
-                                    @foreach($canceledSchedules as $schedule)
+                                    @foreach($schedules as $schedule)
                                     <tr>
                                         <td>
                                             <div class="media align-items-center">
@@ -104,9 +104,9 @@
                                             <div class="media align-items-center">
                                                 <div class="media-body">
                                                     <span class="name mb-0 text-sm">
-                                                        {{ dateBrazilianFormat($schedule->start_date) }} {{ timeBrazilianFormat($schedule->start_time) }} 
+                                                        {{ dateTimeBrazilianFormat($schedule->start) }} 
                                                         |
-                                                        {{ dateBrazilianFormat($schedule->end_date) }} {{ timeBrazilianFormat($schedule->end_time) }}
+                                                        {{ dateTimeBrazilianFormat($schedule->end) }}
                                                     </span>
                                                 </div>
                                             </div>
@@ -144,8 +144,8 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
-                                                    <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("View more") }}</a>
-                                                    <a class="dropdown-item" href="{{ route('schedules.confirm.cancel', ['id' => $schedule->id]) }}">{{ __("Reschedule") }}</a>
+                                                    <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("Edit") }}</a>
+                                                    <a class="dropdown-item" href="{{ route('schedules.confirm.cancel', ['id' => $schedule->id]) }}">{{ __("Cancel") }}</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -197,15 +197,14 @@
                 </div>
             </div>
             <div class="float-right">
-                {{ $canceledSchedules->links() }}
+                {{ $schedules->links() }}
             </div>
         </div>
     </div>
-    <!-- fim da tabela de agendamentos -->
 
-    <!-- fim do conteudo da pagina -->
 
     <!-- filtros -->
+
     <div class="modal-filtros fade" id="modal-filter" tabindex="-1" role="dialog" aria-labelledby="modal-filter" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
             <div class="modal-content">
@@ -237,33 +236,35 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade active show" id="form-intervalo-data" role="tabpanel" aria-labelledby="form-intervalo-data">
                                     <h3>{{ __("Search by date range") }}</h3>
-                                    <form action="{{route('schedules.canceled.findPer.dateRange')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.findPer.dateRange')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
+                                                <label for="">{{ __("From") }}</label>
                                                 <div class="form-group">
                                                     <div class="input-group mb-4">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="start_date" class="form-control dateTop" placeholder="{{ __(" From ") }}" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="start" class="form-control date" placeholder="dd/mm/aaaa" type="text">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
+                                                <label for="">{{ __("To") }}</label>
                                                 <div class="form-group">
                                                     <div class="input-group mb-4">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="end_date" class="form-control dateTop" placeholder="{{ __(" To ") }}" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="end" class="form-control date" placeholder="dd/mm/aaaa" type="text">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- btn pesquisar -->
                                         <div class="float-right">
-                                            <button title="{{ __(" Click to Search ") }}" class="btn btn-primary" type="submit">
+                                            <button title="{{ __("Click to Search") }}" class="btn btn-primary" type="submit">
                                                 {{ __("Search") }}
                                             </button>
                                         </div>
@@ -271,26 +272,28 @@
                                 </div>
                                 <div class="tab-pane fade" id="form-data-local" role="tabpanel" aria-labelledby="form-data-local-tab">
                                     <h3>{{ __("Search by date and place") }}</h3>
-                                    <form action="{{route('schedules.canceled.findPer.dateAndPlace')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.findPer.dateAndPlace')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
+                                                <label for="">{{ __("From") }}</label>
                                                 <div class="form-group">
                                                     <div class="input-group mb-4">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="start_date" placeholder="{{ __(" From ") }}" class="form-control dateTop" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="start" placeholder="dd/mm/aaaa" class="form-control date" type="text">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
+                                                <label for="">{{ __("To") }}</label>
                                                 <div class="form-group">
                                                     <div class="input-group mb-4">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="end_date" class="form-control dateTop" placeholder="{{ __(" To ") }}" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="end" class="form-control date" placeholder="dd/mm/aaaa" type="text">
                                                     </div>
                                                 </div>
                                             </div>
@@ -324,7 +327,7 @@
                                             <div class="col-6">
                                                 <div class="espaco"></div>
                                                 <div class="float-right">
-                                                    <button title="{{ __(" Click to Search ") }}" class="btn btn-primary" type="submit">
+                                                    <button title="{{ __("Click to Search") }}" class="btn btn-primary" type="submit">
                                                         {{ __("Search") }}
                                                     </button>
                                                 </div>
@@ -334,7 +337,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="form-unica-data" role="tabpanel" aria-labelledby="form-unica-data">
                                     <h3>{{ __("Search by single date") }}</h3>
-                                    <form action="{{route('schedules.canceled.findPer.specificDate')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.findPer.specificDate')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -343,7 +346,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="date" id="unica_data" class="form-control dateTop" placeholder="{{ __(" Date ") }}" type="date">
+                                                        <input title="{{ __("Fill this field") }}" required name="date" id="unica_data" class="form-control date" placeholder="dd/mm/aaaa" type="text">
                                                     </div>
                                                 </div>
                                             </div>
@@ -351,7 +354,7 @@
                                                 <div class="form-group">
                                                     <!-- btn pesquisar -->
                                                     <div class="float-right">
-                                                        <button title="{{ __(" Click to Search ") }}" class="btn btn-primary" type="submit">
+                                                        <button title="{{ __("Click to Search") }}" class="btn btn-primary" type="submit">
                                                     {{ __("Search") }}
                                                 </button>
                                                     </div>
@@ -373,5 +376,4 @@
             </div>
         </div>
     </div>
-    <!-- fim do modal filtros -->
 @endsection
