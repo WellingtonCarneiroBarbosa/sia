@@ -8,10 +8,10 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Do you really want to cancel this appointment") }}?</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Do you really want to reschedule this appointment") }}?</h6>
                 </div>
                 <div class="col-lg-6 col-5 text-right">
-                    <a onclick="comeBack();" class="btn btn-sm btn-neutral">{{ __("No, go back to appointments") }}</a>
+                    <a onclick="comeBack();" class="btn btn-sm btn-neutral">{{ __("No, go back to canceled appointments") }}</a>
                 </div>
             </div>
         <!-- fim do header -->
@@ -139,11 +139,11 @@
 
                 </div>
 
-                <form action="{{ route('schedules.cancel', $schedule->id)}}" class="form-loader"  method="POST">
+                <form action="{{ route('schedules.restore', $schedule->id)}}" class="form-loader"  method="POST">
                     @csrf
-                    @method('DELETE')
+                    @method('PUT')
                     <button onclick="comeBack();" type="button" class="btn btn-outline-success">{{ __("Come Back") }}</button>
-                    <button type="submit" class="btn btn-danger">{{ __("Confirm Cancellation") }}</button>
+                    <button type="submit" class="btn btn-primary">{{ __("Reschedule") }}</button>
               </form>
             </div>
         </div>

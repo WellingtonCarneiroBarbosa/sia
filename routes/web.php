@@ -64,12 +64,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::delete('/cancel/{id}', 'Schedules\ScheduleController@cancel')
                                                       ->name('schedules.cancel');
 
+            Route::put('/restore/{id}', 'Schedules\ScheduleController@restore')
+                                                    ->name('schedules.restore');
+
             /***
              * Group for canceled 
              * schedules
              * 
              */
             Route::group(['prefix' => 'canceled'], function () {
+
                 Route::get('/', 'Schedules\CanceledSchedulesController@index')
                                                   ->name('schedules.canceled');
 
@@ -80,13 +84,13 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::group(['prefix' => 'find/per'], function () {
                     
                     Route::any('/date-range', 'Schedules\FindCanceledScheduleController@dateRange')
-                                                      ->name('schedules.canceled.findPer.dateRange');
+                                                     ->name('schedules.canceled.findPer.dateRange');
 
                     Route::any('/date-and-place', 'Schedules\FindCanceledScheduleController@dateRangeAndPlace')
-                                                        ->name('schedules.canceled.findPer.dateAndPlace');
+                                                              ->name('schedules.canceled.findPer.dateAndPlace');
 
                     Route::any('/specific-date', 'Schedules\FindCanceledScheduleController@uniqueDate')
-                                                       ->name('schedules.canceled.findPer.specificDate');
+                                                      ->name('schedules.canceled.findPer.specificDate');
                 });
 
             });
@@ -100,6 +104,9 @@ Route::group(['middleware' => ['auth']], function () {
                 
                 Route::get('/cancel/{id}', 'Schedules\ScheduleController@confirmCancel')
                                                       ->name('schedules.confirm.cancel');
+
+                Route::get('/restore/{id}', 'Schedules\ScheduleController@confirmRestore')
+                                                       ->name('schedules.confirm.restore');
 
             });
 

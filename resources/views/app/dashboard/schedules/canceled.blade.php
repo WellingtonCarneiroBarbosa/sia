@@ -82,9 +82,9 @@
                                 <!-- fim do cabeçalho da tabela -->
                                 <tbody class="list">
                                     <!-- inicio corpo da tabela -->
-                                    @if ($hasSchedules)
+                                    @if ($hasCanceledSchedules)
                                     
-                                    @foreach($schedules as $schedule)
+                                    @foreach($canceledSchedules as $schedule)
                                     <tr>
                                         <td>
                                             <div class="media align-items-center">
@@ -144,8 +144,8 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
-                                                    <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("Edit") }}</a>
-                                                    <a class="dropdown-item" href="{{ route('schedules.confirm.cancel', ['id' => $schedule->id]) }}">{{ __("Cancel") }}</a>
+                                                    <a class="dropdown-item" href="{{ route('schedules.confirm.cancel',  ['id' => $schedule->id]) }}">{{ __("Permanently delete") }}</a>
+                                                    <a class="dropdown-item" href="{{ route('schedules.confirm.restore', ['id' => $schedule->id]) }}">{{ __("Reschedule") }}</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -197,7 +197,7 @@
                 </div>
             </div>
             <div class="float-right">
-                {{ $schedules->links() }}
+                {{ $canceledSchedules->links() }}
             </div>
         </div>
     </div>

@@ -156,6 +156,8 @@
     "Schedule canceled": "Agendamento cancelado",
     "Do you really want to cancel this appointment": "Deseja realmente cancelar este agendamento",
     "No, go back to appointments": "Não, voltar para agendamentos",
+    "Do you really want to reschedule this appointment": "Deseja realmente reagendar este agendamento",
+    "No, go back to canceled appointments": "Não, voltar para agendamentos cancelados",
     "Caution": "Cuidado",
     "Canceling an appointment changes the statistics for canceled appointments": "O cancelamento de um agendamento modifica a estatística de agendamentos cancelados",
     "Besides that": "Além disso",
@@ -182,5 +184,8 @@
     "The start date and time must be before the end date and time": "A data e hora de início deve ser anterior à data e hora de término",
     "The date entered is not a valid date": "A data digitada não é uma data válida",
     " This location is not available on these dates": " Esse local não está disponível nestas datas",
-    "Another Search": "Outra Busca"
+    "Another Search": "Outra Busca",
+    "Confirm Cancellation": "Confirmar Cancelamento",
+    "Rescheduled": "Reagendado",
+    "Permanently delete": "Deletar permanentemente"
 }

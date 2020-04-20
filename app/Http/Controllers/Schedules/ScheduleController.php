@@ -258,4 +258,48 @@ class ScheduleController extends Controller
 
         return redirect()->route('home')->with(['status' => Lang::get('Schedule canceled')]);
     }
+
+    /**
+     * Confirm before restore
+     * 
+     */
+    public function confirmRestore($id){
+        $schedule = Schedule::with('schedulingCustomer')
+                    ->with('schedulingPlace')
+                    ->onlyTrashed()
+                    ->findOrFail($id);
+
+        return view('app.dashboard.schedules.confirm.restore', [
+            'schedule'  => $schedule
+        ]);
+    }
+
+    /**
+     * Restore a schedule
+     * 
+     */
+    public function restore($id){
+        $restore = Schedule::onlyTrashed()->findOrFail($id);
+
+        $restore = $restore->restore();
+        if(!$restore){
+            return redirect()
+            ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+        }
+
+        $log     =
+        [
+            'schedule_id'   => $id,
+            'user_id'       => auth()->user()->id,
+            'action'        => '4'
+        ];
+
+        $createLog = ScheduleLog::create($log);
+
+        if(!$createLog){
+            return abort(500);
+        }
+
+        return redirect()->route('home')->with(['status' => Lang::get('Rescheduled')]);
+    }
 }
