@@ -95,7 +95,6 @@ class ScheduleController extends Controller
                 OR ? BETWEEN start AND end
                 OR ( start > ? AND end < ? ) 
                 OR ( ? = start AND ? = end )
-                LIMIT 1 
             )",[$data['place_id'],
                 $data['start'], $data['end'],
                 $data['start'], $data['end'],
