@@ -121,6 +121,15 @@ class ScheduleController extends Controller
                      ->withInput();
         }
 
+        /**
+         * checks if the date entered
+         * is in the past
+         * 
+         */
+
+         /**something here that checks it */
+
+
         $create  = Schedule::create($data);
 
         if(!$create){

@@ -104,11 +104,12 @@
                     <!-- status -->
                     <div class="form-group mb-3">
                         <span>{{ __("Status") }}:</span>
+
                         @if($schedule->deleted_at != null)
                             <strong>{{ __("canceled") }}</strong>
-                        @elseif ($schedule->status == null)
+                        @elseif (!$schedule->status)
                             <strong>{{ __("On budget") }}</strong>
-                        @elseif($schedule->status == 1)
+                        @elseif($schedule->status)
                             <strong>{{ __("Confirmed") }}</strong>
                         @endif
                     </div>

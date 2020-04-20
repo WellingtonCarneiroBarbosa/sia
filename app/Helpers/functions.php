@@ -62,7 +62,7 @@
      * 
      * return @date
      */
-    function timeBrazilianFormat($value, $format='G:i')
+    function timeBrazilianFormat($value, $format='H:i')
     {
         return date($format, strtotime($value));
     }
@@ -78,16 +78,6 @@
         return date($format, strtotime($value));
     }
 
-    /***
-     * Convert any brazilian datetime to
-     * server format
-     * 
-     * return @date
-     */
-    function dateTimeServerFormat($value, $format='Y/d/m H:i')
-    {
-        return date($format, strtotime($value));
-    }
 
     /***
      * performs the interval calculation
@@ -130,7 +120,7 @@
 
         $timeRange = array();
         while($timeStart <= $timeEnd){
-            $timeRange[]  = $timeStart->format('G:i');
+            $timeRange[]  = $timeStart->format('H:i');
             $timeStart    = $timeStart->modify('+1minute');
         }
 

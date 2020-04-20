@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Schedules\Schedule;
 use App\Models\Places\Place;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Validator;
+use Datetime;
 use DB;
 
 class FindScheduleController extends Controller
@@ -17,7 +19,7 @@ class FindScheduleController extends Controller
      */
 
     public function dateRange(Request $request){
-        /**
+         /**
          * Custom messages for 
          * exceptions
          * 
@@ -32,19 +34,29 @@ class FindScheduleController extends Controller
          * Validate request
          * 
          */
-        $request->validate([
-            'start'          => ['required', 'date', 'before_or_equal:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
-            'end'            => ['required', 'date', 'after_or_equal:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
-        ], $messages);
-
-        /**
-         * Validated data
-         * 
-         */
-        $data       = $request->except('_token');
+        $data = $request->except('_token');
 
         $data['start'] = dateAmericanFormat($data['start']);
         $data['end']   = dateAmericanFormat($data['end']);
+
+        $validator = Validator::make($data, [
+            'start'   => ['required', 'date', 'before_or_equal:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'     => ['required', 'date', 'after_or_equal:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+        ], $messages);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        /**
+         * validate completed
+         * 
+         */
+
 
         /**
          * get all the schedules by data range
@@ -52,6 +64,8 @@ class FindScheduleController extends Controller
          */
         $schedules = Schedule::where(DB::raw('DATE(start)'), '>=', $data['start'])
                              ->where(DB::raw('DATE(end)'),   '<=', $data['end'])
+                             ->orWhere(DB::raw('DATE(start)'), $data['start'])
+                             ->orWhere(DB::raw('DATE(end)'), $data['end'])
                              ->with('schedulingCustomer')
                              ->with('schedulingPlace')
                              ->paginate(config('app.paginate_limit'));
@@ -82,9 +96,7 @@ class FindScheduleController extends Controller
      * 
      */
     public function dateRangeAndPlace(Request $request){
-        $data       = $request->except('_token');
-
-        /**
+         /**
          * Custom messages for 
          * exceptions
          * 
@@ -99,20 +111,29 @@ class FindScheduleController extends Controller
          * Validate request
          * 
          */
-        $request->validate([
-            'start'          => ['required', 'date', 'before_or_equal:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
-            'end'            => ['required', 'date', 'after_or_equal:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
-        ], $messages);
-
-        /**
-         * Validated data
-         * 
-         */
-        $data       = $request->except('_token');
+        $data = $request->except('_token');
 
         $data['start'] = dateAmericanFormat($data['start']);
         $data['end']   = dateAmericanFormat($data['end']);
 
+        $validator = Validator::make($data, [
+            'start'   => ['required', 'date', 'before_or_equal:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'     => ['required', 'date', 'after_or_equal:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+        ], $messages);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        /**
+         * validate completed
+         * 
+         */
+        
         /**
          * get all the schedules by data range
          * and specific place
@@ -120,6 +141,8 @@ class FindScheduleController extends Controller
          */
         $schedules = Schedule::where(DB::raw('DATE(start)'), '>=', $data['start'])
                              ->where(DB::raw('DATE(end)'),   '<=', $data['end'])
+                             ->orWhere(DB::raw('DATE(start)'), $data['start'])
+                             ->orWhere(DB::raw('DATE(end)'), $data['end'])
                              ->where('place_id', $data['place_id'])
                              ->with('schedulingCustomer')
                              ->with('schedulingPlace')
@@ -151,35 +174,39 @@ class FindScheduleController extends Controller
      * 
      */
     public function uniqueDate(Request $request){
-        $data       = $request->except('_token');
-
         /**
          * Custom messages for 
          * exceptions
          * 
          */
         $messages  = [
-            'before' => Lang::get('The date entered is not a valid date'),
-            'after'  => Lang::get('The date entered is not a valid date'),
             'date'   => Lang::get('The date entered is not a valid date')
         ];
+
         /**
          * Validate request
          * 
          */
+        $data = $request->except('_token');
 
-        $request->validate([
-            'date'          => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],
+        $data['date'] = DateTime::dateAmericanFormat($data['date']);
+
+        $validator = Validator::make($data, [
+            'date'   => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],
         ], $messages);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         /**
-         * Validated data
+         * validate completed
          * 
          */
-        $data       = $request->except('_token');
-
-        $data['date'] = dateAmericanFormat($data['date']);
-
         /**
          * Select where start or
          * end_date === $anyDate

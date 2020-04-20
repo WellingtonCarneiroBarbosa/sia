@@ -116,11 +116,14 @@
                                             <span class="badge badge-dot mr-4">
 
                                                 @if($schedule->deleted_at != null)
-                                                    <strong>{{ __("canceled") }}</strong>
-                                                @elseif ($schedule->status == null)
-                                                    <strong>{{ __("On budget") }}</strong>
-                                                @elseif($schedule->status == 1)
-                                                    <strong>{{ __("Confirmed") }}</strong>
+                                                    <i class="bg-danger"></i>
+                                                    <span class="status">{{ __("canceled") }}</span>
+                                                @elseif (!$schedule->status)
+                                                    <i class="bg-danger"></i>
+                                                    <span class="status">{{ __("On budget") }}</span>
+                                                @elseif($schedule->status)
+                                                    <i class="bg-success"></i>
+                                                    <span class="status">{{ __("Confirmed") }}</span>
                                                 @endif
                                                 
                                             </span>
@@ -238,7 +241,7 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade active show" id="form-intervalo-data" role="tabpanel" aria-labelledby="form-intervalo-data">
                                     <h3>{{ __("Search by date range") }}</h3>
-                                    <form action="{{route('schedules.findPer.dateRange')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.canceled.findPer.dateRange')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -274,7 +277,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="form-data-local" role="tabpanel" aria-labelledby="form-data-local-tab">
                                     <h3>{{ __("Search by date and place") }}</h3>
-                                    <form action="{{route('schedules.findPer.dateAndPlace')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.canceled.findPer.dateAndPlace')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -339,7 +342,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="form-unica-data" role="tabpanel" aria-labelledby="form-unica-data">
                                     <h3>{{ __("Search by single date") }}</h3>
-                                    <form action="{{route('schedules.findPer.specificDate')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.canceled.findPer.specificDate')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -378,4 +381,18 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+
+<script>
+    (function( $ ) {
+        $(function() {
+            $('.date').mask('00/00/0000');
+        });
+    })(jQuery);
+</script>
+
 @endsection

@@ -95,7 +95,6 @@ Route::group(['middleware' => ['auth']], function () {
                     Route::any('/specific-date', 'Schedules\FindCanceledScheduleController@uniqueDate')
                                                       ->name('schedules.canceled.findPer.specificDate');
                 });
-
             });
 
             /***

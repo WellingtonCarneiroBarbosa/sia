@@ -5,11 +5,11 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Schedules") }}</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Canceled Schedules") }}</h6>
                 </div>
 
                 <div class="col-lg-6 col-5 text-right">
-                    <a href="{{ route('home') }}" class="btn btn-sm btn-neutral mb-2">{{ __("Come back to schedules") }}</a>
+                    <a href="{{ route('schedules.canceled') }}" class="btn btn-sm btn-neutral mb-2">{{ __("Come back to canceled schedules") }}</a>
                     <a href="#" data-toggle="modal" data-target="#modal-filter" id="filtros-agendamento" class="btn btn-sm btn-neutral mb-2 mr-2">{{ __("Another Search") }}</a>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     <div class="row align-items-center">
                         <!-- inicio cabecalho da tabela -->
                         <div class="col">
-                            <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Schedule's Table") }}</h5>
+                            <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Canceled Schedule's Table") }}</h5>
                         </div>
                         <div class="table-responsive">
                             <table class="table align-items-center table-dark table-flush">
@@ -215,7 +215,7 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade active show" id="form-intervalo-data" role="tabpanel" aria-labelledby="form-intervalo-data">
                                     <h3>{{ __("Search by date range") }}</h3>
-                                    <form action="{{route('schedules.findPer.dateRange')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.canceled.findPer.dateRange')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -251,7 +251,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="form-data-local" role="tabpanel" aria-labelledby="form-data-local-tab">
                                     <h3>{{ __("Search by date and place") }}</h3>
-                                    <form action="{{route('schedules.findPer.dateAndPlace')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.canceled.findPer.dateAndPlace')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -316,7 +316,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="form-unica-data" role="tabpanel" aria-labelledby="form-unica-data">
                                     <h3>{{ __("Search by single date") }}</h3>
-                                    <form action="{{route('schedules.findPer.specificDate')}}" class="form-loader" method="POST">
+                                    <form action="{{route('schedules.canceled.findPer.specificDate')}}" class="form-loader" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">

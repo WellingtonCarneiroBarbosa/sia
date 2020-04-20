@@ -5,38 +5,70 @@ namespace App\Http\Controllers\Schedules;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Schedules\Schedule;
+use App\Models\Places\Place;
+use Illuminate\Support\Facades\Validator;
+use Datetime;
 use Lang;
+use DB;
 
 class FindCanceledScheduleController extends Controller
 {
     /**
-     * Find a canceled schedule
-     * by date range
+     * Find a schedule by date range
      * 
      */
-    public function dateRange(Request $request){
-        $data       = $request->except('_token');
 
-        $start_date = $data['start_date'];
-        $end_date   = $data['end_date'];
+    public function dateRange(Request $request){
+         /**
+         * Custom messages for 
+         * exceptions
+         * 
+         */
+        $messages  = [
+            'before_or_equal' => Lang::get('The date entered is not a valid date'),
+            'after_or_equal'  => Lang::get('The date entered is not a valid date'),
+            'date'   => Lang::get('The date entered is not a valid date')
+        ];
+
+        /**
+         * Validate request
+         * 
+         */
+        $data = $request->except('_token');
+
+        $data['start'] = dateAmericanFormat($data['start']);
+        $data['end']   = dateAmericanFormat($data['end']);
+
+        $validator = Validator::make($data, [
+            'start'   => ['required', 'date', 'before_or_equal:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'     => ['required', 'date', 'after_or_equal:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+        ], $messages);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        /**
+         * validate completed
+         * 
+         */
 
         /**
          * get all the schedules by data range
          * 
          */
-
-        /***
-         * Select where start_date or end_date === $anyDate
-         * or start_date or end_date between $date01 $date02
-         * 
-         */
-        $schedules = Schedule::with('schedulingCustomer')
-                    ->with('schedulingPlace')
-                    ->WhereBetween('start_date', [$start_date, $end_date])
-                    ->onlyTrashed()
-                    ->orWhereBetween('end_date',   [$start_date, $end_date])
-                    ->onlyTrashed()
-                    ->paginate(config('app.paginate_limit'));
+        $schedules = Schedule::onlyTrashed()
+                             ->where(DB::raw('DATE(start)'), '>=', $data['start'])
+                             ->where(DB::raw('DATE(end)'),   '<=', $data['end'])
+                             ->orWhere(DB::raw('DATE(start)'), $data['start'])
+                             ->orWhere(DB::raw('DATE(end)'), $data['end'])
+                             ->with('schedulingCustomer')
+                             ->with('schedulingPlace')
+                             ->paginate(config('app.paginate_limit'));
 
         $hasSchedules = hasData($schedules);
 
@@ -45,47 +77,77 @@ class FindCanceledScheduleController extends Controller
         }else{
             $response = null;
         }
+
+        $places         = Place::get();
+
+        $hasPlaces      = hasData($places);
         
-        return view('app.dashboard.schedules.find', 
+        return view('app.dashboard.schedules.findCanceled', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
-            'response'  => $response,  'data'         => $data
+            'response'  => $response,  'data'         => $data,
+            'places'    => $places,    'hasPlaces'    => $hasPlaces
         ]);
     }
 
     /**
-     * Find a canceled schedule
-     * by date range and
+     * Find a schedule by date range and
      * any place
      * 
      */
     public function dateRangeAndPlace(Request $request){
-        $data       = $request->except('_token');
+         /**
+         * Custom messages for 
+         * exceptions
+         * 
+         */
+        $messages  = [
+            'before_or_equal' => Lang::get('The date entered is not a valid date'),
+            'after_or_equal'  => Lang::get('The date entered is not a valid date'),
+            'date'   => Lang::get('The date entered is not a valid date')
+        ];
 
-        $start_date = $data['start_date'];
-        $end_date   = $data['end_date'];
-        $place      = $data['place_id'];
+        /**
+         * Validate request
+         * 
+         */
+        $data = $request->except('_token');
+
+        $data['start'] = dateAmericanFormat($data['start']);
+        $data['end']   = dateAmericanFormat($data['end']);
+
+        $validator = Validator::make($data, [
+            'start'   => ['required', 'date', 'before_or_equal:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'     => ['required', 'date', 'after_or_equal:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+        ], $messages);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        /**
+         * validate completed
+         * 
+         */
+
 
         /**
          * get all the schedules by data range
+         * and specific place
          * 
          */
-
-        /***
-         * Select where start_date or end_date === $anyDate
-         * or start_date or end_date between $date01 $date02
-         * and place === $place
-         * 
-         */
-        $schedules = Schedule::with('schedulingCustomer')
+        $schedules = Schedule::onlyTrashed()
+                    ->where(DB::raw('DATE(start)'), '>=', $data['start'])
+                    ->where(DB::raw('DATE(end)'),   '<=', $data['end'])
+                    ->orWhere(DB::raw('DATE(start)'), $data['start'])
+                    ->orWhere(DB::raw('DATE(end)'), $data['end'])
+                    ->where('place_id', $data['place_id'])
+                    ->with('schedulingCustomer')
                     ->with('schedulingPlace')
-                    ->where('place_id', $place)
-                    ->WhereBetween('start_date', [$start_date, $end_date])
-                    ->onlyTrashed()
-                    ->orWhereBetween('end_date',   [$start_date, $end_date])
-                    ->onlyTrashed()
-                    ->where('place_id', $place)
-                    ->onlyTrashed()
                     ->paginate(config('app.paginate_limit'));
 
         $hasSchedules = hasData($schedules);
@@ -96,39 +158,69 @@ class FindCanceledScheduleController extends Controller
             $response = null;
         }
         
-        return view('app.dashboard.schedules.find', 
+
+        $places         = Place::get();
+
+        $hasPlaces      = hasData($places);
+        
+        return view('app.dashboard.schedules.findCanceled', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
-            'response'  => $response,  'data'         => $data
+            'response'  => $response,  'data'         => $data,
+            'places'    => $places,    'hasPlaces'    => $hasPlaces
         ]);
     }
 
     /**
-     * Find a canceled schedule by
-     * specific date
+     * Find a schedule by specific date
      * 
      */
     public function uniqueDate(Request $request){
-        $data       = $request->except('_token');
-
-        $date       = $data['date'];
+         /**
+         * Custom messages for 
+         * exceptions
+         * 
+         */
+        $messages  = [
+            'date'   => Lang::get('The date entered is not a valid date')
+        ];
 
         /**
-         * get all the schedules by unique date
+         * Validate request
+         * 
+         */
+        $data = $request->except('_token');
+
+        $data['date'] = dateAmericanFormat($data['date']);
+
+        $validator = Validator::make($data, [
+            'date'   => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],
+        ], $messages);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        /**
+         * validate completed
          * 
          */
 
         /**
-         * Select where start_date or end_date === $date
+         * Select where start or
+         * end_date === $anyDate
          * 
          */
-        $schedules = Schedule::with('schedulingCustomer')
-                    ->with('schedulingPlace')
-                    ->where('start_date', $date)
-                    ->onlyTrashed()
-                    ->orWhere('end_date', $date)
-                    ->onlyTrashed()
-                    ->paginate(config('app.paginate_limit'));
+        $schedules = Schedule::onlyTrashed()
+                             ->where(DB::raw('DATE(start)'), $data['date'])
+                             ->orWhere(DB::raw('DATE(end)'), $data['date'])
+                             ->with('schedulingCustomer')
+                             ->with('schedulingPlace')
+                             ->paginate(config('app.paginate_limit'));
 
         $hasSchedules = hasData($schedules);
 
@@ -137,11 +229,16 @@ class FindCanceledScheduleController extends Controller
         }else{
             $response = null;
         }
+   
+        $places         = Place::get();
+
+        $hasPlaces      = hasData($places);
         
-        return view('app.dashboard.schedules.find', 
+        return view('app.dashboard.schedules.findCanceled', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
-            'response'  => $response,  'data'         => $data
+            'response'  => $response,  'data'         => $data,
+            'places'    => $places,    'hasPlaces'    => $hasPlaces
         ]);
     }
 }
