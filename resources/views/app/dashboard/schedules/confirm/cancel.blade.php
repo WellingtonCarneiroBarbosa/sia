@@ -57,8 +57,8 @@
                             <br>
                             {{ __("Besides that") }}, <u>{{ $schedule->schedulingPlace['name'] }}</u> {{ __("will stay") }} <u class="text-danger">{{ __("available") }}</u>
                             {{ __("for new appointments between") }}
-                            <u> {{ dateTimeBrazilianFormat($schedule->start) }} {{ __("and") }} </u>
-                            <u> {{ dateTimeBrazilianFormat($schedule->end) }} </u>.
+                            <u> {{dateBrazilianFormat($schedule->start)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->start) }}</u> {{ __("and") }}
+                            <u> {{dateBrazilianFormat($schedule->end)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->end) }}</u>.
                         </span>
                         *
                     </strong>
@@ -86,13 +86,13 @@
                     <!-- datahora inicio -->
                     <div class="form-group mb-3">
                        <span>{{ __("Start") }}:</span>
-                       <strong>{{dateBrazilianFormat($schedule->start_date)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->start_time) }}</strong>
+                       <strong>{{dateBrazilianFormat($schedule->start)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->start) }}</strong>
                    </div>
 
                     <!-- datahora final -->
                     <div class="form-group mb-3">
                         <span>{{ __("End") }}:</span>
-                        <strong>{{dateBrazilianFormat($schedule->end_date)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->end_time) }}</strong>
+                        <strong>{{dateBrazilianFormat($schedule->end)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->end) }}</strong>
                     </div>
 
                     <!-- cliente -->
