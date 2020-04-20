@@ -229,6 +229,42 @@ class ScheduleController extends Controller
         }
 
         /**
+          * Validate if the place is avaible
+          * to schedule
+          *
+          * LOGICS FOR VALIDATION
+          *
+          * Considero que já existe um conflito
+          * com um outro compromisso quando a data é a mesma,
+          * ou existe uma sobreposição
+          * de horário. 
+          */
+
+          $scheduleUpdate  = Schedule::findOrFail($id);
+
+          $isReserved  = DB::select(
+            "SELECT * FROM schedules WHERE place_id = ? AND deleted_at IS NULL AND created_at != ? AND (
+                ? BETWEEN start AND end
+                OR ? BETWEEN start AND end
+                OR ( start > ? AND end < ? ) 
+                OR ( ? = start AND ? = end )
+            )",[$data['place_id'], $scheduleUpdate['created_at'],
+                $data['start'], $data['end'],
+                $data['start'], $data['end'],
+                $data['start'], $data['end']
+                ]
+            );
+
+        $isReserved = hasData($isReserved);
+
+        if($isReserved){
+            return redirect()
+                     ->back()->with(['error' => Lang::get(' This location is not available on these dates')])
+                     ->withInput();
+        }
+
+
+        /**
          * checks if the date entered
          * is in the past
          * 
@@ -237,9 +273,9 @@ class ScheduleController extends Controller
          /**something here that checks it */
         
 
-        $update  = Schedule::findOrFail($id)->update($data);
+        $scheduleUpdate = $scheduleUpdate->update($data);
 
-        if(!$update){
+        if(!$scheduleUpdate){
             return redirect()
                      ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
         }
