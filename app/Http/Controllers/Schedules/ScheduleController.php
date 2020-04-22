@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\ScheduleLog;
+use App\Models\Schedules\HistoricSchedule;
 use App\Models\Places\Place;
 use App\Models\Customers\Customer;
 use Illuminate\Support\Facades\Lang;

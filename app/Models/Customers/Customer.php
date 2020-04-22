@@ -5,6 +5,7 @@ namespace App\Models\Customers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Schedules\Schedule;
+use App\Models\Schedules\Schedule\HistoricSchedule;
 use Illuminate\Database\Eloquent\Relations\hasMany;
 
 class Customer extends Model
@@ -36,5 +37,10 @@ class Customer extends Model
     public function schedulingCustomers()
     {
         return $this->hasMany(Schedule::class);
+    }
+
+    public function historicSchedulingCustomers()
+    {
+        return $this->hasMany(HistoricSchedule::class);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models\Places;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Schedules\Schedule;
+use App\Models\Schedules\Schedule\HistoricSchedule;
 use Illuminate\Database\Eloquent\Relations\hasMany;
 
 class Place extends Model
@@ -36,5 +37,10 @@ class Place extends Model
     public function schedulingPlaces()
     {
         return $this->hasMany(Schedule::class);
+    }
+
+    public function historicSchedulingPlaces()
+    {
+        return $this->hasMany(HistoricSchedule::class);
     }
 }
