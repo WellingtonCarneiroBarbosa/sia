@@ -1,4 +1,8 @@
-@extends('layouts.dashboard') @section('title', 'Resultado da Pesquisa') @section('content')
+@extends('layouts.dashboard')
+
+@section('title', 'Resultado da Pesquisa')
+
+@section('content')
 <!-- Header -->
 <div class="header bg-primary pb-6">
     <div class="container-fluid">

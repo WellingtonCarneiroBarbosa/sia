@@ -198,6 +198,8 @@
     "I understand the consequences": "Compreendo as consequências",
     "Permanently delete modifies the statistics for canceled schedules": "Excluir permanentemente modifica as estatísticas para agendamentos cancelados",
     "canceled": "Cancelado",
-    "Permanently deleted": "Deletado permanentemente"
-    
+    "Permanently deleted": "Deletado permanentemente",
+    "View Schedule": "Visualizar Agendamento",
+    "More details about scheduling": "Mais detalhes sobre o agendamento",
+    "Canceled at": "Cancelado em"
 }

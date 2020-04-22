@@ -149,6 +149,7 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
+                                                    <a class="dropdown-item" href="{{ route('schedules.show', ['id' => $schedule->id]) }}">{{ __("View more") }}</a>
                                                     <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("Edit") }}</a>
                                                     <a class="dropdown-item" href="{{ route('schedules.confirm.cancel', ['id' => $schedule->id]) }}">{{ __("Cancel") }}</a>
                                                 </div>

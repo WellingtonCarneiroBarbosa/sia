@@ -147,6 +147,7 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
+                                                    <a class="dropdown-item" href="{{ route('schedules.canceled.show',              ['id' => $schedule->id]) }}">{{ __("View more") }}</a>
                                                     @if(auth()->user()->role_id == 5)
                                                     <a class="dropdown-item" href="{{ route('schedules.confirm.permanentlyDelete',  ['id' => $schedule->id]) }}">{{ __("Delete Permanently") }}</a>
                                                     @endif

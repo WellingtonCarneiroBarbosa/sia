@@ -52,6 +52,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/create', 'Schedules\ScheduleController@create')
                                               ->name('schedules.create');
 
+            Route::get('/show/{id}', 'Schedules\ScheduleController@show')
+                                                 ->name('schedules.show');                                             
+
             Route::post('/store', 'Schedules\ScheduleController@store')
                                               ->name('schedules.store');
 
@@ -64,11 +67,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::delete('/cancel/{id}', 'Schedules\ScheduleController@cancel')
                                                       ->name('schedules.cancel');
 
-            Route::put('/restore/{id}', 'Schedules\ScheduleController@restore')
-                                                    ->name('schedules.restore');
+            Route::put('/restore/{id}', 'Schedules\CanceledSchedulesController@restore')
+                                                             ->name('schedules.restore');
 
-            Route::delete('/permanently/delete/{id}', 'Schedules\ScheduleController@permanentlyDelete')
-                                                                  ->name('schedules.permanentlyDelete');
+            Route::delete('/permanently/delete/{id}', 'Schedules\CanceledSchedulesController@permanentlyDelete')
+                                                                           ->name('schedules.permanentlyDelete');
 
             /***
              * Group for canceled 
@@ -79,6 +82,9 @@ Route::group(['middleware' => ['auth']], function () {
 
                 Route::get('/', 'Schedules\CanceledSchedulesController@index')
                                                   ->name('schedules.canceled');
+
+                Route::get('/show/{id}', 'Schedules\CanceledSchedulesController@show')
+                                                     ->name('schedules.canceled.show');  
 
                 /***
                  * Specific filter
@@ -107,11 +113,11 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('/cancel/{id}', 'Schedules\ScheduleController@confirmCancel')
                                                       ->name('schedules.confirm.cancel');
 
-                Route::get('/restore/{id}', 'Schedules\ScheduleController@confirmRestore')
-                                                       ->name('schedules.confirm.restore');
+                Route::get('/restore/{id}', 'Schedules\CanceledSchedulesController@confirmRestore')
+                                                                ->name('schedules.confirm.restore');
 
-                Route::get('/permanently/delete/{id}', 'Schedules\ScheduleController@confirmPermanentlyDelete')
-                                                                  ->name('schedules.confirm.permanentlyDelete');                                                       
+                Route::get('/permanently/delete/{id}', 'Schedules\CanceledSchedulesController@confirmPermanentlyDelete')
+                                                                           ->name('schedules.confirm.permanentlyDelete');                                                       
 
             });
 
