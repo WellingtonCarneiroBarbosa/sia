@@ -35,10 +35,13 @@ class HomeController extends Controller
         $hasPlaces      = hasData($places);
         $hasSchedules   = hasData($schedules);
 
+        $now = date('Y-m-d H:i:s');
+
         return view('app.dashboard.index',
         [
             'schedules' => $schedules,  'hasSchedules' => $hasSchedules,
-            'places'    => $places,     'hasPlaces'    => $hasPlaces
+            'places'    => $places,     'hasPlaces'    => $hasPlaces,
+            'now'       => $now
         ]);
     }
 }

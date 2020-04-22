@@ -117,17 +117,24 @@
                                         <td>
                                             <span class="badge badge-dot mr-4">
 
-                                                @if($schedule->deleted_at != null)
+                                                @if($now > $schedule->start && $now < $schedule->end)
+                                                    <i class="bg-success"></i>
+                                                    <span class="status">{{ __("Em andamento") }}</span>
+                                                @elseif($now > $schedule->start && $now >= $schedule->end)
+                                                    <i class="bg-danger"></i>
+                                                    <span class="status">{{ __("Finalizado") }}</span>
+                                                @elseif($schedule->deleted_at != null)
                                                     <i class="bg-danger"></i>
                                                     <span class="status">{{ __("canceled") }}</span>
                                                 @elseif (!$schedule->status)
-                                                    <i class="bg-danger"></i>
+                                                    <i class="bg-warning"></i>
                                                     <span class="status">{{ __("On budget") }}</span>
                                                 @elseif($schedule->status)
                                                     <i class="bg-success"></i>
                                                     <span class="status">{{ __("Confirmed") }}</span>
                                                 @endif
-                                                
+
+
                                             </span>
                                         </td>
 
