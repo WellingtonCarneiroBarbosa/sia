@@ -52,7 +52,7 @@ class Kernel extends ConsoleKernel
                   $delete = DB::delete('DELETE FROM schedules WHERE id = ?', [$schedule->id]);
                 }
             }
-        })->everyMinute();
+        })->everyThirtyMinutes();
     }
 
     /**
