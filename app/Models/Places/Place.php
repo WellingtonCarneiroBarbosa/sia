@@ -18,7 +18,9 @@ class Place extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name', 'capacity', 'size', 'hasProjector', 'howManyProjectors',
+        'hasTranslationBooth', 'howManyBooths', 'hasSound', 'hasLighting',
+        'hasWifi', 'hasAccessibility', 'hasFreeParking'
     ];
 
     /***

@@ -6,9 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Places\Place;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Validator;
 
 class PlaceController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +38,69 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        $data   = $request->all();
+        /**
+         * Custom messages for 
+         * exceptions
+         * 
+         */
+
+        /**
+         * Validate request
+         * 
+         */
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'name'      => ['required', 'string', 'max:120'],
+            'capacity'  => ['required', 'string', 'max:3'],
+            'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
+            'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
+        ]);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        /**
+         * validate completed
+         * 
+         */
+
+        if($request->hasProjector){
+            $data['hasProjector'] = true;
+        }else{
+            $data['howManyProjectors'] = null;
+        }
+
+        if($request->hasTranslationBooth){
+            $data['hasTranslationBooth'] = true;
+        }else{
+            $data['howManyBooths'] = null;
+        }
+
+        if($request->hasSound){
+            $data['hasSound'] = true;
+        }
+
+        if($request->hasLighting){
+            $data['hasLighting'] = true;
+        }
+
+        if($request->hasWifi){
+            $data['hasWifi'] = true;
+        }
+
+        if($request->hasAccessibility){
+            $data['hasAccessibility'] = true;
+        }
+
+        if($request->hasFreeParking){
+            $data['hasFreeParking'] = true;
+        }
 
         $create = Place::create($data);
 
@@ -38,5 +110,50 @@ class PlaceController extends Controller
         }
 
         return redirect()->back()->with(['status' => Lang::get('Registered Place')]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }
