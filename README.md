@@ -13,10 +13,9 @@ Para obter um login de testes entre em contato com **carneirobarbosawellington@g
 ```
 git clone https://github.com/WellingtonCarneiroBarbosa/sistema-de-gerenciamento-de-eventos.git
 ```
-2. Instale o pacote do composer e do npm
+2. Instale as dependências necessárias (você deve possuir o composer)
 ```
 composer install
-npm install
 ```
 3. Na pasta do projeto, clone o arquivo **_.env.exemple_** e renomeie para **.env**. Então, atualize com suas variáveis de ambiente. Após, crie um banco de dados com o nome configurado no **_.env_**.
 Então, gere a chave da aplicação e publique as alterações
@@ -28,11 +27,7 @@ php artisan config:cache
 ```
 php artisan migrate
 ```
-5. Compile o CSS e o JS
-```
-npm run dev
-```
-6. Inicialize um servidor local
+5. Inicialize um servidor local
 ```
 php artisan serve
 ```
