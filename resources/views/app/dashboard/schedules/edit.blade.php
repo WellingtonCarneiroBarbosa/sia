@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Cadastrar Agendamento')
+@section('title', 'Editar Agendamento')
 
 @section('content')
 

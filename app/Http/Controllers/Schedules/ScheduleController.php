@@ -234,9 +234,10 @@ class ScheduleController extends Controller
          * validate completed
          * 
          */
-
-        if($request->status){
+        if($request->status === "on"){
             $data['status'] = null;
+        }else {
+            $data['status'] = '1';
         }
 
         /**
