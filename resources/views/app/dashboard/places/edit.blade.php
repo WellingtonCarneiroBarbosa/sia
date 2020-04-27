@@ -74,7 +74,7 @@
                         <span class="input-group-text"><i class="fa fa-users"></i></span>
                         </div>
 
-                        <input id="capacity" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Capacity") }}"  class="form-control " value="{{ $place->capacity }}" name="capacity" required>
+                        <input id="capacity" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Capacity") }}"  class="form-control " value="{{  str_replace(',', '.', number_format($place->capacity)) }}" name="capacity" required>
                     
                     </div>
                 </div>
@@ -264,12 +264,6 @@
             var sizeOriginal = $("#sizeOriginalDatabase").val();
             sizeOriginal = sizeOriginal.replace('.', ',');
             $("#size").val(sizeOriginal);
-
-
-
-            var capacityNumber = $("#capacity").val();
-            capacityNumber = capacityNumber.maskNumber({thousands: '.', integer: true});
-            $("#capacity").val(capacityNumber);
         });
 
         (function( $ ) {
