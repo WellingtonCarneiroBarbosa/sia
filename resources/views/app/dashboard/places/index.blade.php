@@ -130,7 +130,7 @@
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
                                                     <a class="dropdown-item" href="{{ route('places.show', ['id' => $place->id]) }}">{{ __("View more") }}</a>
                                                     <a class="dropdown-item" href="{{ route('places.edit', ['id' => $place->id]) }}">{{ __("Edit") }}</a>
-                                                    <a class="dropdown-item" href="{{ route('places.confirm.delete', ['id' => $place->id]) }}">{{ __("Cancel") }}</a>
+                                                    <a class="dropdown-item" href="{{ route('places.confirm.delete', ['id' => $place->id]) }}">{{ __("Delete") }}</a>
                                                 </div>
                                             </div>
                                         </td>

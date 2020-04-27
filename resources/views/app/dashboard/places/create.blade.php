@@ -194,6 +194,7 @@
 
                 <!-- submit button -->
                     <div class="text-center">
+                        <button onclick="comeBack();" type="button" class="btn btn-outline-primary  ml-auto" >{{ __("Cancel") }}</button>
                         <button type="submit" title="{{ __("Click to register this place") }}" class="btn btn-primary my-4">{{ __("Register Place") }}</button>
                     </div>
                 <!-- fim do submit button -->

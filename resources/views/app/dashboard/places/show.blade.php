@@ -50,36 +50,39 @@
                 <div class="text-center text-danger"><h3>{{ __("More details about the place") }}</h3></div>
                 <hr>
                 <div class="text-left text-sm">
-                    <!-- identificador do agendamento -->
+                    <!-- identificador do local -->
                     <div class="form-group mb-3">
                         <span>{{ __("Identifier number") }}:</span>
                         <strong>{{ $place->id }}</strong>
                     </div>
 
-                    <!-- titulo do agendamento -->
+                    <!-- nome do local -->
                     <div class="form-group mb-3">
                         <span>{{ __("Name") }}:</span>
                         <strong>{{ $place->name }}</strong> 
                     </div>
 
-                    <!-- local do agendamento -->
+                    <!-- capacidade do ambiente -->
                     <div class="form-group mb-3">
                         <span>{{ __("Capacity") }}:</span>
                         <strong>{{ $place->capacity }} {{ __("peoples") }}</strong>
                     </div>
 
-                    <!-- datahora inicio -->
+                    <!-- tamanho do ambiente -->
                     <div class="form-group mb-3">
                        <span>{{ __("Size") }}:</span>
                        <strong>{{ $place->size }} m<sup>2</sup> </strong>
                    </div>
 
-                    <!-- datahora final -->
+                   @if($place->hasProjectors)
+                    <!-- qtd projetores -->
                     <div class="form-group mb-3">
-                        <span>{{ __("End") }}:</span>
-                        <strong></strong>
+                        <span>{{ __("Projectors") }}:</span>
+                        <strong>
+                            {{ $place->howManyProjectors }}
+                        </strong>
                     </div>
-
+                    @endif
                     <!-- cliente -->
                     <div class="form-group mb-3">
                         <span>{{ __("Customer") }}:</span>
