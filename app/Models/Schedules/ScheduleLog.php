@@ -29,4 +29,16 @@ class ScheduleLog extends Model
     {
         return $this->hasOne(Schedule::class, 'id', 'schedule_id');
     }
+
+    /**
+     * its not editable
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::updating(function($model)
+        {
+            return false;
+        });
+    }
 }

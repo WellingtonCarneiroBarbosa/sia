@@ -143,11 +143,11 @@ class FindCanceledScheduleController extends Controller
         $schedules = Schedule::onlyTrashed()
                     ->where(DB::raw('DATE(start)'), '>=', $data['start'])
                     ->where(DB::raw('DATE(end)'),   '<=', $data['end'])
+                    ->where('place_id', $data['place_id'])
                     ->orWhere(DB::raw('DATE(start)'), $data['start'])
+                    ->where('place_id', $data['place_id'])
                     ->orWhere(DB::raw('DATE(end)'), $data['end'])
                     ->where('place_id', $data['place_id'])
-                    ->with('schedulingCustomer')
-                    ->with('schedulingPlace')
                     ->paginate(config('app.paginate_limit'));
 
         $hasSchedules = hasData($schedules);

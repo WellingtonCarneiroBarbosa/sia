@@ -79,9 +79,9 @@
 
                         <!--Locais - left -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('places.create') }}">
+                            <a class="nav-link {{request()->routeIs('places.index') ? 'active' : ''}}" href="{{ route('places.index') }}">
                                 <i class="fa fa-map text-primary"></i>
-                                <span title="{{ __(" Click to manage the places ") }}" class="nav-link-text">{{ __("Register Place") }}</span>
+                                <span title="{{ __(" Click to manage the places ") }}" class="nav-link-text">{{ __("Places") }}</span>
                             </a>
                         </li>
                         <!-- Fim Locais - left -->
@@ -258,9 +258,9 @@
                                 <form class="form-loader" action="{{route('logout')}}" method="POST">
                                     @csrf
                                     <button type="submit" class="dropdown-item">
-                                            <i class="ni ni-user-run"></i>
-                                            <span title="{{ __("Click to logout") }}">{{ __("Logout") }}</span>
-                                        </button>
+                                        <i class="ni ni-user-run"></i>
+                                        <span title="{{ __("Click to logout") }}">{{ __("Logout") }}</span>
+                                    </button>
                                 </form>
                             </div>
                         </li>

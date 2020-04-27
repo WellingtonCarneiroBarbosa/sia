@@ -214,5 +214,18 @@
     "No": "Não",
     "Yes": "Sim",
     "How many projectors?": "Quantos projetores?",
-    "How many booths?": "Quantas cabines?"
+    "How many booths?": "Quantas cabines?",
+    "Places": "Locais",
+    "Place's Table": "Tabela dos Locais",
+    "peoples": "pessoas",
+    "Size": "Tamanho em metro quadrado",
+    "Update Place": "Editar Local",
+    "Updated place": "Local Atualizado",
+    "Place deleted": "Local deletado",
+    "Place permanently deleted": "Local excluído permanentemente",
+    "Place restored": "Local restaurado",
+    "click to update this place": "Clique para editar este local",
+    "View Place": "Visualizar Local",
+    "More details about the place": "Mais detalhes sobre o local",
+    "Deleted at": "Deletado em"
 }

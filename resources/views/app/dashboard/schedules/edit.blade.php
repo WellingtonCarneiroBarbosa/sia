@@ -164,16 +164,17 @@
 
                         <!-- pendente ou nao -->
 
-                        <div class="custom-control custom-control-alternative custom-checkbox">
-                            <input class="custom-control-input" id="customCheckLogin" name="status" type="checkbox"
+                        <label for="status">{{ __("On budget") }}</label>
+    
+                        <label class="custom-toggle ml-2">
+                            <input name="status" id="status" type="checkbox" 
                             @if($schedule->status == null) 
-                            checked
+                                checked
                             @else 
-                            unchecked
-                            @endif
-                            >
-                            <label class="custom-control-label" for="customCheckLogin"><span>{{ __("On budget") }}</span></label>
-                        </div>
+                                unchecked
+                            @endif>
+                            <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
+                        </label>
                         <!-- fim do pendente ou nao -->
 
                         <!-- submit button -->

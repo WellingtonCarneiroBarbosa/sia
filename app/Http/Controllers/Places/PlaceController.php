@@ -17,7 +17,13 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        //
+        $places     = Place::paginate(config('app.paginate_limit'));
+
+        $hasPlaces = hasData($places);
+
+        return view('app.dashboard.places.index', [
+            'hasPlaces' => $hasPlaces, 'places' => $places
+        ]);
     }
 
     /**
@@ -38,11 +44,6 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        /**
-         * Custom messages for 
-         * exceptions
-         * 
-         */
 
         /**
          * Validate request
@@ -52,7 +53,7 @@ class PlaceController extends Controller
 
         $validator = Validator::make($data, [
             'name'      => ['required', 'string', 'max:120'],
-            'capacity'  => ['required', 'string', 'max:3'],
+            'capacity'  => ['required', 'string', 'max:6'],
             'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
             'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
         ]);
@@ -120,7 +121,11 @@ class PlaceController extends Controller
      */
     public function show($id)
     {
-        //
+        $place = Place::findOrFail($id);
+
+        return view('app.dashboard.places.show', [
+            'place' => $place
+        ]);
     }
 
     /**
@@ -131,7 +136,11 @@ class PlaceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $place = Place::findOrFail($id);
+
+        return view('app.dashboard.places.edit', [
+            'place' => $place
+        ]);
     }
 
     /**
@@ -143,10 +152,104 @@ class PlaceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        /**
+         * Validate request
+         * 
+         */
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'name'      => ['required', 'string', 'max:120'],
+            'capacity'  => ['required', 'string', 'max:6'],
+            'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
+            'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
+        ]);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        /**
+         * validate completed
+         * 
+         */
+        if($request->hasProjector){
+            $data['hasProjector'] = true;
+        }else{
+            $data['hasProjector'] = false;
+            $data['howManyProjectors'] = null;
+        }
+
+        if($request->hasTranslationBooth){
+            $data['hasTranslationBooth'] = true;
+        }else{
+            $data['hasTranslationBooth'] = false;
+            $data['howManyBooths'] = null;
+        }
+
+        if($request->hasSound){
+            $data['hasSound'] = true;
+        }else{
+            $data['hasSound'] = false;
+        }
+
+        if($request->hasLighting){
+            $data['hasLighting'] = true;
+        }else {
+            $data['hasLighting'] = false;
+        }
+
+        if($request->hasWifi){
+            $data['hasWifi'] = true;
+        }else {
+            $data['hasWifi'] = false;
+        }
+
+        if($request->hasAccessibility){
+            $data['hasAccessibility'] = true;
+        }else {
+            $data['hasAccessibility'] = false;
+        }
+
+        if($request->hasFreeParking){
+            $data['hasFreeParking'] = true;
+        }else {
+            $data['hasFreeParking'] = false;
+        }
+
+
+        $placeUpdate = Place::findOrFail($id);
+
+        $placeUpdate = $placeUpdate->update($data);
+
+        if(!$placeUpdate){
+            return redirect()
+                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+        }
+
+        return redirect()->back()->with(['status' => Lang::get('Updated place')]);
     }
 
+
     /**
+     * confirm before delete
+     * 
+     */
+
+    public function confirmDestroy($id){
+        $place = Place::findOrFail($id);
+
+        return view('app.dashboard.places.confirm.delete', [
+            'place' => $place
+        ]);
+    }
+
+     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -154,6 +257,69 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $place = FindOrFail($id);
+
+        $delete = $place->delete();
+
+        if(!$delete){
+            return redirect()
+            ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+        }
+
+        return redirect()->route('places.index')->with(['status' => Lang::get('Place deleted')]);
+    } 
+
+    /**
+     * confirm before forceDelete
+     * 
+     */
+
+    public function confirmForceDestroy($id){
+        $place = Place::onlyTrashed()->findOrFail($id);
+        
+        return view('app.dashboard.places.confirm.forceDelete', [
+            'place' => $place
+        ]);
+    }
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function forceDestroy($id)
+    {
+        $place = Place::onlyTrashed()->FindOrFail($id);
+
+        $delete = $place->forceDelete();
+
+        if(!$delete){
+            return redirect()
+                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+        }
+
+        return redirect()->route('places.index')->with(['status' => Lang::get('Place permanently deleted')]);
+    } 
+
+    public function confirmRestore($id){
+        $place = Place::onlyTrashed()->findOrFail($id);
+
+        return view('app.dashboard.places.confirm.restore', [
+            'place' => $place
+        ]);
+    }
+
+    public function restore(){
+        $place = Place::onlyTrashed()->findOrFail($id);
+
+        $restore = $place->restore();
+
+        if(!$restore){
+            return redirect()
+                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+        }
+
+        return redirect()->route('places.index')->with(['status' => Lang::get('Place restored')]);
     }
 }

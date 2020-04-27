@@ -139,15 +139,17 @@ class FindScheduleController extends Controller
          * and specific place
          * 
          */
+        
         $schedules = Schedule::where(DB::raw('DATE(start)'), '>=', $data['start'])
-                             ->where(DB::raw('DATE(end)'),   '<=', $data['end'])
-                             ->orWhere(DB::raw('DATE(start)'), $data['start'])
-                             ->orWhere(DB::raw('DATE(end)'), $data['end'])
-                             ->where('place_id', $data['place_id'])
-                             ->with('schedulingCustomer')
-                             ->with('schedulingPlace')
-                             ->paginate(config('app.paginate_limit'));
+        ->where(DB::raw('DATE(end)'),   '<=', $data['end'])
+        ->where('place_id', $data['place_id'])
+        ->orWhere(DB::raw('DATE(start)'), $data['start'])
+        ->where('place_id', $data['place_id'])
+        ->orWhere(DB::raw('DATE(end)'), $data['end'])
+        ->where('place_id', $data['place_id'])
+        ->paginate(config('app.paginate_limit'));
 
+                            
         $hasSchedules = hasData($schedules);
 
         if(!$hasSchedules){
@@ -189,7 +191,7 @@ class FindScheduleController extends Controller
          */
         $data = $request->except('_token');
 
-        $data['date'] = DateTime::dateAmericanFormat($data['date']);
+        $data['date'] = dateAmericanFormat($data['date']);
 
         $validator = Validator::make($data, [
             'date'   => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],

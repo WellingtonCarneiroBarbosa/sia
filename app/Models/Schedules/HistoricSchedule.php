@@ -50,4 +50,13 @@ class HistoricSchedule extends Model
         return $this->belongsTo(Place::class, 'place_id', 'id');
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::updating(function($model)
+        {
+            return false;
+        });
+    }
+
 }

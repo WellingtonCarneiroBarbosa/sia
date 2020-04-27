@@ -160,12 +160,16 @@
                         </div>
                         <!-- fim do details do agendamento -->
 
-                        <!-- pendente ou nao -->
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="status" id="status">
-                            <label class="custom-control-label" for="status">{{ __("On budget") }}</label>
-                        </div>
-                        <!-- fim do pendente ou nao -->
+                        <!-- em orçamento -->
+
+                        <label for="status">{{ __("On budget") }}</label>
+    
+                        <label class="custom-toggle ml-2">
+                            <input name="status" id="status" type="checkbox">
+                            <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
+                        </label>
+                     
+                        <!-- fim em orçamento -->
 
                         <!-- submit button -->
                         <div class="text-center">
