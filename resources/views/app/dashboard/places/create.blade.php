@@ -61,7 +61,7 @@
                         <span class="input-group-text"><i class="ni ni-building"></i></span>
                         </div>
 
-                        <input id="name" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Place") }}"  class="form-control " name="name" required>
+                        <input id="name" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Place") }}"  class="form-control " value="{{ old('name') }}" name="name" required>
                     
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                         <span class="input-group-text"><i class="fa fa-users"></i></span>
                         </div>
 
-                        <input id="capacity" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Capacity") }}"  class="form-control " name="capacity" required>
+                        <input id="capacity" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Capacity") }}"  class="form-control " name="capacity" value="{{ old('capacity') }}" required>
                     
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                         <span class="input-group-text"><i class="fa fa-vector-square"></i></span>
                         </div>
 
-                        <input id="size" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Square meters") }}"  class="form-control " name="size" required>
+                        <input id="size" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Square meters") }}"  class="form-control " name="size" value="{{ old('size') }}" required>
                         
                     </div>
                 </div>
@@ -111,18 +111,18 @@
                     <label for="hasProjector"> {{ __("Projectors") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasProjector" name="hasProjector" type="checkbox">
+                        <input id="hasProjector" name="hasProjector" type="checkbox" @if(old('hasProjector') == 'on') checked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
 
-                <div id="howManyProjectorsDiv" class="form-group" style="display: none;">
+                <div id="howManyProjectorsDiv" class="form-group" @if(old('hasProjector') != 'on') style="display: none" @endif>
                     <div class="input-group input-group-alternative">
                         <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-building"></i></span>
                         </div>
 
-                        <input id="howManyProjectors" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("How many projectors?") }}"  class="form-control " name="howManyProjectors">
+                        <input id="howManyProjectors" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("How many projectors?") }}"  class="form-control " value="@if(old('hasProjector') == 'on') {{ old('howManyProjectors') }} @endif" name="howManyProjectors">
                     
                     </div>
                 </div>
@@ -133,18 +133,18 @@
                     <label for="hasTranslationBooth"> {{ __("Translation booths") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasTranslationBooth" name="hasTranslationBooth" type="checkbox">
+                        <input id="hasTranslationBooth" name="hasTranslationBooth" type="checkbox" @if(old('hasTranslationBooth') == 'on') checked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
 
-                <div id="howManyBoothsDiv" class="form-group" style="display: none;">
+                <div id="howManyBoothsDiv" class="form-group" @if(old('hasTranslationBooth') != 'on') style="display: none;" @endif>
                     <div class="input-group input-group-alternative">
                         <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-building"></i></span>
                         </div>
 
-                        <input id="howManyBooths" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("How many booths?") }}"  class="form-control " name="howManyBooths">
+                        <input id="howManyBooths" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("How many booths?") }}"  class="form-control " value="@if(old('hasTranslationBooth') == 'on') {{ old('howManyBooths') }} @endif" name="howManyBooths">
                     
                     </div>
                 </div>
@@ -155,7 +155,7 @@
                     <label for="hasSound"> {{ __("Sound") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasSound" name="hasSound" type="checkbox">
+                        <input id="hasSound" name="hasSound" type="checkbox"  @if(old('hasSound')) checked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
@@ -166,7 +166,7 @@
                     <label for="hasLighting"> {{ __("Scenic lighting") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasLighting" name="hasLighting" type="checkbox">
+                        <input id="hasLighting" name="hasLighting" type="checkbox" @if(old('hasLighting')) checked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
@@ -177,7 +177,7 @@
                     <label for="hasWifi"> {{ __("Wifi") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasWifi" name="hasWifi" type="checkbox">
+                        <input id="hasWifi" name="hasWifi" type="checkbox"  @if(old('hasWifi')) checked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
@@ -188,7 +188,7 @@
                     <label for="hasAccessibility"> {{ __("Accessibility") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasAccessibility" name="hasAccessibility" type="checkbox">
+                        <input id="hasAccessibility" name="hasAccessibility" type="checkbox"  @if(old('hasAccessibility')) checked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
@@ -199,7 +199,7 @@
                     <label for="hasFreeParking"> {{ __("Free parking") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasFreeParking" name="hasFreeParking" type="checkbox">
+                        <input id="hasFreeParking" name="hasFreeParking" type="checkbox"  @if(old('hasFreeParking')) checked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>

@@ -106,7 +106,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                 </div>
-                                <input title="{{ __("Fill this field") }}" placeholder="dd/mm/aaaa hh:mm"  id="start" type="text" class="form-control datetime" name="start" required> 
+                                <input title="{{ __("Fill this field") }}" placeholder="dd/mm/aaaa hh:mm" value="{{ old('start') }}"  id="start" type="text" class="form-control datetime" name="start" required> 
 
 
                             </div>
@@ -120,7 +120,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                 </div>
-                                <input title="{{ __("Fill this field") }}" placeholder="dd/mm/aaaa hh:mm" id="end" type="text" class="form-control datetime" name="end" required> 
+                                <input title="{{ __("Fill this field") }}" placeholder="dd/mm/aaaa hh:mm" value="{{ old('end') }}"  id="end" type="text" class="form-control datetime" name="end" required> 
                             </div>
                         </div>
                         <!-- fim da data final do agendamento -->
@@ -165,7 +165,7 @@
                         <label for="status">{{ __("On budget") }}</label>
     
                         <label class="custom-toggle ml-2">
-                            <input name="status" id="status" type="checkbox">
+                            <input name="status" id="status" type="checkbox" @if(old('status') == 'on') checked @endif>
                             <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                         </label>
                      

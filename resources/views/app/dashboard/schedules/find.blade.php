@@ -229,7 +229,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="start" class="form-control date" placeholder="dd/mm/aaaa" type="text">
+                                                        <input title="{{ __("Fill this field") }}" value="{{ old('start') }}" required name="start" class="form-control date" placeholder="dd/mm/aaaa" type="text">
                                                     </div>
                                                 </div>
                                             </div>
@@ -240,7 +240,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="end" class="form-control date" placeholder="dd/mm/aaaa" type="text">
+                                                        <input title="{{ __("Fill this field") }}" required value="{{ old('end') }}" name="end" class="form-control date" placeholder="dd/mm/aaaa" type="text">
                                                     </div>
                                                 </div>
                                             </div>
@@ -265,7 +265,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="start" placeholder="dd/mm/aaaa" class="form-control date" type="text">
+                                                        <input title="{{ __("Fill this field") }}" value="{{ old('start') }}" required name="start" placeholder="dd/mm/aaaa" class="form-control date" type="text">
                                                     </div>
                                                 </div>
                                             </div>
@@ -276,7 +276,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="end" class="form-control date" placeholder="dd/mm/aaaa" type="text">
+                                                        <input title="{{ __("Fill this field") }}" required value="{{ old('end') }}" name="end" class="form-control date" placeholder="dd/mm/aaaa" type="text">
                                                     </div>
                                                 </div>
                                             </div>
@@ -295,7 +295,7 @@
                                                         @if ($hasPlaces)
                                                         <select name="place_id" id="place_id" class="form-control @error('place_id') is-invalid @enderror" required>
                                                             @foreach ($places as $place)
-                                                                <option value="{{$place->id}}">{{$place->name}}</option>
+                                                                <option value="{{$place->id}}" @if(old('place_id') == $place->id) selected @endif>{{$place->name}}</option>
                                                             @endforeach
                                                         </select> 
                                                         @else
@@ -329,7 +329,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input title="{{ __("Fill this field") }}" required name="date" id="unica_data" class="form-control date" placeholder="dd/mm/aaaa" type="text">
+                                                        <input title="{{ __("Fill this field") }}" value="{{ old('date') }}" required name="date" id="unica_data" class="form-control date" placeholder="dd/mm/aaaa" type="text">
                                                     </div>
                                                 </div>
                                             </div>
