@@ -47,7 +47,7 @@
                 </div>
                 @endif
                 
-                <div class="text-center text-danger"><h3>{{ __("More details about the place") }}</h3></div>
+                <div class="text-center text-danger"><h3>{{ __("More details about") }} <u>{{ $place->name }}</u> </h3></div>
                 <hr>
                 <div class="text-left text-sm">
                     <!-- identificador do local -->
@@ -74,7 +74,19 @@
                        <strong>{{ $place->size }} m<sup>2</sup> </strong>
                    </div>
 
-                   @if($place->hasProjectors)
+                   <!--tensao-->
+                    <div class="form-group mb-3">
+                        <span>{{ __("Outlet voltage") }}:</span>
+                        <strong>
+                        @if($place->outletVoltage)
+                            220v
+                        @else
+                            127v
+                        @endif
+                        </strong>
+                    </div>
+
+                    @if($place->hasProjector)
                     <!-- qtd projetores -->
                     <div class="form-group mb-3">
                         <span>{{ __("Projectors") }}:</span>
@@ -83,32 +95,84 @@
                         </strong>
                     </div>
                     @endif
-                    <!-- cliente -->
+
+                    @if($place->hasTranslationBooth)
+                    <!-- qtd projetores -->
                     <div class="form-group mb-3">
-                        <span>{{ __("Customer") }}:</span>
-                        <strong></strong>
+                        <span>{{ __("Translation booths") }}:</span>
+                        <strong>
+                            {{ $place->howManyBooths }}
+                        </strong>
+                    </div>
+                    @endif
+
+                    <!-- qtd projetores -->
+                    <div class="form-group mb-3">
+                        <span>{{ __("Sound") }}?</span>
+                        <strong>
+                        @if($place->hasSound)
+                            {{ __("Yes") }}
+                        @else
+                            {{ __("No") }}
+                        @endif
+                        </strong>
+                    </div>
+                  
+                    <!-- tem iluminação -->
+                    <div class="form-group mb-3">
+                        <span>{{ __("Scenic lighting") }}?</span>
+                        <strong>
+                        @if($place->hasLighting)
+                           {{ __("Yes") }}
+                        @else
+                           {{ __("No") }}
+                        @endif
+                        </strong>
                     </div>
 
-                    <!-- status -->
+                    <!-- tem wifi -->
                     <div class="form-group mb-3">
-                        <span>{{ __("Status") }}:</span>
-
-
+                        <span>{{ __("Wifi") }}?</span>
+                        <strong>
+                        @if($place->hasWifi)
+                           {{ __("Yes") }}
+                        @else
+                           {{ __("No") }}
+                        @endif
+                        </strong>
                     </div>
 
-                    <!-- detalhes -->
+                    <!-- tem wifi -->
                     <div class="form-group mb-3">
-                        <span>{{ __("Details") }}:</span>
-     
+                        <span>{{ __("Accessibility") }}?</span>
+                        <strong>
+                        @if($place->hasAccessibility)
+                           {{ __("Yes") }}
+                        @else
+                           {{ __("No") }}
+                        @endif
+                        </strong>
                     </div>
 
-                    <!-- agendado em - por -->
+                    <!-- tem estacionamento gratis -->
                     <div class="form-group mb-3">
-                        <span>{{ __("Scheduled on") }}:</span>
-                        <strong></strong>
+                        <span>{{ __("Free parking") }}?</span>
+                        <strong>
+                        @if($place->hasFreeParking)
+                            {{ __("Yes") }}
+                        @else
+                            {{ __("No") }}
+                        @endif
+                        </strong>
                     </div>
 
-
+                     <!-- criado em -->
+                     @if ($place->created_at)
+                        <div class="form-group mb-3">
+                            <span>{{ __("Created at") }}:</span>
+                            <strong>{{dateBrazilianFormat($place->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($place->created_at) }}</strong>
+                        </div>
+                    @endif
 
                     <!-- editado em -->
                     @if ($place->created_at != $place->updated_at)
@@ -118,7 +182,7 @@
                         </div>
                     @endif
 
-                    <!--cancelado em-->
+                    <!--deletado em-->
                     @if ($place->deleted_at)
                     <div class="form-group mb-3">
                         <span>{{ __("Deleted at") }}:</span>

@@ -56,6 +56,7 @@ class PlaceController extends Controller
             'capacity'  => ['required', 'string', 'max:6'],
             'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
             'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
+            'outletVoltage' => ['max:1', 'required', 'string'],
         ]);
       
 
@@ -70,6 +71,9 @@ class PlaceController extends Controller
          * validate completed
          * 
          */
+        if($request->outletVoltage === "0"){
+            $data['outletVoltage'] = null;
+        }
 
         if($request->hasProjector){
             $data['hasProjector'] = true;
@@ -160,8 +164,8 @@ class PlaceController extends Controller
             'capacity'  => ['required', 'string', 'max:6'],
             'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
             'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
+            'outletVoltage' => ['max:1', 'required', 'string'],
         ]);
-      
 
         if($validator->fails()) {
             return redirect()
@@ -174,8 +178,10 @@ class PlaceController extends Controller
          * validate completed
          * 
          */
+        if($request->outletVoltage === "0"){
+            $data['outletVoltage'] = null;
+        }
 
-        
         if($request->hasProjector){
             $data['hasProjector'] = true;
         }else {

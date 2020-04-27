@@ -116,6 +116,13 @@
                     </div>
 
 
+                    <!-- criado em -->
+                    @if ($schedule->created_at)
+                        <div class="form-group mb-3">
+                            <span>{{ __("Created at") }}:</span>
+                            <strong>{{dateBrazilianFormat($schedule->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($schedule->created_at) }}</strong>
+                        </div>
+                    @endif
 
                     <!-- editado em -->
                     @if ($schedule->created_at != $schedule->updated_at)

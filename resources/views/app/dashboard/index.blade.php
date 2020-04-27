@@ -97,6 +97,9 @@
                                                 <div class="media-body">
                                                     <span class="name mb-0 text-sm">
                                                         {{ $schedule->schedulingPlace['name'] }}
+                                                        @if(!$schedule->schedulingPlace['name'])
+                                                            {{ __("Without Data") }}
+                                                        @endif
                                                     </span>
                                                 </div>
                                             </div>

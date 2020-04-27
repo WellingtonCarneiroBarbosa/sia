@@ -18,6 +18,7 @@ class CreatePlacesTable extends Migration
             $table->string('name', 120);
             $table->string('capacity', 6);
             $table->float('size')->nullable()->default(null);
+            $table->char('outletVoltage', 1)->nullable()->default(null);
             $table->char('hasProjector', 1)->nullable()->default(null);
             $table->string('howManyProjectors', 2)->nullable()->default(null);
             $table->char('hasTranslationBooth', 1)->nullable()->default(null);

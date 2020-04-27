@@ -93,6 +93,19 @@
                 </div>
                 <!--fim da espaco em m2-->
 
+                <div class="form-group">
+                    <!--tensão-->
+                    {{ __("Outlet voltage") }}:
+                    <div class="custom-control custom-radio custom-control-inline ml-2">
+                        <input type="radio" id="outletVoltage" name="outletVoltage" class="custom-control-input" @if(!$place->outletVoltage) checked @endif value="0">
+                        <label class="custom-control-label" for="outletVoltage">127v</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="outletVoltage220" name="outletVoltage" class="custom-control-input"  @if($place->outletVoltage) checked @endif value="1">
+                        <label class="custom-control-label" for="outletVoltage220">220v</label>
+                    </div>
+               </div>
+
                 <!--projetor-->
                 <div class="form-group">
                     <label for="hasProjector"> {{ __("Projectors") }}?</label>
@@ -151,7 +164,6 @@
                 <!--iluminacao-->
                 <div class="form-group">
                     <label for="hasLighting"> {{ __("Scenic lighting") }}?</label>
-{{ $place->hasLighting }}
                     <label class="custom-toggle ml-2 mt-2">
                         <input id="hasLighting" name="hasLighting" type="checkbox" @if($place->hasLighting) checked @else unchecked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
