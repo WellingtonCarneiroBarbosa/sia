@@ -264,6 +264,12 @@
             var sizeOriginal = $("#sizeOriginalDatabase").val();
             sizeOriginal = sizeOriginal.replace('.', ',');
             $("#size").val(sizeOriginal);
+
+
+
+            var capacityNumber = $("#capacity").val();
+            capacityNumber = capacityNumber.maskNumber({thousands: '.', integer: true});
+            $("#capacity").val(capacityNumber);
         });
 
         (function( $ ) {

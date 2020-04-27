@@ -58,7 +58,7 @@ class PlaceController extends Controller
 
         $validator = Validator::make($data, [
             'name'      => ['required', 'string', 'max:120'],
-            'capacity'  => ['required', 'string', 'max:7', 'gt:0'],
+            'capacity'  => ['required', 'string', 'max:6', 'gt:0'],
             'size'  => ['required', 'string', 'max:18'],
             'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
             'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
@@ -182,7 +182,7 @@ class PlaceController extends Controller
 
         $validator = Validator::make($data, [
             'name'      => ['required', 'string', 'max:120'],
-            'capacity'  => ['required', 'string', 'max:7', 'gt:0'],
+            'capacity'  => ['required', 'string', 'max:6', 'gt:0'],
             'size'  => ['required', 'string', 'max:18'],
             'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
             'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
