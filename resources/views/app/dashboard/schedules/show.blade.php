@@ -47,7 +47,7 @@
                 </div>
                 @endif
                 
-                <div class="text-center text-danger"><h3>{{ __("More details about scheduling") }}</h3></div>
+                <div class="text-center text-danger"><h3>{{ __("More details about") }} <u>{{ $schedule->title }}</u></h3></div>
                 <hr>
                 <div class="text-left text-sm">
                     <!-- identificador do agendamento -->
