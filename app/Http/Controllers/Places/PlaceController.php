@@ -73,16 +73,12 @@ class PlaceController extends Controller
 
         if($request->hasProjector){
             $data['hasProjector'] = true;
-        }else{
-            $data['howManyProjectors'] = null;
         }
 
         if($request->hasTranslationBooth){
             $data['hasTranslationBooth'] = true;
-        }else{
-            $data['howManyBooths'] = null;
         }
-
+        
         if($request->hasSound){
             $data['hasSound'] = true;
         }
@@ -178,48 +174,50 @@ class PlaceController extends Controller
          * validate completed
          * 
          */
+
+        
         if($request->hasProjector){
             $data['hasProjector'] = true;
-        }else{
-            $data['hasProjector'] = false;
+        }else {
+            $data['hasProjector'] = null;
             $data['howManyProjectors'] = null;
         }
 
         if($request->hasTranslationBooth){
             $data['hasTranslationBooth'] = true;
-        }else{
-            $data['hasTranslationBooth'] = false;
+        }else {
+            $data['hasTranslationBooth'] = null;
             $data['howManyBooths'] = null;
         }
 
         if($request->hasSound){
             $data['hasSound'] = true;
-        }else{
-            $data['hasSound'] = false;
+        }else {
+            $data['hasSound'] = null;
         }
 
         if($request->hasLighting){
             $data['hasLighting'] = true;
         }else {
-            $data['hasLighting'] = false;
+            $data['hasLighting'] = null;
         }
 
         if($request->hasWifi){
             $data['hasWifi'] = true;
         }else {
-            $data['hasWifi'] = false;
+            $data['hasWifi'] = null;
         }
 
         if($request->hasAccessibility){
             $data['hasAccessibility'] = true;
         }else {
-            $data['hasAccessibility'] = false;
+            $data['hasAccessibility'] = null;
         }
 
         if($request->hasFreeParking){
             $data['hasFreeParking'] = true;
         }else {
-            $data['hasFreeParking'] = false;
+            $data['hasFreeParking'] = null;
         }
 
 

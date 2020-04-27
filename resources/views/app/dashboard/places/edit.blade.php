@@ -98,7 +98,7 @@
                     <label for="hasProjector"> {{ __("Projectors") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasProjector" name="hasProjector" type="checkbox" @if($place->hasProjector == 1) checked @else unchecked @endif>
+                        <input id="hasProjector" name="hasProjector" type="checkbox" @if($place->hasProjector) checked @else unchecked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
@@ -120,7 +120,7 @@
                     <label for="hasTranslationBooth"> {{ __("Translation booths") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasTranslationBooth" name="hasTranslationBooth" type="checkbox" @if($place->hasTranslationBooth == 1) checked @else unchecked @endif>
+                        <input id="hasTranslationBooth" name="hasTranslationBooth" type="checkbox" @if($place->hasTranslationBooth) checked @else unchecked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
@@ -142,7 +142,7 @@
                     <label for="hasSound"> {{ __("Sound") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasSound" name="hasSound" type="checkbox" @if($place->hasSound == 1) checked @else unchecked @endif>
+                        <input id="hasSound" name="hasSound" type="checkbox" @if($place->hasSound) checked @else unchecked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
@@ -151,9 +151,9 @@
                 <!--iluminacao-->
                 <div class="form-group">
                     <label for="hasLighting"> {{ __("Scenic lighting") }}?</label>
-
+{{ $place->hasLighting }}
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasLighting" name="hasLighting" type="checkbox" @if($place->hasSound == 1) checked @else unchecked @endif>
+                        <input id="hasLighting" name="hasLighting" type="checkbox" @if($place->hasLighting) checked @else unchecked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
@@ -164,7 +164,7 @@
                     <label for="hasWifi"> {{ __("Wifi") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasWifi" name="hasWifi" type="checkbox" @if($place->hasWifi == 1) checked @else unchecked @endif>
+                        <input id="hasWifi" name="hasWifi" type="checkbox" @if($place->hasWifi) checked @else unchecked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
@@ -175,7 +175,7 @@
                     <label for="hasAccessibility"> {{ __("Accessibility") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasAccessibility" name="hasAccessibility" type="checkbox" @if($place->hasAccessibility == 1) checked @else unchecked @endif>
+                        <input id="hasAccessibility" name="hasAccessibility" type="checkbox" @if($place->hasAccessibility) checked @else unchecked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
@@ -186,7 +186,7 @@
                     <label for="hasFreeParking"> {{ __("Free parking") }}?</label>
 
                     <label class="custom-toggle ml-2 mt-2">
-                        <input id="hasFreeParking" name="hasFreeParking" type="checkbox" @if($place->hasFreeParking == 1) checked @else unchecked @endif>
+                        <input id="hasFreeParking" name="hasFreeParking" type="checkbox" @if($place->hasFreeParking) checked @else unchecked @endif>
                         <span class="custom-toggle-slider rounded-circle" data-label-off="{{ __("No") }}" data-label-on="{{ __("Yes") }}"></span>
                     </label>
                 </div>
