@@ -11,7 +11,7 @@ Para obter um login de testes entre em contato com **carneirobarbosawellington@g
 # Getting Started
 1. Primeiro, clone o repositório
 ```
-git clone https://github.com/WellingtonCarneiroBarbosa/sistema-de-gerenciamento-de-eventos.git
+git clone https://github.com/WellingtonCarneiroBarbosa/sia
 ```
 2. Instale as dependências necessárias (você deve possuir o composer)
 ```
