@@ -261,3 +261,12 @@
 
         return false;
     }
+
+    /**
+     * Remove comas
+     * 
+     */
+    function removeComas($string){
+        $string = preg_replace('/[.,]/', '', $string);
+        return $string;
+    }

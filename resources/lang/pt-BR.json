@@ -231,5 +231,6 @@
     "Delete": "Deletar",
     "Created at": "Criado em",
     "Outlet voltage": "Tensão das tomadas",
-    "More details about": "Mais detalhes sobre"
+    "More details about": "Mais detalhes sobre",
+    "The size field must be greater than 0": "O campo tamanho deve ser maior que 0"
 }

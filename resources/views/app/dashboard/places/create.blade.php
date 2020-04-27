@@ -95,7 +95,7 @@
 
                <div class="form-group">
                     <!--tensão-->
-                    {{ __("Outlet voltage") }}:
+                    <label for="outletVoltage">{{ __("Outlet voltage") }}:</label>
                     <div class="custom-control custom-radio custom-control-inline ml-2">
                         <input type="radio" id="outletVoltage" name="outletVoltage" class="custom-control-input" value="0">
                         <label class="custom-control-label" for="outletVoltage">127v</label>
@@ -219,6 +219,8 @@
 @endsection
 
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+    <script src="{{ asset('js/plugins/maskNumber/dist/jquery.masknumber.min.js') }}"></script>
     <script>
         $(document).ready(function (){
             /**
@@ -256,5 +258,14 @@
                 return $howManyBooths.hide();
             });
         });
+
+        (function( $ ) {
+            $(function() {
+                $("#capacity").maskNumber({thousands: '.', integer: true});
+                $("#size").maskNumber({ decimal: ',', thousands: '.', float: true, });
+                $("#howManyProjectors").mask('00');
+                $("#howManyBooths").mask('00');
+            });
+        })(jQuery);
     </script>
 @endsection

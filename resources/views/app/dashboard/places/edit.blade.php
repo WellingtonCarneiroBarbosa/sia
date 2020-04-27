@@ -116,13 +116,13 @@
                     </label>
                 </div>
 
-                <div id="howManyProjectorsDiv" class="form-group">
+                <div id="howManyProjectorsDiv" class="form-group" style="@if(!$place->hasProjector) display: none; @endif">
                     <div class="input-group input-group-alternative">
                         <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-building"></i></span>
                         </div>
 
-                        <input id="howManyProjectors" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("How many projectors?") }}"  class="form-control" value="{{ $place->howManyProjectors }}" name="howManyProjectors">
+                        <input id="howManyProjectors" type="text" title="{{ __("Fill this field") }}" placeholder="{{ __("How many projectors?") }}"  class="form-control" value="{{ $place->howManyProjectors }}" name="howManyProjectors">
                     
                     </div>
                 </div>
@@ -138,13 +138,13 @@
                     </label>
                 </div>
 
-                <div id="howManyBoothsDiv" class="form-group">
+                <div id="howManyBoothsDiv" class="form-group" style="@if(!$place->hasTranslationBooth) display: none; @endif">
                     <div class="input-group input-group-alternative">
                         <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-building"></i></span>
                         </div>
 
-                        <input id="howManyBooths" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("How many booths?") }}"  value="{{ $place->howManyBooths }}" class="form-control " name="howManyBooths">
+                        <input id="howManyBooths" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("How many booths?") }}" value="{{ $place->howManyBooths }}" class="form-control " name="howManyBooths">
                     
                     </div>
                 </div>
@@ -217,5 +217,62 @@
         </div>
     </div>
 </div>
+<input style="display: none" id="sizeOriginalDatabase" value="{{ $place->size }}">
 @endsection
 
+@section('scripts')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+    <script src="{{ asset('js/plugins/maskNumber/dist/jquery.masknumber.min.js') }}"></script>
+    <script>
+        $(document).ready(function (){
+            /**
+            * Elements
+            * 
+            */
+            $hasProjector            = $("#hasProjector");
+            $howManyProjectors       = $("#howManyProjectorsDiv");
+            $hasTranslationBooth     = $("#hasTranslationBooth");
+            $howManyBooths           = $("#howManyBoothsDiv");
+
+            /**
+            * Verify hasProjectorStatus
+            * if true, show howManyProjectorsInput
+            *
+            */
+            $hasProjector.change(function (){
+                if(this.checked){
+                    return $howManyProjectors.show();
+                }
+                
+                return $howManyProjectors.hide();
+            });
+
+            /**
+            * Verify hasTranslationBooths status
+            * if true, show howManyBoothsInput
+            *
+            */
+            $hasTranslationBooth.change(function (){
+                if(this.checked){
+                    return $howManyBooths.show();
+                }
+                
+                return $howManyBooths.hide();
+            });
+
+            var sizeOriginal = $("#sizeOriginalDatabase").val();
+            sizeOriginal = sizeOriginal.replace('.', ',');
+            $("#size").val(sizeOriginal);
+        });
+
+        (function( $ ) {
+            $(function() {
+                $("#capacity").maskNumber({thousands: '.', integer: true});
+                $("#size").maskNumber({ decimal: ',', thousands: '.', float: true, });
+                $("#howManyProjectors").mask('00');
+                $("#howManyBooths").mask('00');
+            });
+        })(jQuery);
+    </script>
+@endsection

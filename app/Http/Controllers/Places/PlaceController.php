@@ -51,20 +51,34 @@ class PlaceController extends Controller
          */
         $data = $request->all();
 
+        $data['size']  = preg_replace('/[.]/', '', $data['size'] );
+        $data['size']  = str_replace(',', '.', $data['size']);
+
+        $data['capacity'] = removeComas($data['capacity']);
+
         $validator = Validator::make($data, [
             'name'      => ['required', 'string', 'max:120'],
-            'capacity'  => ['required', 'string', 'max:6'],
+            'capacity'  => ['required', 'string', 'max:7', 'gt:0'],
+            'size'  => ['required', 'string', 'max:18'],
             'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
             'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
-            'outletVoltage' => ['max:1', 'required', 'string'],
+            'outletVoltage' => ['max:1', 'required', 'numeric'],
         ]);
-      
 
         if($validator->fails()) {
             return redirect()
                         ->back()
                         ->withErrors($validator)
                         ->withInput();
+        }
+
+        /**manual validation */
+        if($data['size'] <= 5){
+            $error = Lang::get('The size field must be greater than 0');
+            return redirect()
+            ->back()
+            ->withErrors($error)
+            ->withInput();
         }
 
         /**
@@ -106,8 +120,11 @@ class PlaceController extends Controller
         $create = Place::create($data);
 
         if(!$create){
+            $error = Lang::get('Something went wrong. Please try again!');
             return redirect()
-                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+            ->back()
+            ->withErrors($error)
+            ->withInput();
         }
 
         return redirect()->back()->with(['status' => Lang::get('Registered Place')]);
@@ -152,19 +169,24 @@ class PlaceController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        /**
+       /**
          * Validate request
          * 
          */
         $data = $request->all();
 
+        $data['size']  = preg_replace('/[.]/', '', $data['size'] );
+        $data['size']  = str_replace(',', '.', $data['size']);
+
+        $data['capacity'] = removeComas($data['capacity']);
+
         $validator = Validator::make($data, [
             'name'      => ['required', 'string', 'max:120'],
-            'capacity'  => ['required', 'string', 'max:6'],
+            'capacity'  => ['required', 'string', 'max:7', 'gt:0'],
+            'size'  => ['required', 'string', 'max:18'],
             'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
             'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
-            'outletVoltage' => ['max:1', 'required', 'string'],
+            'outletVoltage' => ['max:1', 'required', 'numeric'],
         ]);
 
         if($validator->fails()) {
@@ -172,6 +194,15 @@ class PlaceController extends Controller
                         ->back()
                         ->withErrors($validator)
                         ->withInput();
+        }
+
+        /**manual validation */
+        if($data['size'] <= 5){
+            $error = Lang::get('The size field must be greater than 0');
+            return redirect()
+            ->back()
+            ->withErrors($error)
+            ->withInput();
         }
 
         /**
@@ -232,8 +263,11 @@ class PlaceController extends Controller
         $placeUpdate = $placeUpdate->update($data);
 
         if(!$placeUpdate){
+            $error = Lang::get('Something went wrong. Please try again!');
             return redirect()
-                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
         }
 
         return redirect()->back()->with(['status' => Lang::get('Updated place')]);
@@ -266,8 +300,11 @@ class PlaceController extends Controller
         $delete = $place->delete();
 
         if(!$delete){
+            $error = Lang::get('Something went wrong. Please try again!');
             return redirect()
-            ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
         }
 
         return redirect()->route('places.index')->with(['status' => Lang::get('Place deleted')]);
@@ -299,8 +336,11 @@ class PlaceController extends Controller
         $delete = $place->forceDelete();
 
         if(!$delete){
+            $error = Lang::get('Something went wrong. Please try again!');
             return redirect()
-                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
         }
 
         return redirect()->route('places.index')->with(['status' => Lang::get('Place permanently deleted')]);
@@ -320,8 +360,11 @@ class PlaceController extends Controller
         $restore = $place->restore();
 
         if(!$restore){
+            $error = Lang::get('Something went wrong. Please try again!');
             return redirect()
-                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
         }
 
         return redirect()->route('places.index')->with(['status' => Lang::get('Place restored')]);

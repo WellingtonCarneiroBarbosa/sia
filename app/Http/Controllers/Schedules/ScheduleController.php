@@ -117,9 +117,11 @@ class ScheduleController extends Controller
         $isReserved = hasData($isReserved);
 
         if($isReserved){
+            $error = Lang::get(' This location is not available on these dates');
             return redirect()
-                     ->back()->with(['error' => Lang::get(' This location is not available on these dates')])
-                     ->withInput();
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
         }
 
         /**
@@ -134,9 +136,11 @@ class ScheduleController extends Controller
         $create  = Schedule::create($data);
 
         if(!$create){
+            $error = Lang::get('Something went wrong. Please try again!');
             return redirect()
-                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')])
-                     ->withInput();
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
         }
 
         $log     =
@@ -271,9 +275,11 @@ class ScheduleController extends Controller
         $isReserved = hasData($isReserved);
 
         if($isReserved){
+            $error = Lang::get(' This location is not available on these dates');
             return redirect()
-                     ->back()->with(['error' => Lang::get(' This location is not available on these dates')])
-                     ->withInput();
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
         }
 
 
@@ -289,8 +295,11 @@ class ScheduleController extends Controller
         $scheduleUpdate = $scheduleUpdate->update($data);
 
         if(!$scheduleUpdate){
+            $error = Lang::get('Something went wrong. Please try again!');
             return redirect()
-                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
         }
 
         $log     =
@@ -335,8 +344,11 @@ class ScheduleController extends Controller
         $cancel  = Schedule::findOrFail($id)->delete();
 
         if(!$cancel){
+            $error = Lang::get('Something went wrong. Please try again!');
             return redirect()
-                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
         }
 
         $log     =

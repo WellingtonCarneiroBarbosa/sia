@@ -104,15 +104,21 @@ class CanceledSchedulesController extends Controller
         $isReserved = hasData($isReserved);
 
         if($isReserved){
+            $error = Lang::get(' This location is not available on these dates');
             return redirect()
-                     ->back()->with(['error' => Lang::get(' This location is not available on these dates')]);
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
         }
 
         $schedule = $schedule->restore();
 
         if(!$schedule){
+            $error = Lang::get('Something went wrong. Please try again!');
             return redirect()
-                   ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
         }
 
         $log     =
@@ -152,8 +158,11 @@ class CanceledSchedulesController extends Controller
         $delete =  Schedule::onlyTrashed()->findOrFail($id)->forceDelete();
 
         if(!$delete){
+            $error = Lang::get('Something went wrong. Please try again!');
             return redirect()
-                    ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
         }
 
         $log     =
