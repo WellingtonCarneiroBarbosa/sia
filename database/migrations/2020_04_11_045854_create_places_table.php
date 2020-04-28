@@ -15,7 +15,7 @@ class CreatePlacesTable extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->tinyIncrements('id');
-            $table->string('name', 120);
+            $table->string('name', 120)->unique();
             $table->string('capacity', 6);
             $table->float('size')->nullable()->default(null);
             $table->char('outletVoltage', 1)->nullable()->default(null);

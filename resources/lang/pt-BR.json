@@ -232,5 +232,6 @@
     "Created at": "Criado em",
     "Outlet voltage": "Tensão das tomadas",
     "More details about": "Mais detalhes sobre",
-    "The size field must be greater than 0": "O campo tamanho deve ser maior que 0"
+    "The size field must be greater than 0": "O campo tamanho deve ser maior que 0",
+    "There is already a registered place with this name": "Já há um local cadastrado com este nome"
 }

@@ -56,14 +56,16 @@ class PlaceController extends Controller
 
         $data['capacity'] = removeComas($data['capacity']);
 
+        $messages = ['unique' => Lang::get('There is already a registered place with this name')];
+
         $validator = Validator::make($data, [
-            'name'      => ['required', 'string', 'max:120'],
+            'name'      => ['required', 'string', 'max:120', 'unique:places'],
             'capacity'  => ['required', 'string', 'max:6', 'gt:0'],
             'size'  => ['required', 'string', 'max:18'],
             'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
             'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
             'outletVoltage' => ['max:1', 'required', 'numeric'],
-        ]);
+        ], $messages);
 
         if($validator->fails()) {
             return redirect()
@@ -180,14 +182,16 @@ class PlaceController extends Controller
 
         $data['capacity'] = removeComas($data['capacity']);
 
+        $messages = ['unique' => Lang::get('There is already a registered place with this name')];
+
         $validator = Validator::make($data, [
-            'name'      => ['required', 'string', 'max:120'],
+            'name'      => ['required', 'string', 'max:120', 'unique:places'],
             'capacity'  => ['required', 'string', 'max:6', 'gt:0'],
             'size'  => ['required', 'string', 'max:18'],
             'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
             'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
             'outletVoltage' => ['max:1', 'required', 'numeric'],
-        ]);
+        ], $messages);
 
         if($validator->fails()) {
             return redirect()
