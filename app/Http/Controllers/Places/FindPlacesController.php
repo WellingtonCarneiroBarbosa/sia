@@ -70,14 +70,11 @@ class FindPlacesController extends Controller
 
         $hasPlaces      = hasData($places);
 
-        $now = date('Y-m-d H:i:s');
-
         return view('app.dashboard.places.availability', 
         [
         'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
         'response'  => $response,  'data'         => $data,
-        'places'    => $places,    'hasPlaces'    => $hasPlaces,
-        'now'       => $now
+        'places'    => $places,    'hasPlaces'    => $hasPlaces
         ]);
     }
 }

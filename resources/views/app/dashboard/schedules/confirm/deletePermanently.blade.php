@@ -96,24 +96,23 @@
 
                         @if($now > $schedule->start && $now < $schedule->end)
                             <i class="bg-success"></i>
-                            <span class="status">{{ __("In progress") }}</span>
+                            <strong class="status">{{ __("In progress") }}</strong>
                         @elseif($now > $schedule->start && $now >= $schedule->end)
                             <i class="bg-danger"></i>
-                            <span class="status">{{ __("Finalized") }}</span>
+                            <strong class="status">{{ __("Finalized") }}</strong>
                         @elseif(!$schedule->place_id)
                             <i class="bg-danger"></i>
-                            <span class="status">{{ __("Expired") }}</span>
+                            <strong class="status">{{ __("Expired") }}</strong>
                         @elseif($schedule->deleted_at != null)
                             <i class="bg-danger"></i>
-                            <span class="status">{{ __("canceled") }}</span>
+                            <strong class="status">{{ __("canceled") }}</strong>
                         @elseif (!$schedule->status)
                             <i class="bg-warning"></i>
-                            <span class="status">{{ __("On budget") }}</span>
+                            <strong class="status">{{ __("On budget") }}</strong>
                         @elseif($schedule->status)
                             <i class="bg-success"></i>
-                            <span class="status">{{ __("Confirmed") }}</span>
+                            <strong class="status">{{ __("Confirmed") }}</strong>
                         @endif
-                        
                     </div>
 
                     <!-- detalhes -->

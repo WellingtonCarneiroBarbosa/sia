@@ -165,11 +165,8 @@
                         <!-- submit button -->
                         <div class="text-center">
                             <button onclick="comeBack();" type="button" class="btn btn-outline-primary  ml-auto" >{{ __("Cancel") }}</button>
-                            @if($hasPlaces && $hasCustomers)
-                            <button type="submit" id="agendar-submit" class="btn btn-primary my-4">{{ __("Schedule") }}</button> 
-                            @else
-                            <button type="submit" class="btn btn-primary my-4" disabled>{{ __("Schedule") }}</button>
-                            @endif
+                            
+                            <button type="submit" id="agendar-submit" @if(!$hasPlaces || !$hasCustomers) disabled @endif class="btn btn-primary my-4">{{ __("Schedule") }}</button> 
                         </div>
                         <!-- fim do submit button -->
                     </form>

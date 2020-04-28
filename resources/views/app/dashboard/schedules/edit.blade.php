@@ -183,11 +183,7 @@
                             <a href="{{ route('home') }}">
                                 <button type="button" class="btn btn-outline-primary  ml-auto" >{{ __("Cancel") }}</button>
                             </a>
-                            @if($hasPlaces && $hasCustomers)
-                            <button type="submit" id="agendar-submit" class="btn btn-primary my-4">{{ __("Edit") }}</button> 
-                            @else
-                            <button type="submit" class="btn btn-primary my-4" disabled>{{ __("Edit") }}</button>
-                            @endif
+                            <button @if(!$hasPlaces || !$hasCustomers) disabled @endif type="submit" id="agendar-submit" class="btn btn-primary my-4">{{ __("Edit") }}</button> 
                         </div>
                         <!-- fim do submit button -->
                     </form>

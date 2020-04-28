@@ -136,6 +136,7 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
+                                                    <a class="dropdown-item" href="{{ route('schedules.show', ['id' => $schedule->id]) }}">{{ __("View more") }}</a>
                                                     <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("Edit") }}</a>
                                                     <a class="dropdown-item" href="{{ route('schedules.confirm.cancel', ['id' => $schedule->id]) }}">{{ __("Cancel") }}</a>
                                                 </div>
@@ -319,7 +320,7 @@
                                             <div class="col-6">
                                                 <div class="espaco"></div>
                                                 <div class="float-right">
-                                                    <button title="{{ __("Click to Search") }}" class="btn btn-primary" type="submit">
+                                                    <button title="{{ __("Click to Search") }}" @if(!$hasPlaces) disabled @endif class="btn btn-primary" type="submit">
                                                         {{ __("Search") }}
                                                     </button>
                                                 </div>

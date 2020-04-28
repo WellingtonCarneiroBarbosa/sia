@@ -339,7 +339,7 @@
                                             <div class="col-6">
                                                 <div class="espaco"></div>
                                                 <div class="float-right">
-                                                    <button title="{{ __("Click to Search") }}" class="btn btn-primary" type="submit">
+                                                    <button title="{{ __("Click to Search") }}" @if(!$hasPlaces) disabled @endif class="btn btn-primary" type="submit">
                                                         {{ __("Search") }}
                                                     </button>
                                                 </div>
