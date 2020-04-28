@@ -34,14 +34,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
         </div>
-        @endif @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> {{ __("Opps") }}...</strong>{{session('error')}}</span>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-        </div>
-        @endif
+        @endif 
 
         <!-- animacao de entrada -->
         <div class="row justify-content-center fadeInTransition" >
@@ -61,7 +54,7 @@
                         <span class="input-group-text"><i class="ni ni-building"></i></span>
                         </div>
 
-                        <input id="corporation" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Corporation") }}"  class="form-control " name="corporation" required>
+                        <input id="corporation" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Corporation") }}"  class="form-control " name="corporation" value="{{ old('corporation') }}" required>
                     
                     </div>
                 </div>

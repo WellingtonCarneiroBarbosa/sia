@@ -233,5 +233,8 @@
     "Outlet voltage": "Tensão das tomadas",
     "More details about": "Mais detalhes sobre",
     "The size field must be greater than 0": "O campo tamanho deve ser maior que 0",
-    "There is already a registered place with this name": "Já há um local cadastrado com este nome"
+    "There is already a registered place with this name": "Já há um local cadastrado com este nome",
+    "Confirm Delete": "Confirmar Exclusão",
+    "Do you really want to delete permanently this place": "Você realmente quer deletar permanentemente este local",
+    "No, go back to locations table": "Não, voltar para tabela de locais"
 }

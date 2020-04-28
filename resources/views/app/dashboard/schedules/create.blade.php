@@ -44,15 +44,6 @@
         </button>
     </div>
     @endif
-    
-    @if(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> {{ __("Opps") }}...</strong>{{session('error')}}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-    </div>
-    @endif
 
         <!-- animacao de entrada -->
         <div class="row justify-content-center fadeInTransition" >
