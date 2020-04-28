@@ -97,11 +97,11 @@
                     <!--tensão-->
                     <label for="outletVoltage">{{ __("Outlet voltage") }}:</label>
                     <div class="custom-control custom-radio custom-control-inline ml-2">
-                        <input type="radio" id="outletVoltage" name="outletVoltage" class="custom-control-input" value="0">
+                        <input type="radio" id="outletVoltage" name="outletVoltage" class="custom-control-input" @if(old('outletVoltage') == '0') checked @endif value="0">
                         <label class="custom-control-label" for="outletVoltage">127v</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="outletVoltage220" name="outletVoltage" class="custom-control-input" value="1">
+                        <input type="radio" id="outletVoltage220" name="outletVoltage" class="custom-control-input" @if(old('outletVoltage') == '1') checked @endif value="1">
                         <label class="custom-control-label" for="outletVoltage220">220v</label>
                     </div>
                </div>
