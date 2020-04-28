@@ -86,9 +86,11 @@
                                 </select>
                                 @endif 
                             </div>
+                            @if($hasPlaces)
                             <div class="float-right">
                                 <a href="#" class="text-sm" id="viewPlace" title="{{ __("The link will open in a new tab") }}">{{ __("More details of this location") }}</a>
                             </div>
+                            @endif
                         </div>
                         <!-- fim local do agendamento -->
 
