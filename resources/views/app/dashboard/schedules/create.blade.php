@@ -85,7 +85,9 @@
                                     <option selected>{{ __("Please register a place") }}</option>
                                 </select>
                                 @endif 
-
+                            </div>
+                            <div class="float-right">
+                                <a href="#" class="text-sm" id="viewPlace" title="{{ __("The link will open in a new tab") }}">{{ __("More details of this location") }}</a>
                             </div>
                         </div>
                         <!-- fim local do agendamento -->
@@ -187,6 +189,17 @@
             $('.datetime').mask('00/00/0000 00:00');
         });
     })(jQuery);
+
+    $(document).ready(function (){
+        /**view place*/
+        $("#viewPlace").click(function (){
+            var placeID = $("#place_id").val();
+            /**url to show places */
+            <?php echo "var showPlaceUrl = " . "'" . url("/dash/places/show") . "';";  ?>
+            var url =  showPlaceUrl + '/' + placeID;
+            window.open(url, '_blank');
+        });
+    });
 </script>
 
 @endsection
