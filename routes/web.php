@@ -193,6 +193,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::delete('/delete/{id}',  'Places\PlaceController@destroy')
                                                      ->name('places.delete');
 
+            Route::any('/availability/', 'Places\FindPlacesController@findPerDateRange')
+                                                           ->name('places.availability');                                                    
+
             Route::group(['prefix' => 'confirm'], function () {
                 Route::get('/delete/{id}', 'Places\PlaceController@confirmDestroy')
                                                    ->name('places.confirm.delete');

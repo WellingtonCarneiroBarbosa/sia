@@ -247,5 +247,11 @@
     " bookings at this location": " agendamentos neste local",
     "Expired": "Expirado",
     "Finalized": "Finalizado",
-    "In progress": "Em andamento"
+    "In progress": "Em andamento",
+    " This place is avaible on those dates": " Este local está disponível nestas datas",
+    " This location is unavailable on those dates:": " Este local está indisponível nestas datas:",
+    "Check availability": "Consultar disponibilidade",
+    "Check by date and place": "Consultar por data e local",
+    "Consult": "Consultar",
+    "Come back to locations": "Voltar para os locais"
 }

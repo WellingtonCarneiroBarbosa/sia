@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', Lang::get('Places'))
+@section('title', Lang::get('Check availability'))
 
 @section('content')
 <!-- Header -->
@@ -9,12 +9,12 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Places") }}</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Check availability") }}</h6>
                 </div>
 
                 <div class="col-lg-6 col-5 text-right">
-                    <a href="{{ route('places.create') }}" class="btn btn-sm btn-neutral mb-2" id="new-place">{{ __("New") }}</a>
-                    <a href="#" data-toggle="modal" data-target="#modal-filter" id="filtros-locais" class="btn btn-sm btn-neutral mb-2 mr-2">{{ __("Check availability") }}</a>
+                    <a href="{{ route('places.index') }}" class="btn btn-sm btn-neutral mb-2">{{ __("Come back to locations") }}</a>
+                    <a href="#" data-toggle="modal" data-target="#modal-filter" id="filtros-agendamento" class="btn btn-sm btn-neutral mb-2 mr-2">{{ __("Another Search") }}</a>
                 </div>
             </div>
             <!-- fim do header -->
@@ -27,32 +27,15 @@
 <div class="container-fluid mt--6">
     <!-- conteudo da pagina -->
 
-    @if(session('status'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <span class="alert-inner--text"><i class="ni ni-like-2 mr-2"></i><strong>{{  __("Success") }}!</strong> {{session('status')}}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-    </div>
-    @endif
-    
-    @if ($errors->any())
+    @if($hasSchedules)
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <span class="alert-inner--text"><i class="fas fa-thumbs-down mr-2"></i><strong> {{ __("Opps") }}...</strong>
-                <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-                </ul>
-            </span>
+        <span class="alert-inner--text"><i class="fas fa-thumbs-down mr-2"></i><strong> {{ __("Opps") }}...</strong>{{ $response }}</span>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">×</span>
         </button>
     </div>
     @endif
 
-
-    <!--tabela de agendamentos-->
     <div class="row">
         <!-- inicio da tabela de agendamentos -->
         <div class="col-xl-12">
@@ -60,37 +43,29 @@
                 <div class="card-header bg-transparent">
                     <div class="row align-items-center">
                         <!-- inicio cabecalho da tabela -->
-                        <div class="col">
-                            <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Place's Table") }}</h5>
-                        </div>
                         <div class="table-responsive">
                             <table class="table align-items-center table-dark table-flush">
                                 <thead class="thead-dark">
-                                    <tr>
+                                    <tr class="text-center">
                                         <!-- agendamento 01 -->
-                                        <th scope="col" class="sort" data-sort="name">{{ __("Place") }}</th>
-                                        <th scope="col" class="sort" data-sort="budget">{{ __("Capacity") }}</th>
-                                        <th scope="col" class="sort" data-sort="status">{{ __("Size") }}</th>
-                                        <th scope="col" class="sort" data-sort="completion">{{ __("Actions") }}</th>
+                                        <th scope="col" >{{ __("From") }} </th>
+                                        <th scope="col" >{{ __("To") }}</th>
+                                        <th scope="col" >{{ __("Actions") }}</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <!-- fim do cabeçalho da tabela -->
-                                <tbody class="list">
+                                <tbody class="list text-center">
                                     <!-- inicio corpo da tabela -->
-                                    @if ($hasPlaces)
                                     
-                                    @foreach($places as $place)
+                                    @foreach($schedules as $schedule)
                                     <tr>
+
                                         <td>
                                             <div class="media align-items-center">
-                                                <a href="#" class="avatar avatar-md rounded-circle mr-3">
-                                                  <img alt="Image placeholder" src="https://via.placeholder.com/150">
-                                                </a>
-
                                                 <div class="media-body">
                                                     <span class="name mb-0 text-sm">
-                                                        {{ $place->name }}
+                                                        {{ dateTimeBrazilianFormat($schedule->start) }} 
                                                     </span>
                                                 </div>
                                             </div>
@@ -100,68 +75,25 @@
                                             <div class="media align-items-center">
                                                 <div class="media-body">
                                                     <span class="name mb-0 text-sm">
-                                                        {{  str_replace(',', '.', number_format($place->capacity)) }} {{ __("peoples")}}
+                                                        {{ dateTimeBrazilianFormat($schedule->end) }} 
                                                     </span>
                                                 </div>
                                             </div>
                                         </td>
 
                                         <td>
-                                            <span class="badge badge-dot mr-4">
-
-                                                {{ $place->size }} m<sup>2</sup>
-
-                                            </span>
-                                        </td>
-
-                                        <td>
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
-                                                    <a class="dropdown-item" href="{{ route('places.show', ['id' => $place->id]) }}">{{ __("View more") }}</a>
-                                                    <a class="dropdown-item" href="{{ route('places.edit', ['id' => $place->id]) }}">{{ __("Edit") }}</a>
-                                                    <a class="dropdown-item" href="{{ route('places.confirm.delete', ['id' => $place->id]) }}">{{ __("Delete") }}</a>
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <span class="name mb-0 text-sm">
+                                                        <a href="{{ route('schedules.show', ['id' => $schedule->id]) }}">
+                                                            <button class="btn btn-outline-primary">{{ __("View more") }}</button>
+                                                        </a>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     @endforeach
-
-                                    @else
-                                    <!-- se nao houver agendamentos -->
-
-                                    <tr>
-                                        <td class="budget">
-                                            {{ __("Without Data") }}
-                                        </td>
-                                       
-                                        <td>
-                                            <span class="badge badge-dot mr-4">
-                                                <span class="status">{{ __("Without Data") }}</span>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <span class="name mb-0 text-sm">{{ __("Without Data") }}</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="#!">{{ __("No Options Available") }}</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!-- fim do agendamento 01 -->
-                                    @endif
                                 </tbody>
                                 <!-- fim do corpo da tabela -->
                                 <br>
@@ -171,12 +103,12 @@
                 </div>
             </div>
             <div class="float-right">
-                {{ $places->links() }}
+                {{ $schedules->appends($data)->links() }}
             </div>
         </div>
     </div>
 
-    
+
     <!--modal de busca-->
 
     <div class="modal-filtros fade" id="modal-filter" tabindex="-1" role="dialog" aria-labelledby="modal-filter" style="display: none;" aria-hidden="true">
