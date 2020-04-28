@@ -256,5 +256,6 @@
     "Come back to locations": "Voltar para os locais",
     "The link will open in a new tab": "O link será aberto em uma nova guia",
     "More details of this location": "Mais detalhes desse local",
-    " The schedule was saved in the history section": " O agendamento foi salvo na seção de histórico"
+    " The schedule was saved in the history section": " O agendamento foi salvo na seção de histórico",
+    "This schedule cannot start with this start date": "Este agendamento não pode começar com esta data de início"
 }

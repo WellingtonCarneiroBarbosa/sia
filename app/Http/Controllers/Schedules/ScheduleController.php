@@ -281,8 +281,19 @@ class ScheduleController extends Controller
           * de horário. 
           */
 
-          $scheduleUpdate  = Schedule::findOrFail($id);
+          $now = date('Y-m-d H:i:s');
+          $now = DateTime::createFromFormat('Y-m-d H:i:s', $now);
+  
+          if($data['start'] <= $now){
+            $error = Lang::get('This schedule cannot start with this start date');
+            return redirect()
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
+          }
 
+          $scheduleUpdate  = Schedule::findOrFail($id);
+  
           $isReserved  = DB::select(
             "SELECT * FROM schedules WHERE place_id = ? AND deleted_at IS NULL AND created_at != ? AND (
                 ? BETWEEN start AND end
