@@ -169,7 +169,9 @@ class ScheduleController extends Controller
         $schedule = Schedule::with('schedulingCustomer')
                     ->with('schedulingPlace')->findOrFail($id);
 
-        return view('app.dashboard.schedules.show', ['schedule' => $schedule]);
+        $now = date('Y-m-d H:i:s');
+
+        return view('app.dashboard.schedules.show', ['schedule' => $schedule, 'now' => $now]);
     }
 
     /**
@@ -185,10 +187,15 @@ class ScheduleController extends Controller
         $places     = Place::get();
         $customers  = Customer::get();
 
+        $hasPlaces      = hasData($places);
+        $hasCustomers   = hasData($customers);
+
         return view('app.dashboard.schedules.edit', [
             'schedule'      => $schedule,
             'places'        => $places,
-            'customers'     => $customers
+            'customers'     => $customers,
+            'hasPlaces'     => $hasPlaces,
+            'hasCustomers'  => $hasCustomers
         ]);
     }
 
@@ -328,8 +335,10 @@ class ScheduleController extends Controller
                     ->with('schedulingPlace')
                     ->findOrFail($id);
 
+        $now = date('Y-m-d H:i:s');                
+
         return view('app.dashboard.schedules.confirm.cancel', [
-            'schedule'  => $schedule
+            'schedule'  => $schedule, 'now' => $now
         ]);
     }
 

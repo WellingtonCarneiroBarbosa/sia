@@ -87,9 +87,10 @@
 
                                                 <div class="media-body">
                                                     <span class="name mb-0 text-sm">
-                                                        {{ $schedule->schedulingPlace['name'] }}
-                                                        @if(!$schedule->schedulingPlace['name'])
-                                                            {{ __("Without Data") }}
+                                                        @if($schedule->schedulingPlace['name'])
+                                                            {{ $schedule->schedulingPlace['name'] }}
+                                                        @else
+                                                            {{ __("Undefined") }}
                                                         @endif
                                                     </span>
                                                 </div>
@@ -113,10 +114,13 @@
 
                                                 @if($now > $schedule->start && $now < $schedule->end)
                                                     <i class="bg-success"></i>
-                                                    <span class="status">{{ __("Em andamento") }}</span>
+                                                    <span class="status">{{ __("In progress") }}</span>
                                                 @elseif($now > $schedule->start && $now >= $schedule->end)
                                                     <i class="bg-danger"></i>
-                                                    <span class="status">{{ __("Finalizado") }}</span>
+                                                    <span class="status">{{ __("Finalized") }}</span>
+                                                @elseif(!$schedule->place_id)
+                                                    <i class="bg-danger"></i>
+                                                    <span class="status">{{ __("Expired") }}</span>
                                                 @elseif($schedule->deleted_at != null)
                                                     <i class="bg-danger"></i>
                                                     <span class="status">{{ __("canceled") }}</span>
@@ -127,8 +131,7 @@
                                                     <i class="bg-success"></i>
                                                     <span class="status">{{ __("Confirmed") }}</span>
                                                 @endif
-
-
+                                                
                                             </span>
                                         </td>
 
@@ -152,7 +155,9 @@
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
                                                     <a class="dropdown-item" href="{{ route('schedules.show', ['id' => $schedule->id]) }}">{{ __("View more") }}</a>
                                                     <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("Edit") }}</a>
+                                                    @if($schedule->schedulingPlace['name'])
                                                     <a class="dropdown-item" href="{{ route('schedules.confirm.cancel', ['id' => $schedule->id]) }}">{{ __("Cancel") }}</a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </td>

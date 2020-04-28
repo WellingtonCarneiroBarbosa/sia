@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Places;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Places\Place;
+use App\Models\Schedules\Schedule;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class PlaceController extends Controller
 {
@@ -76,7 +78,7 @@ class PlaceController extends Controller
 
         /**manual validation */
         if($data['size'] <= 5){
-            $error = Lang::get('The size field must be greater than 0');
+            $error = Lang::get('The size field must be greater than 5');
             return redirect()
             ->back()
             ->withErrors($error)
@@ -202,7 +204,7 @@ class PlaceController extends Controller
 
         /**manual validation */
         if($data['size'] <= 5){
-            $error = Lang::get('The size field must be greater than 0');
+            $error = Lang::get('The size field must be greater than 5');
             return redirect()
             ->back()
             ->withErrors($error)
@@ -286,8 +288,11 @@ class PlaceController extends Controller
     public function confirmDestroy($id){
         $place = Place::findOrFail($id);
 
+        $howManySchedulesAtThisPlace = Schedule::withTrashed()->where('place_id', $id)->count();
+
         return view('app.dashboard.places.confirm.delete', [
-            'place' => $place
+            'place' => $place,
+            'howManySchedulesAtThisPlace' => $howManySchedulesAtThisPlace
         ]);
     }
 
@@ -299,7 +304,7 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
-        $place = FindOrFail($id);
+        $place = Place::findOrFail($id);
 
         $delete = $place->delete();
 
@@ -311,66 +316,31 @@ class PlaceController extends Controller
                     ->withInput();
         }
 
+        $now = date('Y-m-d H:i:s');
+
+        $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->get();
+
+        $hasExpiredSchedules = hasData($expiredSchedules);
+
+        if($hasExpiredSchedules){
+            foreach($expiredSchedules as $schedule){
+              $data = array(
+                  'title'   => $schedule->title, 'place_id'     => $schedule->place_id, 'start'     => $schedule->start,
+                  'end'     => $schedule->end, 'customer_id'    => $schedule->customer_id, 'status' => $schedule->status,
+              );
+
+              $historic = DB::insert('INSERT INTO historic_schedules (title, place_id, start, end, customer_id, status, created_at, updated_at, deleted_at)
+              values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+              [
+                  $schedule->title,       $schedule->place_id,        $schedule->start,
+                  $schedule->end,         $schedule->customer_id,     $schedule->status,
+                  $schedule->created_at,  $schedule->updated_at,      $schedule->deleted_at
+              ]);
+
+              $delete = DB::delete('DELETE FROM schedules WHERE id = ?', [$schedule->id]);
+            }
+        }
+
         return redirect()->route('places.index')->with(['status' => Lang::get('Place deleted')]);
     } 
-
-    /**
-     * confirm before forceDelete
-     * 
-     */
-
-    public function confirmForceDestroy($id){
-        $place = Place::onlyTrashed()->findOrFail($id);
-        
-        return view('app.dashboard.places.confirm.forceDelete', [
-            'place' => $place
-        ]);
-    }
-
-     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function forceDestroy($id)
-    {
-        $place = Place::onlyTrashed()->FindOrFail($id);
-
-        $delete = $place->forceDelete();
-
-        if(!$delete){
-            $error = Lang::get('Something went wrong. Please try again!');
-            return redirect()
-                    ->back()
-                    ->withErrors($error)
-                    ->withInput();
-        }
-
-        return redirect()->route('places.index')->with(['status' => Lang::get('Place permanently deleted')]);
-    } 
-
-    public function confirmRestore($id){
-        $place = Place::onlyTrashed()->findOrFail($id);
-
-        return view('app.dashboard.places.confirm.restore', [
-            'place' => $place
-        ]);
-    }
-
-    public function restore(){
-        $place = Place::onlyTrashed()->findOrFail($id);
-
-        $restore = $place->restore();
-
-        if(!$restore){
-            $error = Lang::get('Something went wrong. Please try again!');
-            return redirect()
-                    ->back()
-                    ->withErrors($error)
-                    ->withInput();
-        }
-
-        return redirect()->route('places.index')->with(['status' => Lang::get('Place restored')]);
-    }
 }

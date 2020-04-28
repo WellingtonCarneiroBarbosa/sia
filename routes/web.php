@@ -181,12 +181,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/show/{id}', 'Places\PlaceController@show')
                                               ->name('places.show');
 
-            Route::get('/deleted', 'Places\PlaceController@deleted')
-                                            ->name('places.deleted');
-
-            Route::put('/restore/{id}',  'Places\PlaceController@restore')
-                                                  ->name('places.restore');
-
             Route::put('/update/{id}',  'Places\PlaceController@update')
                                                   ->name('places.update');
   
@@ -199,18 +193,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::delete('/delete/{id}',  'Places\PlaceController@destroy')
                                                      ->name('places.delete');
 
-            Route::delete('/permanently/delete/{id}',  'Places\PlaceController@forceDestroy')
-                                                                 ->name('places.forceDelete');
-
             Route::group(['prefix' => 'confirm'], function () {
                 Route::get('/delete/{id}', 'Places\PlaceController@confirmDestroy')
                                                    ->name('places.confirm.delete');
-
-                Route::get('/permanently/delete/{id}', 'Places\PlaceController@confirmForceDestroy')
-                                                                ->name('places.confirm.forceDelete');
-
-                Route::get('/restore/{id}', 'Places\PlaceController@confirmRestore')
-                                                    ->name('places.confirm.restore');
             });
 
         });

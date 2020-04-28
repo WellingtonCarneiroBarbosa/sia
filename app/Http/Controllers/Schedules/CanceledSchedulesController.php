@@ -31,13 +31,16 @@ class CanceledSchedulesController extends Controller
         $hasPlaces    = hasData($places);
         $hasCustomers = hasData($customers);
 
+        $now = date('Y-m-d H:i:s');
+
         return view('app.dashboard.schedules.canceled', [
             'canceledSchedules'         => $canceledSchedules,
             'hasCanceledSchedules'      => $hasCanceledSchedules,
             'places'                    => $places,       
             'hasPlaces'                 => $hasPlaces,
             'customers'                 => $customers, 
-            'hasCustomers'              => $hasCustomers
+            'hasCustomers'              => $hasCustomers,
+            'now'                       => $now
         ]);
     }
 
@@ -49,7 +52,9 @@ class CanceledSchedulesController extends Controller
                     ->with('schedulingCustomer')
                     ->with('schedulingPlace')->findOrFail($id);
 
-        return view('app.dashboard.schedules.show', ['schedule' => $schedule]);
+        $now = date('Y-m-d H:i:s');
+
+        return view('app.dashboard.schedules.show', ['schedule' => $schedule, 'now' => $now]);
     }
 
      /**
@@ -62,8 +67,10 @@ class CanceledSchedulesController extends Controller
                     ->onlyTrashed()
                     ->findOrFail($id);
 
+        $now = date('Y-m-d H:i:s');
+
         return view('app.dashboard.schedules.confirm.restore', [
-            'schedule'  => $schedule
+            'schedule'  => $schedule, 'now' => $now
         ]);
     }
 
@@ -145,8 +152,10 @@ class CanceledSchedulesController extends Controller
         $schedule = Schedule::with('schedulingCustomer')->with('schedulingPlace')
                     ->onlyTrashed()->findOrFail($id);
 
+        $now = date('Y-m-d H:i:s');
+
         return view('app.dashboard.schedules.confirm.deletePermanently', [
-            'schedule'  => $schedule
+            'schedule'  => $schedule, 'now' => $now
         ]);
     }
 

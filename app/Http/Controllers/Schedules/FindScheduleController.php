@@ -82,11 +82,14 @@ class FindScheduleController extends Controller
 
         $hasPlaces      = hasData($places);
         
+        $now = date('Y-m-d H:i:s');
+
         return view('app.dashboard.schedules.find', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
             'response'  => $response,  'data'         => $data,
-            'places'    => $places,    'hasPlaces'    => $hasPlaces
+            'places'    => $places,    'hasPlaces'    => $hasPlaces,
+            'now'       => $now
         ]);
     }
 
@@ -162,12 +165,15 @@ class FindScheduleController extends Controller
         $places         = Place::get();
 
         $hasPlaces      = hasData($places);
+
+        $now = date('Y-m-d H:i:s');
         
         return view('app.dashboard.schedules.find', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
             'response'  => $response,  'data'         => $data,
-            'places'    => $places,    'hasPlaces'    => $hasPlaces
+            'places'    => $places,    'hasPlaces'    => $hasPlaces,
+            'now'       => $now
         ]);
     }
 
@@ -232,12 +238,15 @@ class FindScheduleController extends Controller
         $places         = Place::get();
 
         $hasPlaces      = hasData($places);
+
+        $now = date('Y-m-d H:i:s');
         
         return view('app.dashboard.schedules.find', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
             'response'  => $response,  'data'         => $data,
-            'places'    => $places,    'hasPlaces'    => $hasPlaces
+            'places'    => $places,    'hasPlaces'    => $hasPlaces,
+            'now'       => $now
         ]);
     }
 }

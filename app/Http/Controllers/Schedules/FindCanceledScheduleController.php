@@ -81,12 +81,15 @@ class FindCanceledScheduleController extends Controller
         $places         = Place::get();
 
         $hasPlaces      = hasData($places);
+
+        $now = date('Y-m-d H:i:s');
         
         return view('app.dashboard.schedules.findCanceled', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
             'response'  => $response,  'data'         => $data,
-            'places'    => $places,    'hasPlaces'    => $hasPlaces
+            'places'    => $places,    'hasPlaces'    => $hasPlaces,
+            'now'       => $now
         ]);
     }
 
@@ -162,12 +165,15 @@ class FindCanceledScheduleController extends Controller
         $places         = Place::get();
 
         $hasPlaces      = hasData($places);
+
+        $now = date('Y-m-d H:i:s');
         
         return view('app.dashboard.schedules.findCanceled', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
             'response'  => $response,  'data'         => $data,
-            'places'    => $places,    'hasPlaces'    => $hasPlaces
+            'places'    => $places,    'hasPlaces'    => $hasPlaces,
+            'now'       => $now
         ]);
     }
 
@@ -233,12 +239,15 @@ class FindCanceledScheduleController extends Controller
         $places         = Place::get();
 
         $hasPlaces      = hasData($places);
+
+        $now = date('Y-m-d H:i:s');
         
         return view('app.dashboard.schedules.findCanceled', 
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
             'response'  => $response,  'data'         => $data,
-            'places'    => $places,    'hasPlaces'    => $hasPlaces
+            'places'    => $places,    'hasPlaces'    => $hasPlaces,
+            'now'       => $now
         ]);
     }
 }

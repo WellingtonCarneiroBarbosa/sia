@@ -93,13 +93,27 @@
                     <!-- status -->
                     <div class="form-group mb-3">
                         <span>{{ __("Status") }}:</span>
-                        @if($schedule->deleted_at != null)
-                            <strong>{{ __("canceled") }}</strong>
-                        @elseif ($schedule->status == null)
-                            <strong>{{ __("On budget") }}</strong>
-                        @elseif($schedule->status == 1)
-                            <strong>{{ __("Confirmed") }}</strong>
+
+                        @if($now > $schedule->start && $now < $schedule->end)
+                            <i class="bg-success"></i>
+                            <span class="status">{{ __("In progress") }}</span>
+                        @elseif($now > $schedule->start && $now >= $schedule->end)
+                            <i class="bg-danger"></i>
+                            <span class="status">{{ __("Finalized") }}</span>
+                        @elseif(!$schedule->place_id)
+                            <i class="bg-danger"></i>
+                            <span class="status">{{ __("Expired") }}</span>
+                        @elseif($schedule->deleted_at != null)
+                            <i class="bg-danger"></i>
+                            <span class="status">{{ __("canceled") }}</span>
+                        @elseif (!$schedule->status)
+                            <i class="bg-warning"></i>
+                            <span class="status">{{ __("On budget") }}</span>
+                        @elseif($schedule->status)
+                            <i class="bg-success"></i>
+                            <span class="status">{{ __("Confirmed") }}</span>
                         @endif
+                        
                     </div>
 
                     <!-- detalhes -->

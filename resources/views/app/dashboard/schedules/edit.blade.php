@@ -75,6 +75,7 @@
                                     <span class="input-group-text text-sm"><i class="fa fa-map mr-2"></i>{{ __("Place") }}</span>
                                 </div>
 
+                                @if ($hasPlaces)
                                 <select name="place_id" id="place_id" class="form-control @error('place_id') is-invalid @enderror" required>
                                     @foreach ($places as $place)
                                         <option value="{{$place->id}}"
@@ -84,6 +85,11 @@
                                         >{{$place->name}}</option>
                                     @endforeach
                                 </select> 
+                                @else
+                                <select name="place_id" id="place_id" disabled class="form-control @error('place_id') is-invalid @enderror" required>
+                                    <option selected>{{ __("Please register a place") }}</option>
+                                </select>
+                                @endif 
             
                             </div>
                         </div>
@@ -124,7 +130,7 @@
                                     <span class="input-group-text"><i class="ni ni-single-02 mr-2"></i>{{ __("Customer") }}</span>
                                 </div>
 
-      
+                                @if ($hasCustomers)
                                 <select name="customer_id" id="customer_id" class="form-control @error('customer_id') is-invalid @enderror" required>
                                     @foreach ($customers as $customer)
                                       <option value="{{$customer->id}}" 
@@ -134,6 +140,11 @@
                                       >{{$customer->corporation}}</option>
                                     @endforeach
                                 </select>
+                                @else
+                                <select name="customer_id" id="customer_id" disabled class="form-control @error('customer_id') is-invalid @enderror" required>
+                                    <option selected>{{ __("Please register a customer") }}</option>
+                                </select> 
+                                @endif 
                                 
                             </div>
                         </div>
@@ -172,7 +183,11 @@
                             <a href="{{ route('home') }}">
                                 <button type="button" class="btn btn-outline-primary  ml-auto" >{{ __("Cancel") }}</button>
                             </a>
+                            @if($hasPlaces && $hasCustomers)
                             <button type="submit" id="agendar-submit" class="btn btn-primary my-4">{{ __("Edit") }}</button> 
+                            @else
+                            <button type="submit" class="btn btn-primary my-4" disabled>{{ __("Edit") }}</button>
+                            @endif
                         </div>
                         <!-- fim do submit button -->
                     </form>

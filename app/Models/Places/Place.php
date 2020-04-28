@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\hasMany;
 
 class Place extends Model
 {
-    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -30,7 +29,6 @@ class Place extends Model
     protected $table = 'places';
 
     public $timestamps = true;
-    protected $softDelete = true;
 
     /***
      * Scheduling Places

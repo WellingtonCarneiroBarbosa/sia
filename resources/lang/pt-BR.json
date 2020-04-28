@@ -232,9 +232,20 @@
     "Created at": "Criado em",
     "Outlet voltage": "Tensão das tomadas",
     "More details about": "Mais detalhes sobre",
-    "The size field must be greater than 0": "O campo tamanho deve ser maior que 0",
+    "The size field must be greater than 5": "O campo tamanho deve ser maior que 5",
     "There is already a registered place with this name": "Já há um local cadastrado com este nome",
     "Confirm Delete": "Confirmar Exclusão",
     "Do you really want to delete permanently this place": "Você realmente quer deletar permanentemente este local",
-    "No, go back to locations table": "Não, voltar para tabela de locais"
+    "No, go back to locations table": "Não, voltar para tabela de locais",
+    "This location will be": "Este local será",
+    "deleted. Schedules that have this location will receive the location as": "excluído. Os agendamentos que possuem esse local receberão o local como",
+    " undefined": " indefinido",
+    "and will be moved to the appointment history section": "e serão movidos para a seção de histórico de agendamentos",
+    " permanently ": " permanentemente ",
+    "Undefined": "Indefinido",
+    "There are ": "Há ",
+    " bookings at this location": " agendamentos neste local",
+    "Expired": "Expirado",
+    "Finalized": "Finalizado",
+    "In progress": "Em andamento"
 }

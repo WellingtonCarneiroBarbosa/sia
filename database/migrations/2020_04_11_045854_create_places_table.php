@@ -29,7 +29,6 @@ class CreatePlacesTable extends Migration
             $table->char('hasAccessibility', 1)->nullable()->default(null);
             $table->char('hasFreeParking', 1)->nullable()->default(null);          
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -43,94 +43,159 @@
                     <strong>
                         *
                         <span class="text-muted">
-                            {{ __("Permanently delete modifies the statistics for canceled schedules") }}.
+                            {{ __("This location will be") }} <u class="text-danger"> {{  __(" permanently ") }}</u> {{ __("deleted. Schedules that have this location will receive the location as") }}
+                            <u class="text-danger">{{ __(" undefined") }}</u> {{ __("and will be moved to the appointment history section") }}.
                             <br>
                             <br>
-                            {{ __("Besides that, it will be ") }}<u class="text-danger">{{ __("impossible") }}</u>
-                            {{ __("to restore this schedule and see his logs") }}
+                            <u class="text-danger">{{ __("There are ") }} {{ $howManySchedulesAtThisPlace }} {{ __(" bookings at this location") }}</u>
                         </span>
                         *
                     </strong>
                 </div>
                 <hr>
                 <div class="text-left text-sm">
-                    <!-- identificador do agendamento -->
+                    <!-- identificador do local -->
                     <div class="form-group mb-3">
                         <span>{{ __("Identifier number") }}:</span>
-                        <strong>{{ $schedule->id }}</strong>
+                        <strong>{{ $place->id }}</strong>
                     </div>
 
-                    <!-- titulo do agendamento -->
+                    <!-- nome do local -->
                     <div class="form-group mb-3">
-                        <span>{{ __("Title") }}:</span>
-                        <strong>{{ $schedule->title }}</strong>
+                        <span>{{ __("Name") }}:</span>
+                        <strong>{{ $place->name }}</strong> 
                     </div>
 
-                    <!-- local do agendamento -->
+                    <!-- capacidade do ambiente -->
                     <div class="form-group mb-3">
-                        <span>{{ __("Place") }}:</span>
-                        <strong>{{ $schedule->schedulingPlace['name'] }}</strong>
+                        <span>{{ __("Capacity") }}:</span>
+                        <strong>{{ $place->capacity }} {{ __("peoples") }}</strong>
                     </div>
 
-                    <!-- datahora inicio -->
+                    <!-- tamanho do ambiente -->
                     <div class="form-group mb-3">
-                       <span>{{ __("Start") }}:</span>
-                       <strong>{{dateBrazilianFormat($schedule->start)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->start) }}</strong>
+                       <span>{{ __("Size") }}:</span>
+                       <strong>{{ $place->size }} m<sup>2</sup> </strong>
                    </div>
 
-                    <!-- datahora final -->
+                   <!--tensao-->
                     <div class="form-group mb-3">
-                        <span>{{ __("End") }}:</span>
-                        <strong>{{dateBrazilianFormat($schedule->end)}} {{ __("at") }}  {{ timeBrazilianFormat($schedule->end) }}</strong>
-                    </div>
-
-                    <!-- cliente -->
-                    <div class="form-group mb-3">
-                        <span>{{ __("Customer") }}:</span>
-                        <strong>{{$schedule->schedulingCustomer['corporation'] }}</strong>
-                    </div>
-
-                    <!-- status -->
-                    <div class="form-group mb-3">
-                        <span>{{ __("Status") }}:</span>
-                        @if($schedule->deleted_at != null)
-                            <strong>{{ __("canceled") }}</strong>
-                        @elseif ($schedule->status == null)
-                            <strong>{{ __("On budget") }}</strong>
-                        @elseif($schedule->status == 1)
-                            <strong>{{ __("Confirmed") }}</strong>
-                        @endif
-                    </div>
-
-                    <!-- detalhes -->
-                    <div class="form-group mb-3">
-                        <span>{{ __("Details") }}:</span>
-                        @if($schedule->details == null)
-                            <strong>{{ __("Nothing to show") }}</strong>
+                        <span>{{ __("Outlet voltage") }}:</span>
+                        <strong>
+                        @if($place->outletVoltage)
+                            220v
                         @else
-                            {{ $schedule->details }}
+                            127v
                         @endif
+                        </strong>
                     </div>
 
-                    <!-- agendado em - por -->
+                    @if($place->hasProjector)
+                    <!-- qtd projetores -->
                     <div class="form-group mb-3">
-                        <span>{{ __("Scheduled on") }}:</span>
-                        <strong>{{dateBrazilianFormat($schedule->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($schedule->created_at) }}</strong>
+                        <span>{{ __("Projectors") }}:</span>
+                        <strong>
+                            {{ $place->howManyProjectors }}
+                        </strong>
+                    </div>
+                    @endif
+
+                    @if($place->hasTranslationBooth)
+                    <!-- qtd projetores -->
+                    <div class="form-group mb-3">
+                        <span>{{ __("Translation booths") }}:</span>
+                        <strong>
+                            {{ $place->howManyBooths }}
+                        </strong>
+                    </div>
+                    @endif
+
+                    <!-- qtd projetores -->
+                    <div class="form-group mb-3">
+                        <span>{{ __("Sound") }}?</span>
+                        <strong>
+                        @if($place->hasSound)
+                            {{ __("Yes") }}
+                        @else
+                            {{ __("No") }}
+                        @endif
+                        </strong>
+                    </div>
+                  
+                    <!-- tem iluminação -->
+                    <div class="form-group mb-3">
+                        <span>{{ __("Scenic lighting") }}?</span>
+                        <strong>
+                        @if($place->hasLighting)
+                           {{ __("Yes") }}
+                        @else
+                           {{ __("No") }}
+                        @endif
+                        </strong>
                     </div>
 
+                    <!-- tem wifi -->
+                    <div class="form-group mb-3">
+                        <span>{{ __("Wifi") }}?</span>
+                        <strong>
+                        @if($place->hasWifi)
+                           {{ __("Yes") }}
+                        @else
+                           {{ __("No") }}
+                        @endif
+                        </strong>
+                    </div>
 
+                    <!-- tem wifi -->
+                    <div class="form-group mb-3">
+                        <span>{{ __("Accessibility") }}?</span>
+                        <strong>
+                        @if($place->hasAccessibility)
+                           {{ __("Yes") }}
+                        @else
+                           {{ __("No") }}
+                        @endif
+                        </strong>
+                    </div>
 
-                    <!-- editado em -->
-                    @if ($schedule->created_at != $schedule->updated_at)
+                    <!-- tem estacionamento gratis -->
+                    <div class="form-group mb-3">
+                        <span>{{ __("Free parking") }}?</span>
+                        <strong>
+                        @if($place->hasFreeParking)
+                            {{ __("Yes") }}
+                        @else
+                            {{ __("No") }}
+                        @endif
+                        </strong>
+                    </div>
+
+                     <!-- criado em -->
+                     @if ($place->created_at)
                         <div class="form-group mb-3">
-                            <span>{{ __("Updated") }}:</span>
-                            <strong>{{dateBrazilianFormat($schedule->updated_at)}} {{ __("at") }} {{ timeBrazilianFormat($schedule->updated_at) }}</strong>
+                            <span>{{ __("Created at") }}:</span>
+                            <strong>{{dateBrazilianFormat($place->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($place->created_at) }}</strong>
                         </div>
                     @endif
 
+                    <!-- editado em -->
+                    @if ($place->created_at != $place->updated_at)
+                        <div class="form-group mb-3">
+                            <span>{{ __("Updated") }}:</span>
+                            <strong>{{dateBrazilianFormat($place->updated_at)}} {{ __("at") }} {{ timeBrazilianFormat($place->updated_at) }}</strong>
+                        </div>
+                    @endif
+
+                    <!--deletado em-->
+                    @if ($place->deleted_at)
+                    <div class="form-group mb-3">
+                        <span>{{ __("Deleted at") }}:</span>
+                        <strong>{{dateBrazilianFormat($place->deleted_at)}} {{ __("at") }} {{ timeBrazilianFormat($place->deleted_at) }}</strong>
+                    </div>
+                    @endif 
                 </div>
 
-                <form action="{{ route('schedules.permanentlyDelete', $schedule->id)}}" class="form-loader"  method="POST">
+                <form action="{{ route('places.delete', $place->id)}}" class="form-loader"  method="POST">
                     @csrf
                     @method('DELETE')
                     <button onclick="comeBack();" type="button" class="btn btn-outline-success">{{ __("Come Back") }}</button>
