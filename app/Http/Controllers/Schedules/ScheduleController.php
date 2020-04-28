@@ -100,6 +100,23 @@ class ScheduleController extends Controller
           * de horário. 
           */
 
+        $now = date('Y-m-d H:i:s');
+        $now = DateTime::createFromFormat('Y-m-d H:i:s', $now);
+
+        if($data['start'] <= $now){
+            $saveOnHistoric = HistoricSchedule::create($data);
+
+            if(!$saveOnHistoric){
+                $error = Lang::get('Something went wrong. Please try again!');
+                return redirect()
+                        ->back()
+                        ->withErrors($error)
+                        ->withInput();
+            }
+
+            return redirect()->back()->with(['status' => Lang::get(' The schedule was saved in the history section')]);
+        }
+
         $isReserved  = DB::select(
             "SELECT * FROM schedules WHERE place_id = ? AND deleted_at IS NULL AND (
                 ? BETWEEN start AND end
