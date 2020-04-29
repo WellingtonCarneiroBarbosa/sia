@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,14 @@ Route::get('/', function (){
 })->name('inicio');
 
 Auth::routes();
+
+Route::get('/guest/{token}', function (Request $request){
+    if (! $request->hasValidSignature()) {
+        abort(401);
+    }            
+
+    return "Aq sera a tela de agendamentos para os convidados e tals. Essa tela é valida por 2 minutos.";
+})->name('schedules.guest');
 
 /***
  * Change the app language
@@ -72,6 +81,9 @@ Route::group(['middleware' => ['auth']], function () {
 
             Route::delete('/permanently/delete/{id}', 'Schedules\CanceledSchedulesController@permanentlyDelete')
                                                                            ->name('schedules.permanentlyDelete');
+
+            Route::get('/generate/guestURL', 'Schedules\ScheduleController@generateGuestURL')
+                                                       ->name('schedules.generate.guestURL');
 
             /***
              * Group for canceled 

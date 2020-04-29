@@ -11,6 +11,9 @@ use App\Models\Places\Place;
 use App\Models\Customers\Customer;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
+
 use DB;
 use DateTime;
 
@@ -402,5 +405,15 @@ class ScheduleController extends Controller
         }
 
         return redirect()->route('home')->with(['status' => Lang::get('Schedule canceled')]);
+    }
+
+    public function generateGuestURL(){
+        $token = Str::random(60);
+
+        $temporaryURL = URL::temporarySignedRoute(
+            'schedules.guest', now()->addMinutes(2), ['token' => $token]
+        );
+
+        return redirect()->back()->with(['status' => 'URL temporária gerada! Validade: 02 minutos -> ' . $temporaryURL]);
     }
 }

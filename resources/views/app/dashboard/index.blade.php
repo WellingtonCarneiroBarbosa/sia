@@ -12,6 +12,7 @@
                     <a href="{{ route('schedules.create') }}" class="btn btn-sm btn-neutral mb-2" id="novo-agendamento">{{ __("New") }}</a>
                     <a href="{{route('schedules.canceled')}}" class="btn btn-sm btn-neutral mb-2">{{ __("Canceled") }}</a>
                     <a href="#" data-toggle="modal" data-target="#modal-filter" id="filtros-agendamento" class="btn btn-sm btn-neutral mb-2 mr-2">{{ __("Filters") }}</a>
+                    <a href="{{ route('schedules.generate.guestURL') }}" class="btn btn-sm btn-neutral mb-2">Gerar compartilhamento temporário</a>
                 </div>
             </div>
             <!-- fim do header -->
