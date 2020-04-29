@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::get('/guest/{token}', function (Request $request){
     if (! $request->hasValidSignature()) {
-        abort(403);
+        abort(401);
     }            
 
     return "Aq sera a tela de agendamentos para os convidados e tals. Essa tela é valida por 2 minutos.";
