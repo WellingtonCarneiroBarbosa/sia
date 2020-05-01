@@ -35,7 +35,6 @@
         </div>
     -->
         <!-- fim do background -->
-     
         <!--inicio do conteudo-->
         <div class="page-header">
             <div class="container shape-container d-flex align-items-center py-lg">
