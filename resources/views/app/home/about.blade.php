@@ -24,12 +24,34 @@
                 <div class="col px-0">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-lg-6 text-center">
-                        
-                            <h1>{{ __("Content Here") }}</h1>
-                            
+                            <img src="{{asset('home/assets/img/brand/siaLogo.png')}}" style="width: 10.5em; height: 10.5em;" class="img-fluid">
+                            <p class="lead text-white">{{ __('Manage your appointments with a modern and functional application') }}</p>
+                            <div class="btn-wrapper mt-5">
+                                <a href="{{route('login')}}" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0">
+                                    <span title="{{ __("Click here to access the system") }}" class="btn-inner--text">{{ __('Enter Now') }}</span>
+                                </a>
+                            </div>
+                   
+                            <div class="mt-5">
+                                <span class="text-white">{{ __('Developed with') }}</span>
+                                <span class="btn-inner--icon text-red"><i class="fa fa-heart"></i></span>
+                                <span class="text-white">{{ __('by Evolue IT') }}</span><p>
+                                <p>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+<span class="lead text-white">
+<div class="mt-5">
+        <div class="container shape-container d-flex align-items-center py-lg">
+            {{ __('Bem vindo ao SIA eventos um sistema interno de agendamentos de eventos do sistema
+            FIEP, um sistema sendo produzido desde o ano de 2019 para facilitar todo o trabalho da equipe de eventos,
+            fazendo assim o trabalho da equipe mais agil, eficiente. O sistema pode se utlizado no PC ou em SMARTPHONES.
+            Sem ocupar espaco em seu PC, pois os arquivos relacionados a agendamentos estao armazenados no sistema.') }}</span>
+            </div>
+            <center>
 @endsection
+ 
