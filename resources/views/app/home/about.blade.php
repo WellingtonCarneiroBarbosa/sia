@@ -19,12 +19,6 @@
             <span id="shape10" class="span-100"></span>
         </div>
         <!-- fim do background -->
-        <div class="page-header">
-            <div class="container shape-container d-flex align-items-center py-lg">
-                <div class="col px-0">
-                    <div class="row align-items-center justify-content-center">
-                        <div class="col-lg-6 text-center">
-                            <img src="{{asset('home/assets/img/brand/siaLogo.png')}}" style="width: 10.5em; height: 10.5em;" class="img-fluid">                                
                             <span class="lead text-white">
                                 <div class="mt-5">
                                         <div class="container shape-container d-flex align-items-center py-lg">
