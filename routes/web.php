@@ -18,6 +18,11 @@ Route::get('/', function (){
     return view('app.home.index');
 })->name('inicio');
 
+Route::get('/about', function (){
+    return view('app.home.about');
+})->name('home.about');
+
+
 Auth::routes();
 
 Route::get('/guest/{token}', function (Request $request){
