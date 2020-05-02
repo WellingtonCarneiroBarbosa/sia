@@ -149,6 +149,7 @@
           </div>
         </div>
     </div>
+</div>
     <!--end :) -->
 @endsection
  
