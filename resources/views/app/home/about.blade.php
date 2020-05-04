@@ -41,12 +41,12 @@
               <div class="col px-0">
                 <div class="row align-items-center justify-content-center">
                   <div class="col-lg-6 text-center">
-                    <h1 class="text-white display-1">People stories</h1>
-                    <h2 class="display-4 font-weight-normal text-white">The time is right now!</h2>
+                    <h1 class="text-white display-1">SIA EVENTOS</h1>
+                    <h2 class="display-4 font-weight-normal text-white">Veja nosso video sobre o sistema!</h2>
                     <div class="btn-wrapper mt-4">
-                      <a href="https://www.creative-tim.com/product/argon-design-system" class="btn btn-warning btn-icon mt-3 mb-sm-0">
+                      <a href="https://www.youtube.com/watch?v=8oELt_TkNe0&feature=youtu.be" class="btn btn-warning btn-icon mt-3 mb-sm-0">
                         <span class="btn-inner--icon"><i class="ni ni-button-play"></i></span>
-                        <span class="btn-inner--text">Play more</span>
+                        <span class="btn-inner--text">Assistir</span>
                       </a>
                     </div>
                   </div>
@@ -72,23 +72,29 @@
             <div class="col-lg-6">
               <div class="info info-horizontal info-hover-primary">
                 <div class="description pl-4">
-                  <h5 class="title">For Developers</h5>
-                  <p>The time is now for it to be okay to be great. People in this world shun people for being great. For being a bright color. For standing out. But the time is now.</p>
-                  <a href="#" class="text-info">Learn more</a>
+                  <h5 class="title">Seja bem vindo ao SIA Eventos</h5>
+                  <p>Bem vindo ao SIA Eventos um sistema interno de agendamento de eventos do sistema FIEP, um sistema sendo produzido desde o ano de 2019, para facilitar todo o trabalho da equipe de eventos, fazendo assim o trabalho da equipe mais agil, eficiente e com uma maior facilidade para executar algumas acoes. O sistema pode ser utilizado em PC, Tablet ou SMARTPHONES. Sem ocupar espaco no seu PC, pois os arquivos relacionados a agendamentos estao armazenados no proprio sistema.</p>
+                  <a href="#" class="text-info"></a>
                 </div>
               </div>
               <div class="info info-horizontal info-hover-primary mt-5">
                 <div class="description pl-4">
-                  <h5 class="title">For Designers</h5>
-                  <p>There’s nothing I really wanted to do in life that I wasn’t able to get good at. That’s my skill. I’m not really specifically talented at anything except for the ability to learn.</p>
-                  <a href="#" class="text-info">Learn more</a>
-                </div>
+                  <h5 class="title">Agende quantos eventos desejar!</h5>
+                  <p>O nosso sistema deixa livre o agendamento de novos eventos de acordo com a sua necessidade!</p>
+                  <a href="#" class="text-info"></a>
+              <div class="info info-horizontal info-hover-primary mt-5">
+                <img class="description pl-4" src="{{asset('home/assets/img/brand/agenda.jpg')}}" width="150%" Heightwidth="150%"> 
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
               <div class="info info-horizontal info-hover-primary mt-5">
                 <div class="description pl-4">
-                  <h5 class="title">For Beginners</h5>
-                  <p>That’s what I do. That’s what I’m here for. Don’t be afraid to be wrong because you can’t learn anything from a compliment. If everything I did failed - which it doesn't.</p>
-                  <a href="#" class="text-info">Learn more</a>
+                  <h5 class="title">3</h5>
+                  <p>33333333333333333</p>
+                  <a href="#" class="text-info"></a>
                 </div>
               </div>
             </div>
@@ -104,20 +110,21 @@
         <div class="container">
           <div class="row">
             <div class="col-md-8 mx-auto text-center">
-              <span class="badge badge-primary badge-pill mb-3">Insight</span>
-              <h3 class="display-3">Full-Funnel Social Analytics</h3>
-              <p class="lead">The time is now for it to be okay to be great. For being a bright color. For standing out.</p>
+              <span class="badge badge-primary badge-pill mb-3">Desenvolvimento</span>
+              <h3 class="display-3">Como o projeto foi desenvolvido</h3>
+              <p class="lead">Foi necessario tempo,estudo e reunioes para manter a organização para que assim todo esse sistema de agendamentos pudesse ser feito para melhorar e facilitar todo o trabalho da equipe do centro de eventos.</p>
             </div>
           </div>
+        </p>
           <div class="row">
             <div class="col-md-4">
               <div class="info">
                 <div class="icon icon-lg icon-shape icon-shape-primary shadow rounded-circle">
                   <i class="ni ni-settings-gear-65"></i>
                 </div>
-                <h6 class="info-title text-uppercase text-primary">Social Conversations</h6>
-                <p class="description opacity-8">We get insulted by others, lose trust for those others. We get back stabbed by friends. It becomes harder for us to give others a hand.</p>
-                <a href="javascript:;" class="text-primary">More about us
+                <h6 class="info-title text-uppercase text-primary">Reunioes Scruns</h6>
+                <p class="description opacity-8">Para que pudesse ser feito um crontrole sobre e o que seria implementado no sistema foram feitas diversas reunioes usando a metodologia scrun que sao reunioes de 15 min minutos.</p>
+                <a href="javascript:;" class="text-primary">Ler documentacao
                   <i class="ni ni-bold-right text-primary"></i>
                 </a>
               </div>
@@ -127,10 +134,9 @@
                 <div class="icon icon-lg icon-shape icon-shape-success shadow rounded-circle">
                   <i class="ni ni-atom"></i>
                 </div>
-                <h6 class="info-title text-uppercase text-success">Analyze Performance</h6>
-                <p class="description opacity-8">Don't get your heart broken by people we love, even that we give them all we have. Then we lose family over time. As we live, our hearts turn colder.</p>
-                <a href="javascript:;" class="text-primary">Learn about our products
-                  <i class="ni ni-bold-right text-primary"></i>
+                <h6 class="info-title text-uppercase text-success">Desenvolvimento</h6>
+                <p class="description opacity-8">Para que o sistema pudesse ser desenvolvido com fluides foram divididas as tarefas de desenvolvimento, sendo assim possivel que o sistema pudesse ser desenvolvido com com uma maior facilidade.</p>
+                <a href="javascript:;" class="text-primary">
                 </a>
               </div>
             </div>
@@ -139,10 +145,9 @@
                 <div class="icon icon-lg icon-shape icon-shape-warning shadow rounded-circle">
                   <i class="ni ni-world"></i>
                 </div>
-                <h6 class="info-title text-uppercase text-warning">Measure Conversions</h6>
-                <p class="description opacity-8">What else could rust the heart more over time? Blackgold. The time is now for it to be okay to be great. or being a bright color. For standing out.</p>
-                <a href="javascript:;" class="text-primary">Check our documentation
-                  <i class="ni ni-bold-right text-primary"></i>
+                <h6 class="info-title text-uppercase text-warning">Conversas com o cliente</h6>
+                <p class="description opacity-8">Para saber se o sistema estava atendendo toda a necessidade do cliente foram feitas consultas a equipe de agendamentos assim sendo possivel a finalizao do sistema e o contentamento do cliente.</p>
+                <a href="javascript:;" class="text-primary">
                 </a>
               </div>
             </div>
