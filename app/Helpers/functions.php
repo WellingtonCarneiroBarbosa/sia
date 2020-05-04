@@ -270,3 +270,23 @@
         $string = preg_replace('/[.,]/', '', $string);
         return $string;
     }
+
+    function sanitizeString($str) {
+        $str = preg_replace('/[áàãâä]/ui', '', $str);
+        $str = preg_replace('/[éèêë]/ui', '', $str);
+        $str = preg_replace('/[íìîï]/ui', '', $str);
+        $str = preg_replace('/[óòõôö]/ui', '', $str);
+        $str = preg_replace('/[úùûü]/ui', '', $str);
+        $str = preg_replace('/[ç]/ui', '', $str);
+        // $str = preg_replace('/[,(),;:|!"#$%&/=?~^><ªº-]/', '_', $str);
+        $str = preg_replace('/[a-zA-Z]/i', '', $str);
+        $str = preg_replace('/_+/', '', $str); // ideia do Bacco :)
+        $str = preg_replace('/[.,-]/', '', $str);
+        $str = preg_replace('/[ ]/', '', $str);
+        $str = str_replace(' ', '', $str);
+        return $str;
+    }
+
+    function makeInteger($str){
+        return (int) $str;
+    }

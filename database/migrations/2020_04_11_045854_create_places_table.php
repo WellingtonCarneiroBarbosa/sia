@@ -17,7 +17,7 @@ class CreatePlacesTable extends Migration
             $table->tinyIncrements('id');
             $table->string('name', 120)->unique();
             $table->string('capacity', 6);
-            $table->float('size')->nullable()->default(null);
+            $table->string('size', 14)->nullable()->default(null);
             $table->char('outletVoltage', 1)->nullable()->default(null);
             $table->char('hasProjector', 1)->nullable()->default(null);
             $table->string('howManyProjectors', 2)->nullable()->default(null);

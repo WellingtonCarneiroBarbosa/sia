@@ -56,13 +56,13 @@
                     <!-- capacidade do ambiente -->
                     <div class="form-group mb-3">
                         <span>{{ __("Capacity") }}:</span>
-                        <strong>{{ $place->capacity }} {{ __("peoples") }}</strong>
+                        <strong>{{ str_replace(',', '.', number_format($place->capacity)) }} {{ __("peoples") }}</strong>
                     </div>
 
                     <!-- tamanho do ambiente -->
                     <div class="form-group mb-3">
                        <span>{{ __("Size") }}:</span>
-                       <strong>{{ $place->size }} m<sup>2</sup> </strong>
+                       <strong>{{ str_replace(',', '.', number_format($place->size)) }} m<sup>2</sup> </strong>
                    </div>
 
                    <!--tensao-->

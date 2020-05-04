@@ -79,7 +79,7 @@
                         <span class="input-group-text"><i class="fa fa-vector-square"></i></span>
                         </div>
 
-                        <input id="size" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Square meters") }}"  class="form-control " value="{{ $place->size }}" name="size" required>
+                        <input id="size" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Square meters") }}"  class="form-control " value="{{ str_replace(',', '.', number_format($place->size)) }}" name="size" required>
                         
                     </div>
                 </div>

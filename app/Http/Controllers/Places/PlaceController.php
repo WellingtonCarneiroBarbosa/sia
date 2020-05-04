@@ -53,17 +53,17 @@ class PlaceController extends Controller
          */
         $data = $request->all();
 
-        $data['size']  = preg_replace('/[.]/', '', $data['size'] );
-        $data['size']  = str_replace(',', '.', $data['size']);
+        $data['size']  = sanitizeString($data['size']);
 
-        $data['capacity'] = removeComas($data['capacity']);
+        $data['capacity'] = sanitizeString($data['capacity']);
 
+        //dd($data['size'], $data['capacity']);
         $messages = ['unique' => Lang::get('There is already a registered place with this name')];
 
         $validator = Validator::make($data, [
             'name'      => ['required', 'string', 'max:120', 'unique:places'],
-            'capacity'  => ['required', 'string', 'max:6', 'gt:0'],
-            'size'  => ['required', 'string', 'max:18'],
+            'capacity'  => ['required', 'string', 'max:7', 'gt:0'],
+            'size'  => ['required', 'string', 'max:14'],
             'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
             'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
             'outletVoltage' => ['max:1', 'required', 'numeric'],
@@ -75,7 +75,6 @@ class PlaceController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-
         /**manual validation */
         if($data['size'] <= 5){
             $error = Lang::get('The size field must be greater than 5');
@@ -179,10 +178,9 @@ class PlaceController extends Controller
          */
         $data = $request->all();
 
-        $data['size']  = preg_replace('/[.]/', '', $data['size'] );
-        $data['size']  = str_replace(',', '.', $data['size']);
+        $data['size']  = sanitizeString($data['size']);
 
-        $data['capacity'] = removeComas($data['capacity']);
+        $data['capacity'] = sanitizeString($data['capacity']);
 
         $messages = ['unique' => Lang::get('There is already a registered place with this name')];
 

@@ -260,6 +260,9 @@
     "This schedule cannot start with this start date": "Este agendamento não pode começar com esta data de início",
     "Sorry, you are not authorized to access this page.": "Desculpe, você não está autorizado a acessar esta página.",
     "About The System": "Sobre o Sistema",
-    "Content Here": "Conteúdo Aqui"
+    "Content Here": "Conteúdo Aqui",
+    "Expected number of participants": "Quantidade de participantes prevista",
+    "This place support only ": "Este local suporta apenas ",
+    " peoples": " pessoas"
     
 }

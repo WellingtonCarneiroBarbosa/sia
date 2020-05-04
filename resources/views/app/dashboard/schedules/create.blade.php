@@ -87,12 +87,24 @@
                                 @endif 
                             </div>
                             @if($hasPlaces)
-                            <div class="float-right">
+                            <div class="float-right mb-2">
                                 <a href="#" class="text-sm" id="viewPlace" title="{{ __("The link will open in a new tab") }}">{{ __("More details of this location") }}</a>
                             </div>
                             @endif
                         </div>
                         <!-- fim local do agendamento -->
+                        
+                        <!-- quantidade de participantes do agendamento -->
+                        <div class="form-group focused">
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-users"></i></span>
+                                </div>
+
+                                <input type="text" title="{{ __("Fill this field") }}" placeholder="{{ __("Expected number of participants") }}" id="participants" name="participants" value="{{ old("participants") }}" class="form-control" required>
+                            </div>
+                        </div>
+                        <!-- fim da quantidade de participantes do agendamento -->
 
                         <!-- data inicial do agendamento -->
                         <div class="form-group focused">
@@ -182,26 +194,31 @@
 @endsection
 
 @section('scripts')
+    <!--plugins-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+    <script src="{{ asset('js/plugins/maskNumber/dist/jquery.masknumber.min.js') }}"></script>
+    <script>
+        /**
+         * Masks
+         * 
+         */
+        (function( $ ) {
+            $(function() {
+                $("#participants").maskNumber({thousands: '.', integer: true});
+                $('.datetime').mask('00/00/0000 00:00');
+            });
+        })(jQuery);
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
-
-<script>
-    (function( $ ) {
-        $(function() {
-            $('.datetime').mask('00/00/0000 00:00');
+        $(document).ready(function (){
+            /**view place*/
+            $("#viewPlace").click(function (){
+                var placeID = $("#place_id").val();
+                /**url to show places */
+                <?php echo "var showPlaceUrl = " . "'" . url("/dash/places/show") . "';";  ?>
+                var url =  showPlaceUrl + '/' + placeID;
+                window.open(url, '_blank');
+            });
         });
-    })(jQuery);
-
-    $(document).ready(function (){
-        /**view place*/
-        $("#viewPlace").click(function (){
-            var placeID = $("#place_id").val();
-            /**url to show places */
-            <?php echo "var showPlaceUrl = " . "'" . url("/dash/places/show") . "';";  ?>
-            var url =  showPlaceUrl + '/' + placeID;
-            window.open(url, '_blank');
-        });
-    });
-</script>
+    </script>
 
 @endsection

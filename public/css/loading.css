@@ -78,3 +78,13 @@
         transform: translate(24px, 0);
     }
 }
+
+/**remover setinhas do input type number */
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+}
