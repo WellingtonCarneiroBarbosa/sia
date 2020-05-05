@@ -53,6 +53,7 @@
     <div class="row">
         <!-- inicio da tabela de agendamentos -->
         <div class="col-xl-12">
+            @if ($hasSchedules)
             <div class="card bg-default">
                 <div class="card-header bg-transparent">
                     <div class="row align-items-center">
@@ -76,7 +77,6 @@
                                 <!-- fim do cabeçalho da tabela -->
                                 <tbody class="list">
                                     <!-- inicio corpo da tabela -->
-                                    @if ($hasSchedules)
                                     
                                     @foreach($schedules as $schedule)
                                     <tr>
@@ -165,43 +165,6 @@
                                         </td>
                                     </tr>
                                     @endforeach
-
-                                    @else
-                                    <!-- se nao houver agendamentos -->
-
-                                    <tr>
-                                        <td class="budget">
-                                            {{ __("Without Data") }}
-                                        </td>
-                                        <td class="budget">
-                                            {{ __("Without Data") }} | {{ __("Without Data") }}
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-dot mr-4">
-                                                <i class="bg-danger"></i>
-                                                <span class="status">{{ __("Without Data") }}</span>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <span class="name mb-0 text-sm">{{ __("Without Data") }}</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="#!">{{ __("No Options Available") }}</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!-- fim do agendamento 01 -->
-                                    @endif
                                 </tbody>
                                 <!-- fim do corpo da tabela -->
                                 <br>
@@ -210,6 +173,13 @@
                     </div>
                 </div>
             </div>
+            @else
+            <!-- se nao houver agendamentos -->
+            @component('components.noData', ['message' => Lang::get('We still have nothing to display. Click new and register an appointment')])
+                
+            @endcomponent
+
+            @endif
             <div class="float-right">
                 {{ $schedules->links() }}
             </div>

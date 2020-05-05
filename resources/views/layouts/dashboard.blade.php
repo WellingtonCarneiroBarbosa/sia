@@ -129,7 +129,7 @@
                         </div>
                         <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
                                 <span aria-hidden="true">×</span>
-                            </button>
+                        </button>
                     </form>
                     <!-- Navbar links -->
                     <ul class="navbar-nav align-items-center  ml-md-auto ">
