@@ -66,11 +66,13 @@ class ScheduleController extends Controller
 
         $data['start'] = DateTime::createFromFormat('d/m/Y H:i', $data['start']);
         $data['end']   = DateTime::createFromFormat('d/m/Y H:i', $data['end']);
+        $data['participants']  = sanitizeString($data['participants']);
 
         $validator = Validator::make($data, [
             'title'   => ['required', 'string', 'max:40',],
             'start'   => ['required', 'date', 'before:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
             'end'     => ['required', 'date', 'after:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'participants' => ['required', 'max:6'],
         ], $messages);
       
 
@@ -90,18 +92,24 @@ class ScheduleController extends Controller
             $data['status'] = null;
         }
 
+        /**check if the place support the participants */
+        $placeCapacity = Place::findOrFail($data['place_id']);
 
-         /**
-          * Validate if the place is avaible
-          * to schedule
-          *
-          * LOGICS FOR VALIDATION
-          *
-          * Considero que já existe um conflito
-          * com um outro compromisso quando a data é a mesma,
-          * ou existe uma sobreposição
-          * de horário. 
-          */
+        $placeCapacity = $placeCapacity->capacity;
+
+        if((int) $data['participants'] > (int) $placeCapacity){
+            $error = Lang::get('This place support only ') .  $placeCapacity  . Lang::get(' peoples');
+            return redirect()
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
+        }
+
+        /**
+         * checks if the date entered
+         * is in the past
+         * 
+         */
 
         $now = date('Y-m-d H:i:s');
         $now = DateTime::createFromFormat('Y-m-d H:i:s', $now);
@@ -119,6 +127,18 @@ class ScheduleController extends Controller
 
             return redirect()->back()->with(['status' => Lang::get(' The schedule was saved in the history section')]);
         }
+
+        /**
+          * Validate if the place is avaible
+          * to schedule
+          *
+          * LOGICS FOR VALIDATION
+          *
+          * Considero que já existe um conflito
+          * com um outro compromisso quando a data é a mesma,
+          * ou existe uma sobreposição
+          * de horário. 
+          */
 
         $isReserved  = DB::select(
             "SELECT * FROM schedules WHERE place_id = ? AND deleted_at IS NULL AND (
@@ -143,16 +163,7 @@ class ScheduleController extends Controller
                     ->withErrors($error)
                     ->withInput();
         }
-
-        /**
-         * checks if the date entered
-         * is in the past
-         * 
-         */
-
-         /**something here that checks it */
-
-
+        
         $create  = Schedule::create($data);
 
         if(!$create){
@@ -247,6 +258,7 @@ class ScheduleController extends Controller
 
         $data['start'] = DateTime::createFromFormat('d/m/Y H:i', $data['start']);
         $data['end']   = DateTime::createFromFormat('d/m/Y H:i', $data['end']);
+        $data['participants']  = sanitizeString($data['participants']);
 
         $validator = Validator::make($data, [
             'title'   => ['required', 'string', 'max:40',],
@@ -272,6 +284,32 @@ class ScheduleController extends Controller
             $data['status'] = '1';
         }
 
+        /**check if the place support the participants */
+        $placeCapacity = Place::findOrFail($data['place_id']);
+
+        $placeCapacity = $placeCapacity->capacity;
+
+        if((int) $data['participants'] > (int) $placeCapacity){
+            $error = Lang::get('This place support only ') .  $placeCapacity  . Lang::get(' peoples');
+            return redirect()
+                    ->back()
+                    ->withErrors($error)
+                    ->withInput();
+        }
+
+        $now = date('Y-m-d H:i:s');
+        $now = DateTime::createFromFormat('Y-m-d H:i:s', $now);
+
+        if($data['start'] <= $now){
+        $error = Lang::get('This schedule cannot start with this start date');
+        return redirect()
+                ->back()
+                ->withErrors($error)
+                ->withInput();
+        }
+
+        $scheduleUpdate  = Schedule::findOrFail($id);
+
         /**
           * Validate if the place is avaible
           * to schedule
@@ -283,19 +321,6 @@ class ScheduleController extends Controller
           * ou existe uma sobreposição
           * de horário. 
           */
-
-          $now = date('Y-m-d H:i:s');
-          $now = DateTime::createFromFormat('Y-m-d H:i:s', $now);
-  
-          if($data['start'] <= $now){
-            $error = Lang::get('This schedule cannot start with this start date');
-            return redirect()
-                    ->back()
-                    ->withErrors($error)
-                    ->withInput();
-          }
-
-          $scheduleUpdate  = Schedule::findOrFail($id);
   
           $isReserved  = DB::select(
             "SELECT * FROM schedules WHERE place_id = ? AND deleted_at IS NULL AND created_at != ? AND (
@@ -319,16 +344,6 @@ class ScheduleController extends Controller
                     ->withErrors($error)
                     ->withInput();
         }
-
-
-        /**
-         * checks if the date entered
-         * is in the past
-         * 
-         */
-
-         /**something here that checks it */
-        
 
         $scheduleUpdate = $scheduleUpdate->update($data);
 

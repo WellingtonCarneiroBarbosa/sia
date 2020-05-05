@@ -100,6 +100,18 @@
                         </div>
                         <!-- fim local do agendamento -->
 
+                        <!-- quantidade de participantes do agendamento -->
+                        <div class="form-group focused">
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-users"></i></span>
+                                </div>
+
+                                <input type="text" title="{{ __("Fill this field") }}" placeholder="{{ __("Expected number of participants") }}" id="participants" name="participants" value="{{ $schedule->participants }}" class="form-control" required>
+                            </div>
+                        </div>
+                        <!-- fim da quantidade de participantes do agendamento -->
+
                         <!-- data inicial do agendamento -->
                         <div class="form-group focused">
                             <label for="start">{{ __("Start Datetime") }}</label>

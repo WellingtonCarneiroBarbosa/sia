@@ -74,6 +74,12 @@
                         <strong>{{ $schedule->schedulingPlace['name'] }}</strong>
                     </div>
 
+                    <!--participantes do evento-->
+                    <div class="form-group mb-3">
+                        <span>{{ __("Expected number of participants") }}:</span>
+                        <strong>{{ $schedule->participants }} {{ __("peoples") }} </strong> 
+                    </div>
+
                     <!-- datahora inicio -->
                     <div class="form-group mb-3">
                        <span>{{ __("Start") }}:</span>

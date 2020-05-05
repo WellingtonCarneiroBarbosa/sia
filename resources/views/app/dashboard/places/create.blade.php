@@ -255,7 +255,7 @@
         (function( $ ) {
             $(function() {
                 $("#capacity").maskNumber({thousands: '.', integer: true});
-                $("#size").maskNumber({ decimal: ',', thousands: '.', float: true, });
+                $("#size").maskNumber({ thousands: '.', integer: true, });
                 $("#howManyProjectors").mask('00');
                 $("#howManyBooths").mask('00');
             });

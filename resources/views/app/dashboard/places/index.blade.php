@@ -109,7 +109,7 @@
                                         <td>
                                             <span class="badge badge-dot mr-4">
 
-                                                {{ $place->size }} m<sup>2</sup>
+                                                {{ str_replace(',', '.', number_format($place->size)) }} m<sup>2</sup>
 
                                             </span>
                                         </td>
