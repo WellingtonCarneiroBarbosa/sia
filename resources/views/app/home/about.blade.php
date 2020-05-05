@@ -42,11 +42,11 @@
                 <div class="row align-items-center justify-content-center">
                   <div class="col-lg-6 text-center">
                     <h1 class="text-white display-1">SIA EVENTOS</h1>
-                    <h2 class="display-4 font-weight-normal text-white">Veja nosso video sobre o sistema!</h2>
+                    <h2 class="display-4 font-weight-normal text-white">Conheca mais sobre o nosso video sobre o sistema!</h2>
                     <div class="btn-wrapper mt-4">
-                      <a href="https://www.youtube.com/watch?v=8oELt_TkNe0&feature=youtu.be" class="btn btn-warning btn-icon mt-3 mb-sm-0">
+                      <a target="_blank" href="https://www.youtube.com/watch?v=8oELt_TkNe0&feature=youtu.be" class="btn btn-warning btn-icon mt-3 mb-sm-0">
                         <span class="btn-inner--icon"><i class="ni ni-button-play"></i></span>
-                        <span class="btn-inner--text">Assistir</span>
+                        <span class="btn-inner--text">Assista ao traler do sistema</span>
                       </a>
                     </div>
                   </div>
@@ -92,7 +92,7 @@
     </div>
               <div class="info info-horizontal info-hover-primary mt-5">
                 <div class="description pl-4">
-                  <h5 class="title">3</h5>
+                  <h5 class="title">Sobre</h5>
                   <p>33333333333333333</p>
                   <a href="#" class="text-info"></a>
                 </div>
