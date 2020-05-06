@@ -182,22 +182,35 @@ class PlaceController extends Controller
 
         $data['capacity'] = sanitizeString($data['capacity']);
 
-        $messages = ['unique' => Lang::get('There is already a registered place with this name')];
-
         $validator = Validator::make($data, [
-            'name'      => ['required', 'string', 'max:120', 'unique:places'],
+            'name'      => ['required', 'string', 'max:120'],
             'capacity'  => ['required', 'string', 'max:6', 'gt:0'],
             'size'  => ['required', 'string', 'max:18'],
             'howManyProjectors'  => ['max:2', 'required_with:hasProjector'],
             'howManyBooths'  => ['max:2', 'required_with:hasTranslationBooth'],
             'outletVoltage' => ['max:1', 'required', 'numeric'],
-        ], $messages);
+        ]);
 
         if($validator->fails()) {
             return redirect()
                         ->back()
                         ->withErrors($validator)
                         ->withInput();
+        }
+
+        $place = Place::findOrFail($id);
+
+        $hasAlreadyPlace = Place::where('name', $data['name'])->where('created_at', '!=', $place['created_at'])->get();
+
+        $hasAlreadyPlace = hasData($hasAlreadyPlace);
+
+        if($hasAlreadyPlace)
+        {
+            $error = Lang::get('There is already a registered place with this name');
+            return redirect()
+            ->back()
+            ->withErrors($error)
+            ->withInput();
         }
 
         /**manual validation */
@@ -218,14 +231,26 @@ class PlaceController extends Controller
         }
 
         if($request->hasProjector){
-            $data['hasProjector'] = true;
+            if( (int) $data['howManyProjectors'] === 0)
+            {
+                $data['hasProjector'] = null;
+                $data['howManyProjectors'] = null;
+            }else {
+                $data['hasProjector'] = true;
+            }
         }else {
             $data['hasProjector'] = null;
             $data['howManyProjectors'] = null;
         }
 
         if($request->hasTranslationBooth){
-            $data['hasTranslationBooth'] = true;
+            if( (int) $data['howManyBooths'] === 0)
+            {
+                $data['hasTranslationBooth'] = null;
+                $data['howManyBooths'] = null;
+            }else {
+                $data['hasTranslationBooth'] = true;
+            }
         }else {
             $data['hasTranslationBooth'] = null;
             $data['howManyBooths'] = null;
