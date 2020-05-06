@@ -1,5 +1,5 @@
 <center class="fadeInTransition">
-    <h1>{{ $message }}</h1>
+    <h3>{{ $message }}</h3>
     <div class="espaco"></div>
     <img style="width: 70%; " src="{{ asset('dashboard/assets/img/brand/team/image.jpg') }}" alt="{{ __("team") }}">
 </center>
