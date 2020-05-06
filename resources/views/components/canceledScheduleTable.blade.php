@@ -103,7 +103,6 @@
                                         <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("Edit") }}</a>
                                         <a class="dropdown-item" href="{{ route('schedules.confirm.cancel', ['id' => $schedule->id]) }}">{{ __("Cancel") }}</a>
                                         @endif
-                                        
                                     </div>
                                 </div>
                             </td>
@@ -118,9 +117,5 @@
     </div>
 </div>
 <div class="float-right">
-    @if(isset($data))
-        {{ $schedules->appends($data)->links() }}
-    @else
-        {{ $schedules->links() }}
-    @endif
+    {{ $schedules->links() }}
 </div>

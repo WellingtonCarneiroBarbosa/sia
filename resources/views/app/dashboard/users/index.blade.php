@@ -3,6 +3,9 @@
 @section('title', 'Usuários')
 
 @section('content')
+    <!-- alertas -->
+    @component('components.alert')@endcomponent
+
     <h1>Users</h1>
     @foreach($usuarios as $user)
     {{-- conteudo a ser impresso --}}

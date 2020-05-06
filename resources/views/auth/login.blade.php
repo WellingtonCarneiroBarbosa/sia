@@ -17,20 +17,8 @@
             <div class="col-lg-5">
                 <div class="card bg-secondary shadow border-0">
                     <div class="card-body px-lg-5 py-lg-5">
-                        @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> Ops...</strong>
-                                <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                                </ul>
-                            </span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        @endif
+                        <!-- alertas -->
+                        @component('components.alert')@endcomponent
                         <div class="text-center">
                             <h3>{{ __('Login') }}</h3>
                         </div>

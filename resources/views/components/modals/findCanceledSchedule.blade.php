@@ -29,7 +29,7 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade active show" id="form-intervalo-data" role="tabpanel" aria-labelledby="form-intervalo-data">
                                 <h3>{{ __("Search by date range") }}</h3>
-                                <form action="{{route('schedules.findPer.dateRange')}}" class="form-loader" method="POST">
+                                <form action="{{route('schedules.canceled.findPer.dateRange')}}" class="form-loader" method="POST">
                                     @csrf
                                     <div class="row">
                                         <div class="col-6">
@@ -65,7 +65,7 @@
                             </div>
                             <div class="tab-pane fade" id="form-data-local" role="tabpanel" aria-labelledby="form-data-local-tab">
                                 <h3>{{ __("Search by date and place") }}</h3>
-                                <form action="{{route('schedules.findPer.dateAndPlace')}}" class="form-loader" method="POST">
+                                <form action="{{route('schedules.canceled.findPer.dateAndPlace')}}" class="form-loader" method="POST">
                                     @csrf
                                     <div class="row">
                                         <div class="col-6">
@@ -130,7 +130,7 @@
                             </div>
                             <div class="tab-pane fade" id="form-unica-data" role="tabpanel" aria-labelledby="form-unica-data">
                                 <h3>{{ __("Search by single date") }}</h3>
-                                <form action="{{route('schedules.findPer.specificDate')}}" class="form-loader" method="POST">
+                                <form action="{{route('schedules.canceled.findPer.specificDate')}}" class="form-loader" method="POST">
                                     @csrf
                                     <div class="row">
                                         <div class="col-6">
