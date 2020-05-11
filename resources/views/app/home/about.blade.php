@@ -92,7 +92,7 @@
     <div class="info info-horizontal info-hover-primary mt-5">
       <div class="description pl-4">
         <h5 class="title">Cadastre quantos locais desejar!</h5>
-        <p>O nosso sistema deixa livre o cadastro de novos locais sempre de acordo com a sua necessidade! Tendo no total 7 locais ja cadastrados!</p>
+        <p>O nosso sistema deixa livre o cadastro de novos locais sempre de acordo com a sua necessidade! <p>Tendo no total 7 locais ja cadastrados!</p>
         <a href="#" class="text-info"></a>
     <div class="info info-horizontal info-hover-primary mt-5">
       <img class="description pl-4" src="{{asset('home/assets/img/brand/fotofinal.png')}}" width="50%" Heightwidth="50%"> 
