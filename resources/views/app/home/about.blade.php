@@ -46,7 +46,7 @@
                     <div class="btn-wrapper mt-4">
                       <a target="_blank" href="https://www.youtube.com/watch?v=8oELt_TkNe0&feature=youtu.be" class="btn btn-warning btn-icon mt-3 mb-sm-0">
                         <span class="btn-inner--icon"><i class="ni ni-button-play"></i></span>
-                        <span class="btn-inner--text">Assista ao traler do sistema</span>
+                        <span class="btn-inner--text">Assista ao Trailer do sistema</span>
                       </a>
                     </div>
                   </div>
@@ -89,22 +89,19 @@
           </div>
         </div>
       </div>
+    <div class="info info-horizontal info-hover-primary mt-5">
+      <div class="description pl-4">
+        <h5 class="title">Cadastre quantos locais desejar!</h5>
+        <p>O nosso sistema deixa livre o cadastro de novos locais sempre de acordo com a sua necessidade! Tendo no total 7 locais ja cadastrados!</p>
+        <a href="#" class="text-info"></a>
+    <div class="info info-horizontal info-hover-primary mt-5">
+      <img class="description pl-4" src="{{asset('home/assets/img/brand/fotofinal.png')}}" width="50%" Heightwidth="50%"> 
     </div>
-              <div class="info info-horizontal info-hover-primary mt-5">
-                <div class="description pl-4">
-                  <h5 class="title">Sobre</h5>
-                  <p>33333333333333333</p>
-                  <a href="#" class="text-info"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-10 mx-md-auto">
-              <img class="ml-lg-5" src="../assets/img/ill/ill.png" width="100%">
-            </div>
-          </div>
-        </div>
-      </div>
-
+  </div>
+</div>
+</div>
+</div>
+</div>
       <!--other section-->
       <div class="section features-1">
         <div class="container">
