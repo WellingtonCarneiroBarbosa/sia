@@ -31,7 +31,7 @@
             @if($hasPlaces)
                 @component('components.placeTable', ['places' => $places])@endcomponent
             @else
-                @component('components.noData', ['message' => Lang::get('We still have nothing to display. Click new and register an appointment')])@endcomponent
+                @component('components.noData', ['message' => Lang::get('We still have nothing to display. Click new and register a place')])@endcomponent
             @endif
         </div>
     </div>
