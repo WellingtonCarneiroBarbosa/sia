@@ -4,8 +4,9 @@
 
 @section('content')
 
-<!-- Header -->
+{{-- background --}}
 <div class="header bg-primary pb-6">
+    {{-- header --}}
     <div class="container-fluid">
         <div class="header-body">
             <div class="row align-items-center py-4">
@@ -17,14 +18,14 @@
                     <a onclick="comeBack()" class="btn btn-sm btn-neutral">{{ __("Come Back") }}</a>
                 </div>
             </div>
-            <!-- fim do header -->
         </div>
     </div>
+    {{-- fim do header --}}
 
-    <!-- alertas -->
+    {{-- alertas --}}
     @component('components.alert')@endcomponent
 
-        <!-- animacao de entrada -->
+        {{-- formulario --}}
         <div class="row justify-content-center fadeInTransition" >
             <div class="card col-6 bg-secondary shadow border-0">
                 <div class="card-body px-lg-10 py-lg-10">
@@ -36,18 +37,12 @@
                     </div>
                     <form method="POST" action="{{ route('schedules.store') }}" class="form-loader">
                         @csrf
-                        <!-- titulo do agendamento -->
-                        <div class="form-group mb-3">
-                            <div class="input-group input-group-alternative">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-tag"></i></span>
-                                </div>
-                                <input id="title" title="{{ __("Fill this field") }}"  placeholder="{{ __("Schedule title") }}" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autofocus> 
-                            </div>
-                        </div>
-                        <!-- fim do titulo do agendamento -->
+                        
+                        {{-- Título do agendamento --}}
+                        <x-input id="title" name="title" :value="old('title')" :placeholder="__('Schedule title')" :required="true" />
 
-                        <!-- local do agendamento -->
+
+                        {{-- Select de locais --}}
                         <div class="form-group mb-3">
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
@@ -71,45 +66,17 @@
                             </div>
                             @endif
                         </div>
-                        <!-- fim local do agendamento -->
                         
-                        <!-- quantidade de participantes do agendamento -->
-                        <div class="form-group focused">
-                            <div class="input-group input-group-alternative">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-users"></i></span>
-                                </div>
+                        {{-- participantes --}}
+                        <x-input icon="group" id="participants" name="participants" :value="old('participants')" :placeholder="__('Expected number of participants')" :required="true" />
 
-                                <input type="text" title="{{ __("Fill this field") }}" placeholder="{{ __("Expected number of participants") }}" id="participants" name="participants" value="{{ old("participants") }}" class="form-control" required>
-                            </div>
-                        </div>
-                        <!-- fim da quantidade de participantes do agendamento -->
+                        {{-- inicio do agendamento --}}
+                        <label for="start">{{ __("Start Datetime") }}</label>
+                        <x-input icon="date" class="datetime" id="start" name="start" :value="old('start')" :required="true" />
 
-                        <!-- data inicial do agendamento -->
-                        <div class="form-group focused">
-                            <label for="start">{{ __("Start Datetime") }}</label>
-                            <div class="input-group input-group-alternative">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                </div>
-                                <input title="{{ __("Fill this field") }}" placeholder="dd/mm/aaaa hh:mm" value="{{ old('start') }}"  id="start" type="text" class="form-control datetime" name="start" required> 
-
-
-                            </div>
-                        </div>
-                        <!-- fim da data inicial do agendamento -->
-
-                        <!-- data final do agendamento -->
-                        <div class="form-group focused">
-                            <label for="end">{{ __("End Datetime") }}</label>
-                            <div class="input-group input-group-alternative">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                </div>
-                                <input title="{{ __("Fill this field") }}" placeholder="dd/mm/aaaa hh:mm" value="{{ old('end') }}"  id="end" type="text" class="form-control datetime" name="end" required> 
-                            </div>
-                        </div>
-                        <!-- fim da data final do agendamento -->
+                        {{-- término do agendamento --}}
+                        <label for="end">{{ __("End Datetime") }}</label>
+                        <x-input icon="date" class="datetime" id="end" name="end" :value="old('end')" :required="true" />
 
                         <!-- cliente do agendamento -->
                         <div class="form-group mb-3">

@@ -40,8 +40,6 @@
         <div class="col-xl-12">
             @if($hasSchedules)
                 @component('components.scheduleTable', ['schedules' => $schedules, 'now' => $now])@endcomponent
-            @else
-                @component('components.noData', ['message' => Lang::get('We still have nothing to display. Go to schedules page and click in new to register an appoitment')])@endcomponent
             @endif
         </div>
     </div>

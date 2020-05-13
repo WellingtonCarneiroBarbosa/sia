@@ -26,45 +26,19 @@
                 </div>
                 <form method="POST" class="form-loader" action="{{ route('places.update', ['id' => $place->id]) }}">
                 @csrf
-                @method('put')
-                <!--nome do local-->
-                <div class="form-group focused">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-building"></i></span>
-                        </div>
+                @method('PUT')
 
-                        <input id="name" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Place") }}"  class="form-control " value="{{ $place->name }}" name="name" required>
-                    
-                    </div>
-                </div>
-                <!--fim do nome do local-->
+                {{-- nome do local --}}
+                <label for="name">{{ __("Place") }}</label>
+                <x-input icon="ni ni-building" id="name" name="name" :value="$place->name" :placeholder="__('Place')" :required="true" />
 
-                <!--lotação-->
-                <div class="form-group focused">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fa fa-users"></i></span>
-                        </div>
+                {{-- lotação --}}
+                <label for="capacity">{{ __("Capacity") }}</label>
+                <x-input icon="group" id="capacity" name="capacity" :value="str_replace(',', '.', number_format($place->capacity))" :placeholder="__('Capacity')" :required="true" />
 
-                        <input id="capacity" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Capacity") }}"  class="form-control " value="{{  str_replace(',', '.', number_format($place->capacity)) }}" name="capacity" required>
-                    
-                    </div>
-                </div>
-                <!--fim da lotação-->
-
-                <!--espaco em m2-->
-                <div class="form-group focused">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fa fa-vector-square"></i></span>
-                        </div>
-
-                        <input id="size" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Square meters") }}"  class="form-control " value="{{ str_replace(',', '.', number_format($place->size)) }}" name="size" required>
-                        
-                    </div>
-                </div>
-                <!--fim da espaco em m2-->
+                {{-- tamanho em m2 --}}
+                <label for="size">{{ __("Square meters") }}</label>
+                <x-input icon="fa fa-vector-square" id="size" name="size" :value="str_replace(',', '.', number_format($place->size))" :placeholder="__('Square meters')" :required="true" />
 
                 <div class="form-group">
                     <!--tensão-->
@@ -90,14 +64,8 @@
                 </div>
 
                 <div id="howManyProjectorsDiv" class="form-group" style="@if(!$place->hasProjector) display: none; @endif">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-building"></i></span>
-                        </div>
-
-                        <input id="howManyProjectors" type="text" title="{{ __("Fill this field") }}" placeholder="{{ __("How many projectors?") }}"  class="form-control" value="{{ $place->howManyProjectors }}" name="howManyProjectors">
-                    
-                    </div>
+                    <label for="howManyProjectors">{{ __('How many projectors?') }}</label>
+                    <x-input icon="ni ni-building" id="howManyProjectors" name="howManyProjectors" :value="$place->howManyProjectors" :placeholder="__('How many projectors?')" />
                 </div>
                 <!--fim do projetor-->
 
@@ -112,14 +80,8 @@
                 </div>
 
                 <div id="howManyBoothsDiv" class="form-group" style="@if(!$place->hasTranslationBooth) display: none; @endif">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-building"></i></span>
-                        </div>
-
-                        <input id="howManyBooths" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("How many booths?") }}" value="{{ $place->howManyBooths }}" class="form-control " name="howManyBooths">
-                    
-                    </div>
+                    <label for="howManyBooths">{{ __('How many booths?') }}</label>
+                    <x-input icon="ni ni-building" id="howManyBooths" name="howManyBooths" :value="$place->howManyBooths" :placeholder="__('How many booths?')"/>
                 </div>
                 <!--fim do cabines de tradução-->
 
@@ -233,16 +195,12 @@
                 
                 return $howManyBooths.hide();
             });
-
-            var sizeOriginal = $("#sizeOriginalDatabase").val();
-            sizeOriginal = sizeOriginal.replace('.', ',');
-            $("#size").val(sizeOriginal);
         });
 
         (function( $ ) {
             $(function() {
                 $("#capacity").maskNumber({thousands: '.', integer: true});
-                $("#size").maskNumber({ decimal: ',', thousands: '.', float: true, });
+                $("#size").maskNumber({ thousands: '.', integer: true, });
                 $("#howManyProjectors").mask('00');
                 $("#howManyBooths").mask('00');
             });

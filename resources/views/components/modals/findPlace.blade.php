@@ -16,26 +16,12 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-6">
-                                            <label for="">{{ __("From") }}</label>
-                                            <div class="form-group">
-                                                <div class="input-group mb-4">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                    </div>
-                                                    <input title="{{ __("Fill this field") }}" value="{{ old('start') }}" required name="start" placeholder="dd/mm/aaaa" class="form-control date" type="text">
-                                                </div>
-                                            </div>
+                                            <label for="startFindPerDateAndPlace">{{ __("From") }}</label>
+                                            <x-input id="startFindPerDateAndPlace" icon="date" name="start" class="date" :value="old('start')" :required="true" />
                                         </div>
                                         <div class="col-6">
-                                            <label for="">{{ __("To") }}</label>
-                                            <div class="form-group">
-                                                <div class="input-group mb-4">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                    </div>
-                                                    <input title="{{ __("Fill this field") }}" required value="{{ old('end') }}" name="end" class="form-control date" placeholder="dd/mm/aaaa" type="text">
-                                                </div>
-                                            </div>
+                                            <label for="endFindPerDateAndPlace">{{ __("To") }}</label>
+                                            <x-input id="endFindPerDateAndPlace" icon="date" name="end" class="date" :value="old('end')" :required="true" />
                                         </div>
                                     </div>
                                     <div class="row">

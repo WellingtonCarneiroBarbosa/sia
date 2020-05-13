@@ -36,16 +36,10 @@
                     <form method="POST" action="{{ route('schedules.update', ['id' => $schedule->id]) }}" class="form-loader">
                         @csrf
                         @method('PUT')
-                        <!-- titulo do agendamento -->
-                        <div class="form-group mb-3">
-                            <div class="input-group input-group-alternative">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-tag"></i></span>
-                                </div>
-                                <input value="{{ $schedule->title }}" id="title" title="{{ __("Fill this field") }}"  placeholder="{{ __("Schedule title") }}" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autofocus> 
-                            </div>
-                        </div>
-                        <!-- fim do titulo do agendamento -->
+
+                        {{-- Título do agendamento --}}
+                        <label for="title">{{ __("Schedule title") }}</label>
+                        <x-input id="title" name="title" :value="$schedule->title" :placeholder="__('Schedule title')" :required="true" />
 
                         <!-- local do agendamento -->
                         <div class="form-group mb-3">
@@ -79,44 +73,18 @@
                         </div>
                         <!-- fim local do agendamento -->
 
-                        <!-- quantidade de participantes do agendamento -->
-                        <div class="form-group focused">
-                            <div class="input-group input-group-alternative">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-users"></i></span>
-                                </div>
+                        {{-- participantes --}}
+                        <label for="participants">{{ __("Expected number of participants") }}</label>
+                        <x-input icon="group" id="participants" name="participants" :value="$schedule->participants" :placeholder="__('Expected number of participants')" :required="true" />
 
-                                <input type="text" title="{{ __("Fill this field") }}" placeholder="{{ __("Expected number of participants") }}" id="participants" name="participants" value="{{ $schedule->participants }}" class="form-control" required>
-                            </div>
-                        </div>
-                        <!-- fim da quantidade de participantes do agendamento -->
+                        {{-- inicio do agendamento --}}
+                        <label for="start">{{ __("Start Datetime") }}</label>
+                        <x-input icon="date" class="datetime" id="start" name="start" :value="$schedule->start" :required="true" />
 
-                        <!-- data inicial do agendamento -->
-                        <div class="form-group focused">
-                            <label for="start">{{ __("Start Datetime") }}</label>
-                            <div class="input-group input-group-alternative">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                </div>
+                        {{-- término do agendamento --}}
+                        <label for="end">{{ __("End Datetime") }}</label>
+                        <x-input icon="date" class="datetime" id="end" name="end" :value="$schedule->end" :required="true" />
 
-                                <input type="text" class="datetime form-control" id="start" name="start" placeholder="dd/mm/aaaa hh:mm" value="{{ dateTimeBrazilianFormat($schedule->start) }}" required>
-
-                            </div>
-                        </div>
-                        <!-- fim da data inicial do agendamento -->
-
-                        <!-- data final do agendamento -->
-                        <div class="form-group focused">
-                            <label for="date-final">{{ __("End Datetime") }}</label>
-                            <div class="input-group input-group-alternative">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                </div>
-
-                                <input type="text" class="datetime form-control" id="end" name="end" placeholder="dd/mm/aaaa hh:mm" value="{{ dateTimeBrazilianFormat($schedule->end) }}" required>
-                            </div>
-                        </div>
-                            <!-- fim da data final do agendamento -->
 
                         <!-- cliente do agendamento -->
                         <div class="form-group mb-3">
@@ -148,6 +116,7 @@
 
                         <!-- detalhes do agendamento -->
                         <div class="form-group mb-3">
+                            <label for="details">{{ __("Scheduling Details") }}</label>
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-align-left-2"></i></span>

@@ -28,44 +28,14 @@
                 <form method="POST" class="form-loader" action="{{ route('places.store') }}">
                 @csrf
 
-                <!--nome do local-->
-                <div class="form-group focused">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-building"></i></span>
-                        </div>
+                {{-- nome do local --}}
+                <x-input icon="ni ni-building" id="name" name="name" :value="old('name')" :placeholder="__('Place')" :required="true" />
 
-                        <input id="name" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Place") }}"  class="form-control " value="{{ old('name') }}" name="name" required>
-                    
-                    </div>
-                </div>
-                <!--fim do nome do local-->
+                {{-- lotação --}}
+                <x-input icon="group" id="capacity" name="capacity" :value="old('capacity')" :placeholder="__('Capacity')" :required="true" />
 
-                <!--lotação-->
-                <div class="form-group focused">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fa fa-users"></i></span>
-                        </div>
-
-                        <input id="capacity" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Capacity") }}"  class="form-control " name="capacity" value="{{ old('capacity') }}" required>
-                    
-                    </div>
-                </div>
-                <!--fim da lotação-->
-
-                <!--espaco em m2-->
-                <div class="form-group focused">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fa fa-vector-square"></i></span>
-                        </div>
-
-                        <input id="size" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Square meters") }}"  class="form-control " name="size" value="{{ old('size') }}" required>
-                        
-                    </div>
-                </div>
-                <!--fim da espaco em m2-->
+                {{-- tamanho em m2 --}}
+                <x-input icon="fa fa-vector-square" id="size" name="size" :value="old('size')" :placeholder="__('Square meters')" :required="true" />
 
                <div class="form-group">
                     <!--tensão-->
@@ -91,14 +61,8 @@
                 </div>
 
                 <div id="howManyProjectorsDiv" class="form-group" @if(old('hasProjector') != 'on') style="display: none" @endif>
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-building"></i></span>
-                        </div>
-
-                        <input id="howManyProjectors" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("How many projectors?") }}"  class="form-control " value="@if(old('hasProjector') == 'on') {{ old('howManyProjectors') }} @endif" name="howManyProjectors">
-                    
-                    </div>
+                    {{-- quantos projetores --}}
+                    <x-input icon="ni ni-building" id="howManyProjectors" name="howManyProjectors" :value="old('howManyProjectors')" :placeholder="__('How many projectors?')" />
                 </div>
                 <!--fim do projetor-->
 
@@ -113,14 +77,7 @@
                 </div>
 
                 <div id="howManyBoothsDiv" class="form-group" @if(old('hasTranslationBooth') != 'on') style="display: none;" @endif>
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-building"></i></span>
-                        </div>
-
-                        <input id="howManyBooths" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("How many booths?") }}"  class="form-control " value="@if(old('hasTranslationBooth') == 'on') {{ old('howManyBooths') }} @endif" name="howManyBooths">
-                    
-                    </div>
+                    <x-input icon="ni ni-building" id="howManyBooths" name="howManyBooths" :value="old('howManyBooths')" :placeholder="__('How many booths?')"/>
                 </div>
                 <!--fim do cabines de tradução-->
 
