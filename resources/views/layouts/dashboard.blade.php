@@ -81,16 +81,16 @@
                         <li class="nav-item">
                             <a class="nav-link {{request()->routeIs('places.index') ? 'active' : ''}}" href="{{ route('places.index') }}">
                                 <i class="fa fa-map text-primary"></i>
-                                <span title="{{ __(" Click to manage the places ") }}" class="nav-link-text">{{ __("Places") }}</span>
+                                <span title="{{ __("Click to manage the places") }}" class="nav-link-text">{{ __("Places") }}</span>
                             </a>
                         </li>
                         <!-- Fim Locais - left -->
 
                         <!--clientes - left -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customers.create') }}">
+                            <a class="nav-link {{request()->routeIs('customers.index') ? 'active' : ''}}" href="{{ route('customers.index') }}">
                                 <i class="ni ni-briefcase-24 text-primary"></i>
-                                <span title="{{ __(" Click to manage the customers ") }}" class="nav-link-text">{{ __("Register Customer") }}</span>
+                                <span title="{{ __("Click to manage the customers") }}" class="nav-link-text">{{ __("Customers") }}</span>
                             </a>
                         </li>
                         <!-- Fim clientes - left -->
@@ -98,7 +98,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('statistics') }}">
                                 <i class="fa fa-chart-line text-primary"></i>
-                                <span title="{{ __(" Click to go to the statistics ") }}" class="nav-link-text">{{ __("Statistics") }}</span>
+                                <span title="{{ __("Click to go to the statistics") }}" class="nav-link-text">{{ __("Statistics") }}</span>
                             </a>
                         </li>
                         @endif

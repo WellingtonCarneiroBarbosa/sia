@@ -119,7 +119,7 @@
     "New": "Novo",
     "Canceled": "Cancelados",
     "Filters": "Filtros",
-    "Schedule's Table": "Tabela de Agendamentos",
+    "Schedule's List": "Lista de Agendamentos",
     "Table": "Tabela",
     "Start Datetime": "Data-Hora Inicial",
     "End Datetime": "Data-Hora Final",
@@ -180,7 +180,7 @@
     "View more": "Ver mais",
     "Reschedule": "Reagendar",
     "Canceled Schedules": "Agendamentos Cancelados",
-    "Canceled Schedule's Table": "Tabela de Agendamentos Cancelados",
+    "Canceled Schedule's List": "Lista de Agendamentos Cancelados",
     "The end date and time must be after the start date and time": "A data e hora de término deve ser posterior à data e hora de início",
     "The start date and time must be before the end date and time": "A data e hora de início deve ser anterior à data e hora de término",
     "The date entered is not a valid date": "A data digitada não é uma data válida",
@@ -216,7 +216,7 @@
     "How many projectors?": "Quantos projetores?",
     "How many booths?": "Quantas cabines?",
     "Places": "Locais",
-    "Place's Table": "Tabela dos Locais",
+    "Place's List": "Lista de Locais",
     "peoples": "pessoas",
     "Size": "Tamanho em metro quadrado",
     "Update Place": "Editar Local",
@@ -268,5 +268,8 @@
     "We still have nothing to display. Click new and register an appointment": "Ainda não temos nada para exibir. Clique em novo e cadastre um agendamento",
     "We still have nothing to display. Click new and register a place": "Ainda não temos nada para exibir. Clique em novo e cadastre um local",
     "We still have nothing to display.": "Ainda não temos nada para exibir.",
-    "Dashboard": "Agendamentos"
+    "Dashboard": "Agendamentos",
+    "Customers": "Clientes",
+    "We still have nothing to display. Click new and register a customer": "Ainda não temos nada para exibir. Clique em novo e cadastre um cliente",
+    "Customer's List": "Lista de Clientes"
 }

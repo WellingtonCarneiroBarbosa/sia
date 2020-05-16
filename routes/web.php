@@ -226,12 +226,24 @@ Route::group(['middleware' => ['auth']], function () {
          */
         Route::group(['prefix' => 'customers'], function () {
 
+            Route::get('/', 'Customers\CustomerController@index')
+                                        ->name('customers.index');
+
             Route::get('/create', 'Customers\CustomerController@create')
 
                                               ->name('customers.create');
 
             Route::post('/store', 'Customers\CustomerController@store')
                                               ->name('customers.store');
+
+            Route::get('/show/{id}', 'Customers\CustomerController@show')
+                                                 ->name('customers.show');
+
+            Route::get('edit/{id}', 'Customers\CustomerController@edit')
+                                                ->name('customers.edit');
+
+            Route::get('confirm/delete/{id}', 'Customers\CustomerController@destroy')
+                                                   ->name('customers.confirm.delete');
                                               
         });
 

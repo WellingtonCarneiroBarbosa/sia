@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <!-- inicio cabecalho da tabela -->
             <div class="col">
-                <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Schedule's Table") }}</h5>
+                <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Schedule's List") }}</h5>
             </div>
             <div class="table-responsive">
                 <table class="table align-items-center table-dark table-flush">

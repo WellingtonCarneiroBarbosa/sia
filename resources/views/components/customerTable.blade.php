@@ -3,23 +3,21 @@
         <div class="row align-items-center">
             <!-- inicio cabecalho da tabela -->
             <div class="col">
-                <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Place's List") }}</h5>
+                <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Customer's List") }}</h5>
             </div>
             <div class="table-responsive">
                 <table class="table align-items-center table-dark table-flush">
                     <thead class="thead-dark">
                         <tr>
                             <!-- agendamento 01 -->
-                            <th scope="col" class="sort" data-sort="name">{{ __("Place") }}</th>
-                            <th scope="col" class="sort" data-sort="budget">{{ __("Capacity") }}</th>
-                            <th scope="col" class="sort" data-sort="status">{{ __("Size") }}</th>
+                            <th scope="col" class="sort" data-sort="name">{{ __("Corporation") }}</th>
                             <th scope="col" class="sort" data-sort="completion">{{ __("Actions") }}</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <!-- fim do cabeçalho da tabela -->
                     <tbody class="list">
-                        @foreach($places as $place)
+                        @foreach($customers as $customer)
                         <tr>
                             <td>
                                 <div class="media align-items-center">
@@ -29,28 +27,10 @@
 
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm">
-                                            {{ $place->name }}
+                                            {{ $customer->corporation }}
                                         </span>
                                     </div>
                                 </div>
-                            </td>
-
-                            <td>
-                                <div class="media align-items-center">
-                                    <div class="media-body">
-                                        <span class="name mb-0 text-sm">
-                                            {{  str_replace(',', '.', number_format($place->capacity)) }} {{ __("peoples")}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <span class="badge badge-dot mr-4">
-
-                                    {{ str_replace(',', '.', number_format($place->size)) }} m<sup>2</sup>
-
-                                </span>
                             </td>
 
                             <td>
@@ -59,9 +39,9 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
-                                        <a class="dropdown-item" href="{{ route('places.show', ['id' => $place->id]) }}">{{ __("View more") }}</a>
-                                        <a class="dropdown-item" href="{{ route('places.edit', ['id' => $place->id]) }}">{{ __("Edit") }}</a>
-                                        <a class="dropdown-item" href="{{ route('places.confirm.delete', ['id' => $place->id]) }}">{{ __("Delete") }}</a>
+                                        <a class="dropdown-item" href="{{ route('customers.show', ['id' => $customer->id]) }}">{{ __("View more") }}</a>
+                                        <a class="dropdown-item" href="{{ route('customers.edit', ['id' => $customer->id]) }}">{{ __("Edit") }}</a>
+                                        <a class="dropdown-item" href="{{ route('customers.confirm.delete', ['id' => $customer->id]) }}">{{ __("Delete") }}</a>
                                     </div>
                                 </div>
                             </td>
@@ -76,5 +56,5 @@
     </div>
 </div>
 <div class="float-right">
-    {{ $places->links() }}
+    {{ $customers->links() }}
 </div>

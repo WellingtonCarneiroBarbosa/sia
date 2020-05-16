@@ -16,7 +16,12 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::paginate(config('app.paginate_limit'));
+        $hasCustomers = hasData($customers);
+
+        return view('app.dashboard.customers.index', [
+            'customers' => $customers, 'hasCustomers' => $hasCustomers
+        ]);
     }
 
     /**
