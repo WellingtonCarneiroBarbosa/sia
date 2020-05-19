@@ -230,7 +230,6 @@ Route::group(['middleware' => ['auth']], function () {
                                         ->name('customers.index');
 
             Route::get('/create', 'Customers\CustomerController@create')
-
                                               ->name('customers.create');
 
             Route::post('/store', 'Customers\CustomerController@store')
@@ -265,6 +264,20 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/create', function () {
                 return 'ok';
             })->name('feedback.create');
+        });
+
+        /**
+         * Group for chat
+         * 
+         */
+        Route::group(['prefix' => 'chat'], function () {
+
+            Route::get('/', 'Chats\ChatController@index')
+                                     ->name('chat.index');
+
+            Route::get('/contacts', 'Chats\ChatController@fetchContacts');
+
+            Route::get('/conversation/{id}', 'Chats\ChatController@fetchMessages');
         });
 
         /***
