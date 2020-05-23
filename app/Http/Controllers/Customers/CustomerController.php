@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Customers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Customers\Customer;
 use Illuminate\Support\Facades\Lang;
+use App\Models\Customers\Customer;
+use App\Models\Schedules\Schedule;
 
 class CustomerController extends Controller
 {
@@ -73,7 +74,9 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+
+        return view('app.dashboard.customers.edit', ['customer' => $customer]);
     }
 
     /**
@@ -85,7 +88,31 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update = Customer::findOrFail($id)->update($request->all());
+
+        if(!$update)
+        {
+            return redirect()->back()->withInput()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+        }
+
+        return redirect()->back()->with(['status' => Lang::get('Updated Customer')]);
+    }
+
+    /**
+     * Confirm if really
+     * want destroy the
+     * customer :v 
+     * 
+     */
+    public function confirmDestroy($id){
+        $customer = Customer::findOrFail($id);
+
+        $howManySchedulesWithThisCustomer = Schedule::where('customer_id', $customer->id)->count();
+
+        return view('app.dashboard.customers.confirmDestroy', 
+        [
+            'customer' => $customer, 'howManySchedulesWithThisCustomer' => $howManySchedulesWithThisCustomer
+        ]);
     }
 
     /**
@@ -96,6 +123,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destroy = Customer::destroy($id);
+
+        return redirect()->route('customers.index')->with(['status' => Lang::get('Customer permanently deleted')]);
     }
 }

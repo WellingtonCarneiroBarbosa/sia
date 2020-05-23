@@ -241,8 +241,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{id}', 'Customers\CustomerController@edit')
                                                 ->name('customers.edit');
 
-            Route::get('confirm/delete/{id}', 'Customers\CustomerController@destroy')
-                                                   ->name('customers.confirm.delete');
+            Route::put('update/{id}', 'Customers\CustomerController@update')
+                                                  ->name('customers.update');
+
+            Route::get('confirm/delete/{id}', 'Customers\CustomerController@confirmDestroy')
+                                                          ->name('customers.confirm.delete');
+            Route::delete('delete/{id}', 'Customers\CustomerController@destroy')
+                                                     ->name('customers.destroy');
                                               
         });
 

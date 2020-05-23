@@ -236,7 +236,7 @@
     "There is already a registered place with this name": "Já há um local cadastrado com este nome",
     "Confirm Delete": "Confirmar Exclusão",
     "Do you really want to delete permanently this place": "Você realmente quer deletar permanentemente este local",
-    "No, go back to locations table": "Não, voltar para tabela de locais",
+    "No, go back to locations list": "Não, voltar para lista de locais",
     "This location will be": "Este local será",
     "deleted. Schedules that have this location will receive the location as": "excluído. Os agendamentos que possuem esse local receberão o local como",
     " undefined": " indefinido",
@@ -271,5 +271,14 @@
     "Dashboard": "Agendamentos",
     "Customers": "Clientes",
     "We still have nothing to display. Click new and register a customer": "Ainda não temos nada para exibir. Clique em novo e cadastre um cliente",
-    "Customer's List": "Lista de Clientes"
+    "Customer's List": "Lista de Clientes",
+    "Edit Customer": "Editar Cliente",
+    "Click to edit this costumer": "Clique para editar este cliente",
+    "Updated Customer": "Cliente Atualizado",
+    "No, go back to customers list": "Não, voltar para lista de clientes",
+    "Do you really want to delete permanently this customer": "Deseja realmente deletar permanentemente este cliente",
+    "This customer will be": "Este cliente será",
+    "deleted. Schedules that have this customer will receive the customer as": "excluído. Agendamentos que possuem este cliente receberão o cliente como",
+    " bookings with this customer": " agendamentos com este cliente",
+    "Customer permanently deleted": "Cliente excluído permanentemente"
 }

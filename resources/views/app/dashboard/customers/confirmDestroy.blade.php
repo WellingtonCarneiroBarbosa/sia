@@ -8,10 +8,10 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Do you really want to delete permanently this place") }}?</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Do you really want to delete permanently this customer") }}?</h6>
                 </div>
                 <div class="col-lg-6 col-5 text-right">
-                    <a onclick="comeBack();" class="btn btn-sm btn-neutral">{{ __("No, go back to locations list") }}</a>
+                    <a onclick="comeBack();" class="btn btn-sm btn-neutral">{{ __("No, go back to customers list") }}</a>
                 </div>
             </div>
         <!-- fim do header -->
@@ -31,21 +31,21 @@
                     <strong>
                         *
                         <span class="text-muted">
-                            {{ __("This location will be") }} <u class="text-danger"> {{  __(" permanently ") }}</u> {{ __("deleted. Schedules that have this location will receive the location as") }}
+                            {{ __("This customer will be") }} <u class="text-danger"> {{  __(" permanently ") }}</u> {{ __("deleted. Schedules that have this customer will receive the customer as") }}
                             <u class="text-danger">{{ __(" undefined") }}</u> {{ __("and will be moved to the appointment history section") }}.
                             <br>
                             <br>
-                            <u class="text-danger">{{ __("There are ") }} {{ $howManySchedulesAtThisPlace }} {{ __(" bookings at this location") }}</u>
+                            <u class="text-danger">{{ __("There are ") }} {{ $howManySchedulesWithThisCustomer }} {{ __(" bookings with this customer") }}</u>
                         </span>
                         *
                     </strong>
                 </div>
                 <hr>
                 <div class="text-left text-sm">
-                    @component('components.showPlaceBody', ['place' => $place])@endcomponent
+                    @component('components.showCustomerBody', ['customer' => $customer])@endcomponent
                 </div>
 
-                <form action="{{ route('places.delete', $place->id)}}" class="form-loader"  method="POST">
+                <form action="{{ route('customers.destroy', $customer->id)}}" class="form-loader"  method="POST">
                     @csrf
                     @method('DELETE')
                     <button onclick="comeBack();" type="button" class="btn btn-outline-success">{{ __("Come Back") }}</button>

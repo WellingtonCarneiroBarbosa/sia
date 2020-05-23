@@ -25,6 +25,7 @@
                         @foreach($schedules as $schedule)
                         <tr>
                             <td>
+                                @if($schedule->schedulingPlace['name'])
                                 <div class="media align-items-center">
                                     <a href="#" class="avatar avatar-md rounded-circle mr-3">
                                         <img alt="Image placeholder" src="https://via.placeholder.com/150">
@@ -32,14 +33,16 @@
 
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm">
-                                            @if($schedule->schedulingPlace['name'])
-                                                {{ $schedule->schedulingPlace['name'] }}
-                                            @else
-                                                {{ __("Undefined") }}
-                                            @endif
+                                    {{ $schedule->schedulingPlace['name'] }}
                                         </span>
                                     </div>
                                 </div>
+                                @else
+                                <span class="badge badge-dot mr-4">
+                                    <i class="bg-danger"></i>
+                                    <span class="status">{{ __("Undefined") }}</span>
+                                </span>
+                                @endif
                             </td>
 
                             <td>
@@ -81,6 +84,7 @@
                             </td>
 
                             <td>
+                                @if($schedule->customer)
                                 <div class="media align-items-center">
                                     <a href="#" class="avatar avatar-sm rounded-circle mr-3">
                                         <img alt="Image placeholder" src="https://via.placeholder.com/150">
@@ -90,6 +94,12 @@
                                         <span class="name mb-0 text-sm">{{ $schedule->schedulingCustomer['corporation'] }}</span>
                                     </div>
                                 </div>
+                                @else 
+                                <span class="badge badge-dot mr-4">
+                                    <i class="bg-danger"></i>
+                                    <span class="status">{{ __("Undefined") }}</span>
+                                </span>
+                                @endif
                             </td>
 
                             <td>
