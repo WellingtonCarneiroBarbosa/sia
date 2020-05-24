@@ -171,6 +171,32 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/', 'Users\SystemUserController@index')
                                           ->name('users.index');
 
+            Route::get('create', 'Users\SystemUserController@create')
+                                                    ->name('users.create');
+
+            Route::post('/store/{id}', 'Users\SystemUserController@store')
+                                                     ->name('users.store');
+            
+            Route::get('edit/{id}', 'Users\SystemUserController@edit')
+                                                  ->name('users.edit');
+
+            Route::put('update/{id}', 'Users\SystemUserController@update')
+                                                    ->name('users.update');
+
+            Route::get('/confirm-disable/{id}', 'Users\SystemUserController@confirmDestroy')
+                                                              ->name('users.confirmDestroy');
+            
+            Route::delete('/disable/{id}', 'Users\SystemUserController@destroy')
+                                                         ->name('users.destroy');
+
+            Route::get('/confirm-restore/{id}', 'Users\SystemUserController@confirmRestore')
+                                                              ->name('users.confirmRestore');
+
+            Route::put('/restore/{id}', 'Users\SystemUserController@restore')
+                                                      ->name('users.restore');
+
+            Route::get('show/{id}', 'User\SystemUserController@show')
+                                                 ->name('users.show');
 
             /***
              * Group for authenticated user

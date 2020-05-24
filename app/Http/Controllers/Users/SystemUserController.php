@@ -15,14 +15,15 @@ class SystemUserController extends Controller
      */
     public function index()
     {
-    	$user = User::get();
+        $users = User::where('id', '!=', auth()->user()->id)->paginate(config('app.paginate_limit'));
+        
+        $hasUsers = hasData($users);
+
     	return view('app.dashboard.users.index',
     	[
-    		'usuarios' => $user
+    		'users' => $users, 'hasUsers' => $hasUsers
     	]);
 
-    	//return 'parece que funcionou';
-    	//dd($user);
     }
 
     /**
@@ -81,6 +82,16 @@ class SystemUserController extends Controller
     }
 
     /**
+     * Confirm before disable
+     * a user
+     * 
+     */
+    public function confirmDestroy($id)
+    {
+        //
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -88,6 +99,23 @@ class SystemUserController extends Controller
      */
     public function destroy($id)
     {
+        //
+    }
+
+    /**
+     * Confirm before restore
+     * 
+     */
+    public function confirmRestore($id)
+    {
+        //
+    }
+
+    /**
+     * Restore a disabled user
+     * 
+     */
+    public function restore($id){
         //
     }
 }

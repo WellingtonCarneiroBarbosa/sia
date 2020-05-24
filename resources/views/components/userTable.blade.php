@@ -3,33 +3,33 @@
         <div class="row align-items-center">
             <!-- inicio cabecalho da tabela -->
             <div class="col">
-                <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Places List") }}</h5>
+                <h5 class="text-light text-uppercase ls-1 mb-1">{{ __("Users List") }}</h5>
             </div>
             <div class="table-responsive">
                 <table class="table align-items-center table-dark table-flush">
                     <thead class="thead-dark">
                         <tr>
                             <!-- agendamento 01 -->
-                            <th scope="col" class="sort" data-sort="name">{{ __("Place") }}</th>
-                            <th scope="col" class="sort" data-sort="budget">{{ __("Capacity") }}</th>
-                            <th scope="col" class="sort" data-sort="status">{{ __("Size") }}</th>
+                            <th scope="col" class="sort" data-sort="name">{{ __("Name") }}</th>
+                            <th scope="col" class="sort" data-sort="budget">{{ __("Email") }}</th>
+                            <th scope="col" class="sort" data-sort="status">{{ __("Status") }}</th>
                             <th scope="col" class="sort" data-sort="completion">{{ __("Actions") }}</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <!-- fim do cabeçalho da tabela -->
                     <tbody class="list">
-                        @foreach($places as $place)
+                        @foreach($users as $user)
                         <tr>
                             <td>
                                 <div class="media align-items-center">
                                     <a href="#" class="avatar avatar-md rounded-circle mr-3">
-                                        <img alt="Image placeholder" src="https://via.placeholder.com/150">
+                                        <img alt="Image User" src="https://via.placeholder.com/150">
                                     </a>
 
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm">
-                                            {{ $place->name }}
+                                            {{ $user->name }}
                                         </span>
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@
                                 <div class="media align-items-center">
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm">
-                                            {{  str_replace(',', '.', number_format($place->capacity)) }} {{ __("peoples")}}
+                                            {{ $user->email }}
                                         </span>
                                     </div>
                                 </div>
@@ -47,9 +47,17 @@
 
                             <td>
                                 <span class="badge badge-dot mr-4">
-
-                                    {{ str_replace(',', '.', number_format($place->size)) }} m<sup>2</sup>
-
+                                    @if($user->deleted_at)
+                                    <span class="badge badge-dot mr-4">
+                                        <i class="bg-danger"></i>
+                                        <span class="status">{{ ucfirst(__("disabled") )}}</span>
+                                    </span>
+                                    @else 
+                                    <span class="badge badge-dot mr-4">
+                                        <i class="bg-success"></i>
+                                        <span class="status">{{ ucfirst(__("activated")) }}</span>
+                                    </span>
+                                    @endif
                                 </span>
                             </td>
 
@@ -59,9 +67,13 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
-                                        <a class="dropdown-item" href="{{ route('places.show', ['id' => $place->id]) }}">{{ __("View more") }}</a>
-                                        <a class="dropdown-item" href="{{ route('places.edit', ['id' => $place->id]) }}">{{ __("Edit") }}</a>
-                                        <a class="dropdown-item" href="{{ route('places.confirm.delete', ['id' => $place->id]) }}">{{ __("Delete") }}</a>
+                                        <a class="dropdown-item" href="{{ route('users.show', ['id' => $user->id]) }}">{{ __("View more") }}</a>
+                                        <a class="dropdown-item" href="{{ route('users.edit', ['id' => $user->id]) }}">{{ __("Edit") }}</a>
+                                        @if($user->deleted_at)
+                                        <a class="dropdown-item" href="{{ route('users.confirmRestore', ['id' => $user->id]) }}">{{ __("Activate") }}</a>
+                                        @else 
+                                        <a class="dropdown-item" href="{{ route('users.confirmDestroy', ['id' => $user->id]) }}">{{ __("Disable") }}</a>
+                                        @endif
                                     </div>
                                 </div>
                             </td>
@@ -76,5 +88,5 @@
     </div>
 </div>
 <div class="float-right">
-    {{ $places->links() }}
+    {{ $users->links() }}
 </div>

@@ -216,7 +216,7 @@
     "How many projectors?": "Quantos projetores?",
     "How many booths?": "Quantas cabines?",
     "Places": "Locais",
-    "Place's List": "Lista de Locais",
+    "Places List": "Lista de Locais",
     "peoples": "pessoas",
     "Size": "Tamanho em metro quadrado",
     "Update Place": "Editar Local",
@@ -271,7 +271,7 @@
     "Dashboard": "Agendamentos",
     "Customers": "Clientes",
     "We still have nothing to display. Click new and register a customer": "Ainda não temos nada para exibir. Clique em novo e cadastre um cliente",
-    "Customer's List": "Lista de Clientes",
+    "Customers List": "Lista de Clientes",
     "Edit Customer": "Editar Cliente",
     "Click to edit this costumer": "Clique para editar este cliente",
     "Updated Customer": "Cliente Atualizado",
@@ -281,5 +281,13 @@
     "deleted. Schedules that have this customer will receive the customer as": "excluído. Agendamentos que possuem este cliente receberão o cliente como",
     " bookings with this customer": " agendamentos com este cliente",
     "Customer permanently deleted": "Cliente excluído permanentemente",
-    "View Customer": "Visualizar Cliente"
+    "View Customer": "Visualizar Cliente",
+    "Users List": "Lista de Usuários",
+    "It looks like you're already here. Click new and register as a user": "Parece que só temos você por aqui. Clique em novo e cadastre um usuário",
+    "Disabled": "Desativados",
+    "Users List": "Lista de Usuários",
+    "disabled": "desativado",
+    "activated": "ativado",
+    "Disable": "Desativar",
+    "Activate": "Ativar"
 }
