@@ -174,7 +174,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('create', 'Users\SystemUserController@create')
                                                     ->name('users.create');
 
-            Route::post('/store/{id}', 'Users\SystemUserController@store')
+            Route::post('/store', 'Users\SystemUserController@store')
                                                      ->name('users.store');
             
             Route::get('edit/{id}', 'Users\SystemUserController@edit')

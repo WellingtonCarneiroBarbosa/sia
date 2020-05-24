@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use Lang;
+use Illuminate\Support\Facades\Validator;
+use App\Rules\FullNameRule;
+use App\Rules\EmailDomainRule;
 
 class SystemUserController extends Controller
 {
@@ -34,7 +37,7 @@ class SystemUserController extends Controller
      */
     public function create()
     {
-        //
+        return view('app.dashboard.users.create');
     }
 
     /**
@@ -45,7 +48,57 @@ class SystemUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         /**
+         * Custom messages for 
+         * exceptions
+         * 
+         */
+        $messages  = [
+            'name' => Lang::get('O nome digitado é inválido. Digite o nome completo'),
+            'email'  => Lang::get('O email digitado é inválido. A extensão deve ser @fiepr.org.br')
+        ];
+
+        /**
+         * Validate request
+         * 
+         */
+        $data = $request->except('_token');
+
+        $validator = Validator::make($data, [
+            'name'   => ['required', 'string', 'max:255', new FullNameRule()],
+            'email'     => ['required', 'email', 'unique:users', new EmailDomainRule()],
+            'role_id' => ['required']
+        ], $messages);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        /**
+         * validate completed
+         * 
+         */
+
+        /**
+         * generate default password
+         *
+         */
+
+        $password = bcrypt("12345678");
+        $data['password'] = $password;
+
+        $create = User::create($data);
+
+        if(!$create)
+        {
+            return redirect()->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+        }
+
+        return redirect()->back()->with(['status' => Lang::get('Registered User')]);
     }
 
     /**

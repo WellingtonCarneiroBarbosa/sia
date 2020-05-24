@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', 'Cadastrar Local')
+@section('title', Lang::get('Register Place'))
 @section('content')
 <!-- Header -->
 <div class="header bg-primary pb-6">
