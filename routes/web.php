@@ -23,7 +23,7 @@ Route::get('/about', function (){
 })->name('home.about');
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/guest/{token}', function (Request $request){
     if (! $request->hasValidSignature()) {
@@ -175,7 +175,7 @@ Route::group(['middleware' => ['auth']], function () {
                                                     ->name('users.create');
 
             Route::post('/store', 'Users\SystemUserController@store')
-                                                     ->name('users.store');
+                                                ->name('users.store');
             
             Route::get('edit/{id}', 'Users\SystemUserController@edit')
                                                   ->name('users.edit');

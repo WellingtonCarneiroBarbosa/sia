@@ -68,11 +68,13 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
                                         <a class="dropdown-item" href="{{ route('users.show', ['id' => $user->id]) }}">{{ __("View more") }}</a>
-                                        <a class="dropdown-item" href="{{ route('users.edit', ['id' => $user->id]) }}">{{ __("Edit") }}</a>
-                                        @if($user->deleted_at)
-                                        <a class="dropdown-item" href="{{ route('users.confirmRestore', ['id' => $user->id]) }}">{{ __("Activate") }}</a>
-                                        @else 
-                                        <a class="dropdown-item" href="{{ route('users.confirmDestroy', ['id' => $user->id]) }}">{{ __("Disable") }}</a>
+                                        @if(auth()->user()->role_id == 5)
+                                            <a class="dropdown-item" href="{{ route('users.edit', ['id' => $user->id]) }}">{{ __("Edit") }}</a>
+                                            @if($user->deleted_at)
+                                            <a class="dropdown-item" href="{{ route('users.confirmRestore', ['id' => $user->id]) }}">{{ __("Activate") }}</a>
+                                            @else 
+                                            <a class="dropdown-item" href="{{ route('users.confirmDestroy', ['id' => $user->id]) }}">{{ __("Disable") }}</a>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>

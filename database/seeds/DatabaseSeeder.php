@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
 
-        factory(\App\User::class, 30)->create();
-        factory(\App\Models\Chats\Message::class, 10)->create();
+        //factory(\App\User::class, 30)->create();
+        //factory(\App\Models\Chats\Message::class, 10)->create();
     }
 }

@@ -69,7 +69,7 @@
                             </a>
                         </li>
                         <!-- Fim Agendamentos - left -->
-                        @if(auth()->user()->role_id == 5)
+
                         <!--Usuários - left -->
                         <li class="nav-item">
                             <a class="nav-link {{request()->routeIs('users.index') ? 'active' : ''}}" href="{{route('users.index')}}">
@@ -103,7 +103,6 @@
                                 <span title="{{ __("Click to go to the statistics") }}" class="nav-link-text">{{ __("Statistics") }}</span>
                             </a>
                         </li>
-                        @endif
 
                     </ul>
                 </div>

@@ -9,6 +9,8 @@ use Lang;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\FullNameRule;
 use App\Rules\EmailDomainRule;
+use Illuminate\Auth\Events\Verified;
+use App\Notifications\NewUserNotification;
 
 class SystemUserController extends Controller
 {
@@ -54,8 +56,7 @@ class SystemUserController extends Controller
          * 
          */
         $messages  = [
-            'name' => Lang::get('O nome digitado é inválido. Digite o nome completo'),
-            'email'  => Lang::get('O email digitado é inválido. A extensão deve ser @fiepr.org.br')
+            'unique' => Lang::get('This user has already been registered. Enter a different email')
         ];
 
         /**
@@ -66,7 +67,7 @@ class SystemUserController extends Controller
 
         $validator = Validator::make($data, [
             'name'   => ['required', 'string', 'max:255', new FullNameRule()],
-            'email'     => ['required', 'email', 'unique:users', new EmailDomainRule()],
+            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'role_id' => ['required']
         ], $messages);
       
@@ -77,11 +78,6 @@ class SystemUserController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-
-        /**
-         * validate completed
-         * 
-         */
 
         /**
          * generate default password
@@ -97,6 +93,8 @@ class SystemUserController extends Controller
         {
             return redirect()->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
         }
+
+        $sendEmailVerification = $create->sendEmailVerificationNotification();
 
         return redirect()->back()->with(['status' => Lang::get('Registered User')]);
     }

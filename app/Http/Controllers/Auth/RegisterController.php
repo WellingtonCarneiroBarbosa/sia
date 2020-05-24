@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\FullNameRule;
+use App\Rules\EmailDomainRule;
 
 class RegisterController extends Controller
 {
@@ -50,8 +52,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:255', new FullNameRule()],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', new EmailDomainRule()],
+            'role_id' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -67,7 +70,8 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'role_id' => $data['role_id'],
+            'password' => Hash::make("12345678"),
         ]);
     }
 }

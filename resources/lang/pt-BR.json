@@ -310,5 +310,8 @@
     "User": "Usuário",
     "Administrator": "Administrador",
     "The email domain must be @ fiepr.org.br": "O domínio do email deve ser @fiepr.org.br",
-    "Enter the full name of the new user": "Insira o nome completo do novo usuário"
+    "Enter the full name of the new user": "Insira o nome completo do novo usuário",
+    "This user has already been registered. Enter a different email": "Este usuário já foi cadastrado. Insira um email diferente",
+    "You are not authorized to access this page": "Você não tem autorização para acessar esta página"
+
 }
