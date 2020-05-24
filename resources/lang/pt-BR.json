@@ -297,5 +297,8 @@
     "Disabled User": "Usuário Desativado",
     "This user will be disabled. All data remains in the system, but the user will not be able to log in and make changes.": "Este usuário será desativado. Todos os dados permanecem no sistema, mas o usuário não poderá efetuar login e fazer alterações.",
     "Account verified": "Conta verificada",
-    "Verified account on": "Verificou conta em"
+    "Verified account on": "Verificou conta em",
+    "Do you really want to activate this user": "Deseja realmente ativar este usuário",
+    "This user will be activated. He can log in and make changes to the system.": "Este usuário será ativado. Ele poderá realizar login e alterações no sistema.",
+    "Activated User": "Usuário Ativado"
 }

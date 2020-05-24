@@ -111,9 +111,7 @@ class SystemUserController extends Controller
     public function destroy($id)
     {
 
-        $user = User::findOrFail($id);
-
-        $disable = $user->delete();
+        $disable = User::destroy($id);
 
         if(!$disable)
         {
@@ -130,7 +128,12 @@ class SystemUserController extends Controller
      */
     public function confirmRestore($id)
     {
-        //
+        $user = User::onlyTrashed()->findOrFail($id);
+
+        return view('app.dashboard.users.confirmRestore',
+        [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -138,6 +141,13 @@ class SystemUserController extends Controller
      * 
      */
     public function restore($id){
-        //
+        $activate = User::onlyTrashed()->restore($id);
+
+        if(!$activate)
+        {
+            return redirect()->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+        }
+
+        return redirect()->route('users.index')->with(['status' => Lang::get('Activated User')]);
     }
 }
