@@ -232,7 +232,7 @@
                                             @endif
                                         </span>
                                     <div class="media-body  ml-2  d-none d-lg-block">
-                                        <span class="mb-0 text-sm  font-weight-bold">{{auth()->user()->name}}</span>
+                                        <span class="mb-0 text-sm  font-weight-bold">{{ ucFirstNames(auth()->user()->name) }}</span>
                                     </div>
                                 </div>
                             </a>

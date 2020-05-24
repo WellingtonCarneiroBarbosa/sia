@@ -290,3 +290,9 @@
     function makeInteger($str){
         return (int) $str;
     }
+
+    function ucFirstNames($str)
+    {   
+        return mb_convert_case($str, MB_CASE_TITLE, 'UTF-8');
+    }
+   
