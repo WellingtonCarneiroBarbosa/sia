@@ -327,9 +327,7 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
-        $place = Place::findOrFail($id);
-
-        $delete = $place->delete();
+        $delete = Place::destroy($id);
 
         if(!$delete){
             $error = Lang::get('Something went wrong. Please try again!');

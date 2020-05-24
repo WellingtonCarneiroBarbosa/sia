@@ -33,7 +33,7 @@
 
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm">
-                                    {{ $schedule->schedulingPlace['name'] }}
+                                            {{ $schedule->schedulingPlace['name'] }}
                                         </span>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                             </td>
 
                             <td>
-                                @if($schedule->customer)
+                                @if($schedule->schedulingCustomer)
                                 <div class="media align-items-center">
                                     <a href="#" class="avatar avatar-sm rounded-circle mr-3">
                                         <img alt="Image placeholder" src="https://via.placeholder.com/150">
