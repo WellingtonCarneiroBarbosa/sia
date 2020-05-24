@@ -16,7 +16,7 @@ class SystemUserController extends Controller
      */
     public function index()
     {
-        $users = User::withTrashed()->where('id', '!=', auth()->user()->id)->paginate(config('app.paginate_limit'));
+        $users = User::withTrashed()->where('id', '!=', auth()->user()->id)->orderBy('name')->paginate(config('app.paginate_limit'));
         
         $hasUsers = hasData($users);
 
