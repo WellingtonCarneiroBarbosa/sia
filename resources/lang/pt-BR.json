@@ -280,5 +280,6 @@
     "This customer will be": "Este cliente será",
     "deleted. Schedules that have this customer will receive the customer as": "excluído. Agendamentos que possuem este cliente receberão o cliente como",
     " bookings with this customer": " agendamentos com este cliente",
-    "Customer permanently deleted": "Cliente excluído permanentemente"
+    "Customer permanently deleted": "Cliente excluído permanentemente",
+    "View Customer": "Visualizar Cliente"
 }
