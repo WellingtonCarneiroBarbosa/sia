@@ -7,7 +7,7 @@
 {{-- Nome --}}
 <div class="form-group mb-3">
     <span>{{ __("Name") }}:</span>
-    <strong>{{ $user->name }}</strong> 
+    <strong>{{ ucfirst($user->name) }}</strong> 
 </div>
 
 {{-- Email --}}

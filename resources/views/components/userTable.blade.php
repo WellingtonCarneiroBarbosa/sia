@@ -29,7 +29,7 @@
 
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm">
-                                            {{ $user->name }}
+                                            {{ ucfirst($user->name) }}
                                         </span>
                                     </div>
                                 </div>
