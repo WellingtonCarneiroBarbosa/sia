@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use Lang;
 
 class SystemUserController extends Controller
 {
@@ -15,7 +16,7 @@ class SystemUserController extends Controller
      */
     public function index()
     {
-        $users = User::where('id', '!=', auth()->user()->id)->paginate(config('app.paginate_limit'));
+        $users = User::withTrashed()->where('id', '!=', auth()->user()->id)->paginate(config('app.paginate_limit'));
         
         $hasUsers = hasData($users);
 
@@ -55,7 +56,12 @@ class SystemUserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::withTrashed()->findOrFail($id);
+
+        return view('app.dashboard.users.show',
+        [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -88,7 +94,12 @@ class SystemUserController extends Controller
      */
     public function confirmDestroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('app.dashboard.users.confirmDestroy',
+        [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -99,7 +110,18 @@ class SystemUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $user = User::findOrFail($id);
+
+        $disable = $user->delete();
+
+        if(!$disable)
+        {
+            return redirect()->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
+        }
+
+
+        return redirect()->route('users.index')->with(['status' => Lang::get('Disabled User')]);
     }
 
     /**

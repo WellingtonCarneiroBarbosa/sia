@@ -229,7 +229,7 @@
     "More details about the place": "Mais detalhes sobre o local",
     "Deleted at": "Deletado em",
     "Delete": "Deletar",
-    "Created at": "Criado em",
+    "Created at": "Cadastrado em",
     "Outlet voltage": "Tensão das tomadas",
     "More details about": "Mais detalhes sobre",
     "The size field must be greater than 5": "O campo tamanho deve ser maior que 5",
@@ -285,9 +285,17 @@
     "Users List": "Lista de Usuários",
     "It looks like you're already here. Click new and register as a user": "Parece que só temos você por aqui. Clique em novo e cadastre um usuário",
     "Disabled": "Desativados",
-    "Users List": "Lista de Usuários",
     "disabled": "desativado",
     "activated": "ativado",
     "Disable": "Desativar",
-    "Activate": "Ativar"
+    "Activate": "Ativar",
+    "View User": "Visualizar Usuário",
+    "Disabled at": "Desativado em",
+    "Joined on": "Entrou em",
+    "Do you really want to disable this user": "Você realmente deseja desativar este usuário",
+    "No, go back to users list": "Não, voltar para a lista de usuários",
+    "Disabled User": "Usuário Desativado",
+    "This user will be disabled. All data remains in the system, but the user will not be able to log in and make changes.": "Este usuário será desativado. Todos os dados permanecem no sistema, mas o usuário não poderá efetuar login e fazer alterações.",
+    "Account verified": "Conta verificada",
+    "Verified account on": "Verificou conta em"
 }

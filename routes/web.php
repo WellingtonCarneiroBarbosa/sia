@@ -195,8 +195,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('/restore/{id}', 'Users\SystemUserController@restore')
                                                       ->name('users.restore');
 
-            Route::get('show/{id}', 'User\SystemUserController@show')
-                                                 ->name('users.show');
+            Route::get('show/{id}', 'Users\SystemUserController@show')
+                                                  ->name('users.show');
 
             /***
              * Group for authenticated user
