@@ -1,4 +1,8 @@
-@extends('layouts.home') @section('title', 'Ative sua conta') @section('content')
+@extends('layouts.dashboard')
+
+@section('title', 'Ative sua conta')
+
+@section('content')
 <!-- Header -->
 <div class="header bg-primary pb-6">
     <div class="container">

@@ -39,23 +39,27 @@ Route::get('/guest/{token}', function (Request $request){
  */
 Route::get('dash/configs/lang/{locale}', 'LocalizationController@index')->name('config.language');
 
+Route::get('/teste', function (){
+    return "hm..";
+})->middleware('verified');
 /***
  * Start
  * Authenticated routes
  * 
  */
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
     /***
      * Start
      * Dashboard routes
      * 
      */
+    Route::get('/dash', 'HomeController@index')->name('home');
     Route::group(['prefix' => 'dash'], function () {
         /***
          * Route index of the dash
          * 
          */
-        Route::get('/', 'HomeController@index')->name('home');
+     
 
         /***
          * Group for schedules routes
@@ -172,10 +176,12 @@ Route::group(['middleware' => ['auth']], function () {
                                           ->name('users.index');
 
             Route::get('create', 'Users\SystemUserController@create')
-                                                    ->name('users.create');
+                                                ->name('users.create')
+                                                 ->middleware('admin'); 
 
             Route::post('/store', 'Users\SystemUserController@store')
-                                                ->name('users.store');
+                                                ->name('users.store')
+                                                ->middleware('admin');
             
             Route::get('edit/{id}', 'Users\SystemUserController@edit')
                                                   ->name('users.edit');
