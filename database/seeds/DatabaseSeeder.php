@@ -17,6 +17,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         factory(\App\User::class, 30)->create();
-        factory(\App\Models\Chats\Message::class, 10)->create();
+        factory(\App\Models\Chats\Message::class, 1000)->create();
     }
 }
