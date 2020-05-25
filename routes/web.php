@@ -53,13 +53,12 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
      * Dashboard routes
      * 
      */
-    Route::get('/dash', 'HomeController@index')->name('home');
     Route::group(['prefix' => 'dash'], function () {
         /***
          * Route index of the dash
          * 
          */
-     
+        Route::get('/', 'HomeController@index')->name('home');
 
         /***
          * Group for schedules routes
