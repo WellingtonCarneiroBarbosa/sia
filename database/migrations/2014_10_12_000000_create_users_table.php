@@ -18,8 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('profile_image')->default('http://via.placeholder.com/150');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('cpf', 11)->nullable();
+            $table->string('cep', 8)->nullable();
             $table->string('role_id', 1)->default('3');
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('profile_completed_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

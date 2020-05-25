@@ -47,7 +47,7 @@ Route::get('/teste', function (){
  * Authenticated routes
  * 
  */
-Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
+Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], function () {
     /***
      * Start
      * Dashboard routes
@@ -323,6 +323,8 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
         Route::get('/statistics', function (){
             return 'ok';
         })->name('statistics');
+
+       
     });
     /***
      * End
@@ -335,5 +337,24 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
  * Authenticated routes
  * 
  */
+
+/**
+ * Complete profile routes
+ * 
+ */
+ Route::group(['middleware' => ['web', 'auth', 'verified'], 'prefix' => 'complete-profile'], function () {
+
+    Route::get('/', 'Users\CompleteProfileController@index')
+                            ->name('complete.profile.index');
+
+    Route::get('stage-1', 'Users\CompleteProfileController@stageOne')
+                                  ->name('complete.profile.stageOne');
+
+    Route::get('stage-2', 'Users\CompleteProfileController@stageTwo')
+                                  ->name('complete.profile.stageTwo');
+
+    Route::get('stage-3', 'Users\CompleteProfileController@stageThree')
+                                  ->name('complete.profile.stageThree');
+ });
 
 

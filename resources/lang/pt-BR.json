@@ -312,6 +312,21 @@
     "The email domain must be @ fiepr.org.br": "O domínio do email deve ser @fiepr.org.br",
     "Enter the full name of the new user": "Insira o nome completo do novo usuário",
     "This user has already been registered. Enter a different email": "Este usuário já foi cadastrado. Insira um email diferente",
-    "You are not authorized to access this page": "Você não tem autorização para acessar esta página"
-
+    "You are not authorized to access this page": "Você não tem autorização para acessar esta página",
+    "Complete Register": "Completar Cadastro",
+    "Welcome to SIA Events.": "Seja bem-vindo ao SIA Eventos.",
+    "We're almost done, click the button below to complete your registration": "Estamos quase finalizando, clique no botão abaixo para completar seu cadastro",
+    "Stage 1": "Etapa 1",
+    "Go to stage 2": "Ir para etapa 2",
+    "Click to go to stage 2": "Clique para ir para etapa 2",
+    "Stage 2": "Etapa 2",
+    "Click to complete your register": "Clique para concluir seu cadastro",
+    "What is your CPF?": "Qual é seu CPF?",
+    "And your CEP?": "E seu CEP?",
+    "Choose your profile image": "Escolha sua imagem de perfil",
+    "Go to last stage": "Ir para última etapa",
+    "Click to go to last stage": "Clique para ir para a última etapa",
+    "Last stage": "Última etapa",
+    "Choose your password": "Escolha sua senha",
+    "Confirm your password": "Confirme sua senha"
 }
