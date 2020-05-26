@@ -26,16 +26,16 @@
                 <div class="text-center text-muted mb-4">
                     <small>{{ __("Fill in the details below to proceed") }}</small>
                 </div>
-                <form method="POST" class="form-loader" action="{{ route('users.store') }}">
+                <form method="POST" class="form-loader" action="{{ route('complete.profile.storeStageOne') }}">
                 @csrf
 
                 {{--  cpf do usuario --}}
                 <label for="cpf">{{ __('What is your CPF?') }}</label>
-                <x-input icon="ni ni-badge" id="cpf" name="cpf" :value="auth()->user()->cpf ?: old('cpf')" :required="true"/>
+                <x-input icon="ni ni-badge" id="cpf" name="cpf" :value="auth()->user()->cpf ?: old('cpf')" :required="false"/>
 
                 {{--  cep do usuario --}}
                 <label for="cep">{{ __("And your CEP?") }}</label>
-                <x-input icon="ni ni-map-big" id="cep" name="cep" :value="auth()->user()->cep ?: old('cep')" :required="true"/>
+                <x-input icon="ni ni-map-big" id="cep" name="cep" :value="auth()->user()->cep ?: old('cep')" :required="false"/>
 
                 
                 <!-- submit button -->

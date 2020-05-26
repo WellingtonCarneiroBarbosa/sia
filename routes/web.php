@@ -355,6 +355,18 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
 
     Route::get('stage-3', 'Users\CompleteProfileController@stageThree')
                                   ->name('complete.profile.stageThree');
+
+
+    Route::group(['prefix' => 'store'], function () {
+        Route::post('/stage-1', 'Users\CompleteProfileController@storeStageOne')
+                                        ->name('complete.profile.storeStageOne');
+
+        Route::post('/stage-2', 'Users\CompleteProfileController@storeStageTwo')
+                                        ->name('complete.profile.storeStageTwo');
+
+        Route::post('/stage-3', 'Users\CompleteProfileController@storeStageThree')
+                                        ->name('complete.profile.storeStageThree');
+    });
  });
 
 

@@ -26,4 +26,19 @@ class CompleteProfileController extends Controller
     {
         return view('auth.complete-profile.stageThree');
     }
+
+    public function storeStageOne(Request $request)
+    {
+        return redirect()->route('complete.profile.stageTwo');
+    }
+
+    public function storeStageTwo(Request $request)
+    {
+        return redirect()->route('complete.profile.stageThree');
+    }
+
+    public function storeStageThree(Request $request)
+    {
+        return "uau, vc concluiu seu perfil, aqui vai aparecer uma mensagem bonitinha, prometo";
+    }
 }

@@ -27,19 +27,19 @@
                 <div class="text-center text-muted mb-4">
                     <small>{{ __("Fill in the details below to proceed") }}</small>
                 </div>
-                <form method="POST" class="form-loader" action="{{ route('users.store') }}">
+                <form method="POST" class="form-loader" action="{{ route('complete.profile.storeStageThree') }}">
                 @csrf
 
               
                 {{-- User passs --}}
                 <div class="form-group">
                     <label for="password">{{ __("Choose your password") }}</label>
-                    <x-input icon="fa fa-lock" id="password" name="password" type="password" :required="true" />
+                    <x-input icon="fa fa-lock" id="password" name="password" type="password" :required="false" />
                 </div>
 
                 <div class="form-group">
                     <label for="confirm-password">{{ __("Confirm your password") }}</label>
-                    <x-input icon="fa fa-lock" id="confirm-password" name="confirm-password" type="password" :required="true" />
+                    <x-input icon="fa fa-lock" id="confirm-password" name="confirm-password" type="password" :required="false" />
                 </div>
 
                 <div class="float-right">

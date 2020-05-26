@@ -9,18 +9,19 @@
     @component('components.progressBar', ['progress' => '0'])@endcomponent
     <div class="container-fluid">
         <div class="header-body">
-            <div class="espaco"></div>
             <!-- alertas -->
             @component('components.alert')@endcomponent
 
             <div class="row">
                 <div class="col-xl-12">
                     <center class="fadeInTransition">
-                        <h2>
+                        <hr>
+                        <span class="text-white h2">
                             {{ __("Welcome to SIA Events.") }}
                             <br>
                             {{ __("We're almost done, click the button below to complete your registration") }}
-                        </h2>
+                        </span>
+                        <hr>
                         <div class="espacol"></div>
                         <a href="{{ route('complete.profile.stageOne') }}">
                             <button class="btn btn-secondary">{{ __("Complete Register") }}</button>
