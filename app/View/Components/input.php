@@ -17,6 +17,7 @@ class input extends Component
     {
         $this->icon = $icon;
     }
+    
     /**
      * Get the view / contents that represent the component.
      *
