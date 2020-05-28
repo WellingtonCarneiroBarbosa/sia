@@ -162,6 +162,17 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
                                                        ->name('schedules.findPer.specificDate');
                 });
             });
+
+            /**
+             * Routes for historic schedules
+             * 
+             */
+            Route::group(['prefix' => 'historic'], function () {
+                
+                Route::get('/', 'Schedules\HistoricController@index')
+                                   ->name('schedules.historic.index');
+
+            });
             //
         });
 

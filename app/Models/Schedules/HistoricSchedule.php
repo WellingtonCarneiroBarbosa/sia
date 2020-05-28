@@ -19,8 +19,8 @@ class HistoricSchedule extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'place_id', 'start', 'end', 'customer_id', 'details',
-        'status',
+        'title', 'place_id', 'participants', 'start',
+        'end', 'customer_id', 'details', 'status',
     ];
 
     /***

@@ -42,6 +42,7 @@
                         <x-input id="title" name="title" :value="old('title')" :placeholder="__('Schedule title')" :required="true" />
 
 
+
                         {{-- Select de locais --}}
                         <div class="form-group mb-3">
                             <div class="input-group input-group-alternative">

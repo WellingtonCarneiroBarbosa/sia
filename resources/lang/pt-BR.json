@@ -333,5 +333,8 @@
     "Go back to system": "Voltar para o sistema",
     "Welcome to application manual.": "Bem-vindo ao manual da aplicação.",
     "Use the left menu to find what you need": "Use o menu esquerdo para encontrar o que você precisa",
-    "How to register a schedule": "Como cadastrar um agendamento"
+    "How to register a schedule": "Como cadastrar um agendamento",
+    "Historic Schedules": "Histórico de Agendamentos",
+    "We still have nothing to display. Here, expired and invalid schedules will be displayed": "Ainda não temos nada para mostrar. Aqui, os agendamentos expirados e inválidos serão exibidos",
+    "Go back to schedule's list": "Voltar para a lista de agendamentos"
 }

@@ -18,6 +18,7 @@ class CreateHistoricSchedulesTable extends Migration
             $table->string('title', 40);
             $table->unsignedTinyInteger('place_id')->nullable();
             $table->foreign('place_id')->references('id')->on('places')->onUpdate('cascade')->onDelete('set null');
+            $table->string('participants', 6);
             $table->timestamp('start')->nullable();
             $table->timestamp('end')->nullable();
             $table->foreignId('customer_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');

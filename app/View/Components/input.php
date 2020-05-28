@@ -6,7 +6,6 @@ use Illuminate\View\Component;
 
 class input extends Component
 {
-
     public $icon;
 
     /**
@@ -18,7 +17,6 @@ class input extends Component
     {
         $this->icon = $icon;
     }
-
     /**
      * Get the view / contents that represent the component.
      *
