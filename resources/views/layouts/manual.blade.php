@@ -60,50 +60,42 @@
                 <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                     <!-- Nav items -->
                     <ul class="navbar-nav">
-
-                        <!--Agendamentos - left -->
+                        {{-- Go back to system --}}
                         <li class="nav-item">
-                            <a class="nav-link {{request()->routeIs('home') ? 'active' : ''}}" href="{{route('home')}}">
+                            <a href="{{ route('home') }}" class="nav-link">
+                                <i class="fa fa-arrow-left text-primary"></i>
+                                {{ __("Go back to system") }}
+                            </a>
+                        </li>
+
+                        {{-- Manual for schedules --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-calendar text-primary"></i>
-                                <span title="{{ __(" Click to manage the appointments ") }}" class="nav-link-text">{{ __("Schedules") }}</span>
+                                {{ __("Schedules") }}
                             </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('manual.schedules.create') }}">{{ __("How to register a schedule") }}?</a>
+                                <a class="dropdown-item" href="#">Como editar um agendamento?</a>
+                                <a class="dropdown-item" href="#">Como cancelar um agendamento?</a>
+                            </div>
                         </li>
-                        <!-- Fim Agendamentos - left -->
+                        {{-- End Manual for schedules --}}
 
-                        <!--Usuários - left -->
-                        <li class="nav-item">
-                            <a class="nav-link {{request()->routeIs('users.index') ? 'active' : ''}}" href="{{route('users.index')}}">
-                                <i class="ni ni-circle-08 text-primary"></i>
-                                <span title="{{ __(" Click to manage the users ") }}" class="nav-link-text">{{ __("Users") }}</span>
+                         {{-- Manual for schedules --}}
+                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-calendar text-primary"></i>
+                                {{ __("Schedules") }}
                             </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('manual.schedules.create') }}">{{ __("How to register a schedule") }}?</a>
+                                <a class="dropdown-item" href="#">Como editar um agendamento?</a>
+                                <a class="dropdown-item" href="#">Como cancelar um agendamento?</a>
+                            </div>
                         </li>
-                        <!-- Fim Usuários - left -->
-
-                        <!--Locais - left -->
-                        <li class="nav-item">
-                            <a class="nav-link {{request()->routeIs('places.index') ? 'active' : ''}}" href="{{ route('places.index') }}">
-                                <i class="fa fa-map text-primary"></i>
-                                <span title="{{ __("Click to manage the places") }}" class="nav-link-text">{{ __("Places") }}</span>
-                            </a>
-                        </li>
-                        <!-- Fim Locais - left -->
-
-                        <!--clientes - left -->
-                        <li class="nav-item">
-                            <a class="nav-link {{request()->routeIs('customers.index') ? 'active' : ''}}" href="{{ route('customers.index') }}">
-                                <i class="ni ni-briefcase-24 text-primary"></i>
-                                <span title="{{ __("Click to manage the customers") }}" class="nav-link-text">{{ __("Customers") }}</span>
-                            </a>
-                        </li>
-                        <!-- Fim clientes - left -->
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('statistics') }}">
-                                <i class="fa fa-chart-line text-primary"></i>
-                                <span title="{{ __("Click to go to the statistics") }}" class="nav-link-text">{{ __("Statistics") }}</span>
-                            </a>
-                        </li>
-
+                        {{-- End Manual for schedules --}}
+                        
                     </ul>
                 </div>
             </div>

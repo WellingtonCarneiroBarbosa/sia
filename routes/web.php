@@ -47,7 +47,7 @@ Route::get('/teste', function (){
  * Authenticated routes
  * 
  */
-Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], function () {
+Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
     /***
      * Start
      * Dashboard routes
@@ -323,6 +323,32 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
         Route::get('/statistics', function (){
             return 'ok';
         })->name('statistics');
+
+        /**
+         * Manual Routes
+         * 
+         */
+        Route::group(['prefix' => 'manual'], function () {
+
+            Route::get('/', 'Manual\ManualController@index')
+                                      ->name('manual.index');
+                                      
+            /**
+             * Schedules manual
+             * 
+             */
+            Route::group(['prefix' => 'schedules'], function () {
+
+                Route::get('/create',  'Manual\ManualController@schedulesCreate')
+                                                ->name('manual.schedules.create'); 
+                                                
+            });
+
+            Route::group(['prefix' => 'places'], function () {
+                Route::get('/create',  'Manual\ManualController@schedulesCreate')
+                                                ->name('manual.places.create'); 
+            });
+        });
 
        
     });
