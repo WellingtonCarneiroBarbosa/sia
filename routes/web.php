@@ -334,9 +334,9 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
          * Statistics route
          * 
          */
-        Route::get('/statistics', function (){
-            return 'ok';
-        })->name('statistics');
+        Route::get('/statistics', 'Statistics\StatisticController@index')
+                                                     ->name('statistics')
+                                                    ->middleware('admin');
 
         /**
          * Manual Routes
