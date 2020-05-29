@@ -114,13 +114,10 @@
     </strong>
 </div>
 
- <!-- criado em -->
- @if ($place->created_at)
-    <div class="form-group mb-3">
-        <span>{{ __("Created at") }}:</span>
-        <strong>{{dateBrazilianFormat($place->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($place->created_at) }}</strong>
-    </div>
-@endif
+<div class="form-group mb-3">
+    <span>{{ __("Created at") }}:</span>
+    <strong>{{dateBrazilianFormat($place->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($place->created_at) }}</strong>
+</div>
 
 <!-- editado em -->
 @if ($place->created_at != $place->updated_at)

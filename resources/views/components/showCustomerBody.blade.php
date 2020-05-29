@@ -10,13 +10,10 @@
     <strong>{{ $customer->corporation }}</strong> 
 </div>
 
- <!-- criado em -->
- @if ($customer->created_at)
-    <div class="form-group mb-3">
-        <span>{{ __("Joined on") }}:</span>
-        <strong>{{dateBrazilianFormat($customer->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($customer->created_at) }}</strong>
-    </div>
-@endif
+<div class="form-group mb-3">
+    <span>{{ __("Joined on") }}:</span>
+    <strong>{{dateBrazilianFormat($customer->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($customer->created_at) }}</strong>
+</div>
 
 <!-- editado em -->
 @if ($customer->created_at != $customer->updated_at)

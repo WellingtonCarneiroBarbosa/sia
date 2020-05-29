@@ -34,6 +34,12 @@
             <span aria-hidden="true">×</span>
         </button>
     </div>
+
+    <div class="espaco"></div>
+    <div class="espaco"></div>
+    <center>
+        <img style="width: 70%; " src="{{ asset('dashboard/assets/img/brand/team/semdados.png') }}" alt="{{ __("team") }}">
+    </center>
     @endif
 
     <div class="row">
