@@ -6,22 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Schedules\Schedule;
+use ArrayObject;
 
 class StatisticController extends Controller
 {
-    public function howManySchedulesInAMouth($month)
-    {
-        $schedules = Schedule::whereMonth('created_at', $month)->count();
-        return $schedules;
-    }
-
-    public function howManyCanceledSchedulesInAMouth($month)
-    {
-        $schedules = Schedule::onlyTrashed()->whereMonth('deleted_at', $month)->count();
-        return $schedules;
-    }
-    
-
     public function index()
     {
         /**
@@ -38,7 +26,6 @@ class StatisticController extends Controller
          * 
          */
         $actualyMonth       = $now->month;
-        $actualyMonthName   = utf8_encode($now->formatLocalized('%B'));
 
         /**
          * Last Month
@@ -59,7 +46,145 @@ class StatisticController extends Controller
 
         $howManyCanceledSchedulesAtLastMonth = static::howManyCanceledSchedulesInAMouth($lastMonth);
 
+        /**
+         * Get percentage Statistics
+         * 
+         */
+        $canceledStatistics  = static::getCanceledSchedulesStatistics($howManyCanceledSchedulesAtThisMonth, $howManyCanceledSchedulesAtLastMonth);
 
-        return view('app.dashboard.statistics.index');
+        $schedulesStatistics = static::getSchedulesStatistics($howManySchedulesAtThisMonth, $howManySchedulesAtLastMonth);
+
+        /**
+         * Data for views
+         * 
+         */
+        $goodCanceledStatistic = $canceledStatistics[0];
+
+        $goodConfirmedStatistic = $schedulesStatistics[0];
+
+        $canceledStatistic     = $canceledStatistics[1];
+
+        $confirmedStatistic    = $schedulesStatistics[1];
+        
+        return view('app.dashboard.statistics.index', [
+            'lastMonth'              => $lastMonthName, 
+            'canceledStatistic'      => $canceledStatistic,      'confirmedStatistic'    => $confirmedStatistic,
+            'goodConfirmedStatistic' => $goodConfirmedStatistic, 'goodCanceledStatistic' => $goodCanceledStatistic,
+            'howManyNewSchedules'    => $howManySchedulesAtThisMonth, 'howManyCanceledSchedules' => $howManyCanceledSchedulesAtThisMonth
+        ]);
+    }
+
+    /**
+     * Returns countable object
+     * 
+     */
+    public function howManySchedulesInAMouth($month)
+    {
+        $schedules = Schedule::whereMonth('created_at', $month)->count();
+        return $schedules;
+    }
+
+    /**
+     * Returns coutable object
+     * 
+     */
+    public function howManyCanceledSchedulesInAMouth($month)
+    {
+        $schedules = Schedule::onlyTrashed()->whereMonth('deleted_at', $month)->count();
+        return $schedules;
+    }
+
+    /**
+     * Returns array
+     * 
+     * [0] => positive stat? 
+     * [1] => percentage number
+     * 
+     */ 
+    public function getCanceledSchedulesStatistics($actualyMonth, $lastMonth){
+        $statistics = new ArrayObject();
+
+        if($actualyMonth > 0 && $lastMonth > 0)
+        {
+            if($actualyMonth > $lastMonth)
+            {
+                $percentage = positivePercentageChange($actualyMonth, $lastMonth);
+
+                $statistics->append(false);
+                $statistics->append($percentage);
+
+                return $statistics;
+            }
+            else if($lastMonth > $actualyMonth)
+            {
+                $percentage = negativePercentageChange($lastMonth, $actualyMonth);
+
+                $statistics->append(true);
+                $statistics->append($percentage);
+
+                return $statistics;
+            }
+        }
+        else if($actualyMonth > 0 && $lastMonth <= 0)
+        {
+            $percentage = percentageForm($actualyMonth);
+
+            $statistics->append(false);
+            $statistics->append($percentage);
+
+            return $statistics;
+        }
+
+        $statistics->append(null);
+        $statistics->append(0);
+
+        return $statistics;
+    }
+           
+    /**
+     * Returns array
+     * 
+     * [0] => positive stat? 
+     * [1] => percentage number
+     * 
+     */ 
+    public function getSchedulesStatistics($actualyMonth, $lastMonth){
+        $statistics = new ArrayObject();
+
+        if($actualyMonth > 0 && $lastMonth > 0)
+        {
+            if($actualyMonth > $lastMonth)
+            {
+                $percentage = positivePercentageChange($actualyMonth, $lastMonth);
+
+                $statistics->append(true);
+                $statistics->append($percentage);
+
+                return $statistics;
+            }
+            else if($lastMonth > $actualyMonth)
+            {
+                $percentage = negativePercentageChange($lastMonth, $actualyMonth);
+
+                $statistics->append(false);
+                $statistics->append($percentage);
+
+                return $statistics;
+            }
+        }
+        else if($actualyMonth > 0 && $lastMonth <= 0)
+        {
+            $percentage = percentageForm($actualyMonth);
+
+            $statistics->append(true);
+            $statistics->append($percentage);
+
+            return $statistics;
+        }
+
+        $statistics->append(null);
+        $statistics->append(0);
+
+        return $statistics;
     }
 }
