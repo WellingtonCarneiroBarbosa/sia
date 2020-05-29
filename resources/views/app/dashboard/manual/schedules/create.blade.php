@@ -29,7 +29,7 @@
                             </ol>
                             <div class="carousel-inner">
                                 
-                                {{-- Item 01 --}}
+                                {{-- Item 01 ta dando certo--}}
                                 <div class="carousel-item active">
                                     <img class="d-block w-50" src="http://via.placeholder.com/150" alt="First slide">
                                     <div class="carousel-caption d-none d-md-block">
@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
 
-                                {{-- Item 02 --}}
+                                {{-- Item 02 ta dando certo--}}
                                 <div class="carousel-item">
                                     <img class="d-block w-50" src="http://via.placeholder.com/150" alt="Second slide">
                                     <div class="carousel-caption d-none d-md-block">
@@ -46,12 +46,21 @@
                                         <p>Apenas 1 texto</p>
                                     </div>
                                 </div>
-
-                                {{-- Item 03 --}}
+                                
+                                {{-- Item 03 >:( a original n mostra--}}
                                 <div class="carousel-item">
                                     <img class="d-block w-50" src="{{ asset('manual/schedules/create/passo01.jpg') }}" alt="Third slide">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Passo 03</h5>
+                                        <p>Apenas 1 texto</p>
+                                    </div>
+                                </div>
+
+                                {{-- Item 04 pq ta dando erro >:(--}}
+                                <div class="carousel-item">
+                                    <img class="d-block w-50" src="{{ asset('manual/schedules/create/passo02.jpg') }}" alt="Fourth slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Passo 04</h5>
                                         <p>Apenas 1 texto</p>
                                     </div>
                                 </div>

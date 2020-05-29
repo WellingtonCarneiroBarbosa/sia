@@ -1,4 +1,3 @@
-[15:15] Wellington Carneiro Barbosa (Convidado)
 <?php
 namespace App\Http\Controllers\Manual;
 use App\Http\Controllers\Controller;
@@ -9,16 +8,15 @@ public function index()
 {
 return view('app.dashboard.manual.index');
 }
-
-
+ 
 /**
-
+ 
  
 * Schedules Manual Controller
-
+ 
  
 *
-
+ 
  
 */
 public function schedulesCreate()
