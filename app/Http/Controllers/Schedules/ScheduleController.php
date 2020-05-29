@@ -71,7 +71,7 @@ class ScheduleController extends Controller
         $validator = Validator::make($data, [
             'title'   => ['required', 'string', 'max:40',],
             'start'   => ['required', 'date', 'before:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
-            'end'     => ['required', 'date', 'after:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'     => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],
             'participants' => ['required', 'max:6'],
         ], $messages);
       
@@ -263,7 +263,7 @@ class ScheduleController extends Controller
         $validator = Validator::make($data, [
             'title'   => ['required', 'string', 'max:40',],
             'start'   => ['required', 'date', 'before:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
-            'end'     => ['required', 'date', 'after:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'     => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],
         ], $messages);
       
 

@@ -13,7 +13,15 @@
 <!-- local do agendamento -->
 <div class="form-group mb-3">
     <span>{{ __("Place") }}:</span>
-    <strong>{{ $schedule->schedulingPlace['name'] }}</strong>
+    <strong>
+        @if($schedule->schedulingPlace['name'])
+            {{ $schedule->schedulingPlace['name'] }}
+        @elseif($schedule->historicSchedulingPlace['name']) 
+            {{ $schedule->historicSchedulingPlace['name'] }}
+        @else 
+            {{ __("Undefined") }}
+        @endif
+    </strong>
 </div>
 
 <!--participantes do evento-->
@@ -37,7 +45,15 @@
 <!-- cliente -->
 <div class="form-group mb-3">
     <span>{{ __("Customer") }}:</span>
-    <strong>{{$schedule->schedulingCustomer['corporation'] }}</strong>
+    <strong>
+        @if($schedule->schedulingCustomer['corporation']) 
+            {{ $schedule->schedulingCustomer['corporation'] }}
+        @elseif($schedule->historicSchedulingCustomer['corporation'])
+            {{ $schedule->historicSchedulingCustomer['corporation'] }}
+        @else 
+            {{ __("Undefined") }}
+        @endif
+    </strong>
 </div>
 
 <!-- status -->
@@ -82,17 +98,8 @@
     <strong>{{dateBrazilianFormat($schedule->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($schedule->created_at) }}</strong>
 </div>
 
-
-<!-- criado em -->
-@if ($schedule->created_at)
-    <div class="form-group mb-3">
-        <span>{{ __("Created at") }}:</span>
-        <strong>{{dateBrazilianFormat($schedule->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($schedule->created_at) }}</strong>
-    </div>
-@endif
-
 <!-- editado em -->
-@if ($schedule->created_at != $schedule->updated_at)
+@if ($schedule->created_at != $schedule->updated_at && $schedule->updated_at != $schedule->deleted_at)
     <div class="form-group mb-3">
         <span>{{ __("Updated") }}:</span>
         <strong>{{dateBrazilianFormat($schedule->updated_at)}} {{ __("at") }} {{ timeBrazilianFormat($schedule->updated_at) }}</strong>

@@ -98,10 +98,10 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
-                                        <a class="dropdown-item" href="{{ route('schedules.show', ['id' => $schedule->id]) }}">{{ __("View more") }}</a>
+                                        <a class="dropdown-item" href="{{ route('schedules.canceled.show', ['id' => $schedule->id]) }}">{{ __("View more") }}</a>
                                         @if($now <= $schedule->start || $now <= $schedule->end && $schedule->place_id && $now <= $schedule->start &&  $now >= $schedule->end)
-                                        <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("Edit") }}</a>
-                                        <a class="dropdown-item" href="{{ route('schedules.confirm.cancel', ['id' => $schedule->id]) }}">{{ __("Cancel") }}</a>
+                                        <a class="dropdown-item" href="{{ route('schedules.confirm.restore', ['id' => $schedule->id]) }}">{{ __("Reschedule") }}</a>
+                                        <a class="dropdown-item" href="{{ route('schedules.confirm.permanentlyDelete', ['id' => $schedule->id]) }}">{{ __("Delete Permanently") }}</a>
                                         @endif
                                     </div>
                                 </div>

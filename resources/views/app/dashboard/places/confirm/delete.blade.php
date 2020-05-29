@@ -31,7 +31,7 @@
                     <strong>
                         *
                         <span class="text-muted">
-                            {{ __("This location will be") }} <u class="text-danger"> {{  __(" permanently ") }}</u> {{ __("deleted. Schedules that have this location will receive the location as") }}
+                            <u>{{ $place->name }}</u> {{ __("will be") }} <u class="text-danger"> {{  __(" permanently ") }}</u> {{ __("deleted. Schedules that have this location will receive the location as") }}
                             <u class="text-danger">{{ __(" undefined") }}</u> {{ __("and will be moved to the appointment history section") }}.
                             <br>
                             <br>

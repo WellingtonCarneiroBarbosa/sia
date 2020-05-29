@@ -63,7 +63,7 @@
 
                         <!--Agendamentos - left -->
                         <li class="nav-item">
-                            <a class="nav-link {{request()->routeIs('home') ? 'active' : ''}}" href="{{route('home')}}">
+                            <a class="nav-link {{request()->routeIs('schedules*') ? 'active' : (request()->routeIs('home') ? 'active' : '' )}}" href="{{route('home')}}">
                                 <i class="fa fa-calendar text-primary"></i>
                                 <span title="{{ __(" Click to manage the appointments ") }}" class="nav-link-text">{{ __("Schedules") }}</span>
                             </a>
@@ -72,7 +72,7 @@
 
                         <!--Usuários - left -->
                         <li class="nav-item">
-                            <a class="nav-link {{request()->routeIs('users.index') ? 'active' : ''}}" href="{{route('users.index')}}">
+                            <a class="nav-link {{request()->routeIs('users*') ? 'active' : ''}}" href="{{route('users.index')}}">
                                 <i class="ni ni-circle-08 text-primary"></i>
                                 <span title="{{ __(" Click to manage the users ") }}" class="nav-link-text">{{ __("Users") }}</span>
                             </a>
@@ -81,7 +81,7 @@
 
                         <!--Locais - left -->
                         <li class="nav-item">
-                            <a class="nav-link {{request()->routeIs('places.index') ? 'active' : ''}}" href="{{ route('places.index') }}">
+                            <a class="nav-link {{request()->routeIs('places*') ? 'active' : ''}}" href="{{ route('places.index') }}">
                                 <i class="fa fa-map text-primary"></i>
                                 <span title="{{ __("Click to manage the places") }}" class="nav-link-text">{{ __("Places") }}</span>
                             </a>
@@ -90,19 +90,21 @@
 
                         <!--clientes - left -->
                         <li class="nav-item">
-                            <a class="nav-link {{request()->routeIs('customers.index') ? 'active' : ''}}" href="{{ route('customers.index') }}">
+                            <a class="nav-link {{request()->routeIs('customers*') ? 'active' : ''}}" href="{{ route('customers.index') }}">
                                 <i class="ni ni-briefcase-24 text-primary"></i>
                                 <span title="{{ __("Click to manage the customers") }}" class="nav-link-text">{{ __("Customers") }}</span>
                             </a>
                         </li>
                         <!-- Fim clientes - left -->
 
+                        @if(auth()->user()->role_id >= 5)
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('statistics') }}">
+                            <a class="nav-link {{request()->routeIs('statistics') ? 'active' : ''}}" href="{{ route('statistics') }}">
                                 <i class="fa fa-chart-line text-primary"></i>
                                 <span title="{{ __("Click to go to the statistics") }}" class="nav-link-text">{{ __("Statistics") }}</span>
                             </a>
                         </li>
+                        @endif
 
                     </ul>
                 </div>

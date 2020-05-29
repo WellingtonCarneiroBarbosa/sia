@@ -25,10 +25,10 @@
 
      <div class="row">
         <div class="col-xl-12">
-            @if($hasCanceledSchedules)
+            @if($hasSchedules)
                 @component('components.canceledScheduleTable', ['schedules' => $schedules, 'now' => $now])@endcomponent
             @else
-                @component('components.noData', ['message' => Lang::get('We still have nothing to display.')])@endcomponent
+                @component('components.noData', ['message' => Lang::get('We still have nothing to show. Here, you’ll see canceled schedules')])@endcomponent
             @endif
         </div>
     </div>

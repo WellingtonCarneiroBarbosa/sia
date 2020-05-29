@@ -79,11 +79,11 @@
 
                         {{-- inicio do agendamento --}}
                         <label for="start">{{ __("Start Datetime") }}</label>
-                        <x-input icon="date" class="datetime" id="start" name="start" :value="$schedule->start" :required="true" />
+                        <x-input icon="date" class="datetime" id="start" name="start" :value="dateTimeBrazilianFormat($schedule->start)" :required="true" />
 
                         {{-- término do agendamento --}}
                         <label for="end">{{ __("End Datetime") }}</label>
-                        <x-input icon="date" class="datetime" id="end" name="end" :value="$schedule->end" :required="true" />
+                        <x-input icon="date" class="datetime" id="end" name="end" :value="dateTimeBrazilianFormat($schedule->end)" :required="true" />
 
 
                         <!-- cliente do agendamento -->

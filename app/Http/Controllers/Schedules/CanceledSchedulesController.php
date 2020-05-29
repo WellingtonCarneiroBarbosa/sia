@@ -34,8 +34,8 @@ class CanceledSchedulesController extends Controller
         $now = date('Y-m-d H:i:s');
 
         return view('app.dashboard.schedules.canceled', [
-            'canceledSchedules'         => $canceledSchedules,
-            'hasCanceledSchedules'      => $hasCanceledSchedules,
+            'schedules'         => $canceledSchedules,
+            'hasSchedules'      => $hasCanceledSchedules,
             'places'                    => $places,       
             'hasPlaces'                 => $hasPlaces,
             'customers'                 => $customers, 

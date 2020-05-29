@@ -41,7 +41,7 @@ class FindScheduleController extends Controller
 
         $validator = Validator::make($data, [
             'start'   => ['required', 'date', 'before_or_equal:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
-            'end'     => ['required', 'date', 'after_or_equal:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'     => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],
         ], $messages);
       
 
@@ -121,7 +121,7 @@ class FindScheduleController extends Controller
 
         $validator = Validator::make($data, [
             'start'   => ['required', 'date', 'before_or_equal:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
-            'end'     => ['required', 'date', 'after_or_equal:start', config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'end'     => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],
         ], $messages);
       
 

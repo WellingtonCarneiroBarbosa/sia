@@ -172,6 +172,9 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
                 Route::get('/', 'Schedules\HistoricController@index')
                                    ->name('schedules.historic.index');
 
+                Route::get('/show/{id}', 'Schedules\HistoricController@show')
+                                            ->name('schedules.historic.show');
+
             });
             //
         });
@@ -331,9 +334,9 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
          * Statistics route
          * 
          */
-        Route::get('/statistics', function (){
-            return 'ok';
-        })->name('statistics');
+        Route::get('/statistics', 'Statistics\StatisticController@index')
+                                                     ->name('statistics')
+                                                    ->middleware('admin');
 
         /**
          * Manual Routes

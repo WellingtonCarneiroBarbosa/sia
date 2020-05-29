@@ -38,13 +38,10 @@
     </strong>
 </div>
 
-{{-- criado em --}}
- @if ($user->created_at)
-    <div class="form-group mb-3">
-        <span>{{ __("Joined on") }}:</span>
-        <strong>{{dateBrazilianFormat($user->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($user->created_at) }}</strong>
-    </div>
-@endif
+<div class="form-group mb-3">
+    <span>{{ __("Joined on") }}:</span>
+    <strong>{{dateBrazilianFormat($user->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($user->created_at) }}</strong>
+</div>
 
 {{-- Conta verificada em --}}
 @if($user->email_verified_at)

@@ -27,7 +27,7 @@ class HistoricSchedule extends Model
      * The table's name
      * 
      */
-    protected $table = 'schedules';
+    protected $table = 'historic_schedules';
 
     public $timestamps = true;
     protected $softDelete = true;
