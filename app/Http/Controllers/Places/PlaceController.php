@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Places\Place;
 use App\Models\Schedules\Schedule;
+use App\Models\Schedules\HistoricSchedule;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 use DB;
@@ -313,6 +314,9 @@ class PlaceController extends Controller
 
         $howManySchedulesAtThisPlace = Schedule::withTrashed()->where('place_id', $id)->count();
 
+        $howManyHistoricSchedulesAtThisPlace = HistoricSchedule::withTrashed()->where('place_id', $id)->count();
+
+        $howManySchedulesAtThisPlace = $howManySchedulesAtThisPlace + $howManyHistoricSchedulesAtThisPlace;
         return view('app.dashboard.places.confirm.delete', [
             'place' => $place,
             'howManySchedulesAtThisPlace' => $howManySchedulesAtThisPlace
