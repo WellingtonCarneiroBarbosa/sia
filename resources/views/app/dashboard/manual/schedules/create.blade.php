@@ -26,12 +26,14 @@
                               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                              <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                              <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
                             </ol>
                             <div class="carousel-inner">
                                 
                                 {{-- Item 01 ta dando certo--}}
                                 <div class="carousel-item active">
-                                    <img class="d-block w-50" src="http://via.placeholder.com/150" alt="First slide">
+                                    <img class="d-block w-50" src="{{ asset('manual/schedules/create/passo01.jpeg') }}" alt="First slide">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Passo 01</h5>
                                         <p>Apenas 1 texto</p>
@@ -40,7 +42,7 @@
 
                                 {{-- Item 02 ta dando certo--}}
                                 <div class="carousel-item">
-                                    <img class="d-block w-50" src="http://via.placeholder.com/150" alt="Second slide">
+                                    <img class="d-block w-50" src="{{ asset('manual/schedules/create/passo02.jpeg') }}" alt="Second slide">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Passo 02</h5>
                                         <p>Apenas 1 texto</p>
@@ -49,7 +51,7 @@
                                 
                                 {{-- Item 03 >:( a original n mostra--}}
                                 <div class="carousel-item">
-                                    <img class="d-block w-50" src="{{ asset('manual/schedules/create/passo01.jpg') }}" alt="Third slide">
+                                    <img class="d-block w-50" src="{{ asset('manual/schedules/create/passo03.jpeg') }}" alt="Third slide">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Passo 03</h5>
                                         <p>Apenas 1 texto</p>
@@ -58,7 +60,7 @@
 
                                 {{-- Item 04 pq ta dando erro >:(--}}
                                 <div class="carousel-item">
-                                    <img class="d-block w-50" src="{{ asset('manual/schedules/create/passo02.jpg') }}" alt="Fourth slide">
+                                    <img class="d-block w-50" src="{{ asset('manual/schedules/create/passo04.jpeg') }}" alt="Fourth slide">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Passo 04</h5>
                                         <p>Apenas 1 texto</p>
