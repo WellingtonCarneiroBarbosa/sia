@@ -25,7 +25,7 @@
                         @foreach($schedules as $schedule)
                         <tr>
                             <td>
-                                @if($schedule->schedulingPlace['name'])
+                                @if($schedule->historicSchedulingPlace['name'])
                                 <div class="media align-items-center">
                                     <a href="#" class="avatar avatar-md rounded-circle mr-3">
                                         <img alt="Image placeholder" src="https://via.placeholder.com/150">
@@ -33,7 +33,7 @@
 
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm">
-                                            {{ $schedule->schedulingPlace['name'] }}
+                                            {{ $schedule->historicSchedulingPlace['name'] }}
                                         </span>
                                     </div>
                                 </div>
@@ -84,14 +84,14 @@
                             </td>
 
                             <td>
-                                @if($schedule->schedulingCustomer)
+                                @if($schedule->historicSchedulingCustomer)
                                 <div class="media align-items-center">
                                     <a href="#" class="avatar avatar-sm rounded-circle mr-3">
                                         <img alt="Image placeholder" src="https://via.placeholder.com/150">
                                     </a>
 
                                     <div class="media-body">
-                                        <span class="name mb-0 text-sm">{{ $schedule->schedulingCustomer['corporation'] }}</span>
+                                        <span class="name mb-0 text-sm">{{ $schedule->historicSchedulingCustomer['corporation'] }}</span>
                                     </div>
                                 </div>
                                 @else 
@@ -108,12 +108,7 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
-                                        <a class="dropdown-item" href="{{ route('schedules.show', ['id' => $schedule->id]) }}">{{ __("View more") }}</a>
-                                        @if($now <= $schedule->start || $now <= $schedule->end && $schedule->place_id && $now <= $schedule->start &&  $now >= $schedule->end)
-                                        <a class="dropdown-item" href="{{ route('schedules.edit', ['id' => $schedule->id]) }}">{{ __("Edit") }}</a>
-                                        <a class="dropdown-item" href="{{ route('schedules.confirm.cancel', ['id' => $schedule->id]) }}">{{ __("Cancel") }}</a>
-                                        @endif
-                                        
+                                        <a class="dropdown-item" href="{{ route('schedules.historic.show', ['id' => $schedule->id]) }}">{{ __("View more") }}</a>   
                                     </div>
                                 </div>
                             </td>
@@ -134,5 +129,3 @@
         {{ $schedules->links() }}
     @endif
 </div>
-
-

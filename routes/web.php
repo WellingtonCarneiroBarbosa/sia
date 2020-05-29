@@ -172,6 +172,9 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
                 Route::get('/', 'Schedules\HistoricController@index')
                                    ->name('schedules.historic.index');
 
+                Route::get('/show/{id}', 'Schedules\HistoricController@show')
+                                            ->name('schedules.historic.show');
+
             });
             //
         });

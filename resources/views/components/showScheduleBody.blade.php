@@ -13,7 +13,15 @@
 <!-- local do agendamento -->
 <div class="form-group mb-3">
     <span>{{ __("Place") }}:</span>
-    <strong>{{ $schedule->schedulingPlace['name'] }}</strong>
+    <strong>
+        @if($schedule->schedulingPlace['name'])
+            {{ $schedule->schedulingPlace['name'] }}
+        @elseif($schedule->historicSchedulingPlace['name']) 
+            {{ $schedule->historicSchedulingPlace['name'] }}
+        @else 
+            {{ __("Undefined") }}
+        @endif
+    </strong>
 </div>
 
 <!--participantes do evento-->
@@ -37,7 +45,15 @@
 <!-- cliente -->
 <div class="form-group mb-3">
     <span>{{ __("Customer") }}:</span>
-    <strong>{{$schedule->schedulingCustomer['corporation'] }}</strong>
+    <strong>
+        @if($schedule->schedulingCustomer['corporation']) 
+            {{ $schedule->schedulingCustomer['corporation'] }}
+        @elseif($schedule->historicSchedulingCustomer['corporation'])
+            {{ $schedule->historicSchedulingCustomer['corporation'] }}
+        @else 
+            {{ __("Undefined") }}
+        @endif
+    </strong>
 </div>
 
 <!-- status -->

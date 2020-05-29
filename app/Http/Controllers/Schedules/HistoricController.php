@@ -36,4 +36,19 @@ class HistoricController extends Controller
             'places' => $places, 'customers' => $customers, 'now' => $now
         ]);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id){
+        $schedule = HistoricSchedule::with('historicSchedulingCustomer')
+                      ->with('historicSchedulingPlace')->findOrFail($id);
+
+        $now = date('Y-m-d H:i:s');
+
+        return view('app.dashboard.schedules.show', ['schedule' => $schedule, 'now' => $now]);
+    }
 }
