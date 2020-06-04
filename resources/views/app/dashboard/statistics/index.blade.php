@@ -42,7 +42,7 @@
                 <p class="mt-3 mb-0 text-sm">
                   @if($goodConfirmedStatistic)
                   <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{ $confirmedStatistic }}%</span>
-                  @elseif($goodConfirmedStatistic == false)
+                  @elseif($goodConfirmedStatistic == false && $confirmedStatistic != 0)
                   <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> {{ $confirmedStatistic }}%</span>
                   @else
                   <span class="text-primary mr-2"><i class="ni ni-fat-delete"></i> 0.00%</span>
@@ -74,7 +74,7 @@
               <p class="mt-3 mb-0 text-sm">
                 @if($goodCanceledStatistic)
                 <span class="text-success mr-2"><i class="fa fa-arrow-down"></i> {{ $canceledStatistic }}%</span>
-                @elseif($goodCanceledStatistic == false)
+                @elseif($goodCanceledStatistic == false && $canceledStatistic != 0)
                 <span class="text-danger mr-2"><i class="fa fa-arrow-up"></i> {{ $canceledStatistic }}%</span>
                 @else
                 <span class="text-primary mr-2"><i class="ni ni-fat-delete"></i> 0.00%</span>

@@ -20,6 +20,7 @@ class StatisticController extends Controller
         $carbon = new Carbon();
 
         $now = $carbon->now();
+        $lastMonthObject = $carbon->subMonth();
 
         /**
          * Actualy Mounth
@@ -31,8 +32,8 @@ class StatisticController extends Controller
          * Last Month
          * 
          */
-        $lastMonth      = $now->subMonth()->month;
-        $lastMonthName  = utf8_encode($now->subMonth()->formatLocalized('%B'));
+        $lastMonth      = $lastMonthObject->month;
+        $lastMonthName  = utf8_encode($lastMonthObject->formatLocalized('%B'));
 
         /**
          * Quantites
