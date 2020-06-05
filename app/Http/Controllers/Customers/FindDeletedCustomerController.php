@@ -16,10 +16,6 @@ class FindDeletedCustomerController extends Controller
      */
     public function corporation(Request $request)
     {
-        /**
-         * Validate before find
-         * 
-         */
         $data = $request->all();
 
         $customers = Customer::onlyTrashed()

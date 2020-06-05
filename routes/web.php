@@ -47,7 +47,7 @@ Route::get('/teste', function (){
  * Authenticated routes
  * 
  */
-Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
+Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], function () {
     /***
      * Start
      * Dashboard routes

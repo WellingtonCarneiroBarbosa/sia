@@ -16,10 +16,6 @@ class FindCustomerController extends Controller
      */
     public function corporation(Request $request)
     {
-        /**
-         * Validate before find
-         * 
-         */
         $data = $request->all();
 
         $customers = Customer::where('corporation', 'LIKE', '%' . $data['corporation'] . '%')
