@@ -270,14 +270,14 @@
     "We still have nothing to display.": "Ainda não temos nada para exibir.",
     "Dashboard": "Agendamentos",
     "Customers": "Clientes",
-    "We still have nothing to display. Click new and register a customer": "Ainda não temos nada para exibir. Clique em novo e cadastre um cliente",
+    "We still have nothing to display. Here, you can see the deleted customers list": "Ainda não temos nada para exibir. Aqui, você poderá ver a lista de clientes deletados",
     "Customers List": "Lista de Clientes",
     "Edit Customer": "Editar Cliente",
     "Click to edit this costumer": "Clique para editar este cliente",
     "Updated Customer": "Cliente Atualizado",
     "No, go back to customers list": "Não, voltar para lista de clientes",
     "Do you really want to delete permanently this customer": "Deseja realmente deletar permanentemente este cliente",
-    "This customer will be deleted and moved to the deleted customers section. Schedules that have this customer will be moved to the appointment history section": "Este cliente será excluído e movido para a seção clientes excluídos. Os agendamentos que possuem esse cliente serão movidos para a seção de histórico de agendamentos",
+    "This customer will be deleted and moved to the deleted customers section. Schedules that have this customer will be moved to the appointment history section": "Este cliente será deletado e movido para a seção clientes deletados. Os agendamentos que possuem esse cliente serão movidos para a seção de histórico de agendamentos",
     " bookings with this customer": " agendamentos com este cliente",
     "Customer permanently deleted": "Cliente excluído permanentemente",
     "View Customer": "Visualizar Cliente",
@@ -341,5 +341,8 @@
     "New appointments this month": "Novos agendamentos neste mês",
     "Canceled appointments this month": "Agendamentos cancelados neste mês",
     "Since ": "Desde ",
-    "The schedule must have at least 1 participant": "O agendamento deve possuir, ao menos, 1 participante"
+    "The schedule must have at least 1 participant": "O agendamento deve possuir, ao menos, 1 participante",
+    "Deleted Customers": "Clientes Deletados",
+    "Come back to customers list": "Voltar para a lista de clientes",
+    "We still have nothing to display. Click new and register a customer": "Ainda não temos nada para mostrar. Clique em novo e cadastre um cliente"
 }

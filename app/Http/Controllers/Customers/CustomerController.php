@@ -64,7 +64,7 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $customer = Customer::findOrFail($id);
+        $customer = Customer::withTrashed()->findOrFail($id);
 
         return view('app.dashboard.customers.show',
         [

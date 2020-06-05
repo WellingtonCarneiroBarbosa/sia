@@ -293,7 +293,9 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
                                                           ->name('customers.confirm.delete');
             Route::delete('delete/{id}', 'Customers\CustomerController@destroy')
                                                      ->name('customers.destroy');
-                                              
+
+            Route::get('/deleted', 'Customers\DeletedCustomer@index')
+                                          ->name('customers.deleted');
         });
 
         /***
