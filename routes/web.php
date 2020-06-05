@@ -314,11 +314,10 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
 
             Route::get('confirm/delete/{id}', 'Customers\CustomerController@confirmDestroy')
                                                           ->name('customers.confirm.delete');
+
             Route::delete('delete/{id}', 'Customers\CustomerController@destroy')
                                                      ->name('customers.destroy');
 
-            Route::get('/deleted', 'Customers\DeletedCustomer@index')
-                                          ->name('customers.deleted');
 
             /**
              * Filter routes
@@ -329,6 +328,29 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
                 Route::any('/corporation', 'Customers\FindCustomerController@corporation')
                                                       ->name('customers.find.corporation');
 
+            });
+
+
+            /**
+             * Deleted Customer
+             * methods
+             * 
+             */
+            Route::group(['prefix' => 'deleted'], function () {
+
+                Route::get('/', 'Customers\DeletedCustomer@index')
+                                       ->name('customers.deleted'); 
+
+                /**
+                 * Filter Routes
+                 * 
+                 */
+                Route::group(['prefix' => 'filter'], function () {
+
+                    Route::any('/corporation', 'Customers\FindDeletedCustomerController@corporation')
+                                                         ->name('customers.deleted.find.corporation');
+                                                         
+                });          
             });
         });
 
