@@ -188,34 +188,41 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
             Route::get('/', 'Users\SystemUserController@index')
                                           ->name('users.index');
 
-            Route::get('create', 'Users\SystemUserController@create')
-                                                ->name('users.create')
-                                                 ->middleware('admin'); 
-
-            Route::post('/store', 'Users\SystemUserController@store')
-                                                ->name('users.store')
-                                                ->middleware('admin');
-            
-            Route::get('edit/{id}', 'Users\SystemUserController@edit')
-                                                  ->name('users.edit');
-
-            Route::put('update/{id}', 'Users\SystemUserController@update')
-                                                    ->name('users.update');
-
-            Route::get('/confirm-disable/{id}', 'Users\SystemUserController@confirmDestroy')
-                                                              ->name('users.confirmDestroy');
-            
-            Route::delete('/disable/{id}', 'Users\SystemUserController@destroy')
-                                                         ->name('users.destroy');
-
-            Route::get('/confirm-restore/{id}', 'Users\SystemUserController@confirmRestore')
-                                                              ->name('users.confirmRestore');
-
-            Route::put('/restore/{id}', 'Users\SystemUserController@restore')
-                                                      ->name('users.restore');
-
             Route::get('show/{id}', 'Users\SystemUserController@show')
                                                   ->name('users.show');
+
+            /**
+             * Only admins and superior
+             * can access this!
+             * 
+             */
+            Route::group(['middleware' => 'admin'], function () {
+
+                Route::get('create', 'Users\SystemUserController@create')
+                                                   ->name('users.create');
+
+                Route::post('/store', 'Users\SystemUserController@store')
+                                                    ->name('users.store');
+
+                Route::get('edit/{id}', 'Users\SystemUserController@edit')
+                                                      ->name('users.edit');
+
+                Route::put('update/{id}', 'Users\SystemUserController@update')
+                                                        ->name('users.update');
+
+                Route::get('/confirm-disable/{id}', 'Users\SystemUserController@confirmDestroy')
+                                                                  ->name('users.confirmDestroy');
+
+                Route::delete('/disable/{id}', 'Users\SystemUserController@destroy')
+                                                             ->name('users.destroy');
+
+                Route::get('/confirm-restore/{id}', 'Users\SystemUserController@confirmRestore')
+                                                                  ->name('users.confirmRestore');
+
+                Route::put('/restore/{id}', 'Users\SystemUserController@restore')
+                                                          ->name('users.restore');
+
+            });
 
             /***
              * Group for authenticated user
@@ -237,32 +244,48 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
             Route::get('/', 'Places\PlaceController@index')
                                      ->name('places.index');
 
-            Route::get('/edit/{id}', 'Places\PlaceController@edit')
-                                              ->name('places.edit');
 
             Route::get('/show/{id}', 'Places\PlaceController@show')
                                               ->name('places.show');
 
-            Route::put('/update/{id}',  'Places\PlaceController@update')
-                                                  ->name('places.update');
-  
-            Route::get('/create', 'Places\PlaceController@create')
-                                           ->name('places.create');
-
-            Route::post('/store',  'Places\PlaceController@store')
-                                            ->name('places.store');
-
-            Route::delete('/delete/{id}',  'Places\PlaceController@destroy')
-                                                     ->name('places.delete');
 
             Route::any('/availability/', 'Places\FindPlacesController@findPerDateRange')
-                                                           ->name('places.availability');                                                    
+                                                           ->name('places.availability'); 
 
-            Route::group(['prefix' => 'confirm'], function () {
-                Route::get('/delete/{id}', 'Places\PlaceController@confirmDestroy')
-                                                   ->name('places.confirm.delete');
+            /**
+             * Only admins can
+             * access this!
+             * 
+             */
+            Route::group(['middleware' => 'admin'], function () {
+                
+                Route::get('/edit/{id}', 'Places\PlaceController@edit')
+                                                  ->name('places.edit');
+
+                Route::put('/update/{id}',  'Places\PlaceController@update')
+                                                     ->name('places.update');
+
+                Route::get('/create', 'Places\PlaceController@create')
+                                               ->name('places.create');
+
+                Route::post('/store',  'Places\PlaceController@store')
+                                                ->name('places.store');
+
+                Route::delete('/delete/{id}',  'Places\PlaceController@destroy')
+                                                         ->name('places.delete');
+
+                /***
+                 * Confirm any action
+                 * routes
+                 * 
+                 */
+                Route::group(['prefix' => 'confirm'], function () {
+
+                    Route::get('/delete/{id}', 'Places\PlaceController@confirmDestroy')
+                                                        ->name('places.confirm.delete');
+
+                });
             });
-
         });
 
         /***

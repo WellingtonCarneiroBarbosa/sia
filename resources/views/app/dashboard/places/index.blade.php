@@ -13,7 +13,9 @@
                 </div>
 
                 <div class="col-lg-6 col-5 text-right">
+                    @if(auth()->user()->role_id >= 5)
                     <a href="{{ route('places.create') }}" class="btn btn-sm btn-neutral mb-2" id="new-place">{{ __("New") }}</a>
+                    @endif
                     <a href="#" data-toggle="modal" data-target="#modal-filter" id="filtros-locais" class="btn btn-sm btn-neutral mb-2 mr-2">{{ __("Check availability") }}</a>
                 </div>
             </div>
