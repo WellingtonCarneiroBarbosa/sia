@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                     <label for="confirm-password">{{ __("Confirm your password") }}</label>
-                    <x-input icon="fa fa-lock" id="confirm-password" name="confirm-password" type="password" :required="false" />
+                    <x-input icon="fa fa-lock" id="confirm-password" name="password_confirmation" type="password" :required="false" />
                 </div>
 
                 <div class="float-right">

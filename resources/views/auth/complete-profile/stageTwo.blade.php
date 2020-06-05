@@ -27,13 +27,12 @@
                 <div class="text-center text-muted mb-4">
                     <small>{{ __("Choose your profile image") }}</small>
                 </div>
-                <form method="POST" class="form-loader" action="{{ route('complete.profile.storeStageTwo') }}">
+                <form method="POST" class="form-loader" action="{{ route('complete.profile.storeStageTwo') }}" enctype="multipart/form-data">
                 @csrf
 
-              
                 {{-- Image input --}}
                 <div class="form-group">
-                    <x-input icon="fa fa-image" id="image_profile" name="image_profile" type="file" :required="false" />
+                    <x-input icon="fa fa-image" id="profile_image" name="profile_image" type="file" :required="false" />
                     <div class="float-right">
                         <a class="btn btn-sm btn-primary" href="{{ route('complete.profile.stageThree') }}">
                             <span class="text-white">Pular etapa</span>

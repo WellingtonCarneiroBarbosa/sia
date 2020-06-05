@@ -226,8 +226,8 @@
                             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="media align-items-center">
                                     <span class="avatar avatar-sm rounded-circle">
-                                            @if(auth()->user()->image != null)
-                                            <img style="width: 15em; height: 15em"  src="{{ url('storage/images/users/'.auth()->user()->image) }}">
+                                            @if(auth()->user()->profile_image != null)
+                                            <img style="width: 3em; height: 3em;"  src="{{ url('storage/users/profile_image/'.auth()->user()->profile_image) }}">
                                             @else
                                             <img src="https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png">
                                             @endif
