@@ -227,7 +227,7 @@
                                 <div class="media align-items-center">
                                     <span class="avatar avatar-sm rounded-circle">
                                             @if(auth()->user()->profile_image != null)
-                                            <img style="width: 3.5em; height: 3em;"  src="{{ url('storage/users/profile_image/'.auth()->user()->profile_image) }}">
+                                            <img style="width: 3.4em; height: 3em;" class="mr-2"  src="{{ url('storage/users/profile_image/'.auth()->user()->profile_image) }}">
                                             @else
                                             <img src="https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png">
                                             @endif
