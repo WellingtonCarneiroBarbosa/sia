@@ -334,14 +334,8 @@ class PlaceController extends Controller
         $delete = Place::destroy($id);
 
         if(!$delete){
-            $error = Lang::get('Something went wrong. Please try again!');
-            return redirect()
-                    ->back()
-                    ->withErrors($error)
-                    ->withInput();
+            return redirect()->back()->with(['error' -> Lang::get('Something went wrong. Please try again!')]);
         }
-        
-        $now = date('Y-m-d H:i:s');
 
         $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', null)->get();
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Schedules;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Schedules\Schedule;
+use App\Models\Schedules\HistoricSchedule;
 use App\Models\Places\Place;
 use App\Models\Customers\Customer;
 use App\Models\Schedules\ScheduleLog;
@@ -185,6 +186,18 @@ class CanceledSchedulesController extends Controller
 
         if(!$createLog){
             return abort(500);
+        }
+
+        $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', null)->get();
+
+        $hasExpiredSchedules = hasData($expiredSchedules);
+
+        if($hasExpiredSchedules){
+            foreach($expiredSchedules as $schedule){
+                $data = $schedule->getAttributes();
+                HistoricSchedule::create($data);
+                Schedule::where('id', $data["id"])->forceDelete();
+            }
         }
 
         return redirect()->route('schedules.canceled')->with(['status' => Lang::get('Permanently deleted')]);

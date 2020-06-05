@@ -419,6 +419,18 @@ class ScheduleController extends Controller
             return abort(500);
         }
 
+        $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', null)->get();
+
+        $hasExpiredSchedules = hasData($expiredSchedules);
+
+        if($hasExpiredSchedules){
+            foreach($expiredSchedules as $schedule){
+                $data = $schedule->getAttributes();
+                HistoricSchedule::create($data);
+                Schedule::where('id', $data["id"])->forceDelete();
+            }
+        }
+
         return redirect()->route('home')->with(['status' => Lang::get('Schedule canceled')]);
     }
 
