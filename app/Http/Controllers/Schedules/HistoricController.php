@@ -21,10 +21,10 @@ class HistoricController extends Controller
                                      ->paginate(config('app.paginate_limit'));
 
         $places = Place::get();
-        $customers = Customer::get();
+        $customers = Customer::withTrashed()->get();
 
         $hasSchedules = hasData($schedules);
-        $hasPlaces = hasData($places);
+        $hasPlaces    = hasData($places);
         $hasCustomers = hasData($customers);
 
         $now = date('Y-m-d H:i:s');

@@ -341,5 +341,6 @@
     "will be": "será",
     "New appointments this month": "Novos agendamentos neste mês",
     "Canceled appointments this month": "Agendamentos cancelados neste mês",
-    "Since ": "Desde "
+    "Since ": "Desde ",
+    "The schedule must have at least 1 participant": "O agendamento deve possuir, ao menos, 1 participante"
 }

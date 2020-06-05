@@ -55,7 +55,8 @@ class ScheduleController extends Controller
         $messages  = [
             'before' => Lang::get('The date entered is not a valid date'),
             'after'  => Lang::get('The date entered is not a valid date'),
-            'date'   => Lang::get('The date entered is not a valid date')
+            'date'   => Lang::get('The date entered is not a valid date'),
+            'gte'    => Lang::get('The schedule must have at least 1 participant'),
         ];
 
         /**
@@ -72,7 +73,7 @@ class ScheduleController extends Controller
             'title'   => ['required', 'string', 'max:40',],
             'start'   => ['required', 'date', 'before:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
             'end'     => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],
-            'participants' => ['required', 'max:6'],
+            'participants' => ['required', 'max:6', 'gte:1'],
         ], $messages);
       
 
@@ -247,7 +248,8 @@ class ScheduleController extends Controller
         $messages  = [
             'before' => Lang::get('The date entered is not a valid date'),
             'after'  => Lang::get('The date entered is not a valid date'),
-            'date'   => Lang::get('The date entered is not a valid date')
+            'date'   => Lang::get('The date entered is not a valid date'),
+            'gte'    => Lang::get('The schedule must have at least 1 participant'),
         ];
 
         /**
@@ -264,6 +266,7 @@ class ScheduleController extends Controller
             'title'   => ['required', 'string', 'max:40',],
             'start'   => ['required', 'date', 'before:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
             'end'     => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],
+            'participants' => ['required', 'max:6', 'gte:1'],
         ], $messages);
       
 
