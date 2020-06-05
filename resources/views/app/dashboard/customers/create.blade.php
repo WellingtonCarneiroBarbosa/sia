@@ -30,26 +30,15 @@
                     <small>{{ __("Fill in the details below to proceed") }}</small>
                 </div>
                 <form method="POST" class="form-loader" action="{{ route('customers.store') }}">
-                @csrf
+                    @csrf
 
-                <!--nome da empresa-->
-                <div class="form-group focused">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-building"></i></span>
-                        </div>
-
-                        <input id="corporation" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Corporation") }}"  class="form-control " name="corporation" value="{{ old('corporation') }}" required>
-                    
-                    </div>
-                </div>
-                <!--fim do nome da empresa-->
-
-                <!-- submit button -->
+                    {{-- Nome da Empresa --}}
+                    <label for="findPerName">{{ __("Enterprise") }}:</label>
+                    <x-input id="findPerName" icon="ni ni-building" name="corporation" :placeholder="__('Type customer corporation name')" :value="old('corporation')" :required="true" />
+                
                     <div class="text-center">
                         <button type="submit" title="{{ __("Click to register this costumer") }}" class="btn btn-primary my-4">{{ __("Register Customer") }}</button>
                     </div>
-                <!-- fim do submit button -->
                 </form>
             </div>
         </div>

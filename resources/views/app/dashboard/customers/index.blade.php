@@ -37,22 +37,7 @@
         </div>
     </div>
 
-    {{-- @component('components.modals.findPlace', ['places' => $places, 'hasPlaces' => $hasPlaces])@endcomponent  --}}
+    {{-- Modals --}}
+    @component('components.modals.findCustomer', ['hasCustomers' => $hasCustomers])@endcomponent 
 
 @endsection
-
-{{-- 
-@section('scripts')
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
-
-<script>
-    (function( $ ) {
-        $(function() {
-            $('.date').mask('00/00/0000');
-        });
-    })(jQuery);
-</script>
-
-@endsection
- --}}

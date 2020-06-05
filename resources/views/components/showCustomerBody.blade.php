@@ -6,7 +6,7 @@
 
 {{-- customer's corporation --}}
 <div class="form-group mb-3">
-    <span>{{ __("Corporation") }}:</span>
+    <span>{{ __("Enterprise") }}:</span>
     <strong>{{ $customer->corporation }}</strong> 
 </div>
 

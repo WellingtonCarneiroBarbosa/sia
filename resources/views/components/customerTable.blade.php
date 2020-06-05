@@ -10,7 +10,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <!-- agendamento 01 -->
-                            <th scope="col" class="sort" data-sort="name">{{ __("Corporation") }}</th>
+                            <th scope="col" class="sort" data-sort="name">{{ __("Enterprise") }}</th>
                             <th scope="col" class="sort" data-sort="completion">{{ __("Actions") }}</th>
                             <th scope="col"></th>
                         </tr>
@@ -55,6 +55,13 @@
         </div>
     </div>
 </div>
+{{-- Table's List --}}
 <div class="float-right">
+
+    @if(isset($dataAppends))
+    {{ $customers->appends($dataAppends)->links() }}
+    @else 
     {{ $customers->links() }}
+    @endif
+    
 </div>

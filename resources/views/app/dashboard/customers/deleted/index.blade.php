@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="col-lg-6 col-5 text-right">
-                    <a href="{{ route('customers.create') }}" class="btn btn-sm btn-neutral mb-2" id="new-place">{{ __("Come back to customers list") }}</a>
+                    <a href="{{ route('customers.index') }}" class="btn btn-sm btn-neutral mb-2" id="new-place">{{ __("Come back to customers list") }}</a>
                     <a href="#" data-toggle="modal" data-target="#modal-filter" id="filtros-locais" class="btn btn-sm btn-neutral mb-2 mr-2">{{ __("Filters") }}</a>
                 </div>
             </div>
@@ -31,7 +31,7 @@
             @if($hasCustomers)
                 @component('components.deletedCustomerTable', ['customers' => $customers])@endcomponent
             @else
-                @component('components.noData', ['message' => Lang::get('We still have nothing to display. Here, you can see the deleted customers list')])@endcomponent
+                @component('components.noData', ['message' => Lang::get("We still have nothing to display. Here, you can see the deleted customers list")])@endcomponent
             @endif
         </div>
     </div>

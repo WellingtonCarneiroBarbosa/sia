@@ -319,6 +319,17 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
 
             Route::get('/deleted', 'Customers\DeletedCustomer@index')
                                           ->name('customers.deleted');
+
+            /**
+             * Filter routes
+             * 
+             */
+            Route::group(['prefix' => 'filter'], function () {
+                
+                Route::any('/corporation', 'Customers\FindCustomerController@corporation')
+                                                      ->name('customers.find.corporation');
+
+            });
         });
 
         /***
@@ -363,7 +374,7 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
 
             Route::get('/', 'Statistics\StatisticController@index')
                                                ->name('statistics');  
-                                               
+
         });
         
 
