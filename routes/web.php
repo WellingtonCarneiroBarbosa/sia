@@ -359,9 +359,13 @@ Route::group(['middleware' => ['web', 'auth', 'verified']], function () {
          * Statistics route
          * 
          */
-        Route::get('/statistics', 'Statistics\StatisticController@index')
-                                                     ->name('statistics')
-                                                    ->middleware('admin');
+        Route::group(['prefix' => 'statistics', 'middleware' => 'admin'], function () {
+
+            Route::get('/', 'Statistics\StatisticController@index')
+                                               ->name('statistics');  
+                                               
+        });
+        
 
         /**
          * Manual Routes
