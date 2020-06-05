@@ -31,8 +31,7 @@
                     <strong>
                         *
                         <span class="text-muted">
-                            {{ __("This customer will be") }} <u class="text-danger"> {{  __(" permanently ") }}</u> {{ __("deleted. Schedules that have this customer will receive the customer as") }}
-                            <u class="text-danger">{{ __(" undefined") }}</u> {{ __("and will be moved to the appointment history section") }}.
+                            {{ __("This customer will be deleted and moved to the deleted customers section. Schedules that have this customer will be moved to the appointment history section") }}
                             <br>
                             <br>
                             <u class="text-danger">{{ __("There are ") }} {{ $howManySchedulesWithThisCustomer }} {{ __(" bookings with this customer") }}</u>
