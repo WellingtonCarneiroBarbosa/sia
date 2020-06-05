@@ -340,29 +340,18 @@ class PlaceController extends Controller
                     ->withErrors($error)
                     ->withInput();
         }
-
+        
         $now = date('Y-m-d H:i:s');
 
-        $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->get();
+        $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', null)->get();
 
         $hasExpiredSchedules = hasData($expiredSchedules);
 
         if($hasExpiredSchedules){
             foreach($expiredSchedules as $schedule){
-              $data = array(
-                  'title'   => $schedule->title, 'place_id'     => $schedule->place_id, 'start'     => $schedule->start,
-                  'end'     => $schedule->end, 'customer_id'    => $schedule->customer_id, 'status' => $schedule->status,
-              );
-
-              $historic = DB::insert('INSERT INTO historic_schedules (title, place_id, start, end, customer_id, status, created_at, updated_at, deleted_at)
-              values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-              [
-                  $schedule->title,       $schedule->place_id,        $schedule->start,
-                  $schedule->end,         $schedule->customer_id,     $schedule->status,
-                  $schedule->created_at,  $schedule->updated_at,      $schedule->deleted_at
-              ]);
-
-              $delete = DB::delete('DELETE FROM schedules WHERE id = ?', [$schedule->id]);
+                $data = $schedule->getAttributes();
+                HistoricSchedule::create($data);
+                Schedule::where('id', $data["id"])->forceDelete();
             }
         }
 
