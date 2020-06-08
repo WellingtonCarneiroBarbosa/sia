@@ -150,7 +150,6 @@
 
 @endsection 
 @section('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 {{-- Show/Hide Profile Data --}}
 <script>
 
@@ -179,46 +178,46 @@
 
 {{-- Get User Location By His Cep --}}
 <script>
-$(document).ready(function (){
-    $cep = $("#user-cep").html();
-    /**
-     * Elements
-     *
-     */
-    $state = $("#state");
-    $city = $("#city");
-    $neighborhood = $("#neighborhood");
-    $address = $("#address");
-    $loader = $("#pageloader");
+    $(document).ready(function (){
+        $cep = $("#user-cep").html();
+        /**
+        * Elements
+        *
+        */
+        $state = $("#state");
+        $city = $("#city");
+        $neighborhood = $("#neighborhood");
+        $address = $("#address");
+        $loader = $("#pageloader");
 
-    /**
+        /**
         * Get Data By ViaCep
         * Provider 
         *
         */
-    $.ajax({
-        url: 'https://viacep.com.br/ws/' + $cep + '/json/unicode/',
-        dataType: 'json',
+        $.ajax({
+            url: 'https://viacep.com.br/ws/' + $cep + '/json/unicode/',
+            dataType: 'json',
 
-        /**/
-        beforeSend: function () {
-            $loader.show();
-        },
+            /**/
+            beforeSend: function () {
+                $loader.show();
+            },
 
-        /**/
-        success: function (response) {
-            $state.html(response.uf);
-            $city.html(response.localidade);
-            $neighborhood.html(response.bairro);
-            $address.html(response.logradouro);
-            $loader.hide();
-        },
+            /**/
+            success: function (response) {
+                $state.html(response.uf);
+                $city.html(response.localidade);
+                $neighborhood.html(response.bairro);
+                $address.html(response.logradouro);
+                $loader.hide();
+            },
 
-        error: function () {
-            alert("{{ __('Something went wrong. Please refresh the page!') }}");
-        },
+            error: function () {
+                alert("{{ __('Something went wrong. Please refresh the page!') }}");
+            },
+        });
+
     });
-
-});
 </script>
 @endsection
