@@ -81,7 +81,7 @@
                         
                         <div class="pb-3">
                             <span class="font-weight-light">{{ __("Address") }}:</span>
-                            <strong id="address"></strong><strong>, {{ auth()->user()->complement_number) }}</strong>
+                            <strong id="address"></strong><strong>, {{ auth()->user()->complement_number }}</strong>
                         </div>
                         
                         <div class="pb-3">
