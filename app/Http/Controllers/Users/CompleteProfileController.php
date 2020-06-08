@@ -23,11 +23,24 @@ class CompleteProfileController extends Controller
 
     public function stageTwo()
     {
+        if(! auth()->user()->cpf)
+        {
+            $error = Lang::get('You must complete step 1 before proceeding to other step');
+            return redirect()->route('complete.profile.stageOne')->withErrors($error);
+        }
+
         return view('auth.complete-profile.stageTwo');
     }
 
     public function stageThree()
     {
+        if(! auth()->user()->cpf)
+        {
+            $error = Lang::get('You must complete step 1 before proceeding to other step');
+            return redirect()->route('complete.profile.stageOne')->withErrors($error);
+        }
+
+
         return view('auth.complete-profile.stageThree');
     }
 
@@ -44,7 +57,8 @@ class CompleteProfileController extends Controller
 
         $validator = Validator::make($data, [
             'cpf'     => ['required', 'string', 'min:11', 'max:15', new CPFRule()],
-            'cep'     => ['required', 'string', 'min:8', 'max:9'],
+            'cep'     => ['required', 'string', 'min:8',  'max:9'],
+            'complement_number' => ['required', 'string', 'max:8'],
         ]);
       
         if($validator->fails()) {

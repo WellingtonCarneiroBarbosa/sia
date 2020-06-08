@@ -379,5 +379,10 @@
     "Account completed": "Conta completada",
     "Registered at": "Cadastrado em",
     "Only you can see your personal data": "Somente você pode ver seus dados pessoais",
-    "Something went wrong. Please refresh the page!": "Algo deu errado. Por favor, atualize a página!"
+    "Something went wrong. Please refresh the page!": "Algo deu errado. Por favor, atualize a página!",
+    "This will be completed automatically": "Isso será preenchido automaticamente",
+    "Complement Number": "Número de Complemento",
+    "Please, enter a valid CEP": "Por favor, insira um CEP válido",
+    "Validate": "Validar",
+    "You must complete step 1 before proceeding to other step": "Você deve concluir a etapa 1 antes de prosseguir para outra etapa"
 }

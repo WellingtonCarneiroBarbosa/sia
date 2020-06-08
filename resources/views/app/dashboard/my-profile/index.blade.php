@@ -32,7 +32,7 @@
                     <div class="col-lg-3 order-lg-2">
                         <div class="card-profile-image">
                             @if(auth()->user()->profile_image != null)
-                            <img style="width: 15em; height: 15em" src="{{ url('storage/users/profile_image/'.auth()->user()->profile_image) }}">
+                            <img style="width: 9em; height: 9em" src="{{ url('storage/users/profile_image/'.auth()->user()->profile_image) }}">
                             @else
                             <img src="https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png">
                             @endif
