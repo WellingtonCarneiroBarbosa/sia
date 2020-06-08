@@ -229,9 +229,10 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
              * 
              */
             Route::group(['prefix' => 'my-profile'], function () {
-                Route::get('/', function (){
-                    return 'ok';
-                })->name('myProfile.index');
+
+                Route::get('/', 'Users\AuthedUserController@showMyProfile')
+                                                  ->name('myProfile.index');
+
             });
         });
 

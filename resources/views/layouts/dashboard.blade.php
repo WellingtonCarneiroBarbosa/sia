@@ -226,14 +226,14 @@
                             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="media align-items-center">
                                     <span class="avatar avatar-sm rounded-circle">
-                                            @if(auth()->user()->profile_image != null)
-                                            <img style="width: 3.4em; height: 3em;" class="mr-2"  src="{{ url('storage/users/profile_image/'.auth()->user()->profile_image) }}">
-                                            @else
-                                            <img src="https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png">
-                                            @endif
-                                        </span>
+                                        @if(auth()->user()->profile_image != null)
+                                        <img style="width: 3.4em; height: 3em;" class="mr-2"  src="{{ url('storage/users/profile_image/'.auth()->user()->profile_image) }}">
+                                        @else
+                                        <img src="https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png">
+                                        @endif
+                                    </span>
                                     <div class="media-body  ml-2  d-none d-lg-block">
-                                        <span class="mb-0 text-sm  font-weight-bold">{{ ucFirstNames(auth()->user()->name) }}</span>
+                                        <span class="mb-0 text-sm  font-weight-bold"> {{ showFirstPieceOfAString(ucFirstNames(auth()->user()->name)) }} </span>
                                     </div>
                                 </div>
                             </a>

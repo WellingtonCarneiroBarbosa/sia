@@ -21,30 +21,9 @@
 
     <!-- inicio do conteudo-->
     <div class="container pt-lg-7">
+        
         <div class="row justify-content-center">
-            <div class="alert alert-warning alert-dismissible fade show mr-2" role="alert">
-                <span class="alert-inner--text"><i class="fa fa-warning mr-2"></i>
-                    <strong>{{ __("Attention to our password policy") }}:</strong>
-                </span>
-
-                <br>
-
-                <li class="ml-3">{{ __("The password must be between 8 and 16 characters") }};</li>
-                <li class="ml-3">{{ __("At least 1 numeric character") }};</li>
-                <li class="ml-3">{{ __("At least 1 uppercase character") }};</li>
-                <li class="ml-3">{{ __("At least 1 lowercase character") }};</li>
-                <li class="ml-3">{{ __("At least 1 special character") }}.</li>
-                <span class="alert-inner--text"><i class="fa fa-arrow-right"></i>
-                    {{ __("Exemple") }}: "<strong>Minha12Senha!</strong>"
-                </span>
-
-                <!--
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                -->
-            </div>
-            <div class="col-lg-5">
+            <div class="col-lg-6">
                 <div class="card bg-secondary shadow border-0">
                     <div class="card-body px-lg-5 py-lg-5">
 

@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Notifications\PasswordResetNotification;
+use App\Notifications\VerifyEmailNotification;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -18,7 +20,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'profile_image', 'name', 'email', 'cpf', 'cep',
-        'profile_completed_at', 'password', 'role_id'
+        'complement_number', 'profile_completed_at', 
+        'password', 'role_id'
     ];
 
     /**
@@ -42,4 +45,25 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public $timestamps = true;
     protected $softDelete = true;
+
+    /***
+     * Send Reset Password 
+     * Notification
+     * 
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordResetNotification($token));
+    }
+
+    /**
+     * Send Verify Email
+     * Notification
+     * 
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $defaultPassword = "12345678";
+        $this->notify(new VerifyEmailNotification($this->email, $defaultPassword));
+    }
 }
