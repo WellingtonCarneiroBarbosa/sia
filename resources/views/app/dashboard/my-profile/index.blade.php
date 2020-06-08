@@ -52,7 +52,7 @@
 
                 {{-- User Name --}}
                 <div class="text-center">
-                    <h5 class="h3">{{ auth()->user()->name }}</h5>
+                    <h5 class="h3">{{ ucFirstNames(auth()->user()->name) }}</h5>
                 </div>
 
                 {{-- Personal Data --}}

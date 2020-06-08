@@ -76,7 +76,7 @@
 {{-- Conta completa em --}}
 @if($user->profile_completed_at)
 <div class="form-group mb-3">
-    <span>{{ __("Last update on profile at") }}:</span>
+    <span>{{ __("Account completed at") }}:</span>
     <strong>{{dateBrazilianFormat($user->profile_completed_at)}} {{ __("at") }} {{ timeBrazilianFormat($user->profile_completed_at) }}</strong>
 </div>
 @endif
