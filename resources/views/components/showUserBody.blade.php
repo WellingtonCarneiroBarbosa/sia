@@ -16,35 +16,16 @@
     <strong>{{ $user->email }}</strong> 
 </div>
 
-@if(auth()->user()->profile_completed_at)
+{{-- User Type --}}
 <div class="form-group mb-3">
-    <span>{{ __("State") }}:</span>
-
+    <span>{{ __("User Type") }}:</span>
+    @if($user->role_id == 5)
+        <Strong>{{ __("Administrator") }}</Strong>
+    @else
+        <Strong>{{ __("Standart") }}</Strong>
+    @endif
 </div>
 
-<div class="form-group mb-3">
-    <span >{{ __("City") }}:</span>
-</div>
-
-<div class="form-group mb-3">
-    <span>{{ __("Neighborhood") }}:</span>
-</div>
-
-<div class="form-group mb-3">
-    <span>{{ __("Address") }}:</span>
-</div>
-
-<div class="form-group mb-3">
-    <span id="cep">CEP:</span>
-    <Strong>{{CEPscore(auth()->user()->cep)}}</Strong>
-    <input type="text" id="cep-value" style="display: none;" value="{{ auth()->user()->cep }}">
-</div>
-
-<div class="form-group mb-3">
-    <span>CPF:</span>
-    <strong>{{ CPFscore(auth()->user()->cpf) }}</strong>
-</div>
-@endif
 {{-- Status --}}
 <div class="form-group mb-3">
     <span>{{ __("Status") }}:</span>
@@ -101,7 +82,7 @@
 @endif
 
 {{-- editado em --}}
-@if (auth()->user()->created_at != auth()->user()->updated_at && auth()->user()->updated_at != auth()->user()->deleted_at && auth()->user()->updated_at != auth()->user()->profile_completed_at)
+@if ($user->created_at != $user->updated_at && $user->updated_at != $user->deleted_at && $user->updated_at != $user->profile_completed_at)
     <div class="form-group mb-3">
         <span>{{ __("Last update on profile at") }}:</span>
         <strong>{{dateBrazilianFormat($user->updated_at)}} {{ __("at") }} {{ timeBrazilianFormat($user->updated_at) }}</strong>

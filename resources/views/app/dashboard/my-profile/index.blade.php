@@ -60,31 +60,38 @@
                     <div class="text-center" id="personal-data">
                         <div class="pb-3">
                             <span class="font-weight-light">{{ __("Personal Data") }}</span>
+                            <br>
+                            <i><span class="font-weight-light text-sm">{{ __("Only you can see your personal data") }}</span></i>
+                        </div>
+                        
+                        <div class="pb-3">
+                            <span class="font-weight-light">{{ __("State") }}:</span>
+                            <strong id="state"></strong>
+                        </div>
+                        
+                        <div class="pb-3">
+                            <span class="font-weight-light">{{ __("City") }}:</span>
+                            <strong id="city"></strong>
+                        </div>
+                        
+                        <div class="pb-3">
+                            <span class="font-weight-light">{{ __("Neighborhood") }}:</span>
+                            <strong id="neighborhood"></strong>
+                        </div>
+                        
+                        <div class="pb-3">
+                            <span class="font-weight-light">{{ __("Address") }}:</span>
+                            <strong id="address"></strong><strong>, {{ str_replace(',', '.', number_format(auth()->user()->complement_number)) }}</strong>
+                        </div>
+                        
+                        <div class="pb-3">
+                            <span class="font-weight-light">CEP:</span>
+                            <strong id="user-cep">{{ CEPscore(auth()->user()->cep) }}</strong>
                         </div>
 
-                        <div class="pb-2">
-                            <span class="font-weight-light">{{ __("State") }}:</span> <Strong id="estado">{{auth()->user()->estado}}</Strong>
-                        </div>
-
-                        <div class="pb-2">
-                            <span  class="font-weight-light">{{ __("City") }}:</span> <Strong id="cidade">{{auth()->user()->cidade}}</Strong>
-                        </div>
-
-                        <div class="pb-2">
-                            <span class="font-weight-light">{{ __("Neighborhood") }}:</span> <Strong  id="bairro">{{auth()->user()->bairro}}</Strong>
-                        </div>
-
-                        <div class="pb-2">
-                            <span class="font-weight-light">{{ __("Address") }}:</span> <Strong id="rua">{{auth()->user()->rua}}, {{auth()->user()->numero_do_complemento}}</Strong>
-                        </div>
-
-                        <div class="pb-2">
-                            <span id="cep" class="font-weight-light">CEP:</span> <Strong>{{CEPscore(auth()->user()->cep)}}</Strong>
-                            <input type="text" id="cepValue" style="display: none;" value="{{ auth()->user()->cep }}">
-                        </div>
-
-                        <div class="pb-2">
-                            <span class="font-weight-light">CPF:</span> <Strong>{{CPFscore(auth()->user()->cpf)}}</Strong>
+                        <div class="pb-3">
+                            <span class="font-weight-light">CPF:</span>
+                            <strong>{{ CPFscore(auth()->user()->cpf) }}</strong>
                         </div>
                 </div>
                 {{-- End Personal Data --}}
@@ -170,16 +177,48 @@
 
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-
+{{-- Get User Location By His Cep --}}
 <script>
-   $(document).ready(function ($){
-       /**máscaras */
-       $("#cpf").mask('000.000.000-00')
-       $("#cepcep").mask('00000-000')
-       /**20 caracteres*/
-       $('#numero_do_complemento').mask('AAAAAAAAAAAAAAAAAAAA');
-       $("#telefone_comercial").mask('(99) 9999-9999');
-   })
+$(document).ready(function (){
+    $cep = $("#user-cep").html();
+    /**
+     * Elements
+     *
+     */
+    $state = $("#state");
+    $city = $("#city");
+    $neighborhood = $("#neighborhood");
+    $address = $("#address");
+    $loader = $("#pageloader");
+
+    /**
+        * Get Data By ViaCep
+        * Provider 
+        *
+        */
+    $.ajax({
+        url: 'https://viacep.com.br/ws/' + $cep + '/json/unicode/',
+        dataType: 'json',
+
+        /**/
+        beforeSend: function () {
+            $loader.show();
+        },
+
+        /**/
+        success: function (response) {
+            $state.html(response.uf);
+            $city.html(response.localidade);
+            $neighborhood.html(response.bairro);
+            $address.html(response.logradouro);
+            $loader.hide();
+        },
+
+        error: function () {
+            alert("{{ __('Something went wrong. Please refresh the page!') }}");
+        },
+    });
+
+});
 </script>
 @endsection
