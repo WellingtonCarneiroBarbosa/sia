@@ -95,8 +95,8 @@ class ScheduleObserver
 
         /**Notify all users */
         $schedule['user'] = getAuthUserFirstName();
-        
-        $users = User::all();
+
+        $users = User::where('id', '!=', auth()->user()->id)->get();
         Notification::send($users, new CanceledScheduleNotification($schedule));
     }
 

@@ -370,7 +370,7 @@ class ScheduleController extends Controller
             }
         }
 
-        return redirect()->route('home')->with(['status' => Lang::get('Schedule canceled')]);
+        return redirect()->route('home')->with(['status' => Lang::get('Schedule canceled') . ". " . Lang::get('System users were notified via email')]);
     }
 
     public function generateGuestURL(){
