@@ -51,26 +51,4 @@ class CustomerObserver
             }
         }
     }
-
-    /**
-     * Handle the customer "restored" event.
-     *
-     * @param  \App\Models\Customers\Customer  $customer
-     * @return void
-     */
-    public function restored(Customer $customer)
-    {
-        //
-    }
-
-    /**
-     * Handle the customer "force deleted" event.
-     *
-     * @param  \App\Models\Customers\Customer  $customer
-     * @return void
-     */
-    public function forceDeleted(Customer $customer)
-    {
-        //
-    }
 }
