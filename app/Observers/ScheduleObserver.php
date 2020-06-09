@@ -2,8 +2,11 @@
 
 namespace App\Observers;
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\Schedule\CanceledScheduleNotification;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\ScheduleLog;
+use App\User;
 
 /**
  * ====================================
@@ -42,6 +45,7 @@ class ScheduleObserver
         }
 
         /**Notify all users */
+
     }
 
     /**
@@ -90,6 +94,8 @@ class ScheduleObserver
         }
 
         /**Notify all users */
+        $users = User::all();
+        Notification::send($users, new CanceledScheduleNotification($schedule));
     }
 
     /**
