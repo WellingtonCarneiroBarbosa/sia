@@ -3,8 +3,20 @@
 namespace App\Observers;
 
 use App\Models\Customers\Customer;
+use App\Models\Customers\CustomerLog;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\HistoricSchedule;
+
+/**
+ * ====================================
+ * LOGS CAPTION
+ *
+ * 1 == create
+ * 2 == update
+ * 3 == delete
+ * ====================================
+ * 
+ */
 
 class CustomerObserver
 {
@@ -16,7 +28,20 @@ class CustomerObserver
      */
     public function created(Customer $customer)
     {
-        //
+        $log     =
+        [
+            'customer_id'   => $customer->id,
+            'user_id'       => auth()->user()->id,
+            'action'        => '1'
+        ];
+
+        $createLog = CustomerLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**Notify the auth()->user() */
     }
 
     /**
@@ -27,7 +52,20 @@ class CustomerObserver
      */
     public function updated(Customer $customer)
     {
-        //
+        $log     =
+        [
+            'customer_id'   => $customer->id,
+            'user_id'       => auth()->user()->id,
+            'action'        => '2'
+        ];
+
+        $createLog = CustomerLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**Notify the auth()->user() */
     }
 
     /**
@@ -38,6 +76,21 @@ class CustomerObserver
      */
     public function deleted(Customer $customer)
     {
+        $log     =
+        [
+            'customer_id'   => $customer->id,
+            'user_id'       => auth()->user()->id,
+            'action'        => '3'
+        ];
+
+        $createLog = CustomerLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**Notify the auth()->user() */
+
         $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', $customer->id)->get();
 
         $hasExpiredSchedules = hasData($expiredSchedules);
