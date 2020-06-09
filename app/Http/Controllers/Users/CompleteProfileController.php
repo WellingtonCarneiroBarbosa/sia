@@ -56,7 +56,7 @@ class CompleteProfileController extends Controller
         $data['cep']  = sanitizeString($data['cep']);
 
         $validator = Validator::make($data, [
-            'cpf'     => ['required', 'string', 'min:11', 'max:15', new CPFRule()],
+            'cpf'     => ['required', 'unique:users', 'string', 'min:11', 'max:15', new CPFRule()],
             'cep'     => ['required', 'string', 'min:8',  'max:9'],
             'complement_number' => ['required', 'string', 'max:8'],
         ]);

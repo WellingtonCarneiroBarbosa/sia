@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('profile_image')->nullable();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('cpf', 11)->nullable();
+            $table->string('cpf', 11)->unique()->nullable();
             $table->string('cep', 8)->nullable();
             $table->string('complement_number', 8)->nullable();
             $table->string('role_id', 1)->default('3');
