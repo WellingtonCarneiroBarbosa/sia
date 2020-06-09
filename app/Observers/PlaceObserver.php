@@ -41,7 +41,7 @@ class PlaceObserver
            /**Notify the auth()->user() */
         }
 
-        /**Notify the auth()->user() */
+        /**Notify all users */
     }
 
     /**
@@ -65,7 +65,7 @@ class PlaceObserver
            /**Notify the auth()->user() */
         }
 
-        /**Notify the auth()->user() */
+        /**Notify all users */
     }
 
     /**
@@ -89,7 +89,7 @@ class PlaceObserver
            /**Notify the auth()->user() */
         }
 
-        /**Notify the auth()->user() */
+        /**Notify all users */
 
         /**
          * Move a schedule

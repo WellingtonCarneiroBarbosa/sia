@@ -40,7 +40,7 @@ class UserObserver
            /**Notify the auth()->user() */
         }
 
-        /**Notify the auth()->user() */
+        /**Notify all users */
     }
 
     /**
@@ -64,7 +64,7 @@ class UserObserver
            /**Notify the auth()->user() */
         }
 
-        /**Notify the auth()->user() */
+        /**Notify all users */
     }
 
     /**
@@ -88,7 +88,7 @@ class UserObserver
            /**Notify the auth()->user() */
         }
 
-        /**Notify the auth()->user() */
+        /**Notify all users */
     }
 
     /**
@@ -121,6 +121,6 @@ class UserObserver
          */
         UserLog::where('action', 2)->where('created_at', $createLog['created_at'])->delete();
 
-        /**Notify the auth()->user() */
+        /**Notify all users */
     }
 }

@@ -40,8 +40,8 @@ class CustomerObserver
         if(!$createLog){
            /**Notify the auth()->user() */
         }
-
-        /**Notify the auth()->user() */
+        
+        /**Notify all users */
     }
 
     /**
@@ -64,8 +64,8 @@ class CustomerObserver
         if(!$createLog){
            /**Notify the auth()->user() */
         }
-
-        /**Notify the auth()->user() */
+        
+        /**Notify all users */
     }
 
     /**
@@ -88,8 +88,8 @@ class CustomerObserver
         if(!$createLog){
            /**Notify the auth()->user() */
         }
-
-        /**Notify the auth()->user() */
+        
+        /**Notify all users */
 
         $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', $customer->id)->get();
 
