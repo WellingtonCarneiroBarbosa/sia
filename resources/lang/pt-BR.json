@@ -386,5 +386,6 @@
     "Validate": "Validar",
     "You must complete step 1 before proceeding to other step": "Você deve concluir a etapa 1 antes de prosseguir para outra etapa",
     "A fresh verification link has been sent to": "Um novo link de verificação foi enviado para",
-    "Send another email": "Enviar outro e-mail"
+    "Send another email": "Enviar outro e-mail",
+    "This CPF is already registered in the system. If you believe this is a mistake, contact": "Este CPF já está cadastrado no sistema. Se você acredita que isto é um engano, contate"
 }
