@@ -3,6 +3,8 @@
 namespace App\Observers;
 
 use App\Models\Places\Place;
+use App\Models\Schedules\Schedule;
+use App\Models\Schedules\HistoricSchedule;
 
 class PlaceObserver
 {
@@ -36,7 +38,25 @@ class PlaceObserver
      */
     public function deleted(Place $place)
     {
-        //
+        /**
+         * Move a schedule
+         * to historic table
+         * and delete from
+         * schedules table
+         * 
+         */
+        $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', null)->get();
+
+        $hasExpiredSchedules = hasData($expiredSchedules);
+
+        if($hasExpiredSchedules){
+            foreach($expiredSchedules as $schedule){
+                $data = $schedule->getAttributes();
+                $data['schedule_id'] = $data['id'];
+                HistoricSchedule::create($data);
+                Schedule::where('id', $data["id"])->forceDelete();
+            }
+        }
     }
 
     /**

@@ -3,7 +3,21 @@
 namespace App\Observers;
 
 use App\Models\Schedules\HistoricSchedule;
+use App\Models\Schedules\ScheduleLog;
 
+/**
+ * ====================================
+ * LOGS CAPTION
+ *
+ * 1 == create
+ * 2 == update
+ * 3 == delete
+ * 4 == restore
+ * 5 == forceDelete
+ * 6 == moved to historic
+ * ====================================
+ * 
+ */
 class ScheduleHistoricObserver
 {
     /**
@@ -14,50 +28,9 @@ class ScheduleHistoricObserver
      */
     public function created(HistoricSchedule $historicSchedule)
     {
-        //
-    }
-
-    /**
-     * Handle the schedule historic "updated" event.
-     *
-     * @param  \App\Models\Schedules\HistoricSchedule  $historicSchedule
-     * @return void
-     */
-    public function updated(HistoricSchedule $historicSchedule)
-    {
-        //
-    }
-
-    /**
-     * Handle the schedule historic "deleted" event.
-     *
-     * @param  \App\Models\Schedules\HistoricSchedule  $historicSchedule
-     * @return void
-     */
-    public function deleted(HistoricSchedule $historicSchedule)
-    {
-        //
-    }
-
-    /**
-     * Handle the schedule historic "restored" event.
-     *
-     * @param  \App\Models\Schedules\HistoricSchedule  $historicSchedule
-     * @return void
-     */
-    public function restored(HistoricSchedule $historicSchedule)
-    {
-        //
-    }
-
-    /**
-     * Handle the schedule historic "force deleted" event.
-     *
-     * @param  \App\Models\Schedules\HistoricSchedule  $historicSchedule
-     * @return void
-     */
-    public function forceDeleted(HistoricSchedule $historicSchedule)
-    {
-        //
+        /**
+         * NOTIFY ALL USERS
+         * 
+         */
     }
 }

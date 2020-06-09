@@ -14,7 +14,6 @@ class CreatePlaceLogsTable extends Migration
     public function up()
     {
         Schema::create('place_logs', function (Blueprint $table) {
-            $table->id();
             $table->unsignedTinyInteger('place_id')->nullable();
             $table->foreign('place_id')->references('id')->on('places')->onUpdate('cascade')->onDelete('set null');
             $table->unsignedTinyInteger('user_id')->nullable();

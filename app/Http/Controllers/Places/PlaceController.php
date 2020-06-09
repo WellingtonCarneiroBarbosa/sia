@@ -334,18 +334,6 @@ class PlaceController extends Controller
 
         redirectBackIfThereIsAError($delete);
 
-        $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', null)->get();
-
-        $hasExpiredSchedules = hasData($expiredSchedules);
-
-        if($hasExpiredSchedules){
-            foreach($expiredSchedules as $schedule){
-                $data = $schedule->getAttributes();
-                HistoricSchedule::create($data);
-                Schedule::where('id', $data["id"])->forceDelete();
-            }
-        }
-
         return redirect()->route('places.index')->with(['status' => Lang::get('Place deleted')]);
     } 
 }

@@ -14,7 +14,6 @@ use App\Models\Schedules\ScheduleLog;
  * 3 == delete
  * 4 == restore
  * 5 == forceDelete
- * 6 == moved to historic
  * ====================================
  * 
  */
@@ -31,7 +30,7 @@ class ScheduleObserver
     {
         $log     =
         [
-            'schedule_id'   => $create->id,
+            'schedule_id'   => $schedule->id,
             'user_id'       => auth()->user()->id,
             'action'        => '1'
         ];
@@ -39,8 +38,10 @@ class ScheduleObserver
         $createLog = ScheduleLog::create($log);
 
         if(!$createLog){
-            return abort(500);
+           /**Notify the auth()->user() */
         }
+
+        /**Notify the auth()->user() */
     }
 
     /**
@@ -51,7 +52,20 @@ class ScheduleObserver
      */
     public function updated(Schedule $schedule)
     {
-        //
+        $log     =
+        [
+            'schedule_id'   => $schedule->id,
+            'user_id'       => auth()->user()->id,
+            'action'        => '2'
+        ];
+
+        $createLog = ScheduleLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**Notify the auth()->user() */
     }
 
     /**
@@ -62,7 +76,20 @@ class ScheduleObserver
      */
     public function deleted(Schedule $schedule)
     {
-        //
+        $log     =
+        [
+            'schedule_id'   => $schedule->id,
+            'user_id'       => auth()->user()->id,
+            'action'        => '3'
+        ];
+
+        $createLog = ScheduleLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**Notify the auth()->user() */
     }
 
     /**
@@ -73,7 +100,29 @@ class ScheduleObserver
      */
     public function restored(Schedule $schedule)
     {
-        //
+        $log     =
+        [
+            'schedule_id'   => $schedule->id,
+            'user_id'       => auth()->user()->id,
+            'action'        => '4'
+        ];
+
+        $createLog = ScheduleLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**
+         * when a schedule is restored,
+         * it creates an unnecessary
+         * update log, here it removes
+         * this log
+         * 
+         */
+        ScheduleLog::where('action', 2)->where('created_at', $createLog['created_at'])->delete();
+
+        /**Notify the auth()->user() */
     }
 
     /**
@@ -82,8 +131,21 @@ class ScheduleObserver
      * @param  \App\Models\Schedules\Schedule  $schedule
      * @return void
      */
-    public function forceDeleted(Schedule $schedule)
+    public function forceDeleted()
     {
-        //
+        $log     =
+        [
+            'schedule_id'   => null,
+            'user_id'       => auth()->user()->id,
+            'action'        => '5'
+        ];
+
+        $createLog = ScheduleLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**Notify the auth()->user() */
     }
 }

@@ -14,8 +14,7 @@ class CreateCustomerLogsTable extends Migration
     public function up()
     {
         Schema::create('customer_logs', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('customer_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('customer_id')->nullable()->onUpdate('cascade')->onDelete('set null');
             $table->unsignedTinyInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
             $table->string('action', 1);

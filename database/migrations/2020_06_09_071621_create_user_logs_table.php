@@ -14,7 +14,6 @@ class CreateUserLogsTable extends Migration
     public function up()
     {
         Schema::create('user_logs', function (Blueprint $table) {
-            $table->id();
             $table->unsignedTinyInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
             $table->unsignedTinyInteger('user_action_id')->nullable();

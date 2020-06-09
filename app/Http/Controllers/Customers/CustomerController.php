@@ -127,18 +127,6 @@ class CustomerController extends Controller
 
         redirectBackIfThereIsAError($destroy);
 
-        $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', $id)->get();
-
-        $hasExpiredSchedules = hasData($expiredSchedules);
-
-        if($hasExpiredSchedules){
-            foreach($expiredSchedules as $schedule){
-                $data = $schedule->getAttributes();
-                HistoricSchedule::create($data);
-                Schedule::where('id', $data["id"])->forceDelete();
-            }
-        }
-
         return redirect()->route('customers.index')->with(['status' => Lang::get('Customer permanently deleted')]);
     }
 }
