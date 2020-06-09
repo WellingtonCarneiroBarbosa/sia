@@ -118,13 +118,7 @@ class ScheduleController extends Controller
         if($data['start'] <= $now){
             $saveOnHistoric = HistoricSchedule::create($data);
 
-            if(!$saveOnHistoric){
-                $error = Lang::get('Something went wrong. Please try again!');
-                return redirect()
-                        ->back()
-                        ->withErrors($error)
-                        ->withInput();
-            }
+            redirectBackIfThereIsAError($saveOnHistoric);
 
             return redirect()->back()->with(['status' => Lang::get(' The schedule was saved in the history section')]);
         }
@@ -167,13 +161,7 @@ class ScheduleController extends Controller
         
         $create  = Schedule::create($data);
 
-        if(!$create){
-            $error = Lang::get('Something went wrong. Please try again!');
-            return redirect()
-                    ->back()
-                    ->withErrors($error)
-                    ->withInput();
-        }
+        redirectBackIfThereIsAError($create);
 
         $log     =
         [
@@ -350,13 +338,7 @@ class ScheduleController extends Controller
 
         $scheduleUpdate = $scheduleUpdate->update($data);
 
-        if(!$scheduleUpdate){
-            $error = Lang::get('Something went wrong. Please try again!');
-            return redirect()
-                    ->back()
-                    ->withErrors($error)
-                    ->withInput();
-        }
+        redirectBackIfThereIsAError($scheduleUpdate);
 
         $log     =
         [
@@ -401,13 +383,7 @@ class ScheduleController extends Controller
     {
         $cancel  = Schedule::findOrFail($id)->delete();
 
-        if(!$cancel){
-            $error = Lang::get('Something went wrong. Please try again!');
-            return redirect()
-                    ->back()
-                    ->withErrors($error)
-                    ->withInput();
-        }
+        redirectBackIfThereIsAError($cancel);
 
         $log     =
         [

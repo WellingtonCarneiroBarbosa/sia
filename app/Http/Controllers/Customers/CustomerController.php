@@ -48,10 +48,7 @@ class CustomerController extends Controller
 
         $create = Customer::create($data);
 
-        if(!$create){
-            return redirect()
-                     ->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
-        }
+        redirectBackIfThereIsAError($create);
 
         return redirect()->back()->with(['status' => Lang::get('Registered Customer')]);
     }
@@ -96,10 +93,7 @@ class CustomerController extends Controller
     {
         $update = Customer::findOrFail($id)->update($request->all());
 
-        if(!$update)
-        {
-            return redirect()->back()->withInput()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
-        }
+        redirectBackIfThereIsAError($update);
 
         return redirect()->back()->with(['status' => Lang::get('Updated Customer')]);
     }
@@ -131,10 +125,7 @@ class CustomerController extends Controller
     {
         $destroy = Customer::destroy($id);
 
-        if(!$destroy)
-        {
-            return redirect()->back()->with(['error' -> Lang::get('Something went wrong. Please try again!')]);
-        }
+        redirectBackIfThereIsAError($destroy);
 
         $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', $id)->get();
 

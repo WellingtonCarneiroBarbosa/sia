@@ -121,13 +121,7 @@ class CanceledSchedulesController extends Controller
 
         $schedule = $schedule->restore();
 
-        if(!$schedule){
-            $error = Lang::get('Something went wrong. Please try again!');
-            return redirect()
-                    ->back()
-                    ->withErrors($error)
-                    ->withInput();
-        }
+        redirectBackIfThereIsAError($schedule);
 
         $log     =
         [
@@ -167,13 +161,7 @@ class CanceledSchedulesController extends Controller
     public function permanentlyDelete($id){
         $delete =  Schedule::onlyTrashed()->findOrFail($id)->forceDelete();
 
-        if(!$delete){
-            $error = Lang::get('Something went wrong. Please try again!');
-            return redirect()
-                    ->back()
-                    ->withErrors($error)
-                    ->withInput();
-        }
+        redirectBackIfThereIsAError($delete);
 
         $log     =
         [

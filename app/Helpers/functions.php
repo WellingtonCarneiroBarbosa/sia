@@ -302,4 +302,13 @@
 
         echo $string[0];
     }
+
+    function redirectBackIfThereIsAError($trueBoolean)
+    {
+        if(! $trueBoolean)
+        {
+            $error = Lang::get('Something went wrong. Please try again!');
+            return redirect()->back()->withErrors($error)->withInput();
+        }
+    }
    

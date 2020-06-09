@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Places;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Places\Place;
+use App\Models\Places\PlaceLog;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\HistoricSchedule;
 use Illuminate\Support\Facades\Lang;
@@ -123,13 +124,16 @@ class PlaceController extends Controller
 
         $create = Place::create($data);
 
-        if(!$create){
-            $error = Lang::get('Something went wrong. Please try again!');
-            return redirect()
-            ->back()
-            ->withErrors($error)
-            ->withInput();
-        }
+        redirectBackIfThereIsAError($create);
+
+        $dataLog = [''];
+
+        /**
+         * $createLog = PlaceLog::create($dataLog);
+         * 
+         * redirectBackIfThereIsAError($createLog);
+         * 
+         */
 
         return redirect()->back()->with(['status' => Lang::get('Registered Place')]);
     }
@@ -292,13 +296,7 @@ class PlaceController extends Controller
 
         $placeUpdate = $placeUpdate->update($data);
 
-        if(!$placeUpdate){
-            $error = Lang::get('Something went wrong. Please try again!');
-            return redirect()
-                    ->back()
-                    ->withErrors($error)
-                    ->withInput();
-        }
+        redirectBackIfThereIsAError($placeUpdate);
 
         return redirect()->back()->with(['status' => Lang::get('Updated place')]);
     }
@@ -317,6 +315,7 @@ class PlaceController extends Controller
         $howManyHistoricSchedulesAtThisPlace = HistoricSchedule::withTrashed()->where('place_id', $id)->count();
 
         $howManySchedulesAtThisPlace = $howManySchedulesAtThisPlace + $howManyHistoricSchedulesAtThisPlace;
+        
         return view('app.dashboard.places.confirm.delete', [
             'place' => $place,
             'howManySchedulesAtThisPlace' => $howManySchedulesAtThisPlace
@@ -333,9 +332,7 @@ class PlaceController extends Controller
     {
         $delete = Place::destroy($id);
 
-        if(!$delete){
-            return redirect()->back()->with(['error' -> Lang::get('Something went wrong. Please try again!')]);
-        }
+        redirectBackIfThereIsAError($delete);
 
         $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', null)->get();
 
