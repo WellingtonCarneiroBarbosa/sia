@@ -3,6 +3,19 @@
 namespace App\Observers;
 
 use App\User;
+use App\UserLog;
+
+/**
+ * ====================================
+ * LOGS CAPTION
+ *
+ * 1 == create
+ * 2 == update - role_id
+ * 3 == disable
+ * 4 == enable
+ * ====================================
+ * 
+ */
 
 class UserObserver
 {
@@ -14,7 +27,20 @@ class UserObserver
      */
     public function created(User $user)
     {
-        //
+        $log     =
+        [
+            'user_id'        => $user->id,
+            'user_action_id' => auth()->user()->id,
+            'action'         => '1'
+        ];
+
+        $createLog = UserLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**Notify the auth()->user() */
     }
 
     /**
@@ -25,7 +51,20 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        //
+        $log     =
+        [
+            'user_id'        => $user->id,
+            'user_action_id' => auth()->user()->id,
+            'action'         => '2'
+        ];
+
+        $createLog = UserLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**Notify the auth()->user() */
     }
 
     /**
@@ -36,7 +75,20 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        //
+        $log     =
+        [
+            'user_id'        => $user->id,
+            'user_action_id' => auth()->user()->id,
+            'action'         => '3'
+        ];
+
+        $createLog = UserLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**Notify the auth()->user() */
     }
 
     /**
@@ -47,17 +99,28 @@ class UserObserver
      */
     public function restored(User $user)
     {
-        //
-    }
+        $log     =
+        [
+            'user_id'        => $user->id,
+            'user_action_id' => auth()->user()->id,
+            'action'         => '4'
+        ];
 
-    /**
-     * Handle the user "force deleted" event.
-     *
-     * @param  \App\User  $user
-     * @return void
-     */
-    public function forceDeleted(User $user)
-    {
-        //
+        $createLog = UserLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**
+         * when a user is restored,
+         * it creates an unnecessary
+         * update log, here it removes
+         * this log
+         * 
+         */
+        UserLog::where('action', 2)->where('created_at', $createLog['created_at'])->delete();
+
+        /**Notify the auth()->user() */
     }
 }

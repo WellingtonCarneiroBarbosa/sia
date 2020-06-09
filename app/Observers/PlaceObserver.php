@@ -3,8 +3,20 @@
 namespace App\Observers;
 
 use App\Models\Places\Place;
+use App\Models\Places\PlaceLog;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\HistoricSchedule;
+
+/**
+ * ====================================
+ * LOGS CAPTION
+ *
+ * 1 == create
+ * 2 == update
+ * 3 == delete
+ * ====================================
+ * 
+ */
 
 class PlaceObserver
 {
@@ -16,7 +28,20 @@ class PlaceObserver
      */
     public function created(Place $place)
     {
-        //
+        $log     =
+        [
+            'place_id'      => $place->id,
+            'user_id'       => auth()->user()->id,
+            'action'        => '1'
+        ];
+
+        $createLog = PlaceLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**Notify the auth()->user() */
     }
 
     /**
@@ -27,7 +52,20 @@ class PlaceObserver
      */
     public function updated(Place $place)
     {
-        //
+        $log     =
+        [
+            'place_id'      => $place->id,
+            'user_id'       => auth()->user()->id,
+            'action'        => '2'
+        ];
+
+        $createLog = PlaceLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**Notify the auth()->user() */
     }
 
     /**
@@ -38,6 +76,21 @@ class PlaceObserver
      */
     public function deleted(Place $place)
     {
+        $log     =
+        [
+            'place_id'      => null,
+            'user_id'       => auth()->user()->id,
+            'action'        => '3'
+        ];
+
+        $createLog = PlaceLog::create($log);
+
+        if(!$createLog){
+           /**Notify the auth()->user() */
+        }
+
+        /**Notify the auth()->user() */
+
         /**
          * Move a schedule
          * to historic table
@@ -57,27 +110,5 @@ class PlaceObserver
                 Schedule::where('id', $data["id"])->forceDelete();
             }
         }
-    }
-
-    /**
-     * Handle the place "restored" event.
-     *
-     * @param  \App\Models\Places\Place  $place
-     * @return void
-     */
-    public function restored(Place $place)
-    {
-        //
-    }
-
-    /**
-     * Handle the place "force deleted" event.
-     *
-     * @param  \App\Models\Places\Place  $place
-     * @return void
-     */
-    public function forceDeleted(Place $place)
-    {
-        //
     }
 }

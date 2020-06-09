@@ -188,11 +188,7 @@ class SystemUserController extends Controller
 
         $disable = User::destroy($id);
 
-        if(!$disable)
-        {
-            return redirect()->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
-        }
-
+        redirectBackIfThereIsAError($disable);
 
         return redirect()->route('users.index')->with(['status' => Lang::get('Disabled User')]);
     }
@@ -216,12 +212,9 @@ class SystemUserController extends Controller
      * 
      */
     public function restore($id){
-        $activate = User::onlyTrashed()->restore($id);
+        $activate = User::onlyTrashed()->findOrFail($id)->restore();
 
-        if(!$activate)
-        {
-            return redirect()->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
-        }
+        redirectBackIfThereIsAError($activate);
 
         return redirect()->route('users.index')->with(['status' => Lang::get('Activated User')]);
     }
