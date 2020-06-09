@@ -63,7 +63,7 @@ class CompleteProfileController extends Controller
             'cpf'     => ['required', 'unique:users', 'string', 'min:11', 'max:15', new CPFRule()],
             'cep'     => ['required', 'string', 'min:8',  'max:9'],
             'complement_number' => ['required', 'string', 'max:8'],
-        ]);
+        ], $messages);
       
         if($validator->fails()) {
             return redirect()
