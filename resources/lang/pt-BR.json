@@ -391,6 +391,10 @@
     "Moved to the scheduling history": "Movido para o histórico de agendamentos",
     "This action changes the statistics of canceled schedules. It will not be possible to restore it, but it will be possible to consult it later in the appointment history.": "Esta ação modifica a estatística de agendamentos cancelados. Não será possível restaurá-lo, mas será possível consultá-lo posteriormente no histórico de agendamentos.",
     "Move to the historic": "Mover para o histórico",
-    "Do you really want to move to the appointment history": "Deseja realmente mover para o histórico de agendamentos"
+    "Do you really want to move to the appointment history": "Deseja realmente mover para o histórico de agendamentos",
+    "Update User": "Editar Usuário",
+    "Click to edit this user": "Clique para editar este usuário",
+    "Edit User": "Editar Usuário",
+    "Updated User": "Usuário Atualizado"
 
 }

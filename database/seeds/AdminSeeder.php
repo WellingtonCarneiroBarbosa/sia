@@ -17,7 +17,10 @@ class AdminSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Admin',
             'email' => 'admin@example.org',
+            'cpf' => '13320819917',
+            'cep' => '83065480',
             'email_verified_at' => now(),
+            'profile_completed_at' => now(),
             'role_id' => '5',
             'password' => Hash::make('password'),
         ]);

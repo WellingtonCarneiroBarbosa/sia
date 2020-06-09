@@ -89,10 +89,7 @@ class SystemUserController extends Controller
 
         $create = User::create($data);
 
-        if(!$create)
-        {
-            return redirect()->back()->with(['error' => Lang::get('Something went wrong. Please try again!')]);
-        }
+        redirectBackIfThereIsAError($create);
 
         $sendEmailVerification = $create->sendEmailVerificationNotification();
 
@@ -123,7 +120,11 @@ class SystemUserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('app.dashboard.users.edit', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -135,7 +136,30 @@ class SystemUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        /**
+         * Validate request
+         * 
+         */
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'role_id' => ['required']
+        ]);
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $dataUpdate['role_id'] = $data['role_id'];
+
+        $update = User::findOrFail($id)->update($dataUpdate);
+
+        redirectBackIfThereIsAError($update);
+
+        return redirect()->back()->with(['status' => Lang::get('Updated User')]);
     }
 
     /**
