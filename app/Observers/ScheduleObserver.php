@@ -45,7 +45,7 @@ class ScheduleObserver
         }
 
         /**Notify all users */
-
+       
     }
 
     /**
@@ -94,6 +94,8 @@ class ScheduleObserver
         }
 
         /**Notify all users */
+        $schedule['user'] = getAuthUserFirstName();
+        
         $users = User::all();
         Notification::send($users, new CanceledScheduleNotification($schedule));
     }

@@ -311,4 +311,10 @@
             return redirect()->back()->withErrors($error)->withInput();
         }
     }
-   
+
+    function getAuthUserFirstName()
+    {
+        $fullName = explode(" ", ucFirstNames(auth()->user()->name));
+        $firstName = $fullName[0];
+        return $firstName;
+    }

@@ -172,7 +172,7 @@ class ScheduleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id){
-        $schedule = Schedule::with('schedulingCustomer')
+        $schedule = Schedule::withTrashed()->with('schedulingCustomer')
                     ->with('schedulingPlace')->findOrFail($id);
 
         $now = date('Y-m-d H:i:s');

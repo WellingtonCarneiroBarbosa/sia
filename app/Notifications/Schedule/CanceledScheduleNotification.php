@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 use Lang;
 
 class CanceledScheduleNotification extends Notification
@@ -25,11 +26,12 @@ class CanceledScheduleNotification extends Notification
      */
     public function __construct($schedule)
     {
-        $this->title = $schedule->title;
-        $this->start = $schedule->start;
-        $this->end = $schedule->end;
-        $this->user_action = $schedule->user_id;
-        $this->place = $schedule->place_id;
+        $this->user         = $schedule->user;
+        $this->start        = dateTimeBrazilianFormat($schedule->start);
+        $this->end          = dateTimeBrazilianFormat($schedule->end);
+        $this->place        = $schedule->schedulingPlace['name'];
+        $this->customer     = $schedule->schedulingCustomer['corporation'];
+        $this->url          = route('schedules.show', ['id' => $schedule->id]); 
     }
 
     /**
@@ -52,11 +54,12 @@ class CanceledScheduleNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject($this->place . " " . Lang::get('está livre entre') . " " . $this->start . " " .  "e" . " " . $this->end)
+                    ->subject($this->place . " " . "está disponível entre" . " " . $this->start . " " . "e" . " " . $this->end)
                     ->greeting(Lang::get('Hello!'))
-                    ->line(Lang::get('O usuário') . " " . $this->user_action . " " . "cancelou o agendamento" . " " . $this->title)
-                    ->line(Lang::get('Portanto, o local') . " " . $this->place . " " . "está livre entre" . " " . $this->start . " " . "e" . " " . $this->end)
-                    ->line(Lang::get('Caso não deseje receber mais notificações, por favor, vá até as configurações de sua conta e desabilite as notificações'));
-                    /**->action(Lang::get('Reset Password'), $url) */
+                    ->line("<b>" . $this->user . "</b>" . " " . "cancelou o agendamento do cliente" . " " . "<b>" . $this->customer . "</b>")
+                    ->line(Lang::get('Portanto, caso necessite') . ", " . "<b>" . $this->place . "</b>" . " " . "está disponível entre" . " " . "<b>" . $this->start . "</b>" . " " . "e" . " " . "<b>" . $this->end . "</b>")
+                    ->action(Lang::get('Mais detalhes'), $this->url)
+                    ->line(Lang::get('Não deseja receber mais notificações como esta') . "?")
+                    ->line(Lang::get('Para resolver isso, por favor, vá até as configurações de sua conta e desabilite as notificações via e-mail'));
     }
 }
