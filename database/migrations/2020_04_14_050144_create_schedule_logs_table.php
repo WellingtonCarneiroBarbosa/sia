@@ -26,6 +26,8 @@ class CreateScheduleLogsTable extends Migration
              * 3 == cancel
              * 4 == restore
              * 5 == forceDelete
+             * 6 == moved to historic
+             * 
              */
             $table->string('action', 1);
             $table->timestamps();

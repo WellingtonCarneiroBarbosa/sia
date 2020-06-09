@@ -192,6 +192,16 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * Models Providers...
+         */
+        App\Providers\ScheduleModelServiceProvider::class, 
+        App\Providers\ScheduleHistoricModelServiceProvider::class,
+        App\Providers\PlaceModelServiceProvider::class, 
+        App\Providers\CustomerModelServiceProvider::class, 
+        App\Providers\UserModelServiceProvider::class, 
+        
+
     ],
 
     /*
