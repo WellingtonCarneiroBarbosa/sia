@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Schedules;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Schedules\Schedule;
-use App\Models\Schedules\ScheduleLog;
 use App\Models\Schedules\HistoricSchedule;
 use App\Models\Places\Place;
 use App\Models\Customers\Customer;
@@ -162,19 +161,6 @@ class ScheduleController extends Controller
         $create  = Schedule::create($data);
 
         redirectBackIfThereIsAError($create);
-
-        $log     =
-        [
-            'schedule_id'   => $create->id,
-            'user_id'       => auth()->user()->id,
-            'action'        => '1'
-        ];
-
-        $createLog = ScheduleLog::create($log);
-
-        if(!$createLog){
-            return abort(500);
-        }
 
         return redirect()->route('home')->with(['status' => Lang::get('Scheduling Created')]);
     }
@@ -340,19 +326,6 @@ class ScheduleController extends Controller
 
         redirectBackIfThereIsAError($scheduleUpdate);
 
-        $log     =
-        [
-            'schedule_id'   => $id,
-            'user_id'       => auth()->user()->id,
-            'action'        => '2'
-        ];
-
-        $createLog = ScheduleLog::create($log);
-
-        if(!$createLog){
-            return abort(500);
-        }
-
         return redirect()->back()->with(['status' => Lang::get('Updated schedule')]);
     }
 
@@ -384,19 +357,6 @@ class ScheduleController extends Controller
         $cancel  = Schedule::findOrFail($id)->delete();
 
         redirectBackIfThereIsAError($cancel);
-
-        $log     =
-        [
-            'schedule_id'   => $id,
-            'user_id'       => auth()->user()->id,
-            'action'        => '3'
-        ];
-
-        $createLog = ScheduleLog::create($log);
-
-        if(!$createLog){
-            return abort(500);
-        }
 
         $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', null)->get();
 

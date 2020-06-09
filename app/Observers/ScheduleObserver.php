@@ -29,7 +29,18 @@ class ScheduleObserver
      */
     public function created(Schedule $schedule)
     {
-        //
+        $log     =
+        [
+            'schedule_id'   => $create->id,
+            'user_id'       => auth()->user()->id,
+            'action'        => '1'
+        ];
+
+        $createLog = ScheduleLog::create($log);
+
+        if(!$createLog){
+            return abort(500);
+        }
     }
 
     /**

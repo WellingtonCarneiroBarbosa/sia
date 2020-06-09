@@ -8,7 +8,6 @@ use App\Models\Schedules\Schedule;
 use App\Models\Schedules\HistoricSchedule;
 use App\Models\Places\Place;
 use App\Models\Customers\Customer;
-use App\Models\Schedules\ScheduleLog;
 use Illuminate\Support\Facades\Lang;
 use DB;
 use DateTime;
@@ -122,20 +121,7 @@ class CanceledSchedulesController extends Controller
         $schedule = $schedule->restore();
 
         redirectBackIfThereIsAError($schedule);
-
-        $log     =
-        [
-            'schedule_id'   => $id,
-            'user_id'       => auth()->user()->id,
-            'action'        => '4'
-        ];
-
-        $createLog = ScheduleLog::create($log);
-
-        if(!$createLog){
-            return abort(500);
-        }
-
+        
         return redirect()->route('home')->with(['status' => Lang::get('Rescheduled')]);
     }
 
@@ -162,20 +148,7 @@ class CanceledSchedulesController extends Controller
         $delete =  Schedule::onlyTrashed()->findOrFail($id)->forceDelete();
 
         redirectBackIfThereIsAError($delete);
-
-        $log     =
-        [
-            'schedule_id'   => null,
-            'user_id'       => auth()->user()->id,
-            'action'        => '5'
-        ];
-
-        $createLog = ScheduleLog::create($log);
-
-        if(!$createLog){
-            return abort(500);
-        }
-
+        
         $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', null)->get();
 
         $hasExpiredSchedules = hasData($expiredSchedules);
