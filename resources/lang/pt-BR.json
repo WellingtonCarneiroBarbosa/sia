@@ -13,7 +13,7 @@
     "Toggle navigation": "Alternar navegação",
     "Please activate your account.": "Por favor, ative sua conta.",
     "A verification link has been sent to": "Um link de verificação foi enviado para",
-    "If you haven't received any emails, or if the link has expired,": "Se você não recebeu nenhum email, ou se o link expirou,",
+    "If you haven't received any emails, or if the link has expired, click in the button below to request another": "Se você não recebeu nenhum e-mail ou se o link expirou, clique no botão abaixo para solicitar outro",
     "click here to request another": "clique aqui para solicitar outro",
     "Please click the button below to verify your email address.": "Clique no botão abaixo para verificar seu endereço de e-mail",
     "Verify Email Address": "Verificar E-mail",
@@ -384,5 +384,7 @@
     "Complement Number": "Número de Complemento",
     "Please, enter a valid CEP": "Por favor, insira um CEP válido",
     "Validate": "Validar",
-    "You must complete step 1 before proceeding to other step": "Você deve concluir a etapa 1 antes de prosseguir para outra etapa"
+    "You must complete step 1 before proceeding to other step": "Você deve concluir a etapa 1 antes de prosseguir para outra etapa",
+    "A fresh verification link has been sent to": "Um novo link de verificação foi enviado para",
+    "Send another email": "Enviar outro e-mail"
 }
