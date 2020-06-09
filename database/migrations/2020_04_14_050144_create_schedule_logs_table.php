@@ -18,17 +18,6 @@ class CreateScheduleLogsTable extends Migration
             $table->foreignId('schedule_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->unsignedTinyInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
-            /**
-             * Captions for action
-             * 
-             * 1 == create
-             * 2 == update
-             * 3 == cancel
-             * 4 == restore
-             * 5 == forceDelete
-             * 6 == moved to historic
-             * 
-             */
             $table->string('action', 1);
             $table->timestamps();
         });

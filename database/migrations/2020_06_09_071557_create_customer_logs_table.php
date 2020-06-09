@@ -18,15 +18,6 @@ class CreateCustomerLogsTable extends Migration
             $table->foreignId('customer_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->unsignedTinyInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
-            /**
-             * Captions for action
-             * 
-             * 1 == create
-             * 2 == update
-             * 3 == delete
-             * 4 == restore
-             * 5 == forceDelete
-             */
             $table->string('action', 1);
             $table->timestamps();
         });

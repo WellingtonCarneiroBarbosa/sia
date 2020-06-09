@@ -2,17 +2,17 @@
 
 namespace App\Observers;
 
-use App\Models\Schedules\ScheduleHistoric;
+use App\Models\Schedules\HistoricSchedule;
 
 class ScheduleHistoricObserver
 {
     /**
      * Handle the schedule historic "created" event.
      *
-     * @param  \App\Models\Schedules\ScheduleHistoric  $scheduleHistoric
+     * @param  \App\Models\Schedules\HistoricSchedule  $historicSchedule
      * @return void
      */
-    public function created(ScheduleHistoric $scheduleHistoric)
+    public function created(HistoricSchedule $historicSchedule)
     {
         //
     }
@@ -20,10 +20,10 @@ class ScheduleHistoricObserver
     /**
      * Handle the schedule historic "updated" event.
      *
-     * @param  \App\Models\Schedules\ScheduleHistoric  $scheduleHistoric
+     * @param  \App\Models\Schedules\HistoricSchedule  $historicSchedule
      * @return void
      */
-    public function updated(ScheduleHistoric $scheduleHistoric)
+    public function updated(HistoricSchedule $historicSchedule)
     {
         //
     }
@@ -31,10 +31,10 @@ class ScheduleHistoricObserver
     /**
      * Handle the schedule historic "deleted" event.
      *
-     * @param  \App\Models\Schedules\ScheduleHistoric  $scheduleHistoric
+     * @param  \App\Models\Schedules\HistoricSchedule  $historicSchedule
      * @return void
      */
-    public function deleted(ScheduleHistoric $scheduleHistoric)
+    public function deleted(HistoricSchedule $historicSchedule)
     {
         //
     }
@@ -42,10 +42,10 @@ class ScheduleHistoricObserver
     /**
      * Handle the schedule historic "restored" event.
      *
-     * @param  \App\Models\Schedules\ScheduleHistoric  $scheduleHistoric
+     * @param  \App\Models\Schedules\HistoricSchedule  $historicSchedule
      * @return void
      */
-    public function restored(ScheduleHistoric $scheduleHistoric)
+    public function restored(HistoricSchedule $historicSchedule)
     {
         //
     }
@@ -53,10 +53,10 @@ class ScheduleHistoricObserver
     /**
      * Handle the schedule historic "force deleted" event.
      *
-     * @param  \App\Models\Schedules\ScheduleHistoric  $scheduleHistoric
+     * @param  \App\Models\Schedules\HistoricSchedule  $historicSchedule
      * @return void
      */
-    public function forceDeleted(ScheduleHistoric $scheduleHistoric)
+    public function forceDeleted(HistoricSchedule $historicSchedule)
     {
         //
     }

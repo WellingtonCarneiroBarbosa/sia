@@ -19,13 +19,6 @@ class CreatePlaceLogsTable extends Migration
             $table->foreign('place_id')->references('id')->on('places')->onUpdate('cascade')->onDelete('set null');
             $table->unsignedTinyInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
-            /**
-             * Captions for action
-             * 
-             * 1 == create
-             * 2 == update
-             * 3 == delete
-             */
             $table->string('action', 1);
             $table->timestamps();
         });

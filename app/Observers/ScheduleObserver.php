@@ -2,61 +2,76 @@
 
 namespace App\Observers;
 
-use App\Models\Users\User;
+use App\Models\Schedules\Schedule;
+use App\Models\Schedules\ScheduleLog;
+
+/**
+ * ====================================
+ * LOGS CAPTION
+ *
+ * 1 == create
+ * 2 == update
+ * 3 == delete
+ * 4 == restore
+ * 5 == forceDelete
+ * 6 == moved to historic
+ * ====================================
+ * 
+ */
 
 class ScheduleObserver
 {
     /**
-     * Handle the user "created" event.
+     * Handle the schedule "created" event.
      *
-     * @param  \App\Models\Users\User  $user
+     * @param  \App\Models\Schedules\Schedule  $schedule
      * @return void
      */
-    public function created(User $user)
+    public function created(Schedule $schedule)
     {
         //
     }
 
     /**
-     * Handle the user "updated" event.
+     * Handle the schedule "updated" event.
      *
-     * @param  \App\Models\Users\User  $user
+     * @param  \App\Models\Schedules\Schedule  $schedule
      * @return void
      */
-    public function updated(User $user)
+    public function updated(Schedule $schedule)
     {
         //
     }
 
     /**
-     * Handle the user "deleted" event.
+     * Handle the schedule "deleted" event.
      *
-     * @param  \App\Models\Users\User  $user
+     * @param  \App\Models\Schedules\Schedule  $schedule
      * @return void
      */
-    public function deleted(User $user)
+    public function deleted(Schedule $schedule)
     {
         //
     }
 
     /**
-     * Handle the user "restored" event.
+     * Handle the schedule "restored" event.
      *
-     * @param  \App\Models\Users\User  $user
+     * @param  \App\Models\Schedules\Schedule  $schedule
      * @return void
      */
-    public function restored(User $user)
+    public function restored(Schedule $schedule)
     {
         //
     }
 
     /**
-     * Handle the user "force deleted" event.
+     * Handle the schedule "force deleted" event.
      *
-     * @param  \App\Models\Users\User  $user
+     * @param  \App\Models\Schedules\Schedule  $schedule
      * @return void
      */
-    public function forceDeleted(User $user)
+    public function forceDeleted(Schedule $schedule)
     {
         //
     }

@@ -19,14 +19,6 @@ class CreateUserLogsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
             $table->unsignedTinyInteger('user_action_id')->nullable();
             $table->foreign('user_action_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
-            /**
-             * Captions for action
-             * 
-             * 1 == create
-             * 2 == update
-             * 3 == disable
-             * 4 == enable
-             */
             $table->string('action', 1);
             $table->timestamps();
         });
