@@ -59,8 +59,10 @@
 <!-- status -->
 <div class="form-group mb-3">
     <span>{{ __("Status") }}:</span>
-
-    @if($now > $schedule->start && $now < $schedule->end)
+    @if(isset($schedule->schedule_id))
+        <i class="bg-danger"></i>
+        <strong class="status">{{ __("Expired") }}</strong>
+    @elseif($now > $schedule->start && $now < $schedule->end)
         <i class="bg-success"></i>
         <strong class="status">{{ __("In progress") }}</strong>
     @elseif($now > $schedule->start && $now >= $schedule->end)

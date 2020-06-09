@@ -27,13 +27,11 @@ class HistoricController extends Controller
         $hasPlaces    = hasData($places);
         $hasCustomers = hasData($customers);
 
-        $now = date('Y-m-d H:i:s');
-
         return view('app.dashboard.schedules.historic.index',
         [
             'schedules' => $schedules, 'hasSchedules' => $hasSchedules,
             'hasPlaces' => $hasPlaces, 'hasCustomers' => $hasCustomers,
-            'places' => $places, 'customers' => $customers, 'now' => $now
+            'places' => $places, 'customers' => $customers
         ]);
     }
 
@@ -49,6 +47,8 @@ class HistoricController extends Controller
 
         $now = date('Y-m-d H:i:s');
 
-        return view('app.dashboard.schedules.show', ['schedule' => $schedule, 'now' => $now]);
+        return view('app.dashboard.schedules.show', [
+            'schedule' => $schedule, 'now' => $now,
+        ]);
     }
 }

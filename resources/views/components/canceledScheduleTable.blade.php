@@ -56,27 +56,8 @@
 
                             <td>
                                 <span class="badge badge-dot mr-4">
-
-                                    @if($now > $schedule->start && $now < $schedule->end)
-                                        <i class="bg-success"></i>
-                                        <span class="status">{{ __("In progress") }}</span>
-                                    @elseif($now > $schedule->start && $now >= $schedule->end)
-                                        <i class="bg-danger"></i>
-                                        <span class="status">{{ __("Finalized") }}</span>
-                                    @elseif(!$schedule->place_id)
-                                        <i class="bg-danger"></i>
-                                        <span class="status">{{ __("Expired") }}</span>
-                                    @elseif($schedule->deleted_at != null)
-                                        <i class="bg-danger"></i>
-                                        <span class="status">{{ __("canceled") }}</span>
-                                    @elseif (!$schedule->status)
-                                        <i class="bg-warning"></i>
-                                        <span class="status">{{ __("On budget") }}</span>
-                                    @elseif($schedule->status)
-                                        <i class="bg-success"></i>
-                                        <span class="status">{{ __("Confirmed") }}</span>
-                                    @endif
-                                    
+                                    <i class="bg-danger"></i>
+                                    <span class="status">{{ __("canceled") }}</span>
                                 </span>
                             </td>
 
@@ -99,10 +80,8 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
                                         <a class="dropdown-item" href="{{ route('schedules.canceled.show', ['id' => $schedule->id]) }}">{{ __("View more") }}</a>
-                                        @if($now <= $schedule->start || $now <= $schedule->end && $schedule->place_id && $now <= $schedule->start &&  $now >= $schedule->end)
                                         <a class="dropdown-item" href="{{ route('schedules.confirm.restore', ['id' => $schedule->id]) }}">{{ __("Reschedule") }}</a>
-                                        <a class="dropdown-item" href="{{ route('schedules.confirm.permanentlyDelete', ['id' => $schedule->id]) }}">{{ __("Delete Permanently") }}</a>
-                                        @endif
+                                        <a class="dropdown-item" href="{{ route('schedules.confirm.permanentlyDelete', ['id' => $schedule->id]) }}">{{ __("Move to the historic") }}</a>
                                     </div>
                                 </div>
                             </td>

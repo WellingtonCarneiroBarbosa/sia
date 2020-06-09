@@ -89,9 +89,10 @@
         $submitButton.prop('disabled', true);
 
         $("#validate").click(function (){
-            $cep = $("#cep").val();
+            $cepElement = $("#cep");
             $cepLabel = $("#cep-label");
             $cepMessage = $("#cep-message");
+            $cep = $cepElement.val();
 
             /**
             * Elements
@@ -110,6 +111,7 @@
                 $cepLabel.hide();
                 $cepMessage.html("{{ __('Please, enter a valid CEP') }}")
                 $cepMessage.show();
+                $cepElement.focus();
             }
     
             /**
@@ -134,14 +136,14 @@
 
                     if(! response.uf ){
                         errorMessage()
+                    }else {
+                        $state.val(response.uf);
+                        $city.val(response.localidade);
+                        $neighborhood.val(response.bairro);
+                        $address.val(response.logradouro);
+                        $loader.hide();
+                        $complementNumber.focus();
                     }
-
-                    $state.val(response.uf);
-                    $city.val(response.localidade);
-                    $neighborhood.val(response.bairro);
-                    $address.val(response.logradouro);
-                    $loader.hide();
-                    $complementNumber.focus();
                 },
     
                 error: function () {

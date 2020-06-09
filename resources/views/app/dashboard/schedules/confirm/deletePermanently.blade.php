@@ -8,7 +8,7 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Do you really want to delete permanently this scheduling") }}?</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">{{ __("Do you really want to move to the appointment history") }}?</h6>
                 </div>
                 <div class="col-lg-6 col-5 text-right">
                     <a onclick="comeBack();" class="btn btn-sm btn-neutral">{{ __("No, go back to canceled appointments") }}</a>
@@ -31,11 +31,7 @@
                     <strong>
                         *
                         <span class="text-muted">
-                            {{ __("Permanently delete modifies the statistics for canceled schedules") }}.
-                            <br>
-                            <br>
-                            {{ __("Besides that, it will be ") }}<u class="text-danger">{{ __("impossible") }}</u>
-                            {{ __("to restore this schedule and see his logs") }}
+                           {{ __("This action changes the statistics of canceled schedules. It will not be possible to restore it, but it will be possible to consult it later in the appointment history.") }}
                         </span>
                         *
                     </strong>

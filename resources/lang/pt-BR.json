@@ -387,5 +387,10 @@
     "You must complete step 1 before proceeding to other step": "Você deve concluir a etapa 1 antes de prosseguir para outra etapa",
     "A fresh verification link has been sent to": "Um novo link de verificação foi enviado para",
     "Send another email": "Enviar outro e-mail",
-    "This CPF is already registered in the system. If you believe this is a mistake, contact": "Este CPF já está cadastrado no sistema. Se você acredita que isto é um engano, contate"
+    "This CPF is already registered in the system. If you believe this is a mistake, contact": "Este CPF já está cadastrado no sistema. Se você acredita que isto é um engano, contate",
+    "Moved to the scheduling history": "Movido para o histórico de agendamentos",
+    "This action changes the statistics of canceled schedules. It will not be possible to restore it, but it will be possible to consult it later in the appointment history.": "Esta ação modifica a estatística de agendamentos cancelados. Não será possível restaurá-lo, mas será possível consultá-lo posteriormente no histórico de agendamentos.",
+    "Move to the historic": "Mover para o histórico",
+    "Do you really want to move to the appointment history": "Deseja realmente mover para o histórico de agendamentos"
+
 }

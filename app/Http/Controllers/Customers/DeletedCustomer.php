@@ -10,7 +10,7 @@ class DeletedCustomer extends Controller
 {
     public function index()
     {
-        $customers = Customer::withTrashed()->paginate(config('app.paginate_limit'));
+        $customers = Customer::onlyTrashed()->paginate(config('app.paginate_limit'));
 
         $hasCustomers = hasData($customers);
 

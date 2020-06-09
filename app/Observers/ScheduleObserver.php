@@ -13,7 +13,7 @@ use App\Models\Schedules\ScheduleLog;
  * 2 == update
  * 3 == delete
  * 4 == restore
- * 5 == forceDelete
+ * 5 == forceDelete (move to historic)
  * ====================================
  * 
  */

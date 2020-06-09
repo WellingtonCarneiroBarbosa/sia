@@ -31,8 +31,6 @@ class CanceledSchedulesController extends Controller
         $hasPlaces    = hasData($places);
         $hasCustomers = hasData($customers);
 
-        $now = date('Y-m-d H:i:s');
-
         return view('app.dashboard.schedules.canceled', [
             'schedules'         => $canceledSchedules,
             'hasSchedules'      => $hasCanceledSchedules,
@@ -40,7 +38,6 @@ class CanceledSchedulesController extends Controller
             'hasPlaces'                 => $hasPlaces,
             'customers'                 => $customers, 
             'hasCustomers'              => $hasCustomers,
-            'now'                       => $now
         ]);
     }
 
@@ -141,14 +138,28 @@ class CanceledSchedulesController extends Controller
     }
 
     /**
-     * Delete
+     * Move to historic table and
+     * delete from confirmed 
+     * table
      * 
      */
     public function permanentlyDelete($id){
-        $delete =  Schedule::onlyTrashed()->findOrFail($id)->forceDelete();
-
-        redirectBackIfThereIsAError($delete);
+        $scheduleToDelete = Schedule::onlyTrashed()->findOrFail($id);
+        $scheduleToDeleteData = $scheduleToDelete->getAttributes();
         
+        $scheduleToDeleteData['schedule_id'] = $id;
+        $moveToHistoric = historicSchedule::create($scheduleToDeleteData);
+        redirectBackIfThereIsAError($moveToHistoric);
+
+        $delete = $scheduleToDelete->forceDelete();
+        redirectBackIfThereIsAError($delete);
+
+        /**
+         * Verify if has
+         * another invalid
+         * schedule
+         * 
+         */
         $expiredSchedules = Schedule::withTrashed()->where('place_id', null)->orWhere('customer_id', null)->get();
 
         $hasExpiredSchedules = hasData($expiredSchedules);
@@ -161,6 +172,6 @@ class CanceledSchedulesController extends Controller
             }
         }
 
-        return redirect()->route('schedules.canceled')->with(['status' => Lang::get('Permanently deleted')]);
+        return redirect()->route('schedules.canceled')->with(['status' => Lang::get('Moved to the scheduling history')]);
     }
 }

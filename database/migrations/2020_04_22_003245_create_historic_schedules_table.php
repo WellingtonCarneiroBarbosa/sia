@@ -14,6 +14,7 @@ class CreateHistoricSchedulesTable extends Migration
     public function up()
     {
         Schema::create('historic_schedules', function (Blueprint $table) {
+            $table->id();
             $table->integer('schedule_id');
             $table->string('title', 40);
             $table->unsignedTinyInteger('place_id')->nullable();

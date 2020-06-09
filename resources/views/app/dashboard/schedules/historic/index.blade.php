@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-xl-12">
             @if($hasSchedules)
-                @component('components.historicScheduleTable', ['schedules' => $schedules, 'now' => $now])@endcomponent
+                @component('components.historicScheduleTable', ['schedules' => $schedules])@endcomponent
             @else
                 @component('components.noData', ['message' => Lang::get('We still have nothing to display. Here, expired and invalid schedules will be displayed')])@endcomponent
             @endif
