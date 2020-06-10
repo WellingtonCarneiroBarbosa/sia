@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Notification;
 use App\Notifications\Schedule\CanceledScheduleNotification;
 use App\Notifications\Schedule\RescheduledNotification;
 use App\Notifications\Schedule\ScheduledNotification;
+use App\Notifications\Schedule\UpdatedScheduleNotification;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\ScheduleLog;
 use App\User;
@@ -46,17 +47,17 @@ class ScheduleObserver
            /**Notify the auth()->user() */
         }
 
-        /**Notify all users */
-        $schedule['user'] = getAuthUserFirstName();
-
         /**
          * Convert datetime object
          * to string
          * 
          */
-        $schedule['start'] = date_format($schedule['start'], 'Y-m-d H:i');
-        $schedule['end']   = date_format($schedule['end'], 'Y-m-d H:i');
+        $schedule['start'] = date_format($schedule['start'], 'Y-m-d H:i:s');
+        $schedule['end']   = date_format($schedule['end'], 'Y-m-d H:i:s');
 
+        $schedule['user'] = getAuthUserFirstName();
+
+        /**Notify all users */
         $users = User::where('id', '!=', auth()->user()->id)->get();
         Notification::send($users, new ScheduledNotification($schedule));
        
@@ -83,7 +84,29 @@ class ScheduleObserver
            /**Notify the auth()->user() */
         }
 
-        /**Notify all users */
+
+        /**
+         * Convert datetime object
+         * to string
+         * 
+         */
+        $schedule['start'] = date_format($schedule['start'], 'Y-m-d H:i:s');
+        $schedule['end']   = date_format($schedule['end'], 'Y-m-d H:i:s');
+
+        /**
+         * Verify if the 
+         * schedule date
+         * was updated
+         * 
+         */
+        if($schedule['start'] != $schedule->getOriginal('start') || $schedule['end'] != $schedule->getOriginal('end'))
+        {
+            /**Notify all users */   
+            $schedule['user'] = getAuthUserFirstName();
+
+            $users = User::where('id', '!=', auth()->user()->id)->get();
+            Notification::send($users, new UpdatedScheduleNotification($schedule));   
+        }
     }
 
     /**

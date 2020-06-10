@@ -287,6 +287,9 @@ class ScheduleController extends Controller
 
         $scheduleUpdate  = Schedule::findOrFail($id);
 
+        $scheduleStartBeforeUpdate = $scheduleUpdate['start'];
+        $scheduleEndBeforeUpdate = $scheduleUpdate['end'];
+
         /**
           * Validate if the place is avaible
           * to schedule
@@ -322,11 +325,29 @@ class ScheduleController extends Controller
                     ->withInput();
         }
 
-        $scheduleUpdate = $scheduleUpdate->update($data);
+        $updated = $scheduleUpdate->update($data);
 
-        redirectBackIfThereIsAError($scheduleUpdate);
+        redirectBackIfThereIsAError($updated);
 
-        return redirect()->back()->with(['status' => Lang::get('Updated schedule')]);
+        /**
+         * Convert datetime object
+         * to string
+         * 
+         */
+        $data['start'] = date_format($data['start'], 'Y-m-d H:i:s');
+        $data['end']   = date_format($data['end'], 'Y-m-d H:i:s');
+
+        if($data['start'] != $scheduleStartBeforeUpdate || $data['end'] != $scheduleEndBeforeUpdate)
+        {
+            $message = Lang::get('Updated schedule') . ". " . Lang::get('System users were notified via email');
+        }
+        else
+        {
+            $message = Lang::get('Updated schedule');
+        }
+        
+
+        return redirect()->back()->with(['status' => $message]);
     }
 
     /**

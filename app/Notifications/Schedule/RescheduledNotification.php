@@ -55,7 +55,7 @@ class RescheduledNotification extends Notification
         return (new MailMessage)
         ->subject($this->place . " " . "está INDISPONÍVEL entre" . " " . $this->start . " " . "e" . " " . $this->end)
                 ->greeting(Lang::get('Hello!'))
-                ->line("<b>" . $this->user . "</b>" . " " . "reagendou o evento do cliente" . " " . "<b>" . $this->customer . "</b>")
+                ->line("<b>" . $this->user . "</b>" . " " . "reagendou o evento do(a) cliente" . " " . "<b>" . $this->customer . "</b>")
                 ->line(Lang::get('Portanto') . ", " . "<b>" . $this->place . "</b>" . " " . "está INDISPONÍVEL entre" . " " . "<b>" . $this->start . "</b>" . " " . "e" . " " . "<b>" . $this->end . "</b>")
                 ->action(Lang::get('Mais detalhes'), $this->url)
                 ->line(Lang::get('Não deseja receber mais notificações como esta') . "?")
