@@ -4,6 +4,8 @@ namespace App\Observers;
 
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\Schedule\CanceledScheduleNotification;
+use App\Notifications\Schedule\RescheduledNotification;
+use App\Notifications\Schedule\ScheduledNotification;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\ScheduleLog;
 use App\User;
@@ -45,6 +47,18 @@ class ScheduleObserver
         }
 
         /**Notify all users */
+        $schedule['user'] = getAuthUserFirstName();
+
+        /**
+         * Convert datetime object
+         * to string
+         * 
+         */
+        $schedule['start'] = date_format($schedule['start'], 'Y-m-d H:i');
+        $schedule['end']   = date_format($schedule['end'], 'Y-m-d H:i');
+
+        $users = User::where('id', '!=', auth()->user()->id)->get();
+        Notification::send($users, new ScheduledNotification($schedule));
        
     }
 
@@ -131,6 +145,10 @@ class ScheduleObserver
         ScheduleLog::where('action', 2)->where('created_at', $createLog['created_at'])->delete();
 
         /**Notify all users */
+        $schedule['user'] = getAuthUserFirstName();
+
+        $users = User::where('id', '!=', auth()->user()->id)->get();
+        Notification::send($users, new RescheduledNotification($schedule));
     }
 
     /**

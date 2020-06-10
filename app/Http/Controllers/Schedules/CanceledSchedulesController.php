@@ -119,7 +119,7 @@ class CanceledSchedulesController extends Controller
 
         redirectBackIfThereIsAError($schedule);
         
-        return redirect()->route('home')->with(['status' => Lang::get('Rescheduled')]);
+        return redirect()->route('home')->with(['status' => Lang::get('Rescheduled') . ". " . Lang::get('System users were notified via email')]);
     }
 
     /**

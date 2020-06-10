@@ -8,11 +8,11 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Lang;
 
-class CanceledScheduleNotification extends Notification
+class RescheduledNotification extends Notification
 {
     use Queueable;
 
-    /**
+    /**   
      * Schedule data
      * 
      */
@@ -53,12 +53,25 @@ class CanceledScheduleNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject($this->place . " " . "está DISPONÍVEL entre" . " " . $this->start . " " . "e" . " " . $this->end)
+        ->subject($this->place . " " . "está INDISPONÍVEL entre" . " " . $this->start . " " . "e" . " " . $this->end)
                 ->greeting(Lang::get('Hello!'))
-                ->line("<b>" . $this->user . "</b>" . " " . "cancelou o agendamento do cliente" . " " . "<b>" . $this->customer . "</b>")
-                ->line(Lang::get('Portanto, caso necessite') . ", " . "<b>" . $this->place . "</b>" . " " . "está DISPONÍVEL entre" . " " . "<b>" . $this->start . "</b>" . " " . "e" . " " . "<b>" . $this->end . "</b>")
+                ->line("<b>" . $this->user . "</b>" . " " . "reagendou o evento do cliente" . " " . "<b>" . $this->customer . "</b>")
+                ->line(Lang::get('Portanto') . ", " . "<b>" . $this->place . "</b>" . " " . "está INDISPONÍVEL entre" . " " . "<b>" . $this->start . "</b>" . " " . "e" . " " . "<b>" . $this->end . "</b>")
                 ->action(Lang::get('Mais detalhes'), $this->url)
                 ->line(Lang::get('Não deseja receber mais notificações como esta') . "?")
                 ->line(Lang::get('Para resolver isso, por favor, vá até as configurações de sua conta e desabilite as notificações via e-mail'));
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
+    {
+        return [
+            //
+        ];
     }
 }

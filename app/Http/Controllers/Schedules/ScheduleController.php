@@ -162,7 +162,7 @@ class ScheduleController extends Controller
 
         redirectBackIfThereIsAError($create);
 
-        return redirect()->route('home')->with(['status' => Lang::get('Scheduling Created')]);
+        return redirect()->route('home')->with(['status' => Lang::get('Scheduling Created') . ". " . Lang::get('System users were notified via email')]);
     }
 
     /**
