@@ -53,7 +53,7 @@ class CanceledScheduleNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject($this->place . " " . "está DISPONÍVEL entre" . " " . $this->start . " " . "e" . " " . $this->end)
+                ->subject($this->place . " " . "está DISPONÍVEL entre" . " " . $this->start . " " . "e" . " " . $this->end)
                 ->greeting(Lang::get('Hello!'))
                 ->line("<b>" . $this->user . "</b>" . " " . "cancelou o agendamento do(a) cliente" . " " . "<b>" . $this->customer . "</b>")
                 ->line(Lang::get('Portanto, caso necessite') . ", " . "<b>" . $this->place . "</b>" . " " . "está DISPONÍVEL entre" . " " . "<b>" . $this->start . "</b>" . " " . "e" . " " . "<b>" . $this->end . "</b>")

@@ -53,7 +53,7 @@ class ScheduledNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject($this->place . " " . "está INDISPONÍVEL entre" . " " . $this->start . " " . "e" . " " . $this->end)
+                ->subject($this->place . " " . "está INDISPONÍVEL entre" . " " . $this->start . " " . "e" . " " . $this->end)
                 ->greeting(Lang::get('Hello!'))
                 ->line("<b>" . $this->user . "</b>" . " " . "agendou um evento para o(a) cliente" . " " . "<b>" . $this->customer . "</b>")
                 ->line(Lang::get('Portanto') . ", " . "<b>" . $this->place . "</b>" . " " . "está INDISPONÍVEL entre" . " " . "<b>" . $this->start . "</b>" . " " . "e" . " " . "<b>" . $this->end . "</b>")

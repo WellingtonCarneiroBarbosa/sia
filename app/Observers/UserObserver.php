@@ -2,6 +2,9 @@
 
 namespace App\Observers;
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\User\DisabledUserNotification;
+use App\Notifications\User\EnabledUserNotification;
 use App\User;
 use App\UserLog;
 
@@ -88,7 +91,8 @@ class UserObserver
            /**Notify the auth()->user() */
         }
 
-        /**Notify all users */
+        /**Notify the disabled user */
+        Notification::send($user, new DisabledUserNotification());
     }
 
     /**
@@ -121,6 +125,7 @@ class UserObserver
          */
         UserLog::where('action', 2)->where('created_at', $createLog['created_at'])->delete();
 
-        /**Notify all users */
+        /**Notify the enabled user */
+        Notification::send($user, new EnabledUserNotification($user));
     }
 }

@@ -397,5 +397,6 @@
     "Edit User": "Editar Usuário",
     "Updated User": "Usuário Atualizado",
     "System users were notified via email": "Os usuários do sistema foram notificados via e-mail",
-    "Customer deleted" : "Cliente deletado"
+    "Customer deleted" : "Cliente deletado",
+    "The user has been notified via email": "O usuário foi notificado via e-mail"
 }

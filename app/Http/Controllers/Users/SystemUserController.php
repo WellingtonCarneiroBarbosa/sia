@@ -190,7 +190,7 @@ class SystemUserController extends Controller
 
         redirectBackIfThereIsAError($disable);
 
-        return redirect()->route('users.index')->with(['status' => Lang::get('Disabled User')]);
+        return redirect()->route('users.index')->with(['status' => Lang::get('Disabled User') . ". " . Lang::get('The user has been notified via email')]);
     }
 
     /**
@@ -216,6 +216,6 @@ class SystemUserController extends Controller
 
         redirectBackIfThereIsAError($activate);
 
-        return redirect()->route('users.index')->with(['status' => Lang::get('Activated User')]);
+        return redirect()->route('users.index')->with(['status' => Lang::get('Activated User') . ". " . Lang::get('The user has been notified via email')]);
     }
 }
