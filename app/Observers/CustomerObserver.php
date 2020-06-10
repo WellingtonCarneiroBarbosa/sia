@@ -2,10 +2,13 @@
 
 namespace App\Observers;
 
+use Illuminate\Support\Facades\Notification;
 use App\Models\Customers\Customer;
 use App\Models\Customers\CustomerLog;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\HistoricSchedule;
+use App\Notifications\Customer\DeletedCustomerNotification;
+use App\User;
 
 /**
  * ====================================
@@ -103,5 +106,14 @@ class CustomerObserver
                 Schedule::where('id', $data["id"])->forceDelete();
             }
         }
+
+        /**
+         * Notify all users
+         * 
+         */
+        $customer['user'] = getAuthUserFirstName();
+
+        $users = User::where('id', '!=', auth()->user()->id)->get();
+        Notification::send($users, new DeletedCustomerNotification($customer));
     }
 }

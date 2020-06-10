@@ -127,6 +127,6 @@ class CustomerController extends Controller
 
         redirectBackIfThereIsAError($destroy);
 
-        return redirect()->route('customers.index')->with(['status' => Lang::get('Customer permanently deleted')]);
+        return redirect()->route('customers.index')->with(['status' => Lang::get('Customer deleted') . ". " . Lang::get('System users were notified via email')]);
     }
 }

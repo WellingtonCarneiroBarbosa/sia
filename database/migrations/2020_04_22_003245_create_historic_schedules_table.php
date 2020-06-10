@@ -15,7 +15,7 @@ class CreateHistoricSchedulesTable extends Migration
     {
         Schema::create('historic_schedules', function (Blueprint $table) {
             $table->id();
-            $table->integer('schedule_id');
+            $table->integer('schedule_id')->nullable();
             $table->string('title', 40);
             $table->unsignedTinyInteger('place_id')->nullable();
             $table->foreign('place_id')->references('id')->on('places')->onUpdate('cascade')->onDelete('set null');

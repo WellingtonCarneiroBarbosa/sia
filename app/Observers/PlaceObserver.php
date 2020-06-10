@@ -2,10 +2,13 @@
 
 namespace App\Observers;
 
+use Illuminate\Support\Facades\Notification;
 use App\Models\Places\Place;
 use App\Models\Places\PlaceLog;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\HistoricSchedule;
+use App\Notifications\Place\DeletedPlaceNotification;
+use App\User;
 
 /**
  * ====================================
@@ -89,8 +92,6 @@ class PlaceObserver
            /**Notify the auth()->user() */
         }
 
-        /**Notify all users */
-
         /**
          * Move a schedule
          * to historic table
@@ -110,5 +111,14 @@ class PlaceObserver
                 Schedule::where('id', $data["id"])->forceDelete();
             }
         }
+
+        /**
+         * Notify all users
+         * 
+         */
+        $place['user'] = getAuthUserFirstName();
+
+        $users = User::where('id', '!=', auth()->user()->id)->get();
+        Notification::send($users, new DeletedPlaceNotification($place));
     }
 }

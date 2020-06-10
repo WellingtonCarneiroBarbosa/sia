@@ -334,6 +334,6 @@ class PlaceController extends Controller
 
         redirectBackIfThereIsAError($delete);
 
-        return redirect()->route('places.index')->with(['status' => Lang::get('Place deleted')]);
+        return redirect()->route('places.index')->with(['status' => Lang::get('Place permanently deleted') . ". " . Lang::get('System users were notified via email')]);
     } 
 }
