@@ -67,37 +67,40 @@ class ScheduleObserver
      */
     public function updated(Schedule $schedule)
     {
-        $log     =
-        [
-            'schedule_id'   => $schedule->id,
-            'user_id'       => auth()->user()->id,
-            'action'        => '2'
-        ];
-        
-        ScheduleLog::create($log);
+        /**Impede que o método seja utilizado caso a coluna deleted_at seja alterada */
+        if(! $schedule->isDirty($schedule->getDeletedAtColumn()) && count($schedule->getDirty()) != 1){
+            $log     =
+            [
+                'schedule_id'   => $schedule->id,
+                'user_id'       => auth()->user()->id,
+                'action'        => '2'
+            ];
+            
+            ScheduleLog::create($log);
 
-        /**
-         * Convert datetime object
-         * to string
-         * 
-         */
-        $schedule['start'] = date_format($schedule['start'], 'Y-m-d H:i:s');
-        $schedule['end']   = date_format($schedule['end'], 'Y-m-d H:i:s');
+            /**
+             * Convert datetime object
+             * to string
+             * 
+             */
+            $schedule['start'] = date_format($schedule['start'], 'Y-m-d H:i:s');
+            $schedule['end']   = date_format($schedule['end'], 'Y-m-d H:i:s');
 
-        /**
-         * Verify if the 
-         * schedule date
-         * was updated
-         * 
-         */
-        if($schedule['start'] != $schedule->getOriginal('start') || $schedule['end'] != $schedule->getOriginal('end'))
-        {
-            /**Notify all users */   
-            $schedule['user'] = getAuthUserFirstName();
+            /**
+             * Verify if the 
+             * schedule date
+             * was updated
+             * 
+             */
+            if($schedule['start'] != $schedule->getOriginal('start') || $schedule['end'] != $schedule->getOriginal('end'))
+            {
+                /**Notify all users */   
+                $schedule['user'] = getAuthUserFirstName();
 
-            $users = User::where('id', '!=', auth()->user()->id)->get();
-            Notification::send($users, new UpdatedScheduleNotification($schedule));   
-        }
+                $users = User::where('id', '!=', auth()->user()->id)->get();
+                Notification::send($users, new UpdatedScheduleNotification($schedule));   
+            }
+        }    
     }
 
     /**
@@ -108,20 +111,27 @@ class ScheduleObserver
      */
     public function deleted(Schedule $schedule)
     {
-        $log     =
-        [
-            'schedule_id'   => $schedule->id,
-            'user_id'       => auth()->user()->id,
-            'action'        => '3'
-        ];
+        /**
+         * Impede que crie o log caso esteja sendo realizado o metodo
+         * force delete
+         * 
+         */
+        if ($schedule->isForceDeleting()) {
+            $log     =
+            [
+                'schedule_id'   => $schedule->id,
+                'user_id'       => auth()->user()->id,
+                'action'        => '3'
+            ];
 
-        ScheduleLog::create($log);
+            ScheduleLog::create($log);
 
-        /**Notify all users */
-        $schedule['user'] = getAuthUserFirstName();
+            /**Notify all users */
+            $schedule['user'] = getAuthUserFirstName();
 
-        $users = User::where('id', '!=', auth()->user()->id)->get();
-        Notification::send($users, new CanceledScheduleNotification($schedule));
+            $users = User::where('id', '!=', auth()->user()->id)->get();
+            Notification::send($users, new CanceledScheduleNotification($schedule));
+        }
     }
 
     /**
@@ -140,15 +150,6 @@ class ScheduleObserver
         ];
 
         ScheduleLog::create($log);
-
-        /**
-         * when a schedule is restored,
-         * it creates an unnecessary
-         * update log, here it removes
-         * this log
-         * 
-         */
-        ScheduleLog::where('action', 2)->where('created_at', $createLog['created_at'])->delete();
 
         /**Notify all users */
         $schedule['user'] = getAuthUserFirstName();
@@ -173,5 +174,7 @@ class ScheduleObserver
         ];
 
         ScheduleLog::create($log);
+
+        /**Notify all users */
     }
 }
