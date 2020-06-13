@@ -37,13 +37,8 @@ class UserObserver
             'action'         => '1'
         ];
 
-        $createLog = UserLog::create($log);
+        UserLog::create($log);
 
-        if(!$createLog){
-           /**Notify the auth()->user() */
-        }
-
-        /**Notify all users */
     }
 
     /**
@@ -61,13 +56,7 @@ class UserObserver
             'action'         => '2'
         ];
 
-        $createLog = UserLog::create($log);
-
-        if(!$createLog){
-           /**Notify the auth()->user() */
-        }
-
-        /**Notify all users */
+        UserLog::create($log);
     }
 
     /**
@@ -85,11 +74,7 @@ class UserObserver
             'action'         => '3'
         ];
 
-        $createLog = UserLog::create($log);
-
-        if(!$createLog){
-           /**Notify the auth()->user() */
-        }
+        UserLog::create($log);
 
         /**Notify the disabled user */
         Notification::send($user, new DisabledUserNotification());
@@ -111,10 +96,6 @@ class UserObserver
         ];
 
         $createLog = UserLog::create($log);
-
-        if(!$createLog){
-           /**Notify the auth()->user() */
-        }
 
         /**
          * when a user is restored,

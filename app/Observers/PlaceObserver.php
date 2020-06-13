@@ -38,13 +38,7 @@ class PlaceObserver
             'action'        => '1'
         ];
 
-        $createLog = PlaceLog::create($log);
-
-        if(!$createLog){
-           /**Notify the auth()->user() */
-        }
-
-        /**Notify all users */
+        PlaceLog::create($log);
     }
 
     /**
@@ -62,13 +56,7 @@ class PlaceObserver
             'action'        => '2'
         ];
 
-        $createLog = PlaceLog::create($log);
-
-        if(!$createLog){
-           /**Notify the auth()->user() */
-        }
-
-        /**Notify all users */
+        PlaceLog::create($log);
     }
 
     /**
@@ -86,11 +74,7 @@ class PlaceObserver
             'action'        => '3'
         ];
 
-        $createLog = PlaceLog::create($log);
-
-        if(!$createLog){
-           /**Notify the auth()->user() */
-        }
+        PlaceLog::create($log);
 
         /**
          * Move a schedule

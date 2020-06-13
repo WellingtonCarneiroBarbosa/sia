@@ -41,11 +41,7 @@ class ScheduleObserver
             'action'        => '1'
         ];
 
-        $createLog = ScheduleLog::create($log);
-
-        if(!$createLog){
-           /**Notify the auth()->user() */
-        }
+        ScheduleLog::create($log);
 
         /**
          * Convert datetime object
@@ -77,13 +73,8 @@ class ScheduleObserver
             'user_id'       => auth()->user()->id,
             'action'        => '2'
         ];
-
-        $createLog = ScheduleLog::create($log);
-
-        if(!$createLog){
-           /**Notify the auth()->user() */
-        }
-
+        
+        ScheduleLog::create($log);
 
         /**
          * Convert datetime object
@@ -124,11 +115,7 @@ class ScheduleObserver
             'action'        => '3'
         ];
 
-        $createLog = ScheduleLog::create($log);
-
-        if(!$createLog){
-           /**Notify the auth()->user() */
-        }
+        ScheduleLog::create($log);
 
         /**Notify all users */
         $schedule['user'] = getAuthUserFirstName();
@@ -152,11 +139,7 @@ class ScheduleObserver
             'action'        => '4'
         ];
 
-        $createLog = ScheduleLog::create($log);
-
-        if(!$createLog){
-           /**Notify the auth()->user() */
-        }
+        ScheduleLog::create($log);
 
         /**
          * when a schedule is restored,
@@ -189,12 +172,6 @@ class ScheduleObserver
             'action'        => '5'
         ];
 
-        $createLog = ScheduleLog::create($log);
-
-        if(!$createLog){
-           /**Notify the auth()->user() */
-        }
-
-        /**Notify all users */
+        ScheduleLog::create($log);
     }
 }
