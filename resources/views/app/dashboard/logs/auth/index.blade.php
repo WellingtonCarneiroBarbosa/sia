@@ -83,6 +83,9 @@
 <div class="container">
     <div class="espaco"></div>
     <h1>{{ __('Listing your latest') }} {{ $quantity_logs }} {{ __('system activities - max') }}: {{ $max_quantity_logs }}</h1>
+    
+    <hr>
+    
     <ul>
         @foreach ($schedules_log as $log)
         <li>{{ __("You") }}
