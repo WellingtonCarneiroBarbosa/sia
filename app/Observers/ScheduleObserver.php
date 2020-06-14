@@ -164,11 +164,11 @@ class ScheduleObserver
      * @param  \App\Models\Schedules\Schedule  $schedule
      * @return void
      */
-    public function forceDeleted()
+    public function forceDeleted(Schedule $schedule)
     {
         $log     =
         [
-            'schedule_id'   => null,
+            'schedule_id'   => $schedule->id,
             'user_id'       => auth()->user()->id,
             'action'        => '5'
         ];

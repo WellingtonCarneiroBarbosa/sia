@@ -92,8 +92,10 @@
             <strong>{{ $log->action }}</strong>
             {{ __("a schedule") }} <u>{{ $log->created_at->diffForHumans() }}</u>
             -
-            @if($log->schedule_id)
+            @if($log->schedule_id && $log->schedule_log['id'])
                 <a href="{{ route('schedules.show', ['id' => $log->schedule_id]) }}">Visualizar agendamento</a>
+            @elseif($log->schedule_id)
+                <a href="{{ route('schedules.historic.show', ['id' => $log->schedule_id]) }}">Visualizar agendamento</a>
             @else
                 <i>Visualização não disponível</i>
             @endif
