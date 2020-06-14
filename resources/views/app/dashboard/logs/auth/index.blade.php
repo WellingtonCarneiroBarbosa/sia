@@ -91,6 +91,12 @@
         <li>{{ __("You") }}
             <strong>{{ $log->action }}</strong>
             {{ __("a schedule") }} <u>{{ $log->created_at->diffForHumans() }}</u>
+            -
+            @if($log->schedule_id)
+                <a href="{{ route('schedules.show', ['id' => $log->schedule_id]) }}">Visualizar agendamento</a>
+            @else
+                <i>Visualização não disponível</i>
+            @endif
         </li>
         @endforeach
     </ul>
@@ -102,6 +108,8 @@
         <li>{{ __("You") }}
             <strong>{{ $log->action }}</strong>
             {{ __("a customer") }} <u>{{ $log->created_at->diffForHumans() }}</u>
+            -
+            <a href="{{ route('customers.show', ['id' => $log->customer_id]) }}">Visualizar cliente</a>
         </li>
         @endforeach
     </ul>
@@ -113,8 +121,14 @@
         <li>{{ __("You") }}
             <strong>{{ $log->action }}</strong>
             {{ __("a place") }} <u>{{ $log->created_at->diffForHumans() }}</u>
-        </li>
-        @endforeach
+            -
+            @if($log->place_id)
+                <a href="{{ route('places.show', ['id' => $log->place_id]) }}">Visualizar local</a>
+            @else
+                <i>Visualização não disponível</i>
+            @endif
+            @endforeach
+        </li>   
     </ul>
 </div>
 @endsection
