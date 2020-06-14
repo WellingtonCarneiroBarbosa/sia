@@ -25,6 +25,11 @@ class CustomerLog extends Model
 
    public $timestamps = true;
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
    public function customer_log()
    {
        return $this->hasOne(Customer::class, 'id', 'customer_id');

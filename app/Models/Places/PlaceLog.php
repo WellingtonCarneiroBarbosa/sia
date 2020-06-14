@@ -25,6 +25,11 @@ class PlaceLog extends Model
 
     public $timestamps = true;
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function place_log()
     {
         return $this->hasOne(Place::class, 'id', 'place_id');

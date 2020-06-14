@@ -25,6 +25,11 @@ class UserLog extends Model
 
     public $timestamps = true;
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function user_log()
     {
         return $this->hasOne(User::class, 'id', 'user_id');

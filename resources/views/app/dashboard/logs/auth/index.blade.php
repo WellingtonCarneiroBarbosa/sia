@@ -85,9 +85,9 @@
     <h1>{{ __('Listing your latest') }} {{ $quantity_logs }} {{ __('system activities - max') }}: {{ $max_quantity_logs }}</h1>
     <ul>
         @foreach ($schedules_log as $log)
-        <li>Você
+        <li>{{ __("You") }}
             <strong>{{ $log->action }}</strong>
-            um agendamento em <u>{{ dateTimeBrazilianFormat($log->created_at) }}</u>
+            {{ __("a schedule") }} <u>{{ $log->created_at->diffForHumans() }}</u>
         </li>
         @endforeach
     </ul>
@@ -96,9 +96,9 @@
 
     <ul>
         @foreach ($customers_log as $log)
-        <li>Você
+        <li>{{ __("You") }}
             <strong>{{ $log->action }}</strong>
-            um cliente em <u>{{ dateTimeBrazilianFormat($log->created_at) }}</u>
+            {{ __("a customer") }} <u>{{ $log->created_at->diffForHumans() }}</u>
         </li>
         @endforeach
     </ul>
@@ -107,9 +107,9 @@
 
     <ul>
         @foreach ($places_log as $log)
-        <li>Você
+        <li>{{ __("You") }}
             <strong>{{ $log->action }}</strong>
-            um local em <u>{{ dateTimeBrazilianFormat($log->created_at) }}</u>
+            {{ __("a place") }} <u>{{ $log->created_at->diffForHumans() }}</u>
         </li>
         @endforeach
     </ul>

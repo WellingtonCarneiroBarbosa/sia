@@ -25,6 +25,11 @@ class ScheduleLog extends Model
 
     public $timestamps = true;
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function schedule_log()
     {
         return $this->hasOne(Schedule::class, 'id', 'schedule_id');
