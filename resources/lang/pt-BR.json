@@ -98,7 +98,7 @@
     "Settings": "Configurações",
     "Click to go to the settings page": "Clique para ir para a página de configurações",
     "Logs": "Registros",
-    "Click to go to your logs page": "Clique para ir para a página de registros",
+    "Click to go to your logs page": "Clique para ir para visualizar sua atividade no sistema",
     "Help us understand how your system experience is going. If an error has occurred, please describe it.": "Nos ajude a entender como está sendo sua experiência no sistema. Se algum erro ocorreu, por favor, descreva-o.",
     "Enter details here": "Digite os detalhes aqui",
     "Send": "Enviar",
@@ -398,5 +398,13 @@
     "Updated User": "Usuário Atualizado",
     "System users were notified via email": "Os usuários do sistema foram notificados via e-mail",
     "Customer deleted" : "Cliente deletado",
-    "The user has been notified via email": "O usuário foi notificado via e-mail"
+    "The user has been notified via email": "O usuário foi notificado via e-mail",
+    "My Activity": "Minha Atividade",
+    "registered": "cadastrou",
+    "updated": "editou",
+    "revoked": "cancelou",
+    "restored": "restaurou",
+    "deleted": "deletou",
+    "Listing your latest": "Listando suas últimas",
+    "system activities - max": "atividades no sistema - máximo"
 }

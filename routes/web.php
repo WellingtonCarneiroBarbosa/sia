@@ -360,9 +360,16 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
          * 
          */
         Route::group(['prefix' => 'logs'], function () {
-            Route::get('/me', function () {
-                return 'ok';
-            })->name('myLogs');
+
+            /**
+             * Logs for auth user
+             * 
+             */
+            Route::group(['prefix' => 'me'], function () {
+                Route::get('/', 'Logs\AuthUserLogController@index')
+                                                  ->name('logs.me');
+            });
+
         });
 
         /***

@@ -249,9 +249,9 @@
                                     <i class="ni ni-settings-gear-65"></i>
                                     <span {{ __("Click to go to the settings page") }}>{{ __("Settings") }}</span>
                                 </a>
-                                <a href="{{ route('myLogs') }}" class="dropdown-item">
+                                <a href="{{ route('logs.me') }}" class="dropdown-item">
                                     <i class="ni ni-calendar-grid-58"></i>
-                                    <span title="{{ __("Click to go to your logs page") }}">{{ __("Logs") }}</span>
+                                    <span title="{{ __("Click to go to your logs page") }}">{{ __("My Activity") }}</span>
                                 </a>
                                 <a href="#" data-toggle="modal" data-target="#modal-feedback" class="dropdown-item">
                                     <i class="ni ni-support-16"></i>
