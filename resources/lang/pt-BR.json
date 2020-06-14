@@ -415,5 +415,10 @@
     "You have not yet performed any activity on the system": "Você ainda não realizou nenhuma atividade no sistema",
     "enabled": "ativou",
     "deactivated": "desativou",
-    "Preview not available": "Visualização não disponível"
+    "Preview not available": "Visualização não disponível",
+    "Listing latest": "Listando as últimas",
+    "system activities from": "atividades no sistema de",
+    "max": "máximo",
+    "Show Activity": "Visualizar Atividade",
+    "have not yet performed any activity on the system": "não realizou nenhuma atividade no sistema ainda"
 }

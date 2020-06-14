@@ -318,3 +318,10 @@
         $firstName = $fullName[0];
         return $firstName;
     }
+    
+    function getUserFirstName($fullName)
+    {
+        $fullName = explode(" ", ucFirstNames($fullName));
+        $firstName = $fullName[0];
+        return $firstName;
+    }

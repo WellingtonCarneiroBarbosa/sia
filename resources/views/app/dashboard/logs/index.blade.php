@@ -107,10 +107,10 @@
 <div class="container">
     <div class="espaco"></div>
     @if($quantity_logs > 0)
-        <h1>{{ __('Listing your latest') }} {{ $quantity_logs }} {{ __('system activities - max') }}: {{ $max_quantity_logs }}</h1>
+        <h1>{{ $title }}</h1>
 
         @component('components.logsBody', [
-            'user' => Lang::get('You'), 'users_log' => $users_log,
+            'user' => $user_name, 'users_log' => $users_log,
             'schedules_log' => $schedules_log, 'customers_log' => $customers_log,
             'places_log' => $places_log
             ])
@@ -118,7 +118,7 @@
         @endcomponent
         
     @else 
-        @component('components.noData', ['message' => Lang::get('You have not yet performed any activity on the system')])@endcomponent
+        @component('components.noData', ['message' => $noDataMessage])@endcomponent
     @endif
 </div>
 @endsection

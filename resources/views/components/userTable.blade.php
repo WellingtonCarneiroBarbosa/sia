@@ -69,6 +69,7 @@
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow align-items-center">
                                         <a class="dropdown-item" href="{{ route('users.show', ['id' => $user->id]) }}">{{ __("View more") }}</a>
                                         @if(auth()->user()->role_id == 5)
+                                            <a class="dropdown-item" href="{{ route('logs.user', ['id' => $user->id]) }}">{{ __("Show Activity") }}</a>
                                             <a class="dropdown-item" href="{{ route('users.edit', ['id' => $user->id]) }}">{{ __("Edit") }}</a>
                                             @if($user->deleted_at)
                                             <a class="dropdown-item" href="{{ route('users.confirmRestore', ['id' => $user->id]) }}">{{ __("Activate") }}</a>

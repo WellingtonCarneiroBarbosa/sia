@@ -7,18 +7,21 @@ use Illuminate\Http\Request;
 use App\Models\Schedules\ScheduleLog;
 use App\Models\Places\PlaceLog;
 use App\Models\Customers\CustomerLog;
+use App\User;
 use App\UserLog;
 use Auth, Lang;
 
-class AuthUserLogController extends Controller
+class UserLogController extends Controller
 {
     /**
      * Returns all logs
      * 
      */
-    public function index()
+    public function index($id)
     {
-        $user_id = Auth::user()->id;
+        $user = User::withTrashed()->findOrFail($id);
+
+        $user_id = $user['id'];
 
         $limit_per_log = 10;
 
@@ -39,17 +42,17 @@ class AuthUserLogController extends Controller
 
         $quantity_logs = count($schedules_log) + count($places_log) + count($customers_log) + count($users_log);
 
-        $user_name = Lang::get('You'); 
+        $user_name = getUserFirstName($user->name);
 
-        $title = Lang::get('Listing your latest') . " " . $quantity_logs . " " . Lang::get('system activities - max') . ":" . " " . $max_quantity_logs;
+        $title = Lang::get('Listing latest') . " " . $quantity_logs . " " . Lang::get('system activities from') . " " . $user_name . " " . Lang::get('max') . ":" . " " . $max_quantity_logs;
 
-        $noDataMessage = Lang::get('You have not yet performed any activity on the system');
-        
+        $noDataMessage = $user_name . " " . Lang::get('have not yet performed any activity on the system');
+
         return view('app.dashboard.logs.index', [
             'schedules_log' => $schedules_log, 'places_log'    => $places_log,
             'customers_log' => $customers_log, 'quantity_logs' => $quantity_logs,
             'users_log'     => $users_log,     'max_quantity_logs' => $max_quantity_logs,
-            'user_name'     => $user_name,     'title' => $title,
+            'user_name'     => $user_name,     'title' => $title, 
             'noDataMessage' => $noDataMessage,
         ]);
     }

@@ -370,6 +370,15 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
                                                   ->name('logs.me');
             });
 
+            /**
+             * Logs for other users
+             * 
+             */
+            Route::group(['prefix' => 'user', 'middleware' => 'admin'], function () {
+                Route::get('/{id}', 'Logs\UserLogController@index')
+                                                ->name('logs.user');
+            });
+
         });
 
         /***
