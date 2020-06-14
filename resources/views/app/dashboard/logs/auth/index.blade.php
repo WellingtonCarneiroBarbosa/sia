@@ -82,9 +82,9 @@
 @section('content')
 <div class="container">
     <div class="espaco"></div>
-    <h1>{{ __('Listing your latest') }} {{ $quantity_logs }} {{ __('system activities - max') }}: {{ $max_quantity_logs }}</h1>
-    
     @if(count($schedules_log) > 0)
+        <h1>{{ __('Listing your latest') }} {{ $quantity_logs }} {{ __('system activities - max') }}: {{ $max_quantity_logs }}</h1>
+    
         <hr>
         <ul>
             @foreach ($schedules_log as $log)
@@ -102,9 +102,9 @@
             </li>
             @endforeach
         </ul>
-    @endif
+ 
 
-    @if(count($customers_log) > 0)
+
         <hr>
         <ul>
             @foreach ($customers_log as $log)
@@ -116,9 +116,9 @@
             </li>
             @endforeach
         </ul>
-    @endif
+  
 
-    @if(count($places_log) > 0)
+
         <hr>
         <ul>
             @foreach ($places_log as $log)
@@ -134,6 +134,8 @@
                 @endforeach
             </li>   
         </ul>
+    @else 
+    @component('components.noData', ['message' => Lang::get('You have not yet performed any activity on the system')])@endcomponent
     @endif
 </div>
 @endsection
