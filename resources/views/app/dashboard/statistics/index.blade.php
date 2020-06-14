@@ -63,7 +63,7 @@
               <div class="row">
                   <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">{{ __("Canceled appointments this month") }}</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ $howManyNewSchedules }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ $howManyCanceledSchedules }}</span>
                   </div>
                   <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -92,7 +92,8 @@
 
 
       {{-- Table Stats Start--}}
-      <div class="row">
+      {{--  
+        <div class="row">
         <div class="col-xl-12">
           <div class="card bg-default">
             <div class="card-header bg-transparent">
@@ -129,6 +130,7 @@
           </div>
         </div>
       </div>
+        --}}
       {{-- End Table Stats --}}
 @endsection
 
