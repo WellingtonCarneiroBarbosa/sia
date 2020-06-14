@@ -49,7 +49,7 @@
                   @endif
             
                   <span class="text-nowrap">{{ __("Since ") }}
-                    {{ ucfirst($lastMonth) }}
+                    {{ ucfirst(__($lastMonth)) }}
                   </span>
                 </p>
             </div>
@@ -81,7 +81,7 @@
                 @endif
           
                 <span class="text-nowrap">{{ __("Since ") }}
-                  {{ ucfirst($lastMonth) }}
+                  {{ ucfirst(__($lastMonth)) }}
                 </span>
               </p>
           </div>
