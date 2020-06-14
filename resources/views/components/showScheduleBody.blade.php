@@ -14,9 +14,9 @@
 <div class="form-group mb-3">
     <span>{{ __("Place") }}:</span>
     <strong>
-        @if($schedule->schedulingPlace['name'])
+        @if(isset($schedule->schedulingPlace['name']))
             {{ $schedule->schedulingPlace['name'] }}
-        @elseif($schedule->historicSchedulingPlace['name']) 
+        @elseif(isset($schedule->historicSchedulingPlace['name'])) 
             {{ $schedule->historicSchedulingPlace['name'] }}
         @else 
             {{ __("Undefined") }}
@@ -46,9 +46,9 @@
 <div class="form-group mb-3">
     <span>{{ __("Customer") }}:</span>
     <strong>
-        @if($schedule->schedulingCustomer['corporation']) 
+        @if(isset($schedule->schedulingCustomer['corporation'])) 
             {{ $schedule->schedulingCustomer['corporation'] }}
-        @elseif($schedule->historicSchedulingCustomer['corporation'])
+        @elseif(isset($schedule->historicSchedulingCustomer['corporation']))
             {{ $schedule->historicSchedulingCustomer['corporation'] }}
         @else 
             {{ __("Undefined") }}
