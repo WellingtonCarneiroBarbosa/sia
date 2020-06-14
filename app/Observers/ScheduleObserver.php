@@ -116,7 +116,7 @@ class ScheduleObserver
          * force delete
          * 
          */
-        if ($schedule->isForceDeleting()) {
+        if (! $schedule->isForceDeleting()) {
             $log     =
             [
                 'schedule_id'   => $schedule->id,
