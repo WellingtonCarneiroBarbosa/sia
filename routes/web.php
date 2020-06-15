@@ -502,7 +502,7 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
  * Complete profile routes
  * 
  */
- Route::group(['middleware' => ['web', 'auth', 'verified'], 'prefix' => 'complete-profile'], function () {
+ Route::group(['middleware' => ['web', 'auth', 'verified', 'notCompletedProfileYet'], 'prefix' => 'complete-profile'], function () {
 
     Route::get('/', 'Users\CompleteProfileController@index')
                             ->name('complete.profile.index');

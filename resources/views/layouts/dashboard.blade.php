@@ -397,6 +397,7 @@
                                     <li>Sistema permitia o usuário trocar sua hierarquia no sistema</li>
                                     <li>Exibe status de agendamento confirmado quando o agendamento está no histórico de agendamentos</li>
                                     <li>Visualizar senha não funciona</li>
+                                    <li>Usuário conseguia acessar área de completar perfil mesmo já tendo completado antes</li>
                                 </ul>
                             </div>
                         </div>                         

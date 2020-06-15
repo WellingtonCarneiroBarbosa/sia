@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\CheckAdmin::class,
         'completeProfile' => \App\Http\Middleware\CheckCompleteProfile::class,
         'isIDEqualAuthUserId' => \App\Http\Middleware\CheckAuthUser::class,
+        'notCompletedProfileYet' => \App\Http\Middleware\AlreadyCompletedProfileCheck::class,
     ];
 }

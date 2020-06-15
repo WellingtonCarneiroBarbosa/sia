@@ -15,6 +15,9 @@ class AlreadyCompletedProfileCheck
      */
     public function handle($request, Closure $next)
     {
+        if(auth()->user()->completed_profile_at){
+            return redirect()->route('home');
+        }
         return $next($request);
     }
 }
