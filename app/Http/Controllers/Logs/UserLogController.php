@@ -44,7 +44,7 @@ class UserLogController extends Controller
 
         $user_name = getUserFirstName($user->name);
 
-        $title = Lang::get('Listing latest') . " " . $quantity_logs . " " . Lang::get('system activities from') . " " . $user_name . " " . Lang::get('max') . ":" . " " . $max_quantity_logs;
+        $title = Lang::get('Listing latest') . " " . $quantity_logs . " " . Lang::get('system activities from') . " " . $user_name . " " . Lang::get('- max') . ":" . " " . $max_quantity_logs;
 
         $noDataMessage = $user_name . " " . Lang::get('have not yet performed any activity on the system');
 
