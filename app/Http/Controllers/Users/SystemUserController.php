@@ -94,7 +94,7 @@ class SystemUserController extends Controller
 
         $sendEmailVerification = $create->sendEmailVerificationNotification();
 
-        return redirect()->back()->with(['status' => Lang::get('Registered User')]);
+        return redirect()->back()->with(['status' => Lang::get('Registered User. Login data was sent via email to the new user')]);
     }
 
     /**

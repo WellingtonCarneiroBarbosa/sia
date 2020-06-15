@@ -300,7 +300,7 @@
     "Do you really want to activate this user": "Deseja realmente ativar este usuário",
     "This user will be activated. He can log in and make changes to the system.": "Este usuário será ativado. Ele poderá realizar login e alterações no sistema.",
     "Activated User": "Usuário Ativado",
-    "Registered User": "Usuário Cadastrado",
+    "Registered User. Login data was sent via email to the new user": "Usuário Cadastrado. Os dados de login foram enviados via e-mail para o novo usuário",
     "Register User": "Cadastrar Usuário",
     "Click here to register this user": "Clique aqui para cadastrar este usuário",
     "User Full Name": "Nome Completo do Usuário",
