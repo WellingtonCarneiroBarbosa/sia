@@ -15,7 +15,7 @@ class AlreadyCompletedProfileCheck
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->completed_profile_at != null){
+        if(auth()->user()->profile_completed_at != null){
             return redirect()->route('home');
         }
         return $next($request);
