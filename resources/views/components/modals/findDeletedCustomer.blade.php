@@ -1,5 +1,5 @@
 <div class="modal-filtros fade" id="modal-filter" tabindex="-1" role="dialog" aria-labelledby="modal-filter" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="espacol"></div>
             <div class="text-center">
