@@ -10,7 +10,7 @@ class CreateTicketsTable extends Migration
      * Run the migrations.
      *
      * @return void
-     */
+     
     public function up()
     {
         Schema::create('tickets', function (Blueprint $table) {
@@ -26,6 +26,7 @@ class CreateTicketsTable extends Migration
             $table->softDeletes();
         });
     }
+    */
 
     /**
      * Reverse the migrations.

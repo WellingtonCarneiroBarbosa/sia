@@ -10,7 +10,7 @@ class CreateDemandsTable extends Migration
      * Run the migrations.
      *
      * @return void
-     */
+    
     public function up()
     {
         Schema::create('demands', function (Blueprint $table) {
@@ -21,7 +21,8 @@ class CreateDemandsTable extends Migration
             $table->timestamps();
         });
     }
-
+     */
+    
     /**
      * Reverse the migrations.
      *
