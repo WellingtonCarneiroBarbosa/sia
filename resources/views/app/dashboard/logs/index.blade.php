@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', Lang::get('My Activity'))
+@section('title', Lang::get('Logs'))
 
 @php 
     $created = Lang::get('registered');
