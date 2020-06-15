@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Validator, Auth, Lang;
 
 class LoginController extends Controller
 {
@@ -37,4 +39,30 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * public function login(Request $request)
+    {
+        $input = $request->all();
+   
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+   
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        {
+            if (Auth::user()->role_id < 5) {
+                return redirect()->route('home');
+            }else{
+                return redirect()->route('support.home');
+            }
+        }else{
+            return redirect()->route('login')->with(['error' => Lang::get('Incorrect login and/or password(s). Try again')]);
+        }
+          
+    }
+     */
+       
+   
 }

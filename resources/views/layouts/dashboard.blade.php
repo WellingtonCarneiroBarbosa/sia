@@ -14,7 +14,7 @@
     <!-- Styles -->
     <link href="{{ asset('dashboard/assets/vendor/nucleo/css/nucleo.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('dashboard/assets/css/argon.css?v=1.2.0') }}" rel="stylesheet">
+    <link href="{{ asset('dashboard/assets/css/argon.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/loading.css') }}" rel="stylesheet" />
 
     <!--
@@ -196,26 +196,26 @@
                                         <span class="shortcut-media avatar rounded-circle bg-gradient-red">
                                                 <i class="ni ni-calendar-grid-58"></i>
                                             </span>
-                                        <small title="{{ __(" Click to go to the calendar ") }}">{{ __("Calendar") }}</small>
+                                        <small title="{{ __("Click to go to the calendar") }}">{{ __("Calendar") }}</small>
                                     </a>
                                     <a target="_blank" href="https://login.live.com/login.srf?wa=wsignin1.0&rpsnv=13&ct=1582478452&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%3a%2f%2foutlook.live.com%2fowa%2f%3fnlp%3d1%26RpsCsrfState%3ddeb00056-f05f-7220-28a5-906686de2d85&id=292841&aadredir=1&CBCXT=out&lw=1&fl=dob%2cflname%2cwld&cobrandid=90015"
                                         class="col-4 shortcut-item">
                                         <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
                                                 <i class="ni ni-email-83"></i>
                                             </span>
-                                        <small title="{{ __(" Click to go to the microsoft e-mail ") }}">{{ __("E-mail") }}</small>
+                                        <small title="{{ __("Click to go to the microsoft e-mail") }}">{{ __("E-mail") }}</small>
                                     </a>
-                                    <a href="#" data-toggle="modal" data-target="#modal-feedback" class="col-4 shortcut-item">
+                                    <a href="#" data-toggle="modal" data-target="#modal-feedback" onclick="em_desenvolvimento_alert()" class="col-4 shortcut-item">
                                         <span class="shortcut-media avatar rounded-circle bg-gradient-green">
                                                 <i class="ni ni-support-16"></i>
                                             </span>
-                                        <small title="{{ __(" Click to send a feedback for the developers ") }}">{{ __("Feedback") }}</small>
+                                        <small title="{{ __("Click to send a feedback for the developers") }}">{{ __("Feedback") }}</small>
                                     </a>
                                     <a href="{{route('home')}}" class="col-4 shortcut-item">
                                         <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
                                                 <i class="fa fa-calendar"></i>
                                             </span>
-                                        <small title="{{ __(" Click to manage the appointments ") }}">{{ __("Schedules") }}</small>
+                                        <small title="{{ __("Click to manage the appointments") }}">{{ __("Schedules") }}</small>
                                     </a>
                                 </div>
                             </div>
@@ -239,28 +239,33 @@
                             </a>
                             <div class="dropdown-menu  dropdown-menu-right ">
                                 <div class="dropdown-header noti-title">
-                                    <h6 class="text-overflow m-0">{{ __("Hello!") }}</h6>
+                                    <h6 class="text-overflow m-0">{{ __("System version") }}: {{ config('app.version') }}</h6>
                                 </div>
-                                <a href="{{route('myProfile.index')}}" class="dropdown-item">
+                                <a href="{{route('myProfile.index')}}" class="dropdown-item"  title="{{ __("Click to go to the your profile page") }}">
                                     <i class="ni ni-single-02"></i>
-                                    <span title="{{ __("Click to go to the your profile page") }}">{{ __("My Profile") }}</span>
+                                    <span>{{ __("My Profile") }}</span>
                                 </a>
-                                <a href="#!" onclick="em_desenvolvimento_alert()" class="dropdown-item">
+                                <a href="#!" onclick="em_desenvolvimento_alert()" class="dropdown-item" title="{{ __("Click to go to the settings page") }}">
                                     <i class="ni ni-settings-gear-65"></i>
-                                    <span {{ __("Click to go to the settings page") }}>{{ __("Settings") }}</span>
+                                    <span>{{ __("Settings") }}</span>
                                 </a>
-                                <a href="{{ route('logs.me') }}" class="dropdown-item">
+                                <a href="{{ route('logs.me') }}" class="dropdown-item"  title="{{ __("Click to go to your logs page") }}">
                                     <i class="ni ni-calendar-grid-58"></i>
-                                    <span title="{{ __("Click to go to your logs page") }}">{{ __("My Activity") }}</span>
+                                    <span>{{ __("My Activity") }}</span>
                                 </a>
-                                <a href="#" data-toggle="modal" data-target="#modal-feedback" class="dropdown-item">
+                                <a href="#!" onclick="em_desenvolvimento_alert()" class="dropdown-item" title="{{ __("Click to request help") }}"> 
                                     <i class="ni ni-support-16"></i>
-                                    <span title="{{ __("Click to send a feedback for the developers") }}">{{ __("Feedback") }}</span>
+                                    <span>{{ __("Support") }}</span>
                                 </a>
 
-                                <a href="{{ route('manual.index') }}" class="dropdown-item">
-                                    <i class="ni ni-support-16"></i>
-                                    <span title="{{ __("Click to see the aplication manual") }}">{{ __("Manual") }}</span>
+                                <a href="#!" onclick="em_desenvolvimento_alert()"  class="dropdown-item" title="{{ __("Click to see the system manual") }}">
+                                    <i class="fa fa-book"></i>
+                                    <span>{{ __("Manual") }}</span>
+                                </a>
+
+                                <a href="#!" data-toggle="modal" data-target="#atualization-notes"  class="dropdown-item" title="{{ __("Click to see the atualization notes") }}">
+                                    <i class="fa fa-bookmark"></i>
+                                    <span>{{ __("Atualization Notes") }}</span>
                                 </a>
 
                                 <div class="dropdown-divider"></div>
@@ -277,11 +282,13 @@
                 </div>
             </div>
         </nav>
+
         <div id="app">
             <!-- conteudo da pagina -->
             @yield('content')
         </div>
-        <!-- Footer -->
+        
+   
         <hr>
         <footer class="footer pt-0">
             <div class="row align-items-center justify-content-lg-between">
@@ -306,85 +313,126 @@
             </div>
         </footer>
 
-        <!--Modal de feedback de erro-->
-        <div class="col-md-4">
-            <div class="modal fade" id="modal-feedback" tabindex="-1" role="dialog" aria-labelledby="modal-feedback" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body p-0">
-                            <div class="card bg-secondary shadow border-0">
-                                <div class="card-body px-lg-10 py-lg-10">
-                                    @if ($errors->any())
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <span class="alert-inner--text"><i class="fas fa-thumbs-down"></i><strong> Ops...</strong>
-                                                <ul>
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                                </ul>
-                                            </span>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                    </div>
-                                    @endif
-                                    <div class="text-center">
-                                        <h3>{{ __("Feedback") }}</h3>
-                                    </div>
-                                    <div class="text-center text-muted mb-4">
-                                        <small>{{ __("Help us understand how your system experience is going. If an error has occurred, please describe it.") }}</small>
-                                    </div>
-                                    <form method="POST" action="{{ route('feedback.create') }}" class="form-loader">
-                                        @csrf
-                                        <!-- Nome de quem esta reportando o erro -->
-
-                                        <input id="id_usuario" type="hidden" class="form-control @error('id_usuario') is-invalid @enderror" name="id_usuario" value="{{ auth()->user()->id }}" required>
-
-                                        <!-- Removivel -->
-                                        <!-- fim do nome de quem esta reportando o erro -->
-
-                                        <!-- detalhes do bug -->
-                                        <div class="form-group mb-3">
-                                            <div class="input-group input-group-alternative">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="ni ni-align-left-2"></i></span>
-                                                </div>
-                                                <textarea title="{{ __(" Fill this field ") }}" id="descricao" required style="min-height: 10em;" placeholder="{{ __(" Enter details here ") }}" class="form-control @error('descricao') is-invalid @enderror" name="descricao" value="{{ old('detalhes') }}"></textarea>
-                                            </div>
-                                        </div>
-                                        <!-- fim do detalhes do bug -->
-                                        <!-- submit button -->
-                                        <div class="text-center">
-                                            <button type="button" class="btn btn-outline-primary  ml-auto" data-dismiss="modal">{{ __("Cancel") }}</button>
-                                            <button type="submit" class="btn btn-primary my-4">{{ __("Send") }}</button>
-                                        </div>
-                                        <!-- fim do submit button -->
-                                    </form>
-                                </div>
-                            </div>
+        <div id="atualization-notes" class="modal h-100" style="overflow-y: auto;" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Notas da Atualização {{ config('app.version') }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="nav-wrapper">
+                            <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="whats-new-tab" data-toggle="tab" href="#whats-new" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true">O que há de novo</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="whats-updated-tab" data-toggle="tab" href="#whats-updated" role="tab" aria-controls="whats-updated" aria-selected="false">O que mudou</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="whats-corrected-tab" data-toggle="tab" href="#whats-corrected" role="tab" aria-controls="whats-updated" aria-selected="false">Bugs</a>
+                                </li>
+                            </ul>
                         </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade active show" id="whats-new" role="tabpanel" aria-labelledby="whats-new">
+                                <h3>O que há de novo?</h3>
+                                <ul>
+                                    <li>Gerenciamento de locais</li>
+                                    <li>Gerenciamento de clientes</li>
+                                    <li>Gerenciamento de usuários</li>
+                                    <li>Histórico de agendamentos</li>
+                                    <li>Agendamentos são movidos automaticamente para o histórico quando expiram ou são inválidos</li>
+                                    <li>Notificações automatizadas via e-mail</li>
+                                    <li>Loader para ações que possam demorar</li>
+                                    <li>Painel de estatísticas</li>
+                                    <li>Verificar se local está disponível em um período específico</li>
+                                    <li>Disponível em Português e Inglês</li>
+                                    <li>Conclusão de cadastro em etapas</li>
+                                    <li>Mensagem quando não há nada para exibir</li>
+                                    <li>Landing Page sobre o sistema</li>
+                                    <li>Validação de todos os dados inseridos para evitar equívocos</li>
+                                    <li>Visualizar dados do meu perfil</li>
+                                    <li>Logs de atividade</li>
+                                    <li>Descrição do que o botão faz ao deixar o mouse em cima do botão por 1 segundo</li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane fade" id="whats-updated" role="tabpanel" aria-labelledby="whats-updated-tab">
+                                <h3>O que mudou?</h3>
+                                <ul>
+                                    <li>Adicionado novos campos em cadastrar local</li>
+                                    <li>Adicionado campo participantes em cadastrar agendamento</li>
+                                    <li>Quando um agendamento tem a data anterior à atual, ele é movido automaticamente para a seção de histórico</li>
+                                    <li>Um agendamento não é mais deletado permanentemente, é movido para a seção de histórico</li>
+                                    <li>Ativar/Desativar um usuário</li>
+                                    <li>Os usuários não tem acesso à funcionalidades de administradores</li>
+                                    <li>Notificação à todos os usuários quando um local está reservado, ou deixou de estar reservado</li>
+                                    <li>6 novos status em que um agendamento pode se encontrar:</li>
+                                    <ul>
+                                        <li>Confirmado</li>
+                                        <li>Cancelado</li>
+                                        <li>Em progresso</li>
+                                        <li>Em orçamento</li>
+                                        <li>Finalizado</li>
+                                        <li>Expirado</li>
+                                    </ul>
+                                </ul>
+                            </div>}
+                            <div class="tab-pane fade" id="whats-corrected" role="tabpanel" aria-labelledby="whats-corrected">
+                                <h3>O que foi corrigido?</h3>
+                                <ul>
+                                    <li>Quando uma máscara não carregava, o backend não aceitava o dado, mesmo sendo um dado válido</li>
+                                    <li>O alerta de erro era ativado quando não haviam erros</li>
+                                    <li>Ao editar um local, ocorre um bug informando que ele já foi cadastrado e não atualiza</li>
+                                    <li>Estatísticas dos agendamentos cancelados traz dados dos agendamentos confirmados</li>
+                                    <li>Ao excluir um cliente, não exclui os agendamentos inválidos</li>
+                                    <li>Seção de visualizar clientes deletados traz os clientes ativos também</li>
+                                    <li>Backend aceita agendamento com 0 participantes</li>
+                                    <li>Sistema permite desativar a si mesmo</li>
+                                    <li>Quando a data inserida é inválida, exibe duas vezes o alerta de erro</li>
+                                    <li>Não envia e-mail de recuperação de senha</li>
+                                    <li>Sistema permite CPFs duplicados</li>
+                                    <li>Sistema permitia o usuário trocar sua hierarquia no sistema</li>
+                                    <li>Exibe status de agendamento confirmado quando o agendamento está no histórico de agendamentos</li>
+                                    <li>Visualizar senha não funciona</li>
+                                </ul>
+                            </div>
+                        </div>                         
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Okay</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Fim modal de feedback de erro-->
     </div>
-    </div>
+
+    
+
     <script src="{{ asset('js/loader/main.min.js') }}"></script>
+
     <script>
+        $(document).ready(function (){
+            var hasUserAlreadySeenNotes = sessionStorage.getItem("atualization-note");
+    
+            if(! hasUserAlreadySeenNotes){
+                sessionStorage.setItem("atualization-note", "atualization-note");
+                $('#atualization-notes').modal();
+            }
+        });
+
         function em_desenvolvimento_alert(){
             alert('{{ __("Developing Functionality") }}')
         }
-    </script>
-    <script>
+
         function comeBack(){
             window.history.back();
         }
     </script>
-    <!--
-    -- Special Scripts
-    --
-    -->
+
+    
     @yield('scripts')
 </body>
 

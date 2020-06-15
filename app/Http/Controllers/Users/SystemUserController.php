@@ -185,7 +185,6 @@ class SystemUserController extends Controller
      */
     public function destroy($id)
     {
-
         $disable = User::destroy($id);
 
         redirectBackIfThereIsAError($disable);

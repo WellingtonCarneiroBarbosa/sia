@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure, Lang;
 
-class CheckAdmin
+class CheckAuthUser
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,15 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->role_id < 5) {
-            return redirect()->back()->with(['error' => Lang::get('You cannot perform this action')]);
-        }        
+        $auth_user_id = Auth()->user()->id;
         
+        $id = $request->id;
+
+        if((int) $id === $auth_user_id)
+        {
+            return redirect()->route('users.index')->with(['error' => Lang::get('You cannot perform this action')]);
+        }
+
         return $next($request);
     }
 }

@@ -6694,11 +6694,11 @@ a.close.disabled {
 }
 
 .modal-open {
-    overflow: hidden;
+    overflow: auto;
 }
 
 .modal-open .modal {
-    overflow-x: hidden;
+    overflow-x: auto;
     overflow-y: auto;
 }
 
@@ -6709,7 +6709,7 @@ a.close.disabled {
     left: 0;
     display: none;
     width: 100%;
-    height: 75%;
+    height: 100%;
 }
 
 .modal {
@@ -6798,6 +6798,7 @@ a.close.disabled {
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
     pointer-events: auto;
     border: 0 solid rgba(0, 0, 0, .2);
     border-radius: .4375rem;

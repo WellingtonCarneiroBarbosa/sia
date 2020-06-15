@@ -34,4 +34,13 @@ class HomeController extends Controller
             'now'       => $now
         ]);
     }
+
+    /**
+     * Support team home
+     * 
+     */
+    public function supportHome()
+    {
+        return "oi";
+    }
 }

@@ -151,6 +151,12 @@ return [
      */
     'max_schedule_date' => env('MAX_SCHEDULE_DATE'),
 
+    /**
+     * Atual version
+     * 
+     */
+    'version' => env('APP_VERSION'),
+
     'providers' => [
 
         /*

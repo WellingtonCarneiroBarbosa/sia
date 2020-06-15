@@ -431,5 +431,14 @@
     "September": "Setembro",
     "October": "Outubro",
     "November": "Novembro",
-    "December": "Dezembro"
+    "December": "Dezembro",
+    "Support": "Suporte",
+    "Click to request help": "Clique para solicitar ajuda",
+    "Click to see the system manual": "Clique para ver o manual do sistema",
+    "Open a new ticket": "Abrir um novo ticket",
+    "Incorrect login and/or password(s). Try again": "Login e/ou senha incorreto(s). Tente novamente",
+    "System version": "Versão do sistema",
+    "Click to see the atualization notes": "Clique para ver as notas de atualização",
+    "Atualization Notes": "Notas da Atualização",
+    "You cannot perform this action": "Você não pode realizar esta ação"
 }

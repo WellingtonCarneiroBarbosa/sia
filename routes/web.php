@@ -204,22 +204,28 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
                 Route::post('/store', 'Users\SystemUserController@store')
                                                     ->name('users.store');
 
-                Route::get('edit/{id}', 'Users\SystemUserController@edit')
+                Route::get('edit/{id}', 'Users\SystemUserController@edit') 
+                                       ->middleware('isIDEqualAuthUserId')
                                                       ->name('users.edit');
 
                 Route::put('update/{id}', 'Users\SystemUserController@update')
+                                            ->middleware('isIDEqualAuthUserId')
                                                         ->name('users.update');
 
                 Route::get('/confirm-disable/{id}', 'Users\SystemUserController@confirmDestroy')
+                                                             ->middleware('isIDEqualAuthUserId')
                                                                   ->name('users.confirmDestroy');
 
                 Route::delete('/disable/{id}', 'Users\SystemUserController@destroy')
+                                                    ->middleware('isIDEqualAuthUserId')
                                                              ->name('users.destroy');
 
                 Route::get('/confirm-restore/{id}', 'Users\SystemUserController@confirmRestore')
+                                                             ->middleware('isIDEqualAuthUserId')
                                                                   ->name('users.confirmRestore');
 
                 Route::put('/restore/{id}', 'Users\SystemUserController@restore')
+                                              ->middleware('isIDEqualAuthUserId')
                                                           ->name('users.restore');
 
             });
@@ -443,11 +449,46 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
             });
         });
 
-       
+        /**
+         * Support routes
+         * 
+         */
+        Route::group(['prefix' => 'ticket'], function () {
+
+            Route::get('/request', 'Tickets\TicketController@request')
+                                             ->name('tickets.request');
+
+        });
     });
     /***
      * End
      * Dashboard routes
+     * 
+     */
+
+
+    /**
+     * Start Support
+     * Routes
+     * 
+     */
+    Route::group(['prefix' => 'support', 'middleware' => 'support'], function () {
+
+        Route::get('/', 'HomeController@supportHome')
+                               ->name('support.home');
+        /**
+         * Demand routes
+         * 
+         */
+        Route::group(['prefix' => 'demand', 'middleware' => 'support'], function () {
+            Route::get('/register', 'Tickets\DemandController@create')
+                                              ->name('demands.create');
+
+        });
+    });
+    /**
+     * End Support 
+     * Routes
      * 
      */
 });
