@@ -43,7 +43,6 @@
                         <select name="role_id" id="role_id" class="form-control">
                             <option value="3">{{ __("User") }}</option>
                             <option value="5">{{ __("Administrator") }}</option>
-                            <option value="7">{{ __("Support") }}</option>
                         </select>
                     </div>
                 </div>

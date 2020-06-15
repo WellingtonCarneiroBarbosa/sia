@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
-use Lang;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\FullNameRule;
 use App\Rules\EmailDomainRule;
+use App\Rules\RegisterUserAccessRule;
 use Illuminate\Auth\Events\Verified;
 use App\Notifications\NewUserNotification;
+use App\User;
+use Lang;
 
 class SystemUserController extends Controller
 {
@@ -68,7 +69,7 @@ class SystemUserController extends Controller
         $validator = Validator::make($data, [
             'name'   => ['required', 'string', 'max:255', new FullNameRule()],
             'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'role_id' => ['required']
+            'role_id' => ['required', new RegisterUserAccessRule()]
         ], $messages);
       
 
@@ -143,7 +144,7 @@ class SystemUserController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'role_id' => ['required']
+            'role_id' => ['required', new RegisterUserAccessRule()]
         ]);
 
         if($validator->fails()) {
