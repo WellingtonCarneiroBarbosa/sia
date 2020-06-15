@@ -65,3 +65,26 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function (){
+        $password = $("#password");
+        $confirmPassword = $("#confirm-password");
+
+        $showPasswords = $("#showPasswords");
+
+        $showPasswords.click(function (){
+            $type = $password.attr('type');
+
+            if($type == "password"){
+                $password.attr('type', 'text');
+                $confirmPassword.attr('type', 'text');
+            }else{
+                $password.attr('type', 'password');
+                $confirmPassword.attr('type', 'password');
+            }
+        });
+    });
+</script>
+@endsection
