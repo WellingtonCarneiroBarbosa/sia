@@ -379,7 +379,7 @@
                                         <li>Expirado</li>
                                     </ul>
                                 </ul>
-                            </div>}
+                            </div>
                             <div class="tab-pane fade" id="whats-corrected" role="tabpanel" aria-labelledby="whats-corrected">
                                 <h3>O que foi corrigido?</h3>
                                 <ul>
