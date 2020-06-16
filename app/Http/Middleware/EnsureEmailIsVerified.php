@@ -22,7 +22,7 @@ class EnsureEmailIsVerified
             ($request->user() instanceof MustVerifyEmail &&
             ! $request->user()->hasVerifiedEmail())) {
             return $request->expectsJson()
-                    ? redirect()->route('login')->with(['error' => Lang::get('Your account validation token has expired. Please log in and request another verification email.')])
+                    ? redirect()->route('verification.notice')->with(['error' => Lang::get('Your account validation token has expired. Please log in and request another verification email.')])
                     : Redirect::route($redirectToRoute ?: 'verification.notice');
         }
 
