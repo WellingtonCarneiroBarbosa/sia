@@ -22,6 +22,10 @@ Route::get('/about', function (){
     return view('app.home.about');
 })->name('home.about');
 
+Route::get('/exception/invalid/token', function () {
+    return view('errors.invalidToken');
+});
+
 
 Auth::routes(['verify' => true]);
 

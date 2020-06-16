@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use Closure;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Redirect;
-use Closure, Lang;
 
 class EnsureEmailIsVerified
 {
@@ -22,7 +22,7 @@ class EnsureEmailIsVerified
             ($request->user() instanceof MustVerifyEmail &&
             ! $request->user()->hasVerifiedEmail())) {
             return $request->expectsJson()
-                    ? redirect()->route('verification.notice')->with(['error' => Lang::get('Your account validation token has expired. Please log in and request another verification email.')])
+                    ? abort(403, 'Your account validation token has expired. Please log in and request another verification email.')
                     : Redirect::route($redirectToRoute ?: 'verification.notice');
         }
 
