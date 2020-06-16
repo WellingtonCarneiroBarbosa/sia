@@ -157,6 +157,12 @@ return [
      */
     'version' => env('APP_VERSION'),
 
+    /**
+     * API Support URL
+     * 
+     */
+    'support_api' => env('SUPPORT_API'),
+
     'providers' => [
 
         /*

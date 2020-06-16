@@ -108,7 +108,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-align-left-2"></i></span>
                                 </div>
-                                <textarea title="{{ __("Fill this field") }}"  id="details" placeholder="{{ __("Scheduling Details") }}" class="form-control @error('details') is-invalid @enderror" name="details" value="{{ old('details') }}"></textarea> 
+                                <textarea title="{{ __("Fill this field") }}"  id="details" placeholder="{{ __("Scheduling Details") }}" class="form-control @error('details') is-invalid @enderror" name="details">{{ old('details') }}</textarea> 
                             </div>
                         </div>
                         <!-- fim do details do agendamento -->

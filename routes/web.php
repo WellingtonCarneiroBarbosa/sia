@@ -453,42 +453,15 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
          * Support routes
          * 
          */
-        Route::group(['prefix' => 'ticket'], function () {
-
-            Route::get('/request', 'Tickets\TicketController@request')
-                                             ->name('tickets.request');
-
+        Route::namespace('Support')->group(function (){
+            Route::prefix('support')->name('support.')->group(function (){
+                Route::get('/request', 'SupportController@request')->name('request');
+            });
         });
     });
     /***
      * End
      * Dashboard routes
-     * 
-     */
-
-
-    /**
-     * Start Support
-     * Routes
-     * 
-     */
-    Route::group(['prefix' => 'support', 'middleware' => 'support'], function () {
-
-        Route::get('/', 'HomeController@supportHome')
-                               ->name('support.home');
-        /**
-         * Demand routes
-         * 
-         */
-        Route::group(['prefix' => 'demand', 'middleware' => 'support'], function () {
-            Route::get('/register', 'Tickets\DemandController@create')
-                                              ->name('demands.create');
-
-        });
-    });
-    /**
-     * End Support 
-     * Routes
      * 
      */
 });
