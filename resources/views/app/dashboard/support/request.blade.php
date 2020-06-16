@@ -70,7 +70,7 @@
         $(document).ready(function (){
             $url = "{{ config('app.support_api') }}";
             $key = "{{ config('app.support_api_key') }}";
-            console.log($key);
+            
             $endpoint = $url + "/public/demands";
             $loader = $("#pageloader");
 

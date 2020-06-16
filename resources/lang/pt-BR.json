@@ -444,5 +444,6 @@
     "Only the registration of users and administrators is allowed": "Somente o registro de usuários e administradores é permitido",
     "Request Support": "Solicitar Suporte",
     "Categorie": "Categoria",
-    "Loading categories": "Carregando categorias"
+    "Loading categories": "Carregando categorias",
+    "Your account validation token has expired. Please log in and request another verification email.": "Seu token de validação de conta expirou. Por favor, faça login e solicite outro e-mail de verificação."
 }
