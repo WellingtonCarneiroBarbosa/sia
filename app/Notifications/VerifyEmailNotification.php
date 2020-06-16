@@ -64,8 +64,6 @@ class VerifyEmailNotification extends Notification
             ->line(Lang::get('Default Passowrd') . ": " . $this->defaultPassword)
             ->line(Lang::get('Click the button below to check your email and use the system'))
             ->action(Lang::get('Verify Email Address'), $verificationUrl)
-            ->line(Lang::get('Remember, this email is valid for 60 minutes') . ".")
-            ->line(Lang::get('If it has expired, log in and request another') . ".")
             ->line(Lang::get('If you think this is a mistake, no action is needed') . ".");
     }
 
