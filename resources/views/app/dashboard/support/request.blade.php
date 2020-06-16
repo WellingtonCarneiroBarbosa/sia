@@ -69,11 +69,13 @@
     <script>
         $(document).ready(function (){
             $url = "{{ config('app.support_api') }}";
-            $endpoint = $url + "/demands";
+            $key = "{{ config('app.support_api_key') }}";
+            console.log($key);
+            $endpoint = $url + "/public/demands";
             $loader = $("#pageloader");
 
-            function reloadIfStatusCodeIsNotExpected(data, expected) {
-                if(data != expected) {
+            function reloadIfStatusCodeIsNotExpected(response, expected) {
+                if(response != expected) {
                     alert("{{ __("Something went wrong. Please refresh the page!") }}");
                     location.reload();
                     return;
@@ -82,6 +84,8 @@
 
             $.ajax({
                 url: $endpoint,
+                data:{token: $key},
+                method: "GET",
 
                 beforeSend: function () {
                     $loader.show();
@@ -100,7 +104,9 @@
                 },
 
                 error: function () {
-                    reloadIfStatusCodeIsNotExpected(response.code, 200);
+                    alert("{{ __("Something went wrong. Please refresh the page!") }}"); 
+                    location.reload();
+                    return;
                 }
             });
         });
@@ -113,7 +119,8 @@
                 e.preventDefault();
 
                 $url = "{{ config('app.support_api') }}";
-                $endpoint = $url + "/tickets";
+                $key = "{{ config('app.support_api_key') }}";
+                $endpoint = $url +"/public/tickets";
                 $loader = $("#pageloader");
 
                 $user_name = "{{ ucFirstNames(Auth()->user()->name) }}";
@@ -131,7 +138,7 @@
 
                 $.ajax({
                     url: $endpoint,
-                    data:{user_name: $user_name, user_system: $user_system, description: $description, demand_id: $demand},
+                    data:{token: $key, user_name: $user_name, user_system: $user_system, description: $description, demand_id: $demand},
                     method: "POST",
 
                     beforeSend: function () {
@@ -141,17 +148,21 @@
                     success: function (response) {
                         if(response.code != 201) {
                             alert('algo deu errado');
-                            console.log(response)
+    
+                            $loader.hide();
                             return;
                         }
                          
-                        console.log(response);
+
                         alert('Ticket aberto com sucesso!');
                         $loader.hide();
                     },
 
-                    error: function () {
-                        alert('algo deu errado!');
+                    error: function (response) {
+                        alert('algo deu errado');
+
+                        $loader.hide();
+                        return;
                     }
                 })
 

@@ -163,6 +163,12 @@ return [
      */
     'support_api' => env('SUPPORT_API'),
 
+    /**
+     * API Support key
+     * 
+     */
+    'support_api_key' => env('SUPPORT_API_KEY'),
+
     'providers' => [
 
         /*
