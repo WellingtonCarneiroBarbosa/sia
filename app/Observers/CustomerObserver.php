@@ -8,6 +8,7 @@ use App\Models\Customers\CustomerLog;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\HistoricSchedule;
 use App\Notifications\Customer\DeletedCustomerNotification;
+use App\Notifications\NotifyUser;
 use App\User;
 
 /**
@@ -95,7 +96,7 @@ class CustomerObserver
          */
         $customer['user'] = getAuthUserFirstName();
 
-        $users = User::where('id', '!=', auth()->user()->id)->get();
+        $users = NotifyUser::getUsersToNotifyExceptAuthUser();
         Notification::send($users, new DeletedCustomerNotification($customer));
     }
 }

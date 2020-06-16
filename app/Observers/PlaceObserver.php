@@ -8,6 +8,7 @@ use App\Models\Places\PlaceLog;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\HistoricSchedule;
 use App\Notifications\Place\DeletedPlaceNotification;
+use App\Notifications\NotifyUser;
 use App\User;
 
 /**
@@ -102,7 +103,7 @@ class PlaceObserver
          */
         $place['user'] = getAuthUserFirstName();
 
-        $users = User::where('id', '!=', auth()->user()->id)->get();
+        $users = NotifyUser::getUsersToNotifyExceptAuthUser();
         Notification::send($users, new DeletedPlaceNotification($place));
     }
 }

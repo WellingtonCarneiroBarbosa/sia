@@ -1,0 +1,53 @@
+<?php
+
+namespace App\Http\Controllers\Configuration;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\User;
+
+class EmailConfigurationController extends Controller
+{
+    public function __construct(User $user) 
+    {
+        $this->user = $user;
+    }
+
+    public function disableEmailNotification()
+    {
+        try {
+
+            $data = ['dont_email_notification' => 1];
+
+            $userID = Auth()->user()->id;
+
+            $this->user->findOrFail($userID)->update($data);
+
+            return "notificacoes via email desativadas";
+
+        } catch (\Exception $e) {
+
+            return "erro ao desativar notificacoes via email." . "<br>" . $e->getMessage();
+
+        }   
+    }
+
+    public function enableEmailNotification()
+    {
+        try {
+
+            $data = ['dont_email_notification' => null];
+
+            $userID = Auth()->user()->id;
+
+            $this->user->findOrFail($userID)->update($data);
+
+            return "notificacoes via email ativadas";
+
+        } catch (\Exception $e) {
+
+            return "erro ao ativar notificacoes via email." . "<br>" . $e->getMessage();
+
+        }   
+    }
+}

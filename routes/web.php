@@ -462,6 +462,18 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
                 Route::get('/request', 'SupportController@request')->name('request');
             });
         });
+
+        /**
+         * Configs Routes
+         * 
+         */
+        Route::namespace('Configuration')->prefix('configs')->name('config.')->group(function () {
+            Route::get('disable-email-notification', 'EmailConfigurationController@disableEmailNotification')
+                                                                         ->name('disable.email.notification');
+
+            Route::get('enable-email-notification', 'EmailConfigurationController@enableEmailNotification')
+                                                                        ->name('enable.email.notification');
+        });
     });
     /***
      * End

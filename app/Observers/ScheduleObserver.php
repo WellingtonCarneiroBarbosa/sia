@@ -7,6 +7,7 @@ use App\Notifications\Schedule\CanceledScheduleNotification;
 use App\Notifications\Schedule\RescheduledNotification;
 use App\Notifications\Schedule\ScheduledNotification;
 use App\Notifications\Schedule\UpdatedScheduleNotification;
+use App\Notifications\NotifyUser;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\ScheduleLog;
 use App\User;
@@ -54,7 +55,7 @@ class ScheduleObserver
         $schedule['user'] = getAuthUserFirstName();
 
         /**Notify all users */
-        $users = User::where('id', '!=', auth()->user()->id)->get();
+        $users = NotifyUser::getUsersToNotifyExceptAuthUser();
         Notification::send($users, new ScheduledNotification($schedule));
        
     }
@@ -97,7 +98,7 @@ class ScheduleObserver
                 /**Notify all users */   
                 $schedule['user'] = getAuthUserFirstName();
 
-                $users = User::where('id', '!=', auth()->user()->id)->get();
+                $users = NotifyUser::getUsersToNotifyExceptAuthUser();
                 Notification::send($users, new UpdatedScheduleNotification($schedule));   
             }
         }    
@@ -129,7 +130,7 @@ class ScheduleObserver
             /**Notify all users */
             $schedule['user'] = getAuthUserFirstName();
 
-            $users = User::where('id', '!=', auth()->user()->id)->get();
+            $users = NotifyUser::getUsersToNotifyExceptAuthUser();
             Notification::send($users, new CanceledScheduleNotification($schedule));
         }
     }
@@ -154,7 +155,7 @@ class ScheduleObserver
         /**Notify all users */
         $schedule['user'] = getAuthUserFirstName();
 
-        $users = User::where('id', '!=', auth()->user()->id)->get();
+        $users = NotifyUser::getUsersToNotifyExceptAuthUser();
         Notification::send($users, new RescheduledNotification($schedule));
     }
 
