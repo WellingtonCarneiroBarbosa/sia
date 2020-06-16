@@ -21,9 +21,7 @@ class EnsureEmailIsVerified
         if (! $request->user() ||
             ($request->user() instanceof MustVerifyEmail &&
             ! $request->user()->hasVerifiedEmail())) {
-            return $request->expectsJson()
-                    ? abort(403, 'Your account validation token has expired. Please log in and request another verification email.')
-                    : Redirect::route($redirectToRoute ?: 'verification.notice');
+            return Redirect::route('verification.notice');
         }
 
         return $next($request);

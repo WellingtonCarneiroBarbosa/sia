@@ -56,7 +56,7 @@ class VerifyEmailNotification extends Notification
         $login = $notifiable->getEmailForPasswordReset();
 
         return (new MailMessage)
-            ->subject(Lang::get('Verify Email Address'))
+            ->subject(Lang::get('Verify Your SIA Account'))
             ->greeting(Lang::get('Hello!'))
             ->line(Lang::get('You have been registered by a system administrator') . ".")
             ->line(Lang::get('Attention to your login details') . ":")
@@ -79,7 +79,7 @@ class VerifyEmailNotification extends Notification
     {
         return URL::temporarySignedRoute(
             'verification.verify',
-            Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
+            Carbon::now()->addMinutes(Config::get('auth.verification.expire', 525600)), // One year in minutes
             [
                 'id' => $notifiable->getKey(),
                 'hash' => sha1($notifiable->getEmailForVerification()),
