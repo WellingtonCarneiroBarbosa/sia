@@ -459,7 +459,16 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
          */
         Route::namespace('Support')->group(function (){
             Route::prefix('support')->name('support.')->group(function (){
+
+                Route::get('/', 'SupportController@myTickets')->name('tickets');
+
                 Route::get('/request', 'SupportController@request')->name('request');
+
+                Route::get('/response/{ticketID}', 'SupportController@formResponse')->name('ticket.form.response');
+
+                Route::post('/response/{ticketID}', 'SupportController@responseTicket')->name('ticket.response');
+            
+                Route::get('/ticket/{ticketID}/details', 'SupportController@ticketDetails')->name('ticket.details');
             });
         });
 

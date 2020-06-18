@@ -253,7 +253,13 @@
                                     <i class="ni ni-calendar-grid-58"></i>
                                     <span>{{ __("My Activity") }}</span>
                                 </a>
-                                <a href="#!" onclick="em_desenvolvimento_alert()" class="dropdown-item" title="{{ __("Click to request help") }}"> 
+
+                                <a href="{{ route('support.tickets') }}" class="dropdown-item" title="{{ __("Click to manage your tickets") }}">
+                                    <i class="fa fa-check-square"></i>
+                                    <span>{{ __("Tickets") }}</span>
+                                </a>
+
+                                <a href="{{ route('support.request') }}" onclick="em_desenvolvimento_alert()" class="dropdown-item" title="{{ __("Click to request help") }}"> 
                                     <i class="ni ni-support-16"></i>
                                     <span>{{ __("Support") }}</span>
                                 </a>

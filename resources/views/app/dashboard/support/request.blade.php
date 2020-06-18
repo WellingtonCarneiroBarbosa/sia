@@ -71,7 +71,7 @@
             $url = "{{ config('app.support_api') }}";
             $key = "{{ config('app.support_api_key') }}";
             
-            $endpoint = $url + "/public/demands";
+            $endpoint = $url + "/demands";
             $loader = $("#pageloader");
 
             function reloadIfStatusCodeIsNotExpected(response, expected) {
@@ -120,11 +120,11 @@
 
                 $url = "{{ config('app.support_api') }}";
                 $key = "{{ config('app.support_api_key') }}";
-                $endpoint = $url +"/public/tickets";
+                $endpoint = $url +"/tickets";
                 $loader = $("#pageloader");
 
                 $user_name = "{{ ucFirstNames(Auth()->user()->name) }}";
-                $user_system = "{{ config('app.name') }}";
+                $user_email = "{{ ucFirstNames(Auth()->user()->email) }}";
                 $description = $("#details").val();
                 $demand = $("#demands").val();
 
@@ -138,7 +138,7 @@
 
                 $.ajax({
                     url: $endpoint,
-                    data:{token: $key, user_name: $user_name, user_system: $user_system, description: $description, demand_id: $demand},
+                    data:{token: $key, name: $user_name, email: $user_email, message: $description, demand_id: $demand},
                     method: "POST",
 
                     beforeSend: function () {
@@ -147,18 +147,19 @@
 
                     success: function (response) {
                         if(response.code != 201) {
+                            console.log(response)
                             alert('algo deu errado');
-    
                             $loader.hide();
                             return;
                         }
                          
-
+                        console.log(response)
                         alert('Ticket aberto com sucesso!');
                         $loader.hide();
                     },
 
                     error: function (response) {
+                        console.log(response)
                         alert('algo deu errado');
 
                         $loader.hide();
