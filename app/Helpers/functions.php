@@ -1,12 +1,12 @@
 <?php
 
-    /***
+    /**
      * calculates the percentage change if
      * there is profit (positive change)
      * 
      * percentage change = (bigger - smaller) * 100 / smaller
      *
-     * Return @float_number
+     * @return float
      */
     function positivePercentageChange($bigger, $smaller){
         $percentageChange      = $bigger - $smaller; 
@@ -16,13 +16,13 @@
         return $percentageChange;
     }
 
-    /***
+    /**
      * calculates the percentage change if
      * there is loss (negative change)
      * 
      * percentage change = (bigger - smaller) * 100 / bigger
      *
-     * Return @float_number
+     * @return float
      */
     function negativePercentageChange($bigger, $smaller){
         $percentageChange      = $bigger - $smaller; 
@@ -32,12 +32,12 @@
         return $percentageChange;
     }
 
-    /***
+    /**
      * return a number as percentage form
      * 
      * percentage_form = (number) * 100;
      *
-     * Return @float_number
+     * @return float
      */
     function percentageForm($number){
         $percentageForm = $number * 100;
@@ -45,33 +45,33 @@
         return $percentageForm;
     }
 
-    /***
+    /**
      * Convert any american date to
      * brazilian format
      * 
-     * return @date
+     * @return object
      */
     function dateBrazilianFormat($value, $format='d/m/Y')
     {
         return date($format, strtotime($value));
     }
 
-    /***
+    /**
      * Convert any american time to
      * brazilian format
      * 
-     * return @date
+     * @return object
      */
     function timeBrazilianFormat($value, $format='H:i')
     {
         return date($format, strtotime($value));
     }
 
-    /***
+    /**
      * Convert any american datetime to
      * brazilian format
      * 
-     * return @date
+     * @return object
      */
     function dateTimeBrazilianFormat($value, $format='d/m/Y H:i')
     {
@@ -79,11 +79,11 @@
     }
 
 
-    /***
+    /**
      * performs the interval calculation
      * between two dates
      * 
-     * return @date
+     * @return object
      */
     function dateRange($dateStart, $dateEnd){
             $dateStart 		= $dateStart;
@@ -103,11 +103,11 @@
             return $dateRange;
     }
 
-    /***
+    /**
      * performs the interval calculation
      * between two times
      * 
-     * return @date
+     * @return object
      */
     function timeRange($timeStart, $timeEnd){
         $timeStart      = $timeStart;
@@ -127,31 +127,31 @@
         return $timeRange;
     }
 
-    /***
+    /**
      * Split a datetime
      * 
-     * return @array
+     * @return array
      */
     function dateTimeExplode($dateTime){
         $splitTimeStamp = explode(" ", $dateTime);
         return $splitTimeStamp;
     }
 
-    /***
+    /**
      * Convert any brazilian date to
      * american format
      * 
-     * return @date
+     * @return object
      */
     function dateAmericanFormat($date){
         $date = implode('-', array_reverse(explode('/', substr($date, 0, 10)))).substr($date, 10);
         return $date;
     }
 
-    /***
+    /**
      * Clean any cpf or cnpj 
      * 
-     * return @string
+     * @return string
      */
     function clearCPForCNPJ($string){
         $string = trim($string);
@@ -162,10 +162,10 @@
         return $string;
     }
 
-    /***
+    /**
      * Clean any cep 
      * 
-     * return @string
+     * @return string
      */
     function clearCEP($string){
         $string = trim($string);
@@ -173,10 +173,10 @@
         return $string;
     }
 
-    /***
+    /**
      * Clean any phone number
      * 
-     * return @string
+     * @return string
      */
     function clearPhoneNumber($string){
         $string = trim($string);
@@ -187,28 +187,28 @@
         return $string;
     }
 
-    /***
+    /**
      * Adds cpf score 
      * 
-     * return @string
+     * @return string
      */
     function CPFscore($string){
         return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $string);
     }
 
-    /***
+    /**
      * Adds cep score 
      * 
-     * return @string
+     * @return string
      */
     function CEPscore($string){
         return preg_replace("/(\d{5})/", "\$1-\$2", $string);
     }
 
-    /***
+    /**
      * Adds phone number score 
      * 
-     * return @string
+     * @return string
      */
     function phoneNumberScore($string){
         if(strlen($string) == 10){
@@ -221,11 +221,11 @@
         }
     }
 
-    /***
+    /**
      * Verify if has data at
      * any collection
      * 
-     * return @boolean
+     * @return boolean
      */
     function hasData($collection){
         $count = count($collection);
@@ -236,9 +236,11 @@
         }
     }
 
-    /***
-     * Validade dates
+    /**
+     * Verify if the first date
+     * is bigger than second date
      * 
+     * @return boolean
      */
     function isDate01BiggerThanDate02($date01, $date02){
         $date01 = strtotime($date01);
@@ -251,6 +253,12 @@
         return false;
     }
 
+    /**
+     * Verify if the first date
+     * is equals than second date
+     * 
+     * @return boolean
+     */
     function isDate01EqualsDate02($date01, $date02){
         $date01 = strtotime($date01);
         $date02 = strtotime($date02);
@@ -265,12 +273,18 @@
     /**
      * Remove comas
      * 
+     * @return string
      */
     function removeComas($string){
         $string = preg_replace('/[.,]/', '', $string);
         return $string;
     }
 
+    /**
+     * Sanitize string
+     * 
+     * @return string
+     */
     function sanitizeString($str) {
         $str = preg_replace('/[áàãâä]/ui', '', $str);
         $str = preg_replace('/[éèêë]/ui', '', $str);
@@ -287,15 +301,35 @@
         return $str;
     }
 
+    /**
+     * Make a string
+     * to integer
+     * 
+     * @return int
+     */
     function makeInteger($str){
         return (int) $str;
     }
 
+    /**
+     * Make the first letter
+     * of a string to
+     * uppercase
+     * 
+     * @return string
+     */
     function ucFirstNames($str)
     {   
         return mb_convert_case($str, MB_CASE_TITLE, 'UTF-8');
     }
 
+    /**
+     * Show $array[0]
+     * 
+     * explode in space
+     * 
+     * @return array
+     */
     function showFirstPieceOfAString($string)
     {
         $string = explode(" ", $string);
@@ -303,6 +337,12 @@
         echo $string[0];
     }
 
+    /**
+     * Redirect if the boolean is
+     * false
+     * 
+     * @return void
+     */
     function redirectBackIfThereIsAError($trueBoolean)
     {
         if(! $trueBoolean)
@@ -312,6 +352,12 @@
         }
     }
 
+    /**
+     * Returns the auth user name
+     * to show in application
+     * 
+     * @return string
+     */
     function getAuthUserFirstName()
     {
         $fullName = explode(" ", ucFirstNames(auth()->user()->name));
@@ -319,6 +365,12 @@
         return $firstName;
     }
     
+    /**
+     * Returns only first name
+     * of auth user
+     * 
+     * @return string
+     */
     function getUserFirstName($fullName)
     {
         $fullName = explode(" ", ucFirstNames($fullName));

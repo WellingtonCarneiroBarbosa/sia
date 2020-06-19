@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Validator;
 
 class FindPlacesController extends Controller
 {
+    /**
+     * Find a place by date range
+     * 
+     * @return void
+     */
     public function findPerDateRange(Request $request){
         /**
          * Custom messages for 
