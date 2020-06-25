@@ -397,7 +397,7 @@
     "Edit User": "Editar Usuário",
     "Updated User": "Usuário Atualizado",
     "System users were notified via email": "Os usuários do sistema foram notificados via e-mail",
-    "Customer deleted" : "Cliente deletado",
+    "Customer deleted": "Cliente deletado",
     "The user has been notified via email": "O usuário foi notificado via e-mail",
     "My Activity": "Minha Atividade",
     "registered": "cadastrou",
@@ -449,5 +449,7 @@
     "Verify Your SIA Account": "Verifique sua conta SIA",
     "Your Tickets": "Seus Tickets",
     "Response Support": "Responder Suporte",
-    "Click to manage your tickets": "Clique para gerenciar seus tickets"
+    "Click to manage your tickets": "Clique para gerenciar seus tickets",
+    "Error opening ticket": "Erro ao abrir ticket",
+    "Ticket opened": "Ticket aberto"
 }

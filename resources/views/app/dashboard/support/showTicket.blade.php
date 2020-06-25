@@ -5,11 +5,15 @@
 @section('content')
 @component('components.alert')@endcomponent
 <div class="card">
-    <div class="card-header">Visualizar Ticket</div>
+    <div class="card-header">
+        @if(! $ticket['deleted_at'])
+        <div class="float-right"><a href="{{ route('support.ticket.close', [$ticket['id']]) }}">Fechar ticket</a></div>
+        @endif
+        Visualizar Ticket
+    </div>
     <div class="card-body">
         <ul id="tickets">
             @if($response['code'] == 200)
-            @foreach($ticket as $ticket)
             <hr>
             <li>
                 @php 
@@ -30,25 +34,23 @@
                 <br>
             </li>
             <hr>
+            @if(count($responses) > 0 )
+            @if(! $ticket['deleted_at'])
+            <a href="{{ route('support.ticket.form.response', [$ticketID]) }}">Enviar nova mensagem</a>
+            <hr>
+            @endif
+            Histórico de mensagens:
+            @foreach($responses as $response) 
+            <li>
+               
+                @if($response['responsible_id'])
+                Suporte: 
+                @else 
+                Você: 
+                @endif
+                 => {{  $response['message'] }}
+            </li> 
             @endforeach
-            @if(count($responsesFromSupport) > 0 )
-            Resposta do suporte
-            <li>
-                @foreach($responsesFromSupport as $response) 
-                Mensagem =>{{  $response['message'] }}
-                @endforeach
-                <br>
-                <a href="{{ route('support.ticket.form.response', [$ticketID]) }}">Responder Suporte</a>
-            </li> 
-            @endif 
-            <br>
-            @if(count($responsesFromClient) > 0 )
-            Resposta do cliente
-            <li>
-                @foreach($responsesFromClient as $response) 
-                Mensagem =>{{  $response['message'] }}
-                @endforeach
-            </li> 
             @endif 
             @else 
             Não há nenhum ticket para exibir

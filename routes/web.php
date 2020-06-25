@@ -462,13 +462,17 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
 
                 Route::get('/', 'SupportController@myTickets')->name('tickets');
 
-                Route::get('/request', 'SupportController@request')->name('request');
+                Route::get('/request', 'SupportController@openTicketView')->name('request');
 
                 Route::get('/response/{ticketID}', 'SupportController@formResponse')->name('ticket.form.response');
 
                 Route::post('/response/{ticketID}', 'SupportController@responseTicket')->name('ticket.response');
             
+                Route::post('/request/send', 'SupportController@openTicket')->name('send.request');
+
                 Route::get('/ticket/{ticketID}/details', 'SupportController@ticketDetails')->name('ticket.details');
+            
+                Route::get('/ticket/close/{ticketID}', 'SupportController@closeTicket')->name('ticket.close');
             });
         });
 

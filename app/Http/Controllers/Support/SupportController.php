@@ -4,41 +4,26 @@ namespace App\Http\Controllers\Support;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Lang;
 
 class SupportController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->url = config('app.support_api');
+        $this->token = "?token=" . config('app.support_api_key');
+    }
+
     public function myTickets() 
     {
        
-        /**
-         * Pega a url base da api de suporte
-         * 
-         */
-        $url = config('app.support_api');
-
-        /**
-         * Pega o endpoint + os parametros necessarios
-         * 
-         * (email do cliente // token de acesso)
-         * 
-         */
         $endpoint = "/tickets/" . auth()->user()->email;
 
-        $key = config('app.support_api_key');
+        $url = $this->url . $endpoint . $this->token;
 
-        $url = $url . $endpoint . "?token=" . $key;
-
-        /**
-         * Envia o request e pega a resposta
-         * 
-         */
         $response = file_get_contents($url);
 
-        /**
-         * Converte o json de resposta para um array
-         * 
-         */
         $tickets = json_decode($response, true); 
 
         return view('app.dashboard.support.index', [
@@ -46,9 +31,49 @@ class SupportController extends Controller
         ]);
     }
 
-    public function request()
-    {
-        return view('app.dashboard.support.request');
+    public function openTicket(Request $request) {
+        $data = $request->all();
+
+        $data['name'] = auth()->user()->name; 
+        $data['email'] = auth()->user()->email;
+
+        $endpoint = "/tickets";
+
+        $url = $this->url . $endpoint . $this->token;
+
+        $options = [
+            'http' => [
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => "POST",
+                'content' => \http_build_query($data)
+            ]
+        ];
+
+        $context  = stream_context_create($options);
+        $response = file_get_contents($url, false, $context);
+
+        $response = \json_decode($response, true);
+
+        if($response['code'] != 201) {
+            return redirect()->back()->withInput()->with(['error' => Lang::get('Error opening ticket')]);
+
+        } 
+
+        return redirect()->back()->with(['status' => Lang::get('Ticket opened')]);
+    }
+
+    public function openTicketView() {
+        $endpoint = "/demands";
+
+        $url = $this->url . $endpoint . $this->token;
+
+        $response = \file_get_contents($url);
+
+        $demands = \json_decode($response, true);
+
+        return view('app.dashboard.support.request', [
+            'demands' => $demands['data']
+        ]);
     }
 
     public function formResponse($ticketID)
@@ -60,20 +85,15 @@ class SupportController extends Controller
 
     public function responseTicket($ticketID, Request $request)
     {
-        $url = config('app.support_api');
+        $endpoint = "/tickets/client-response";
 
-        $key = config('app.support_api_key');
-
-        $endpoint = "/tickets/responses/client/" . $ticketID;
-
-        $url = $url . $endpoint;
+        $url = $this->url . $endpoint . $this->token;
 
         /**
          * Dados do request
          * 
          */
         $data = [
-            'token' => $key,
             'ticket_id' => $ticketID,
             'message' => $request->message
         ];
@@ -91,50 +111,63 @@ class SupportController extends Controller
 
         $response = \json_decode($response, true);
 
-        if($response["code"] === 201) {
-            return redirect()->route('support.ticket.details', [$ticketID])->with(['success' => "Resposta enviada"]);
+        if($response["code"] != 201) {
+            return redirect()->route('support.ticket.details', [$ticketID])->with(['error' => "Erro ao enviar resposta"]);
         }
 
-        return redirect()->route('support.ticket.details', [$ticketID])->with(['error' => "Erro ao enviar resposta"]);
+        return redirect()->route('support.ticket.details', [$ticketID])->with(['status' => "Resposta enviada"]);
     }
 
     public function ticketDetails($ticketID)
     {
+        $endpoint = "/tickets/info/" . $ticketID;
 
-        $url = config('app.support_api');
+        $url = $this->url . $endpoint . $this->token;
 
-        $key = config('app.support_api_key');
-
-        $firstParameter = auth()->user()->email;
-
-        $secondParameter = $ticketID;
-
-        $endpoint = "/tickets/" . $firstParameter . "/" . $secondParameter . "?token=" . $key;
-
-        $url = $url . $endpoint;
-
-        /**
-         * Send request
-         * 
-         */
         $response = file_get_contents($url);
 
-        /**
-         * Convert response in array
-         * 
-         */
         $response = \json_decode($response, true);
 
-        $ticket = $response['data']['ticket'];
+        $ticket = $response['data']['ticket_infos'];
 
-        $responsesFromSupport = $response['data']['responsesFromSupport'];
+        $ticket_client = $response['data']['ticket_infos']['client'];
 
-        $responsesFromClient = $response['data']['responsesFromClient'];
+        $ticket_demand = $response['data']['ticket_infos']['demand'];
+
+        $responses = $response['data']['ticket_responses'];
 
         return view('app.dashboard.support.showTicket', [
-            'response' => $response, 'ticket' => $ticket,
-            'responsesFromSupport' => $responsesFromSupport,
-            'responsesFromClient' => $responsesFromClient,
+            'ticket' => $ticket, 'responses' => $responses,
+            'ticket_client' => $ticket_client,
+            'ticket_demand' => $ticket_demand,
+            'response' => $response,
         ]);
+    }
+
+    public function closeTicket($ticketID)
+    {
+        $endpoint = "/tickets/close/" . $ticketID;
+
+        $url = $this->url . $endpoint . $this->token;
+
+        $options = [
+            'http' => [
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => "DELETE"
+            ]
+        ];
+
+        $context  = stream_context_create($options);
+        $response = file_get_contents($url, false, $context);
+
+        $response = \json_decode($response, true);
+
+        dd($response);
+
+        if($response["code"] != 201) {
+            return redirect()->route('support.ticket.details', [$ticketID])->with(['error' => "Erro ao enviar resposta"]);
+        }
+
+        return redirect()->route('support.ticket.details', [$ticketID])->with(['status' => "Resposta enviada"]);
     }
 }

@@ -26,9 +26,10 @@
                 <div class="text-center text-muted mb-4">
                     <small>{{ __("Fill in the details below to proceed") }}</small>
                 </div>
-                <form method="POST" action="#" id="openTicket">
+                <form method="POST" action="{{ route('support.send.request') }}">
                     {{-- Categoria --}}
 
+                    @csrf 
                     <div class="form-group mb-3">
                         <div class="input-group input-group-alternative">
 
@@ -36,10 +37,12 @@
                                 <span class="input-group-text"><i class="ni ni-single-02 mr-2"></i>{{ __("Categorie") }}</span>
                             </div>
 
-                            <select id="demands"> class="form-control" required>
-                                <option>{{ __("Loading categories") }}...</option>
+                            <select name="demand_id" class="form-control" required>
+                                @foreach($demands as $demand)
+                                <option value="{{ $demand['id'] }}">{{ $demand['demand'] }}</option>
+                                @endforeach
                             </select>
-                            
+                        
                         </div>
                     </div>
 
@@ -49,136 +52,17 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-align-left-2"></i></span>
                             </div>
-                            <textarea title="{{ __("Fill this field") }}" id="details" required>{{ __("Details") }}</textarea> 
+                            <textarea title="{{ __("Fill this field") }}" name="message" required>{{ __("Details") }}</textarea> 
                         </div>
                     </div>
                 
                     <div class="text-center">
                         <button onclick="comeBack();" type="button" class="btn btn-outline-primary  ml-auto" >{{ __("Cancel") }}</button>
-                        <button type="submit" title="{{ __("Click to register this user") }}" class="btn btn-primary my-4">{{ __("Request Support") }}</button>
+                        <button type="submit" class="btn btn-primary my-4">{{ __("Request Support") }}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-@endsection
-
-@section('scripts')
-    {{-- Get Demands From API --}}
-    <script>
-        $(document).ready(function (){
-            $url = "{{ config('app.support_api') }}";
-            $key = "{{ config('app.support_api_key') }}";
-            
-            $endpoint = $url + "/demands";
-            $loader = $("#pageloader");
-
-            function reloadIfStatusCodeIsNotExpected(response, expected) {
-                if(response != expected) {
-                    alert("{{ __("Something went wrong. Please refresh the page!") }}");
-                    location.reload();
-                    return;
-                }
-            }
-
-            $.ajax({
-                url: $endpoint,
-                data:{token: $key},
-                method: "GET",
-
-                beforeSend: function () {
-                    $loader.show();
-                },
-
-                success: function (response) {
-                    reloadIfStatusCodeIsNotExpected(response.code, 200);
-
-                    var categoriesSelectBox = $("#demands");
-                    categoriesSelectBox.find('option').remove();
-                    $.each(response.data, function (i, d) {
-                        $('<option>').val(d.id).text(d.demand).appendTo(categoriesSelectBox);
-                    });
-
-                    $loader.hide();
-                },
-
-                error: function () {
-                    alert("{{ __("Something went wrong. Please refresh the page!") }}"); 
-                    location.reload();
-                    return;
-                }
-            });
-        });
-    </script>
-
-    {{-- Send Ticket Request --}}
-    <script>
-        $(document).ready(function (){
-            $("#openTicket").submit(function (e){
-                e.preventDefault();
-
-                $url = "{{ config('app.support_api') }}";
-                $key = "{{ config('app.support_api_key') }}";
-                $endpoint = $url +"/tickets";
-                $loader = $("#pageloader");
-
-                $user_name = "{{ ucFirstNames(Auth()->user()->name) }}";
-                $user_email = "{{ ucFirstNames(Auth()->user()->email) }}";
-                $description = $("#details").val();
-                $demand = $("#demands").val();
-
-                function reloadIfStatusCodeIsNotExpected(data, expected) {
-                    if(data != expected) {
-                        alert("{{ __("Something went wrong. Please refresh the page!") }}");
-                        location.reload();
-                        return;
-                    }
-                }
-
-                $.ajax({
-                    url: $endpoint,
-                    data:{token: $key, name: $user_name, email: $user_email, message: $description, demand_id: $demand},
-                    method: "POST",
-
-                    beforeSend: function () {
-                        $loader.show();
-                    },
-
-                    success: function (response) {
-                        if(response.code != 201) {
-                            console.log(response)
-                            alert('algo deu errado');
-                            $loader.hide();
-                            return;
-                        }
-                         
-                        console.log(response)
-                        alert('Ticket aberto com sucesso!');
-                        $loader.hide();
-                    },
-
-                    error: function (response) {
-                        console.log(response)
-                        alert('algo deu errado');
-
-                        $loader.hide();
-                        return;
-                    }
-                })
-
-
-            
-            });
-        });
-    </script>
-
-    {{-- 
-         $.ajax(
-                url: $url,
-                data: 
-            );
-            'user_name', 'user_system', 'description',
-            'responsible_id', 'demand_id'
-             --}}
 @endsection
