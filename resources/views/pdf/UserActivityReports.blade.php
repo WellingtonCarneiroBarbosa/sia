@@ -82,9 +82,9 @@
                                 <li>{{ ucfirst($log['action']) }} um agendamento em {{ dateTimeBrazilianFormat($log['created_at']) }}
                                 -
                                 @if(isset($log->schedule_id) && isset($log->schedule_log['id']))
-                                    <a href="{{ route('schedules.show', ['id' => $log->schedule_id]) }}">{{ __("View Schedule") }}</a>
+                                    <a target="_blank" href="{{ route('schedules.show', ['id' => $log->schedule_id]) }}">{{ __("View Schedule") }}</a>
                                 @elseif(isset($log->schedule_id))
-                                    <a href="{{ route('schedules.historic.show', ['id' => $log->schedule_id]) }}">{{ __("View Schedule") }}</a>
+                                    <a target="_blank" href="{{ route('schedules.historic.show', ['id' => $log->schedule_id]) }}">{{ __("View Schedule") }}</a>
                                 @else
                                     <i>{{ __("Preview not available") }}</i>
                                 @endif
@@ -105,7 +105,7 @@
                                 <li>{{ ucfirst($log['action']) }} um local em {{ dateTimeBrazilianFormat($log['created_at']) }}
                                 -
                                 @if(isset($log->place_id))
-                                    <a href="{{ route('places.show', ['id' => $log->place_id]) }}">{{ __("View Place") }}</a>
+                                    <a target="_blank" href="{{ route('places.show', ['id' => $log->place_id]) }}">{{ __("View Place") }}</a>
                                 @else
                                     <i>{{ __("Preview not available") }}</i>
                                 @endif
@@ -125,7 +125,7 @@
                             @forelse($logs['customer_logs'] as $log)
                                 <li>{{ ucfirst($log['action']) }} um cliente em {{ dateTimeBrazilianFormat($log['created_at']) }}
                                 -
-                                <a href="{{ route('customers.show', ['id' => $log->customer_id]) }}">{{ __("View Customer") }}</a>
+                                <a target="_blank" href="{{ route('customers.show', ['id' => $log->customer_id]) }}">{{ __("View Customer") }}</a>
                                 </li>
                             @empty
                                 <li>Nenhuma atividade encontrada.</li>
@@ -142,7 +142,7 @@
                             @forelse($logs['user_logs'] as $log)
                                 <li>{{ ucfirst($log['action']) }} um usuário em {{ dateTimeBrazilianFormat($log['created_at']) }}
                                 -
-                                <a href="{{ route('users.show', ['id' => $log->user_id]) }}">{{ __("View User") }}</a>
+                                <a target="_blank" href="{{ route('users.show', ['id' => $log->user_id]) }}">{{ __("View User") }}</a>
                                 </li>
                             @empty
                                 <li>Nenhuma atividade encontrada.</li>
