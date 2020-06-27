@@ -454,6 +454,16 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
         });
 
         /**
+         * Reports routes
+         * 
+         */
+        Route::namespace('Reports')->prefix('reports')->name('reports.')->group(function (){
+            Route::group(['prefix' => 'activities'], function (){
+                Route::post('user/{userID}', 'UserActivityReportController@generate')->name('generate.user');
+            });
+        });
+
+        /**
          * Support routes
          * 
          */

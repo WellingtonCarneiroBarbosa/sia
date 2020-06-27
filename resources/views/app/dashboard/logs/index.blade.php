@@ -106,9 +106,16 @@
 @section('content')
 <div class="container">
     <div class="espaco"></div>
+    @component('components.alert')@endcomponent
+    
     @if($quantity_logs > 0)
+
         <h1>{{ $title }}</h1>
 
+        <a href="#" data-toggle="modal" data-target="#modal-filter" id="filtros-locais" class="btn btn-sm btn-neutral mb-2 mr-2">{{ __("Gerar relatório de atividade") }}</a>
+
+        @component('components.modals.userActivityReport', ['user' => $user])@endcomponent
+  
         @component('components.logsBody', [
             'user' => $user_name, 'users_log' => $users_log,
             'schedules_log' => $schedules_log, 'customers_log' => $customers_log,
@@ -121,4 +128,22 @@
         @component('components.noData', ['message' => $noDataMessage])@endcomponent
     @endif
 </div>
+@endsection
+
+@section('scripts')
+    <!--plugins-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+    <script src="{{ asset('js/plugins/maskNumber/dist/jquery.masknumber.min.js') }}"></script>
+    <script>
+        /**
+         * Masks
+         * 
+         */
+        (function( $ ) {
+            $(function() {
+                $('.date').mask('00/00/0000');
+            });
+        })(jQuery);
+    </script>
+
 @endsection

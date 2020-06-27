@@ -53,7 +53,7 @@ class UserLogController extends Controller
             'customers_log' => $customers_log, 'quantity_logs' => $quantity_logs,
             'users_log'     => $users_log,     'max_quantity_logs' => $max_quantity_logs,
             'user_name'     => $user_name,     'title' => $title, 
-            'noDataMessage' => $noDataMessage,
+            'noDataMessage' => $noDataMessage, 'user' => $user
         ]);
     }
 }
