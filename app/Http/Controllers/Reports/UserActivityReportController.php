@@ -124,10 +124,10 @@ class UserActivityReportController extends Controller
          */
         $limit = 50;
 
-        $schedules_log = ScheduleLog::where('user_id', $userID)->where('created_at', '>=', $data['start'])->where('created_at', '<=', $data['end'])->latest()->take($limit)->get();
-        $customers_log = CustomerLog::where('user_id', $userID)->where('created_at', '>=', $data['start'])->where('created_at', '<=', $data['end'])->latest()->take($limit)->get();
-        $places_log = PlaceLog::where('user_id', $userID)->where('created_at', '>=', $data['start'])->where('created_at', '<=', $data['end'])->latest()->take($limit)->get();
-        $users_log = UserLog::where('user_action_id', $userID)->where('created_at', '>=', $data['start'])->where('created_at', '<=', $data['end'])->latest()->take($limit)->get();
+        $schedules_log = ScheduleLog::where('user_id', $userID)->where(DB::raw('DATE(created_at)'), '>=', $data['start'])->where(DB::raw('DATE(created_at)'), '<=', $data['end'])->latest()->take($limit)->get();
+        $customers_log = CustomerLog::where('user_id', $userID)->where(DB::raw('DATE(created_at)'), '>=', $data['start'])->where(DB::raw('DATE(created_at)'), '<=', $data['end'])->latest()->take($limit)->get();
+        $places_log = PlaceLog::where('user_id', $userID)->where(DB::raw('DATE(created_at)'), '>=', $data['start'])->where(DB::raw('DATE(created_at)'), '<=', $data['end'])->latest()->take($limit)->get();
+        $users_log = UserLog::where('user_action_id', $userID)->where(DB::raw('DATE(created_at)'), '>=', $data['start'])->where(DB::raw('DATE(created_at)'), '<=', $data['end'])->latest()->take($limit)->get();
 
         /**
          * Verify if has
