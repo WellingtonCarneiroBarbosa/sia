@@ -45,7 +45,8 @@
     </div>
 
     <!-- Sidenav -->
-    <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+ 
+    <nav id="mainNavBar" class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white">
         <div class="scrollbar-inner">
             <!-- Brand -->
             <div class="sidenav-header align-items-center" style="margin-bottom: 2em;">
@@ -111,15 +112,25 @@
             </div>
         </div>
     </nav>
+    
+       
+    
     <!-- fim do sidenav -->
 
     <!-- top nav -->
-    <!-- Main content -->
     <div class="main-content" id="panel">
         <!-- Topnav -->
         <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
             <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="hideNav">
+                    <div title="{{ __('Click to hide navbar') }}" class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </div>
+
                     <!-- Search form -->
                     <form class="navbar-search navbar-search-light form-inline mr-sm-3 form-loader" id="navbar-search-main">
                         <div class="form-group mb-0">
@@ -136,16 +147,6 @@
                     </form>
                     <!-- Navbar links -->
                     <ul class="navbar-nav align-items-center  ml-md-auto ">
-                        <li class="nav-item d-xl-none">
-                            <!-- Sidenav toggler -->
-                            <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
-                                <div class="sidenav-toggler-inner">
-                                    <i class="sidenav-toggler-line"></i>
-                                    <i class="sidenav-toggler-line"></i>
-                                    <i class="sidenav-toggler-line"></i>
-                                </div>
-                            </div>
-                        </li>
                         <li class="nav-item d-sm-none">
                             <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
                                 <i class="ni ni-zoom-split-in"></i>
@@ -428,6 +429,19 @@
                 sessionStorage.setItem("atualization-note", "atualization-note");
                 $('#atualization-notes').modal();
             }
+
+            /** 
+             * Hide/Show Navbar
+             *
+             */
+             var navBar = $("#mainNavBar");
+             $("#hideNav").click(function (){
+                if(navBar.is(":visible")) {
+                    navBar.addClass("d-none").removeClass('fixed-left')
+                } else {
+                    navBar.removeClass("d-none").addClass('fixed-left')
+                }
+             })
         });
 
         function em_desenvolvimento_alert(){
