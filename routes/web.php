@@ -422,7 +422,10 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
         Route::group(['prefix' => 'statistics', 'middleware' => 'admin'], function () {
 
             Route::get('/', 'Statistics\StatisticController@index')
-                                               ->name('statistics');  
+                                               ->name('statistics'); 
+                                               
+            Route::post('/specific-date', 'Statistics\StatisticController@specificDate')
+                                                       ->name('statistics.specificDate');
 
         });
         

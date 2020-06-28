@@ -459,5 +459,13 @@
     "Generate": "Gerar",
     "Common user": "Usuário comum",
     "Attention! There is a limit of 200 logs per report.": "Atenção! Há um limite de 200 logs por relatório.",
-    "Click to Generate": "Clique para Gerar"
+    "Click to Generate": "Clique para Gerar",
+    "New appointments": "Novos agendamentos",
+    "Canceled appointments": "Agendamentos cancelados",
+    "We did not find any statistics for these dates": "Não encontramos nenhuma estatística para essas datas",
+    "Filter": "Filtrar",
+    "Click to Filter": "Clique para Filtrar",
+    "Filter Statistics": "Filtrar Estatísticas",
+    "Most booked places this month": "Locais mais reservados neste mês",
+    "Relationship between places and schedules": "Relação entre locais e agendamentos"
 }
