@@ -297,6 +297,13 @@
         $str = preg_replace('/_+/', '', $str); // ideia do Bacco :)
         $str = preg_replace('/[.,-]/', '', $str);
         $str = preg_replace('/[ ]/', '', $str);
+        $str = trim($str);
+        $str = str_replace(".", "", $str);
+        $str = str_replace(",", "", $str);
+        $str = str_replace("-", "", $str);
+        $str = str_replace("/", "", $str);
+        $str = str_replace("(", "", $str);
+        $str = str_replace(")", "", $str);
         $str = str_replace(' ', '', $str);
         return $str;
     }

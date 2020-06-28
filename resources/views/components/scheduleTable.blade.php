@@ -27,10 +27,9 @@
                             <td>
                                 @if($schedule->schedulingPlace['name'])
                                 <div class="media align-items-center">
-                                    <a href="#" class="avatar avatar-md rounded-circle mr-3">
-                                        <img alt="Image placeholder" src="https://via.placeholder.com/150">
-                                    </a>
-
+                                   
+                                    <i class="avatar avatar-md rounded-circle mr-3 popover-primary fa fa-building"></i>
+                                    
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm">
                                             {{ $schedule->schedulingPlace['name'] }}
@@ -86,10 +85,9 @@
                             <td>
                                 @if($schedule->schedulingCustomer)
                                 <div class="media align-items-center">
-                                    <a href="#" class="avatar avatar-sm rounded-circle mr-3">
-                                        <img alt="Image placeholder" src="https://via.placeholder.com/150">
-                                    </a>
-
+                                 
+                                    <i class="avatar avatar-sm rounded-circle mr-3 popover-primary fa fa-user"></i>
+                                      
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm">{{ $schedule->schedulingCustomer['corporation'] }}</span>
                                     </div>

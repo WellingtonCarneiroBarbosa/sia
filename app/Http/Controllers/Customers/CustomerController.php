@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Lang;
 use App\Models\Customers\Customer;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\HistoricSchedule;
+use App\Rules\CNPJRule;
+use App\Rules\CustomerFullNameRule;
+use Validator;
 
 class CustomerController extends Controller
 {
@@ -18,7 +21,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::paginate(config('app.paginate_limit'));
+        $customers = Customer::orderBy('corporation', 'ASC')->paginate(config('app.paginate_limit'));
         $hasCustomers = hasData($customers);
 
         return view('app.dashboard.customers.index', [
@@ -45,6 +48,31 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $data   = $request->all();
+
+        /**
+         * Validate request
+         * 
+         */
+        $data = $request->all();
+
+        $data['cnpj'] = sanitizeString($data['cnpj']);
+        $data['phone'] = sanitizeString($data['phone']);
+
+        $validator = Validator::make($data, [
+            'corporation'   => ['required', 'string', 'max:120',],
+            'cnpj'   => ['required', 'string', 'max:18', new CNPJRule()],
+            'name'   => ['required', 'string', 'max:120', new CustomerFullNameRule()],
+            'email'   => ['required', 'email', 'max:200',],
+            'phone'   => ['required', 'string', 'min:10', 'max:14',],
+        ]);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         $create = Customer::create($data);
 
