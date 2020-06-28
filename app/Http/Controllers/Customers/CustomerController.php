@@ -119,7 +119,34 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $update = Customer::findOrFail($id)->update($request->all());
+        $data   = $request->all();
+
+        /**
+         * Validate request
+         * 
+         */
+        $data = $request->all();
+
+        $data['cnpj'] = sanitizeString($data['cnpj']);
+        $data['phone'] = sanitizeString($data['phone']);
+
+        $validator = Validator::make($data, [
+            'corporation'   => ['required', 'string', 'max:120',],
+            'cnpj'   => ['required', 'string', 'max:18', new CNPJRule()],
+            'name'   => ['required', 'string', 'max:120', new CustomerFullNameRule()],
+            'email'   => ['required', 'email', 'max:200',],
+            'phone'   => ['required', 'string', 'min:10', 'max:14',],
+        ]);
+      
+
+        if($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $update = Customer::findOrFail($id)->update($data);
 
         redirectBackIfThereIsAError($update);
 

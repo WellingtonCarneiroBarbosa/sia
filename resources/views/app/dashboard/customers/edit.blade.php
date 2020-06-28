@@ -25,34 +25,77 @@
         <div class="row justify-content-center fadeInTransition" >
             <div class="card col-6 bg-secondary shadow border-0">
                 <div class="card-body px-lg-10 py-lg-10">
-                <div class="text-center"><h3>{{ __("Edit Customer") }}</h3></div>
+                <div class="text-center"><h3>{{ __("Register Customer") }}</h3></div>
                 <div class="text-center text-muted mb-4">
                     <small>{{ __("Fill in the details below to proceed") }}</small>
                 </div>
-                <form method="POST" class="form-loader" action="{{ route('customers.update', ['id' => $customer->id]) }}">
-                @csrf
-                @method('PUT')
-                <!--nome da empresa-->
-                <div class="form-group focused">
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-building"></i></span>
-                        </div>
+                <form method="POST" class="form-loader" action="{{ route('customers.update', [$customer->id]) }}">
+                    @csrf
+                    @method('PUT')
 
-                        <input id="corporation" type="text" title="{{ __("Fill this field") }}"  placeholder="{{ __("Corporation") }}"  class="form-control " name="corporation" value="{{ $customer->corporation }}" required>
-                    
-                    </div>
-                </div>
-                <!--fim do nome da empresa-->
+                    {{-- Representante --}}
+                    <label for="representative">{{ __("Trade Representative") }}:</label>
+                    <x-input id="representative" icon="fa fa-user" name="name" :value="$customer->name" :required="true" />
 
-                <!-- submit button -->
+                    {{-- Nome da Empresa --}}
+                    <label for="corporation">{{ __("Enterprise") }}:</label>
+                    <x-input id="corporation" icon="ni ni-building" name="corporation" :value="$customer->corporation" :required="true" />
+                
+                    {{-- CNPJ --}}
+                    <label for="cnpj">{{ __('CNPJ') }}:</label>
+                    <x-input icon="ni ni-badge" id="cnpj" name="cnpj" :value="mask('##.###.###\####-##', $customer->cnpj)" :required="true"/>
+
+                    {{-- Phone --}}
+                    <label for="phone">{{ __("Phone") }}:</label>
+                    @if(strlen($customer->phone) == 10)
+                    @php
+                        $phone = mask("(##) ####-####", $customer->phone) 
+                    @endphp
+                    @else 
+                    @php
+                        $phone = mask("(##) # ####-####", $customer->phone) 
+                    @endphp
+                    @endif
+                    <x-input id="phone" icon="fa fa-phone" name="phone" :value="$phone" :required="true" />
+
+                    {{-- Email --}}
+                    <label for="email">{{ __("Email") }}:</label>
+                    <x-input icon="ni ni-email-83" id="email" name="email" type="email" :value="$customer->email" :required="true"/>
+
                     <div class="text-center">
-                        <button type="submit" title="{{ __("Click to edit this costumer") }}" class="btn btn-primary my-4">{{ __("Edit Customer") }}</button>
+                        <button type="submit" title="{{ __("Click to register this costumer") }}" class="btn btn-primary my-4">{{ __("Register Customer") }}</button>
                     </div>
-                <!-- fim do submit button -->
                 </form>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+    <script src="{{ asset('js/plugins/maskNumber/dist/jquery.masknumber.min.js') }}"></script>
+    <script>
+        /**
+        * Masks
+        * 
+        */
+        (function( $ ) {
+            $(function() {
+                $('#cnpj').mask('00.000.000/0000-00');
+                
+                    var SPMaskBehavior = function (val) {
+                      return val.replace(/\D/g, '').length === 11 ? '(00) 0 0000-0000' : '(00) 0000-00009';
+                    },
+                    spOptions = {
+                      onKeyPress: function(val, e, field, options) {
+                          field.mask(SPMaskBehavior.apply({}, arguments), options);
+                        }
+                    };
+                  
+                    $('#phone').mask(SPMaskBehavior, spOptions);
+                 
+            });
+        })(jQuery);
+    </script>
 @endsection
