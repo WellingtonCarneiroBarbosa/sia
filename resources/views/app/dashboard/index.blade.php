@@ -1,4 +1,53 @@
-@extends('layouts.dashboard') @section('title', Lang::get('Dashboard')) @section('content')
+@extends('layouts.dashboard')
+
+@section('title', Lang::get('Dashboard'))
+
+@section('styles')
+    <link href='{{ asset("dashboard/libs/full-calendar/lib/main.css") }}' rel='stylesheet' />
+
+    <script src='{{ asset("dashboard/libs/full-calendar/lib/main.js") }}'></script>
+    <script src="{{ asset('dashboard/libs/full-calendar/lib/locales/pt-br.js') }}"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var data = "{{ $schedules }}";
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            
+            @if(config('app.locale') != "pt-BR")
+            locale: "en",
+            @else 
+            locale: "pt-br",
+            @endif
+
+            // Redirect to more details on click
+            eventClick: function(info) {
+                var showScheduleInfosUrl = "{{ url('dash/schedules/show') }}";
+                var id = info.event.id
+                showScheduleInfosUrl = showScheduleInfosUrl + "/" + id;
+                return window.open(showScheduleInfosUrl, '_blank');
+            },
+
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            },
+            initialDate: "{{ now() }}",
+            navLinks: true, // can click day/week names to navigate views
+            businessHours: true, // display business hours
+            editable: true,
+            selectable: true,
+            events: JSON.parse(data.replace(/&quot;/g,'"'))
+        });
+
+        calendar.render();
+    });
+
+    </script>
+@endsection
+
+@section('content')
 <!-- Header -->
 <div class="header bg-primary pb-6">
     <div class="container-fluid">
@@ -28,7 +77,9 @@
     <div class="row">
         <div class="col-xl-12">
             @if($hasSchedules)
-                @component('components.scheduleTable', ['schedules' => $schedules, 'now' => $now])@endcomponent
+            <div class="espacol"></div>
+                <div id='calendar'></div>
+                {{-- @component('components.scheduleTable', ['schedules' => $schedules, 'now' => $now])@endcomponent --}}
             @else
                 @component('components.noData', ['message' => Lang::get('We still have nothing to display. Click new and register an appointment')])@endcomponent
             @endif

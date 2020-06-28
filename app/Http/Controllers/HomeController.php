@@ -16,15 +16,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $schedules      = Schedule::with('schedulingCustomer')
-                          ->with('schedulingPlace')
-                          ->orderBy('start', 'ASC')
-                          ->paginate(config('app.paginate_limit'));   
+        $schedules      = Schedule::orderBy('start', 'ASC')->get();
                           
         $places         = Place::get();
 
         $hasPlaces      = hasData($places);
         $hasSchedules   = hasData($schedules);
+
+        $schedules = \json_encode($schedules);
 
         $now = date('Y-m-d H:i:s');
 
