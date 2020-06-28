@@ -10,6 +10,39 @@
     <strong>{{ $customer->corporation }}</strong> 
 </div>
 
+{{-- customer's representative --}}
+<div class="form-group mb-3">
+    <span>{{ __("Trade Representative") }}:</span>
+    <strong>{{ $customer->name }}</strong> 
+</div>
+
+{{-- cnpj --}}
+<div class="form-group mb-3">
+    <span>{{ __("CNPJ") }}:</span>
+    <strong>
+        {{ mask("##.###.###\####-##", $customer->cnpj) }}
+    </strong> 
+</div>
+
+{{-- telefone --}}
+<div class="form-group mb-3">
+    <span>{{ __("Phone") }}:</span>
+    <strong>
+        @if(strlen($customer->phone) == 10)
+        {{ mask("(##) ####-####", $customer->phone) }}
+        @else 
+        {{ mask("(##) # ####-####", $customer->phone) }}
+        @endif
+    </strong> 
+</div>
+
+{{-- Email --}}
+<div class="form-group mb-3">
+    <span>{{ __("Email") }}:</span>
+    <strong>{{ $customer->email }}</strong> 
+</div>
+
+
 <div class="form-group mb-3">
     <span>{{ __("Created at") }}:</span>
     <strong>{{dateBrazilianFormat($customer->created_at)}} {{ __("at") }} {{ timeBrazilianFormat($customer->created_at) }}</strong>
