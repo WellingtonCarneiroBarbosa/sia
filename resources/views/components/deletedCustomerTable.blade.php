@@ -11,6 +11,8 @@
                         <tr>
                             <!-- agendamento 01 -->
                             <th scope="col" class="sort" data-sort="name">{{ __("Enterprise") }}</th>
+                            <th scope="col" class="sort" data-sort="trade">{{ __("Trade Representative") }}</th>
+                            <th scope="col" class="sort" data-sort="phone">{{ __("Phone") }}</th>
                             <th scope="col" class="sort" data-sort="completion">{{ __("Actions") }}</th>
                             <th scope="col"></th>
                         </tr>
@@ -21,9 +23,7 @@
                         <tr>
                             <td>
                                 <div class="media align-items-center">
-                                    <a href="#" class="avatar avatar-md rounded-circle mr-3">
-                                        <img alt="Image placeholder" src="https://via.placeholder.com/150">
-                                    </a>
+                                    <i class="avatar avatar-md rounded-circle mr-3 popover-primary fa fa-building"></i>
 
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm">
@@ -31,6 +31,27 @@
                                         </span>
                                     </div>
                                 </div>
+                            </td>
+                            
+                            <td>
+                                <div class="media align-items-center">
+                                    <i class="avatar avatar-sm rounded-circle mr-3 popover-primary fa fa-user"></i>
+
+                                    <div class="media-body">
+                                        <span class="name mb-0 text-sm">
+                                            {{ $customer->name }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="phone">
+                                @if(strlen($customer->phone) == 10)
+                                {{ mask("(##) ####-####", $customer->phone) }}
+                                @else 
+                                {{ mask("(##) # ####-####", $customer->phone) }}
+                                @endif
+                                
                             </td>
 
                             <td>

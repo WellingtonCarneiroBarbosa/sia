@@ -58,6 +58,48 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
      * 
      */
     Route::group(['prefix' => 'dash'], function () {
+        
+
+        /**
+         * Funcionalities
+         * in beta
+         * 
+         */
+        Route::group(['prefix' => 'beta'], function () {
+            /**
+             * Support routes
+             * 
+             */
+            Route::namespace('Support')->group(function (){
+                Route::prefix('support')->name('support.')->group(function (){
+
+                    Route::get('/', 'SupportController@myTickets')->name('tickets');
+
+                    Route::get('/request', 'SupportController@openTicketView')->name('request');
+
+                    Route::get('/response/{ticketID}', 'SupportController@formResponse')->name('ticket.form.response');
+
+                    Route::post('/response/{ticketID}', 'SupportController@responseTicket')->name('ticket.response');
+                
+                    Route::post('/request/send', 'SupportController@openTicket')->name('send.request');
+
+                    Route::get('/ticket/{ticketID}/details', 'SupportController@ticketDetails')->name('ticket.details');
+                
+                    Route::get('/ticket/close/{ticketID}', 'SupportController@closeTicket')->name('ticket.close');
+                });
+            });
+            
+            /**
+             * Schedules in calendar
+             * form
+             * 
+             */
+            Route::namespace('Schedules')->name('schedules.calendar.')->prefix('schedules')->group(function (){
+                Route::get('/', 'ScheduleCalendarController@index')->name('index');
+                Route::get('/schedule-list', 'ScheduleCalendarController@getSchedules')->name('list');
+            
+            });
+        });
         /***
          * Route index of the dash
          * 
@@ -463,29 +505,6 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
         Route::namespace('Reports')->prefix('reports')->name('reports.')->group(function (){
             Route::group(['prefix' => 'activities'], function (){
                 Route::post('user/{userID}', 'UserActivityReportController@generate')->name('generate.user');
-            });
-        });
-
-        /**
-         * Support routes
-         * 
-         */
-        Route::namespace('Support')->group(function (){
-            Route::prefix('support')->name('support.')->group(function (){
-
-                Route::get('/', 'SupportController@myTickets')->name('tickets');
-
-                Route::get('/request', 'SupportController@openTicketView')->name('request');
-
-                Route::get('/response/{ticketID}', 'SupportController@formResponse')->name('ticket.form.response');
-
-                Route::post('/response/{ticketID}', 'SupportController@responseTicket')->name('ticket.response');
-            
-                Route::post('/request/send', 'SupportController@openTicket')->name('send.request');
-
-                Route::get('/ticket/{ticketID}/details', 'SupportController@ticketDetails')->name('ticket.details');
-            
-                Route::get('/ticket/close/{ticketID}', 'SupportController@closeTicket')->name('ticket.close');
             });
         });
 
