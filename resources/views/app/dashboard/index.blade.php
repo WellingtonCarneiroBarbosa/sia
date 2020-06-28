@@ -12,6 +12,12 @@
         var calendarEl = document.getElementById('calendar');
         var data = "{{ $schedules }}";
 
+        data = data.replace(/&quot;/g,'"')
+        //if schedule confirmed, color = green
+        data = data.replace(/"status":"1"/g, '"color":"#28a745"')
+        //if schedule on budge, color = orange
+        data = data.replace(/"status":null/g, '"color":"#ffc107"')
+         
         var calendar = new FullCalendar.Calendar(calendarEl, {
             
             @if(config('app.locale') != "pt-BR")
@@ -34,7 +40,7 @@
                 document.getElementById('show-schedule').href = showSchedule;
                 document.getElementById('edit-schedule').href = editSchedule;
                 document.getElementById('cancel-schedule').href = cancelSchedule;
-                
+
                 // Scroll to the modal
                 window.scrollTo(0, 0);
 
@@ -52,12 +58,11 @@
             businessHours: true, // display business hours
             editable: true,
             selectable: true,
-            events: JSON.parse(data.replace(/&quot;/g,'"'))
+            events: JSON.parse(data)
         });
 
         calendar.render();
     });
-
     </script>
 @endsection
 
