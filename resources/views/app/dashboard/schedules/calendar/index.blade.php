@@ -10,7 +10,6 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
-        var showScheduleInfosUrl = "{{ url('dash/schedules/show') }}";
         var data = "{{ $schedules }}";
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -23,6 +22,7 @@
 
             // Redirect to more details on click
             eventClick: function(info) {
+                var showScheduleInfosUrl = "{{ url('dash/schedules/show') }}";
                 var id = info.event.id
                 showScheduleInfosUrl = showScheduleInfosUrl + "/" + id;
                 return window.open(showScheduleInfosUrl, '_blank');
