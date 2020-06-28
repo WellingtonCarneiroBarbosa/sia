@@ -18,6 +18,7 @@ class HomeController extends Controller
     {
         $schedules      = Schedule::with('schedulingCustomer')
                           ->with('schedulingPlace')
+                          ->latest('start')
                           ->paginate(config('app.paginate_limit'));   
                           
         $places         = Place::get();
@@ -33,14 +34,5 @@ class HomeController extends Controller
             'places'    => $places,     'hasPlaces'    => $hasPlaces,
             'now'       => $now
         ]);
-    }
-
-    /**
-     * Support team home
-     * 
-     */
-    public function supportHome()
-    {
-        return "oi";
     }
 }
