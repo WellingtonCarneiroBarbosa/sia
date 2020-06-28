@@ -21,7 +21,7 @@ class CanceledSchedulesController extends Controller
      */
     public function index(){
         $canceledSchedules = Schedule::with('schedulingCustomer')->with('schedulingPlace')
-                            ->latest('start')
+        ->orderBy('start', 'ASC')
                              ->onlyTrashed()->paginate(config('app.paginate_limit'));
 
         $hasCanceledSchedules = hasData($canceledSchedules);

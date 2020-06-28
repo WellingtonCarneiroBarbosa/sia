@@ -18,7 +18,7 @@ class HistoricController extends Controller
     {
         $schedules = HistoricSchedule::with('historicSchedulingCustomer')
                                      ->with('historicSchedulingPlace')
-                                     ->latest('start')
+                                     ->orderBy('start', 'ASC')
                                      ->paginate(config('app.paginate_limit'));
 
         $places = Place::get();

@@ -18,7 +18,7 @@ class HomeController extends Controller
     {
         $schedules      = Schedule::with('schedulingCustomer')
                           ->with('schedulingPlace')
-                          ->latest('start')
+                          ->orderBy('start', 'ASC')
                           ->paginate(config('app.paginate_limit'));   
                           
         $places         = Place::get();
