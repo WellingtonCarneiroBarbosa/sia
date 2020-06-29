@@ -52,6 +52,8 @@ Route::get('/teste', function (){
  * 
  */
 Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], function () {
+   
+
     /***
      * Start
      * Dashboard routes
@@ -59,7 +61,16 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
      */
     Route::group(['prefix' => 'dash'], function () {
         
+        Route::get('/manual/pdf', function (){
+            $filename = 'manual.pdf';
+            $path = storage_path($filename);
 
+            return Response::make(file_get_contents($path), 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="'.$filename.'"'
+            ]);
+            return response()->file('manual.pdf');
+        });
         /**
          * Funcionalities
          * in beta

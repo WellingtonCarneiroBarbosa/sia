@@ -205,12 +205,12 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
                                 <div class="row shortcuts px-4">
-                                    <a href="#!" onclick="em_desenvolvimento_alert()" class="col-4 shortcut-item">
+                                    {{-- <a href="#!" onclick="em_desenvolvimento_alert()" class="col-4 shortcut-item">
                                         <span class="shortcut-media avatar rounded-circle bg-gradient-red">
                                                 <i class="ni ni-calendar-grid-58"></i>
                                             </span>
                                         <small title="{{ __("Click to go to the calendar") }}">{{ __("Calendar") }}</small>
-                                    </a>
+                                    </a> --}}
                                     <a target="_blank" href="https://login.live.com/login.srf?wa=wsignin1.0&rpsnv=13&ct=1582478452&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%3a%2f%2foutlook.live.com%2fowa%2f%3fnlp%3d1%26RpsCsrfState%3ddeb00056-f05f-7220-28a5-906686de2d85&id=292841&aadredir=1&CBCXT=out&lw=1&fl=dob%2cflname%2cwld&cobrandid=90015"
                                         class="col-4 shortcut-item">
                                         <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
@@ -218,12 +218,12 @@
                                             </span>
                                         <small title="{{ __("Click to go to the microsoft e-mail") }}">{{ __("E-mail") }}</small>
                                     </a>
-                                    <a href="#" data-toggle="modal" data-target="#modal-feedback" onclick="em_desenvolvimento_alert()" class="col-4 shortcut-item">
+                                   {{--  <a href="#" data-toggle="modal" data-target="#modal-feedback" onclick="em_desenvolvimento_alert()" class="col-4 shortcut-item">
                                         <span class="shortcut-media avatar rounded-circle bg-gradient-green">
                                                 <i class="ni ni-support-16"></i>
                                             </span>
                                         <small title="{{ __("Click to send a feedback for the developers") }}">{{ __("Feedback") }}</small>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{route('home')}}" class="col-4 shortcut-item">
                                         <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
                                                 <i class="fa fa-calendar"></i>
@@ -277,7 +277,7 @@
                                     <span>{{ __("Support") }}</span>
                                 </a>
 
-                                <a href="#!" onclick="em_desenvolvimento_alert()"  class="dropdown-item" title="{{ __("Click to see the system manual") }}">
+                                <a href="{{ url('dash/manual/pdf') }}" class="dropdown-item" title="{{ __("Click to see the system manual") }}">
                                     <i class="fa fa-book"></i>
                                     <span>{{ __("Manual") }}</span>
                                 </a>
@@ -322,10 +322,10 @@
                             <a class="nav-link">{{ __("Thank you for supporting us") }}!</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" title="{{ __(" Click to know more about the system ") }}" onclick="em_desenvolvimento_alert()" target="_blank">{{ __("About The Project") }}</a>
+                            <a href="#" class="nav-link" title="{{ __("Click to know more about the system") }}" onclick="em_desenvolvimento_alert()" target="_blank">{{ __("About The Project") }}</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" title="{{ __(" Click to view usage documentation ") }}" class="nav-link" onclick="em_desenvolvimento_alert()" target="_blank">{{ __("How To Use") }}?</a>
+                            <a href="#" title="{{ __("Click to view usage documentation") }}" class="nav-link" onclick="em_desenvolvimento_alert()" target="_blank">{{ __("How To Use") }}?</a>
                         </li>
                     </ul>
                 </div>
@@ -427,6 +427,8 @@
                 </div>
             </div>
         </div>
+
+        
     </div>
 
     
@@ -437,15 +439,10 @@
     <script src="{{ asset('dashboard/assets/vendor/js-cookie/js.cookie.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/argon.min.js?v=1.2.0') }}"></script>
 
+    
     <script>
         $(document).ready(function (){
-            var hasUserAlreadySeenNotes = sessionStorage.getItem("atualization-note");
-    
-            if(! hasUserAlreadySeenNotes){
-                sessionStorage.setItem("atualization-note", "atualization-note");
-                $('#atualization-notes').modal();
-            }
-
+           
             /** 
              * Hide/Show Navbar
              *

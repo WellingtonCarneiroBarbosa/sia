@@ -12,7 +12,7 @@
                     <h6 class="h2 text-white d-inline-block mb-0">{{ __("My Profile") }}</h6>
                 </div>
                 <div class="col-lg-6 col-5 text-right">
-                    <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#modal-form">{{ __("Edit Profile") }}</a>
+                    <a href="#" class="btn btn-sm btn-neutral" onclick="em_desenvolvimento_alert()" data-toggle="modal" data-target="#modal-form">{{ __("Edit Profile") }}</a>
                 </div>
             </div>
         </div>
