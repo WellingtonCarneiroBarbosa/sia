@@ -18,4 +18,3 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-node_modules
