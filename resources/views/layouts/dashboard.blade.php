@@ -123,14 +123,15 @@
         <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="hideNav">
+                    
                     <div title="{{ __('Click to hide navbar') }}" class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
-                        <div class="sidenav-toggler-inner">
-                            <i class="sidenav-toggler-line"></i>
-                            <i class="sidenav-toggler-line"></i>
-                            <i class="sidenav-toggler-line"></i>
-                        </div>
+                       {{-- Aumenta a area clicavel --}}
+                        <label style="display: inline-block; position: relative; z-index: 1; padding: 2em; margin: -2em">
+                            <div class="sidenav-toggler-inner">
+                                <i class="fa fa-bars text-white"></i>
+                            </div>
+                       </label>
                     </div>
-                
 
                     <!-- Search form -->
                     <form class="navbar-search navbar-search-light form-inline mr-sm-3 form-loader" id="navbar-search-main">

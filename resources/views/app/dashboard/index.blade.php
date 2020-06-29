@@ -7,6 +7,7 @@
 
     <script src='{{ asset("dashboard/libs/full-calendar/lib/main.js") }}'></script>
     <script src="{{ asset('dashboard/libs/full-calendar/lib/locales/pt-br.js') }}"></script>
+
     <script>
     $(document).ready(function () { 
         var calendarEl = document.getElementById('calendar');
@@ -17,7 +18,7 @@
         data = data.replace(/"status":"1"/g, '"color":"#28a745"')
         //if schedule on budge, color = orange
         data = data.replace(/"status":null/g, '"color":"#ffc107"')
-         
+     
         var calendar = new FullCalendar.Calendar(calendarEl, {
             
             @if(config('app.locale') != "pt-BR")
@@ -53,6 +54,7 @@
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
             },
+            
             initialDate: "{{ now() }}",
             navLinks: true, // can click day/week names to navigate views
             businessHours: true, // display business hours
@@ -94,7 +96,7 @@
     @component('components.alert')@endcomponent
 
     <div class="row">
-        <div class="col-xl-12">
+        <div class="col-12">
             @if($hasSchedules)
             <div class="espacol"></div>
                 <div id='calendar'></div>
