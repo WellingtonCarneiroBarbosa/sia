@@ -257,7 +257,7 @@
                                     <i class="ni ni-single-02"></i>
                                     <span>{{ __("My Profile") }}</span>
                                 </a>
-                                <a href="#!" onclick="em_desenvolvimento_alert()" class="dropdown-item" title="{{ __("Click to go to the settings page") }}">
+                                <a href="{{ route('config.index') }}" class="dropdown-item" title="{{ __("Click to go to the settings page") }}">
                                     <i class="ni ni-settings-gear-65"></i>
                                     <span>{{ __("Settings") }}</span>
                                 </a>

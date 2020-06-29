@@ -512,12 +512,11 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
          * Configs Routes
          * 
          */
-        Route::namespace('Configuration')->prefix('configs')->name('config.')->group(function () {
-            Route::get('disable-email-notification', 'EmailConfigurationController@disableEmailNotification')
-                                                                         ->name('disable.email.notification');
+        Route::namespace('Configuration')->prefix('configuration')->name('config.')->group(function () {
+            Route::get('/', 'ConfigurationController@index')->name('index');
 
-            Route::get('enable-email-notification', 'EmailConfigurationController@enableEmailNotification')
-                                                                        ->name('enable.email.notification');
+            Route::get('email-notification', 'EmailConfigurationController@emailNotification')
+                                                                  ->name('email.notification');
         });
     });
     /***
