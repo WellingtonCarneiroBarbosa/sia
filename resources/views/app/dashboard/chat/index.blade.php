@@ -63,7 +63,7 @@
     <div class="row">
         <div class="col-md-12 col-md-offset-2">
             <div class="panel panel-default ">
-                <div class="panel-heading">Chat</div>
+                <div class="panel-heading">Chat em grupo do sistema</div>
   
                 <div class="panel-body chat-border">
                     <chat-messages :messages="messages"></chat-messages>

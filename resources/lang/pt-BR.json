@@ -481,5 +481,15 @@
     "Save": "Salvar",
     "Email notifications disabled": "Notificações via e-mail desativadas",
     "Email notifications enabled": "Notificações via e-mail ativadas",
-    "registered a new appointment for": "cadastrou um novo agendamento para"
+    "registered a new appointment for": "cadastrou um novo agendamento para",
+    "Watch system trailer": "Assistir trailer do sistema",
+    "What is SIA Eventos": "O que é o SIA Eventos",
+    "The project": "O projeto",
+    "SIA Eventos is a project that aims to facilitate the management of rental environments. The system uses technology to keep its team fully integrated and harmonious, so that efficient management of all schedules can be carried out.": "O SIA Eventos é um projeto que visa facilitar o gerenciamento de locação de ambientes. O sistema utiliza a tecnologia para manter sua equipe totalmente integrada e harmônica, para que possa ser realizado uma gestão eficiente de todos os agendamentos.",
+    "Automated emails": "E-mails automatizados",
+    "Our application automatically notifies all members of your team via email about upcoming events of the week.": "Nossa aplicação avisa automaticamente todos os membros de seu time via e-mail sobre os próximos eventos da semana.",
+    "Real-time notifications": "Notificações em tempo real",
+    "The system has real-time notifications, which help to keep the team integrated about what is happening.": "O sistema conta com notificações em tempo real, que ajudam a manter a equipe integrada sobre o que está ocorrendo.",
+    "Avoiding misunderstandings": "Evitando equívocos",
+    "Your team will not have to worry about registering duplicate schedules in one place, as the system performs all the necessary validations before allowing any type of registration.": "Seu time não precisará se preocupar em cadastrar agendamentos duplicados em um local, pois o sistema realiza todas as validações necessárias antes de permitir qualquer tipo de cadastro."
 }

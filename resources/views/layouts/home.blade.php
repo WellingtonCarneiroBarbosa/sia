@@ -66,20 +66,12 @@
                         </div>
                     </div>
                     <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->routeIs('home.about') ? 'active' : '' }}" >
                             <a class="nav-link" href="{{ route('home.about') }}" role="button">
                                 <i class="ni ni-atom d-lg-none"></i>
-                                @if(request()->routeIs('home.about'))
-                                <u><span class="nav-link-inner--text" title="{{ __("Click to know more about the system") }}">{{ __("About the Project") }}</span></u>
-                                @else 
-                                <span class="nav-link-inner--text" title="{{ __("Click to know more about the system") }}">{{ __("About the Project") }}</span>
-                                @endif
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" role="button">
-                                <i class="ni ni-collection d-lg-none"></i>
-                                <span class="nav-link-inner--text" title="{{ __("Click to view usage documentation") }}">{{ __("How To Use") }}?</span>
+                               
+                                <span class="nav-link-inner--text active" title="{{ __("Click to know more about the system") }}">{{ __("About the Project") }}</span>
+        
                             </a>
                         </li>
                     </ul>

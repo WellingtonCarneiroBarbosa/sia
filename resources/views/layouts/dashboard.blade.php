@@ -263,7 +263,7 @@
                                     <span>{{ __("Support") }}</span>
                                 </a>
 
-                                <a href="{{ url('dash/manual/pdf') }}" class="dropdown-item" title="{{ __("Click to see the system manual") }}">
+                                <a href="{{ url('dash/manual/pdf') }}" target="_blank" class="dropdown-item" title="{{ __("Click to see the system manual") }}">
                                     <i class="fa fa-book"></i>
                                     <span>{{ __("Manual") }}</span>
                                 </a>
@@ -308,10 +308,10 @@
                             <a class="nav-link">{{ __("Thank you for supporting us") }}!</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" title="{{ __("Click to know more about the system") }}" onclick="em_desenvolvimento_alert()" target="_blank">{{ __("About The Project") }}</a>
+                            <a href="{{ route('home.about') }}" class="nav-link" title="{{ __('Click to know more about the system') }}" target="_blank">{{ __("About the Project") }}</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" title="{{ __("Click to view usage documentation") }}" class="nav-link" onclick="em_desenvolvimento_alert()" target="_blank">{{ __("How To Use") }}?</a>
+                            <a href="{{ url('dash/manual/pdf') }}" title="{{ __('Click to view usage documentation') }}" class="nav-link" target="_blank">{{ __("How To Use") }}?</a>
                         </li>
                     </ul>
                 </div>
