@@ -61,6 +61,10 @@
     box-sizing: border-box;
 }
 
+mark {
+    background: yellow;
+}
+
 html {
     font-family: sans-serif;
     line-height: 1.15;
@@ -106,7 +110,7 @@ body {
     margin-left: -3px;
     position: absolute;
     width: 1px;
-  }
+}
 
 [tabindex='-1']:focus:not(:focus-visible) {
     outline: 0 !important;

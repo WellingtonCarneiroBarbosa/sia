@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Notifications\PasswordResetNotification;
 use App\Notifications\VerifyEmailNotification;
+use App\Models\Chats\Message;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -65,5 +66,15 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $defaultPassword = "12345678";
         $this->notify(new VerifyEmailNotification($this->email, $defaultPassword));
+    }
+
+    /**
+     * A user can have many messages
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }
