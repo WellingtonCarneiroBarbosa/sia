@@ -10,6 +10,14 @@
 
     <script>
     $(document).ready(function () { 
+        function formatDate (input) {
+            var datePart = input.match(/\d+/g),
+            year = datePart[0].substring(2), // get only two digits
+            month = datePart[1], day = datePart[2];
+          
+            return day+'/'+month+'/'+year;
+        }
+
         var calendarEl = document.getElementById('calendar');
         var data = "{{ $schedules }}";
 
@@ -29,6 +37,7 @@
 
             // Show modal action options
             eventClick: function(info) {
+
                 // Get schedule ID 
                 var scheduleID = info.event.id 
 
@@ -36,6 +45,37 @@
                 var showSchedule = "{{ url('dash/schedules/show') }}" + "/" + scheduleID;
                 var editSchedule = "{{ url('dash/schedules/edit') }}" + "/" + scheduleID;
                 var cancelSchedule = "{{ url('dash/schedules/confirm/cancel') }}" + "/" + scheduleID;
+
+                // Get schedule infos 
+                var scheduleInfoUrl = "{{ url('dash/schedules/info') }}" + "/" + scheduleID
+
+                $(function(){
+                    $.ajax({
+                        url: scheduleInfoUrl,
+                        method: "GET", 
+
+                        success: function (data) {
+                            var place = data.scheduling_place.name
+                            var customer = data.scheduling_customer.corporation
+                            var start = data.start
+                            var end = data.end 
+                            var details = data.details
+                            if(details == null) 
+                                details = "{{ Lang::get('Nothing to show') }}"
+
+                             // get modal options 
+                            document.getElementById('schedule-modal-title').innerHTML = info.event.title;
+                            document.getElementById('schedule-modal-place').innerHTML = place;
+                            document.getElementById('schedule-modal-start').innerHTML = start;
+                            document.getElementById('schedule-modal-end').innerHTML = end;
+                            document.getElementById('schedule-modal-customer').innerHTML = customer;
+                            document.getElementById('schedule-modal-details').innerHTML = details;
+                        }
+                    })
+                })
+
+                var title = info.event.title; 
+                var place = info.event.place_id;
 
                 //Set urls on modal buttons
                 document.getElementById('show-schedule').href = showSchedule;
@@ -134,6 +174,17 @@
                                         <button class="btn btn-primary">{{ __("Cancel") }}</button>
                                     </a>
                                 </center>
+                                <hr>
+                                <div class="row">
+                                    <ul>
+                                        <li><strong>{{ __("Title") }}: </strong><span id="schedule-modal-title"></span></li>
+                                        <li><strong>{{ __("Place") }}: </strong><span id="schedule-modal-place"></span></li>
+                                        <li><strong>{{ __("Start") }}: </strong><span id="schedule-modal-start"></span></li>
+                                        <li><strong>{{ __("End") }}: </strong><span id="schedule-modal-end"></span></li>
+                                        <li><strong>{{ __("Customer") }}: </strong><span id="schedule-modal-customer"></span></li>
+                                        <li><strong>{{ __("Details") }}: </strong><span id="schedule-modal-details"></span></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

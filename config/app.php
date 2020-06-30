@@ -169,6 +169,18 @@ return [
      */
     'support_api_key' => env('SUPPORT_API_KEY'),
 
+    /**
+     * Pusher API Token
+     * 
+     */
+    'pusher_api_token' => env('PUSHER_APP_KEY'),
+
+    /**
+     * Pusher cluster
+     * 
+     */
+    'pusher_api_cluster' => env('PUSHER_APP_CLUSTER'),
+
     'providers' => [
 
         /*

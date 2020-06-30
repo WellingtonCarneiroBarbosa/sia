@@ -123,6 +123,8 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
          */
         Route::group(['prefix' => 'schedules'], function () {
 
+            Route::get('/info/{id}', 'Schedules\ScheduleController@getScheduleInfos');
+
             Route::get('/create', 'Schedules\ScheduleController@create')
                                               ->name('schedules.create');
 

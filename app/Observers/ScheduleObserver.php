@@ -11,6 +11,8 @@ use App\Notifications\NotifyUser;
 use App\Models\Schedules\Schedule;
 use App\Models\Schedules\ScheduleLog;
 use App\User;
+use App\Events\Action\NewAction;
+use Lang;
 
 /**
  * ====================================
@@ -57,7 +59,16 @@ class ScheduleObserver
         /**Notify all users */
         $users = NotifyUser::getUsersToNotifyExceptAuthUser();
         Notification::send($users, new ScheduledNotification($schedule));
-       
+
+        $message = $schedule['user'] . " " . Lang::get('registered a new appointment for') . " " . $schedule['start'] . " " . Lang::get('and') . " " . $schedule['end'];
+        
+        $user_id = auth()->user()->id;
+        
+        /**
+         * Notify online users
+         * 
+         */
+        event(new NewAction(['user_id' => $user_id, 'message' => $message]));
     }
 
     /**

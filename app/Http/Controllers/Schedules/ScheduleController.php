@@ -18,6 +18,20 @@ use DateTime;
 
 class ScheduleController extends Controller
 {
+    /**
+     * Get schedule info
+     * 
+     */
+    public function getScheduleInfos($schedule_id)
+    {
+        $schedule = Schedule::with('schedulingCustomer')
+        ->with('schedulingPlace')->findOrFail($schedule_id);
+
+        $schedule['start'] = dateTimeBrazilianFormat($schedule['start']);
+        $schedule['end'] = dateTimeBrazilianFormat($schedule['end']);
+
+        return response()->json($schedule);
+    }
 
     /**
      * Show the form for creating a new resource.

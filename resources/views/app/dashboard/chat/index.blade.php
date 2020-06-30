@@ -16,8 +16,11 @@
                 }
             });
 
-            var pusher = new Pusher('1140229c65c9bbe9febf', {
-                cluster: 'mt1',
+            var pusherToken = "{{ config('app.pusher_api_token') }}";
+            var pusherCluster = "{{ config('app.pusher_api_cluster') }}"
+    
+            var pusher = new Pusher(pusherToken, {
+                cluster: pusherCluster,
                 forceTLS: true
             });
             

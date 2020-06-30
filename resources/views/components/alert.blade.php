@@ -1,3 +1,6 @@
+<div id="javascript-alert-container">
+    
+</div>
 @if ($errors->any())
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <span class="alert-inner--text"><i class="fas fa-thumbs-down mr-2"></i><strong> {{ __("Opps") }}...</strong>
@@ -26,3 +29,5 @@
     </button>
 </div>
 @endif
+
+

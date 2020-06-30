@@ -428,18 +428,14 @@
             </div>
         </div>
 
-        
     </div>
-
     
-
     <script src="{{ asset('js/loader/main.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/vendor/js-cookie/js.cookie.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/argon.min.js?v=1.2.0') }}"></script>
 
-    
     <script>
         $(document).ready(function (){
            
@@ -468,6 +464,30 @@
         function comeBack(){
             window.history.back();
         }
+    </script>
+
+    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
+    <script>
+        var pusherToken = "{{ config('app.pusher_api_token') }}";
+        var pusherCluster = "{{ config('app.pusher_api_cluster') }}"
+
+        var pusher = new Pusher(pusherToken, {
+            cluster: pusherCluster,
+            forceTLS: true
+        });
+        
+        var channel = pusher.subscribe('action-channel');
+        
+        channel.bind('new-action', function(data) {
+            if(data.data.user_id != "{{ auth()->user()->id }}")
+            {
+                /**append notify in container*/
+                $(function(){
+                    var message = data.data.message;
+                    $("#javascript-alert-container").prepend("<div class='alert alert-info alert-dismissible fade show' role='alert'><span class='alert-inner--text'><i class='fa fa-info mr-2'></i><strong>Info: </strong>" + message + "</span><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button></div>")
+                });
+            }
+        });
     </script>
 
     

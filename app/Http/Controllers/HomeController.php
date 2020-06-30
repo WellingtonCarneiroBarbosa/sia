@@ -16,7 +16,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $schedules      = Schedule::orderBy('start', 'ASC')->get();
+        $schedules      = Schedule::orderBy('start', 'ASC')->where('start', '>=', now())
+        ->with('schedulingCustomer')->with('schedulingPlace')->get();
                           
         $places         = Place::get();
 
