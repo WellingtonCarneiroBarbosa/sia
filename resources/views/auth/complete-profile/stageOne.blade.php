@@ -37,11 +37,6 @@
                 <label for="cep" id="cep-label">{{ __("And your CEP?") }}</label>
                 <span id="cep-message" class="text-danger"></span>
                 <x-input icon="ni ni-map-big" id="cep" name="cep" :value="auth()->user()->cep ?: old('cep')" :required="true"/>
-                <div class="float-right">
-                    <button type="button" id="validate" class="btn btn-sm mb-3 btn-primary mt-0">{{ __("Validate") }}</button>
-                </div>
-
-                <div class="espaco"></div>
 
                 <label for="state">{{ __("State") }}</label>
                 <x-input id="state" class="disabled" :placeholder="__('This will be completed automatically')" disabled /> 
@@ -71,90 +66,74 @@
 @endsection
 
 @section('scripts') 
-{{-- Input masks --}}
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-
+<script src="{{ asset('dashboard/assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script>
-    $(document).ready(function ($){
-        $("#cpf").mask('000.000.000-00')
-        $("#cep").mask('00000-000')
-    })
-</script>
 
-{{-- Get User Location By His Cep --}}
-<script>
-    $(document).ready(function (){
+$(document).ready(function ($){
+    $("#cpf").mask('000.000.000-00')
+    $("#cep").mask('00000-000')
 
-        $submitButton = $("#submit-button");
-        $submitButton.prop('disabled', true);
+    $loader = $("#pageloader");
+    $cepLabel = $("#cep-label");
+    $cepMessage = $("#cep-message");
+    $submitButton = $("#submit-button");
 
-        $("#validate").click(function (){
-            $cepElement = $("#cep");
-            $cepLabel = $("#cep-label");
-            $cepMessage = $("#cep-message");
-            $cep = $cepElement.val();
+    $("#cep").keyup(function(){
+        if($(this).val().length === 9) {
+            var endpoint = "https://viacep.com.br/ws/" + $(this).val() + "/json/unicode/";
 
-            /**
-            * Elements
-            *
-            */
-            $state = $("#state");
-            $city = $("#city");
-            $neighborhood = $("#neighborhood");
-            $address = $("#address");
-            $complementNumber = $("#complement_number");
-            $loader = $("#pageloader");
-
-            function errorMessage(){
+            function exceptionCEP () {
                 $submitButton.prop('disabled', true);
-                $loader.hide();
                 $cepLabel.hide();
                 $cepMessage.html("{{ __('Please, enter a valid CEP') }}")
                 $cepMessage.show();
-                $cepElement.focus();
+                $(this).focus();
+                $loader.hide();
             }
-    
-            /**
-            * Get Data By ViaCep
-            * Provider 
-            *
-            */
-            
-            return;
-            $.ajax({
-                url: 'https://viacep.com.br/ws/' + $cep + '/json/unicode/',
-                dataType: 'json',
-    
-                /**/
-                beforeSend: function () {
-                    $loader.show();
-                },
-    
-                /**/
-                success: function (response) {
-                    $cepMessage.hide();
-                    $cepLabel.show();
-                    $submitButton.prop('disabled', false);
 
-                    if(! response.uf ){
-                        errorMessage()
-                    }else {
-                        $state.val(response.uf);
-                        $city.val(response.localidade);
-                        $neighborhood.val(response.bairro);
-                        $address.val(response.logradouro);
-                        $loader.hide();
-                        $complementNumber.focus();
+            function successCEP (response) {
+                $state = $("#state").val(response.uf);
+                $city = $("#city").val(response.localidade);
+                $neighborhood = $("#neighborhood").val(response.bairro);
+                $address = $("#address").val(response.logradouro);
+                $complementNumber = $("#complement_number");
+
+                $submitButton.prop('disabled', false);
+                $cepLabel.show();
+                $cepMessage.hide()
+
+                $complementNumber.focus();
+                $loader.hide();
+            }
+
+            $.ajax({
+                url: endpoint,
+                dataType: 'json',
+
+                beforeSend: function () {
+                    $loader.show()
+                }, 
+
+                success: function (response) {
+                    if(response.erro) {
+                        exceptionCEP()
+                        return;
                     }
+
+                    successCEP(response);
+                    return;
                 },
-    
+
                 error: function () {
-                    errorMessage()
-                },
+                    exceptionCEP()
+                    return;
+                }
             });
-        });
+        }
     });
-    
+});
 </script>
 @endsection
 
