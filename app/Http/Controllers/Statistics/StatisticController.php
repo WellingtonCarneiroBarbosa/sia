@@ -161,7 +161,7 @@ class StatisticController extends Controller
          * 
          */
         $currentMonthSchedules = $this->getCurrentMonthSchedules();
-        
+       
         foreach($places as $place)
         {
             $appointmentsPerPlace[$place->id] = 0;

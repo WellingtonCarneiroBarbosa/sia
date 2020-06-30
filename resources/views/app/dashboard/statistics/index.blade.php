@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
 <!-- Header -->
 <div class="header bg-primary pb-6">
     <div class="container-fluid">
@@ -14,8 +15,6 @@
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
                     <h6 class="h2 text-white d-inline-block mb-0">{{ __("Statistics") }}</h6>
-
-                   
                 </div>
             </div>
             <!-- fim do header -->
@@ -145,11 +144,9 @@
     data.addColumn('string', 'Local');
     data.addColumn('number', 'Quantidade');
     data.addRows([
-      
       @foreach ($places as $place)
           ['{{ $place->name }}', {{ $appointmentsPerPlace[$place->id] }}],
       @endforeach
-      
     ]);
 
     var options = {
