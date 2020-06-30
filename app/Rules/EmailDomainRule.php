@@ -28,7 +28,7 @@ class EmailDomainRule implements Rule
     {
         $extension = explode("@", $value);
 
-        if($extension[1] != "fiepr.org.br"){
+        if($extension[1] != "sistemafiep.org.br"){
             return false;
         }
 

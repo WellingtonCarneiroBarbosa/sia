@@ -32,7 +32,7 @@ class PasswordRule implements Rule
          * one number     
          * 
          */
-        if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,18}$/", $value)){
+        if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d){8,18}$/", $value)){
             return false;
         }
 

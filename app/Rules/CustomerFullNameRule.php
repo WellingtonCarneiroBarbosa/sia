@@ -26,7 +26,7 @@ class CustomerFullNameRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        if(!preg_match('/^[a-zA-Z]+(?:\s[a-zA-Z]+)+$/', $value)){
+        if(!preg_match('/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$(?:\s[a-zA-Z]+)+$/', $value)){
             return false;
         }
         
