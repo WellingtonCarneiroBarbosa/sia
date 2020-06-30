@@ -178,7 +178,7 @@ class CompleteProfileController extends Controller
         $data = request()->all();
 
         $validator = Validator::make($data, [
-            'password' => ['required', 'confirmed', 'min:8', 'max:18', new PasswordRule()],
+            'password' => ['required', 'confirmed', 'min:8', 'max:18'],
         ]);
       
         if($validator->fails()) {
