@@ -39,8 +39,8 @@ class ScheduleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(){
-        $places         = Place::get();
-        $customers      = Customer::get();
+        $places         = Place::orderBy('name', 'ASC')->get();
+        $customers      = Customer::orderBy('corporation', 'ASC')->get();
 
         $hasPlaces      = hasData($places);
         $hasCustomers   = hasData($customers);
