@@ -301,6 +301,12 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
                 Route::get('/', 'Users\AuthedUserController@showMyProfile')
                                                   ->name('myProfile.index');
 
+                Route::get('/edit', 'Users\AuthedUserController@editProfile')
+                                                     ->name('myProfile.edit');
+
+                Route::put('/edit', 'Users\AuthedUserController@update')
+                                              ->name('myProfile.update');
+
             });
         });
 

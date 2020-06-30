@@ -11,4 +11,14 @@ class AuthedUserController extends Controller
     {
         return view('app.dashboard.my-profile.index');
     }
+
+    public function editProfile()
+    {
+        return view('app.dashboard.my-profile.edit');
+    }
+
+    public function update(Request $request)
+    {
+        //
+    }
 }

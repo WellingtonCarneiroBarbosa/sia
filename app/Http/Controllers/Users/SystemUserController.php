@@ -67,8 +67,8 @@ class SystemUserController extends Controller
         $data = $request->except('_token');
 
         $validator = Validator::make($data, [
-            'name'   => ['required', 'string', 'max:255', new FullNameRule()],
-            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name'   => ['required', 'string', 'max:120'],
+            'email'     => ['required', 'string', 'email', 'max:160', 'unique:users'],
             'role_id' => ['required', new RegisterUserAccessRule()]
         ], $messages);
       
