@@ -24,7 +24,12 @@
                             <td>
                                 <div class="media align-items-center">
 
-                                    <i class="avatar avatar-md rounded-circle mr-3 popover-primary fa fa-user"></i>
+                                    @if($user->profile_image != null)
+                                        <img class="avatar avatar-md rounded-circle mr-3 popover-primary" class="mr-2"  src="{{ url('storage/users/profile_image/'.$user->profile_image) }}">
+                                    @else
+                                        <i class="avatar avatar-md rounded-circle mr-3 popover-primary fa fa-user"></i>
+                                    @endif
+                                    
 
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm">

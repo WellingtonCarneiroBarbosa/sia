@@ -470,7 +470,7 @@
                 /**append notify in container*/
                 $(function(){
                     var message = data.data.message;
-                    $("#javascript-alert-container").prepend("<div class='alert alert-info alert-dismissible fade show' role='alert'><span class='alert-inner--text'><i class='fa fa-info mr-2'></i><strong>Info: </strong>" + message + "</span><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button></div>")
+                    $("#javascript-alert-container").prepend("<div class='alert alert-dark alert-dismissible fade show' role='alert'><span class='alert-inner--text'><i class='fa fa-info mr-2'></i><strong>Info: </strong>" + message + "</span><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button></div>")
                 });
             }
         });

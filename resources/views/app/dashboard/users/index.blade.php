@@ -14,7 +14,6 @@
                     @if(auth()->user()->role_id == 5)
                         <a href="{{ route('users.create') }}" class="btn btn-sm btn-neutral mb-2" id="novo-usuario">{{ __("New") }}</a>
                     @endif
-                    <a href="#" data-toggle="modal" data-target="#modal-filter" id="filtros-usuario" class="btn btn-sm btn-neutral mb-2 mr-2">{{ __("Filters") }}</a>
                 </div>
             </div>
             <!-- fim do header -->
