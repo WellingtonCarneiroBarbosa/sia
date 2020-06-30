@@ -75,10 +75,16 @@ $(document).ready(function ($){
     $("#cpf").mask('000.000.000-00')
     $("#cep").mask('00000-000')
 
+    $submitButton = $("#submit-button");
+
+    if($("#cep").val().length === 9) {
+        $submitButton.prop('disabled', false);
+    }
+
     $loader = $("#pageloader");
     $cepLabel = $("#cep-label");
     $cepMessage = $("#cep-message");
-    $submitButton = $("#submit-button");
+    
 
     $("#cep").keyup(function(){
         if($(this).val().length === 9) {

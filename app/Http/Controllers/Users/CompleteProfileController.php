@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Rules\CPFRule;
+use App\Rules\UniqueCPFRule;
 use App\Rules\PasswordRule;
 use Auth, Lang, Validator, Storage;
 
@@ -55,15 +56,11 @@ class CompleteProfileController extends Controller
         $data['cpf']  = sanitizeString($data['cpf']);
         $data['cep']  = sanitizeString($data['cep']);
 
-        $messages  = [
-            'unique' => Lang::get('This CPF is already registered in the system. If you believe this is a mistake, contact') . " " . config('mail.from.address'),
-        ];
-
         $validator = Validator::make($data, [
-            'cpf'     => ['required', 'unique:users', 'string', 'min:11', 'max:15', new CPFRule()],
+            'cpf'     => ['required', new UniqueCPFRule(), 'string', 'min:11', 'max:15', new CPFRule()],
             'cep'     => ['required', 'string', 'min:8',  'max:9'],
             'complement_number' => ['required', 'string', 'max:8'],
-        ], $messages);
+        ]);
       
         if($validator->fails()) {
             return redirect()
