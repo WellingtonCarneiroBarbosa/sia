@@ -34,10 +34,10 @@
                 <x-input icon="ni ni-single-02" id="name" name="name" :value="auth()->user()->name" :placeholder="__('User Full Name')" :required="true"/>
 
                 {{--  email do usuario --}}
-                <span class="text-sm">Não é possível editar seu e-mail</span>
+                <span class="text-sm">{{ __("Unable to edit your email") }}</span>
                 <x-input icon="ni ni-email-83" id="email" name="email" type="email" :value="auth()->user()->email" disabled :placeholder="__('User Corporative Email')" :required="true"/>
 
-                <span class="text-sm">Não é possível editar seu CPF</span>
+                <span class="text-sm">{{ __("Unable to edit your CPF") }}</span>
                 <x-input icon="ni ni-badge" id="cpf" disabled name="cpf" :value="CPFscore(auth()->user()->cpf)" :required="true"/>
 
                 <label for="cep" id="cep-label">{{ __("CEP") }}:</label>
@@ -48,7 +48,7 @@
                 <x-input id="complement_number" name="complement_number" :value="auth()->user()->complement_number"  :required="true" />
 
                 {{-- Image input --}}
-                <label for="profile_image">Imagem de Perfil</label>
+                <label for="profile_image">{{ __("Profile Image") }}</label>
                 <div class="form-group">
                     <x-input icon="fa fa-image" id="profile_image" name="profile_image" type="file" :required="false" />
                 </div>

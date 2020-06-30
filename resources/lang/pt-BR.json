@@ -493,5 +493,8 @@
     "Avoiding misunderstandings": "Evitando equívocos",
     "Your team will not have to worry about registering duplicate schedules in one place, as the system performs all the necessary validations before allowing any type of registration.": "Seu time não precisará se preocupar em cadastrar agendamentos duplicados em um local, pois o sistema realiza todas as validações necessárias antes de permitir qualquer tipo de cadastro.",
     "Click to edit": "Clique para editar",
-    "Profile Updated": "Perfil Atualizado"
+    "Profile Updated": "Perfil Atualizado",
+    "Unable to edit your email": "Não é possível editar seu e-mail",
+    "Unable to edit your CPF": "Não é possível editar seu CPF",
+    "Profile Image": "Imagem de Perfil"
 }
