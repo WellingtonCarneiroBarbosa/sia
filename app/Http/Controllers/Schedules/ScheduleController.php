@@ -430,9 +430,9 @@ class ScheduleController extends Controller
         $token = Str::random(5);
 
         $temporaryURL = URL::temporarySignedRoute(
-            'schedules.guest', now()->addMinutes(10), ['token' => $token]
+            'schedules.guest', now()->addMinutes(2), ['token' => $token]
         );
 
-        return redirect()->back()->with(['status' => 'Link gerado. Validade: 10 minutos-> ' . $temporaryURL]);
+        return redirect()->back()->with(['status' => 'Link gerado. Validade: 2 minutos-> ' . $temporaryURL]);
     }
 }
