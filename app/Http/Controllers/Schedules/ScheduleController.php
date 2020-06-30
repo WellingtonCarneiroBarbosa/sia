@@ -105,6 +105,7 @@ class ScheduleController extends Controller
             'start'   => ['required', 'date', 'before:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
             'end'     => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],
             'participants' => ['required', 'max:6', 'gte:1'],
+            'details' => ['max:220']
         ], $messages);
       
 
@@ -273,6 +274,7 @@ class ScheduleController extends Controller
             'start'   => ['required', 'date', 'before:end',  config("app.min_schedule_date"), config("app.max_schedule_date")],
             'end'     => ['required', 'date', config("app.min_schedule_date"), config("app.max_schedule_date")],
             'participants' => ['required', 'max:6', 'gte:1'],
+            'details' => ['max:220']
         ], $messages);
       
 
