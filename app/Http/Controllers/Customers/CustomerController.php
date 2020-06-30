@@ -61,7 +61,7 @@ class CustomerController extends Controller
         $validator = Validator::make($data, [
             'corporation'   => ['required', 'string', 'max:120',],
             'cnpj'   => ['required', 'string', 'max:18', new CNPJRule()],
-            'name'   => ['required', 'string', 'max:120', new CustomerFullNameRule()],
+            'name'   => ['required', 'string', 'max:120'],
             'email'   => ['required', 'email', 'max:200',],
             'phone'   => ['required', 'string', 'min:10', 'max:14',],
         ]);

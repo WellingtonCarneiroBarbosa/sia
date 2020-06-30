@@ -119,6 +119,8 @@
             * Provider 
             *
             */
+            
+            return;
             $.ajax({
                 url: 'https://viacep.com.br/ws/' + $cep + '/json/unicode/',
                 dataType: 'json',

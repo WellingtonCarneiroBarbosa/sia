@@ -40,14 +40,9 @@
                 <span class="text-sm">Não é possível editar seu CPF</span>
                 <x-input icon="ni ni-badge" id="cpf" disabled name="cpf" :value="CPFscore(auth()->user()->cpf)" :required="true"/>
 
-                <label for="cep">{{ __("CEP") }}:</label>
+                <label for="cep" id="cep-label">{{ __("CEP") }}:</label>
                 <span id="cep-message" class="text-danger"></span>
                 <x-input icon="ni ni-map-big"  id="cep" name="cep" :value="CEPscore(auth()->user()->cep)" :required="true"/>
-                <div class="float-right">
-                    <button type="button" id="validate" data-toggle="modal" data-target="#modal-action" class="btn btn-sm mb-3 btn-primary mt-0">{{ __("Validate") }}</button>
-                </div>
-
-                <div class="espaco"></div>
 
                 <label for="complement_number">{{ __("Complement Number") }}:</label>
                 <x-input id="complement_number" name="complement_number" :value="auth()->user()->complement_number"  :required="true" />
@@ -103,166 +98,79 @@
 @section('scripts') 
 {{-- Input masks --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-
+<script src="{{ asset('dashboard/assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script>
-    $(document).ready(function ($){
-        $("#cep").mask('00000-000')
-    })
-</script>
 
-{{-- Get User Location By His Cep --}}
-<script>
-    $(document).ready(function (){
-        $submitButton = $("#submit-button");
+$(document).ready(function ($){
+    $("#cep").mask('00000-000')
 
-        $("#cep").keyup(function (){
-            $submitButton.prop('disabled', true);
-        });
-       
+    $loader = $("#pageloader");
+    $cepLabel = $("#cep-label");
+    $cepMessage = $("#cep-message");
+    $submitButton = $("#submit-button");
 
-        $("#cep").focusout(function (){
-            $cepElement = $("#cep");
-            $cepLabel = $("#cep-label");
-            $cepMessage = $("#cep-message");
-            $cep = $cepElement.val();
+    $("#cep").keyup(function(){
+        if($(this).val().length === 9) {
+            var endpoint = "https://viacep.com.br/ws/" + $(this).val() + "/json/unicode/";
 
-            /**
-            * Elements
-            *
-            */
-            $state = $("#state");
-            $city = $("#city");
-            $neighborhood = $("#neighborhood");
-            $address = $("#address");
-            $complementNumber = $("#complement_number");
-            $loader = $("#pageloader");
-
-            function errorMessage(){
+            function exceptionCEP () {
                 $submitButton.prop('disabled', true);
-                $loader.hide();
                 $cepLabel.hide();
                 $cepMessage.html("{{ __('Please, enter a valid CEP') }}")
                 $cepMessage.show();
-                $cepElement.focus();
-            }
-    
-            /**
-            * Get Data By ViaCep
-            * Provider 
-            *
-            */
-            $.ajax({
-                url: 'https://viacep.com.br/ws/' + $cep + '/json/unicode/',
-                dataType: 'json',
-    
-                /**/
-                beforeSend: function () {
-                    $loader.show();
-                },
-    
-                /**/
-                success: function (response) {
-                    $cepMessage.hide();
-                    $cepLabel.show();
-                    $submitButton.prop('disabled', false);
-
-                    if(! response.uf ){
-                        errorMessage()
-                    }else {
-                        $state.val(response.uf);
-                        $city.val(response.localidade);
-                        $neighborhood.val(response.bairro);
-                        $address.val(response.logradouro);
-                        $loader.hide();
-
-                        // Scroll to the modal
-                        window.scrollTo(0, 0);
-
-                        $("#modal-action").modal();
-                    }
-                },
-                
-    
-                error: function () {
-                    errorMessage()
-                },
-            });
-        });
-
-        $("#validate").click(function (){
-            $cepElement = $("#cep");
-            $cepLabel = $("#cep-label");
-            $cepMessage = $("#cep-message");
-            $cep = $cepElement.val();
-
-            /**
-            * Elements
-            *
-            */
-            $state = $("#state");
-            $city = $("#city");
-            $neighborhood = $("#neighborhood");
-            $address = $("#address");
-            $complementNumber = $("#complement_number");
-            $loader = $("#pageloader");
-
-            function errorMessage(){
-                $submitButton.prop('disabled', true);
+                $(this).focus();
                 $loader.hide();
-                $cepLabel.hide();
-                $cepMessage.html("{{ __('Please, enter a valid CEP') }}")
-                $cepMessage.show();
-                $cepElement.focus();
             }
-    
-            /**
-            * Get Data By ViaCep
-            * Provider 
-            *
-            */
+
+            function successCEP (response) {
+                $state = $("#state").val(response.uf);
+                $city = $("#city").val(response.localidade);
+                $neighborhood = $("#neighborhood").val(response.bairro);
+                $address = $("#address").val(response.logradouro);
+                $complementNumber = $("#complement_number");
+
+                $submitButton.prop('disabled', false);
+                $cepLabel.show();
+                $cepMessage.hide()
+
+                // Scroll to the modal
+                window.scrollTo(0, 0);
+
+                $loader.hide();
+
+                $('#modal-action').modal();
+
+                $("#close-modal").click(function (){
+                    $complementNumber.focus();
+                });  
+            }
+
             $.ajax({
-                url: 'https://viacep.com.br/ws/' + $cep + '/json/unicode/',
+                url: endpoint,
                 dataType: 'json',
-    
-                /**/
+
                 beforeSend: function () {
-                    $loader.show();
-                },
-    
-                /**/
+                    $loader.show()
+                }, 
+
                 success: function (response) {
-                    $cepMessage.hide();
-                    $cepLabel.show();
-                    $submitButton.prop('disabled', false);
-
-                    if(! response.uf ){
-                        $loader.hide()
-                        errorMessage()
-                    }else {
-                        $state.val(response.uf);
-                        $city.val(response.localidade);
-                        $neighborhood.val(response.bairro);
-                        $address.val(response.logradouro);
-                        $loader.hide();
-
-                        // Scroll to the modal
-                        window.scrollTo(0, 0);
-                        $("#modal-action").modal();
+                    if(response.erro) {
+                        exceptionCEP()
+                        return;
                     }
-                },
-                
-    
-                error: function () {
-                    $loader.hide()
-                    errorMessage()
-                },
-            });
-        });
 
-        $("#close-modal").click(function (){
-            $complementNumber.focus();
-        });
+                    successCEP(response);
+                    return;
+                },
+
+                error: function () {
+                    exceptionCEP()
+                    return;
+                }
+            });
+        }
     });
-    
+});
 </script>
+
 @endsection

@@ -55868,6 +55868,17 @@ var app = new Vue({
     }
   }
 });
+$("#validate").click(function () {
+  validateCEP();
+});
+
+function validateCEP(cep) {
+  var url = "https://viacep.com.br/ws/" + cep + "/json/unicode/";
+  console.log(url);
+  axios.get(url).then(function (response) {
+    return response;
+  });
+}
 
 /***/ }),
 
@@ -55904,26 +55915,39 @@ try {
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
+ */
+
+/**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
 
 
-Vue.http.withoutInterceptors.push(function (request, next) {
-  //some api's dont like the X-CSFR-token or Pusher token.. remove it..
-  var removeAuthHeaders = request.url.includes("openiban.com");
-  request.headers['Access-Control-Allow-Origin'] = '*';
+/**
+ * Vue.http.interceptors.push(function(request, next) {
 
-  if (removeAuthHeaders) {
-    request.headers["delete"]('Access-Control-Request-Headers');
-    request.headers["delete"]('X-Socket-ID');
-  } else {
-    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
-  }
+    //some api's dont like the X-CSFR-token or Pusher token.. remove it..
+    const removeAuthHeaders = request.url.includes("openiban.com");
 
-  next(function (response) {});
+    request.headers['Access-Control-Allow-Origin'] = '*';
+
+    if (removeAuthHeaders) {
+        request.headers.delete('Access-Control-Request-Headers')
+        request.headers.delete('X-Socket-ID');
+
+    } else {
+        request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+    }
+
+
+
+    next(function(response) {
+
+    });
 });
+ */
+
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',

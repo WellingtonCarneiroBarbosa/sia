@@ -20,8 +20,10 @@ try {
  */
 
 window.axios = require('axios');
-
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+/**
+ */
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -31,7 +33,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import Echo from 'laravel-echo';
 
-Vue.http.withoutInterceptors.push(function(request, next) {
+/**
+ * Vue.http.interceptors.push(function(request, next) {
 
     //some api's dont like the X-CSFR-token or Pusher token.. remove it..
     const removeAuthHeaders = request.url.includes("openiban.com");
@@ -52,6 +55,7 @@ Vue.http.withoutInterceptors.push(function(request, next) {
 
     });
 });
+ */
 
 window.Pusher = require('pusher-js');
 

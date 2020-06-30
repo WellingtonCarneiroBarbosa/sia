@@ -54,8 +54,17 @@ const app = new Vue({
                 console.log(response.data);
             });
         },
-
-
-
     }
 });
+
+$("#validate").click(function() {
+    validateCEP()
+});
+
+function validateCEP(cep) {
+    var url = "https://viacep.com.br/ws/" + cep + "/json/unicode/";
+    console.log(url)
+    axios.get(url).then(response => {
+        return response;
+    });
+}
