@@ -60,7 +60,7 @@ class ScheduleObserver
         $users = NotifyUser::getUsersToNotifyExceptAuthUser();
         Notification::send($users, new ScheduledNotification($schedule));
 
-        $message = $schedule['user'] . " " . Lang::get('registered a new appointment for') . " " . $schedule['start'] . " " . Lang::get('and') . " " . $schedule['end'];
+        $message = $schedule['user'] . " " . Lang::get('registered a new appointment for') . " " . dateTimeBrazilianFormat($schedule['start']) . " " . Lang::get('and') . " " . dateTimeBrazilianFormat($schedule['end']);
         
         $user_id = auth()->user()->id;
         
