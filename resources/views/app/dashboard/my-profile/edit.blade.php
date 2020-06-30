@@ -113,9 +113,9 @@
 {{-- Get User Location By His Cep --}}
 <script>
     $(document).ready(function (){
+        $submitButton = $("#submit-button");
 
         $("#cep").keyup(function (){
-            $submitButton = $("#submit-button");
             $submitButton.prop('disabled', true);
         });
        
@@ -236,6 +236,7 @@
                     $submitButton.prop('disabled', false);
 
                     if(! response.uf ){
+                        $loader.hide()
                         errorMessage()
                     }else {
                         $state.val(response.uf);
@@ -246,13 +247,13 @@
 
                         // Scroll to the modal
                         window.scrollTo(0, 0);
-
                         $("#modal-action").modal();
                     }
                 },
                 
     
                 error: function () {
+                    $loader.hide()
                     errorMessage()
                 },
             });
