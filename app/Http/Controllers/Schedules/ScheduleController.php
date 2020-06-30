@@ -18,6 +18,24 @@ use DateTime;
 
 class ScheduleController extends Controller
 {
+
+    public function getGuestView(Request $request) 
+    {
+        if (! $request->hasValidSignature()) {
+            abort(401);
+        }
+
+        $schedules      = Schedule::orderBy('start', 'ASC')->where('start', '>=', now())
+        ->with('schedulingCustomer')->with('schedulingPlace')->get();
+
+        $hasSchedules = hasData($schedules);
+
+        $schedules = \json_encode($schedules);
+
+        return view('app.guest.schedules', compact('schedules', 'hasSchedules'));
+                          
+    }
+
     /**
      * Get schedule info
      * 
@@ -409,12 +427,12 @@ class ScheduleController extends Controller
     }
 
     public function generateGuestURL(){
-        $token = Str::random(60);
+        $token = Str::random(5);
 
         $temporaryURL = URL::temporarySignedRoute(
-            'schedules.guest', now()->addMinutes(2), ['token' => $token]
+            'schedules.guest', now()->addMinutes(10), ['token' => $token]
         );
 
-        return redirect()->back()->with(['status' => 'URL temporária gerada! Validade: 02 minutos -> ' . $temporaryURL]);
+        return redirect()->back()->with(['status' => 'Link gerado. Validade: 10 minutos-> ' . $temporaryURL]);
     }
 }
