@@ -31,7 +31,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import Echo from 'laravel-echo';
 
-Vue.http.interceptors.push(function(request, next) {
+Vue.http.withoutInterceptors.push(function(request, next) {
 
     //some api's dont like the X-CSFR-token or Pusher token.. remove it..
     const removeAuthHeaders = request.url.includes("openiban.com");

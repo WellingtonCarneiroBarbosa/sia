@@ -55910,7 +55910,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 
-Vue.http.interceptors.push(function (request, next) {
+Vue.http.withoutInterceptors.push(function (request, next) {
   //some api's dont like the X-CSFR-token or Pusher token.. remove it..
   var removeAuthHeaders = request.url.includes("openiban.com");
   request.headers['Access-Control-Allow-Origin'] = '*';
