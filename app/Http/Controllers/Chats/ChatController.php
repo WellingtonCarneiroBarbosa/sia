@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Models\Chats\Message;
 use App\Events\Chat\MessageSent;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class ChatController extends Controller
@@ -43,7 +44,7 @@ class ChatController extends Controller
         $user = Auth::user();
 
         $message = $user->messages()->create([
-            'message' => $request->input('message')
+            'message' => $request['message']
         ]);
 
         broadcast(new MessageSent($user, $message))->toOthers();

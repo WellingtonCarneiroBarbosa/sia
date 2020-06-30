@@ -10,8 +10,6 @@
 
     <script>
         $(document).ready(function () { 
-            $("#pageloader").show();
-
             function formatDate (input) {
                 var datePart = input.match(/\d+/g),
                 year = datePart[0].substring(2), // get only two digits
@@ -107,9 +105,7 @@
             });
 
             calendar.render()
-            
-            $("#pageloader").hide();
-            
+
         });
     </script>
 @endsection

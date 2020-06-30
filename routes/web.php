@@ -462,9 +462,9 @@ Route::group(['middleware' => ['web', 'auth', 'verified', 'completeProfile']], f
          */
         Route::namespace('Chats')->prefix('chat')->name('chat.')->group(function (){
 
-            Route::get('/', 'ChatsController@index');
-            Route::get('messages', 'ChatsController@fetchMessages');
-            Route::post('messages', 'ChatsController@sendMessage');
+            Route::get('/', 'ChatController@index')->name('index');
+            Route::get('messages', 'ChatController@fetchMessages');
+            Route::post('messages', 'ChatController@sendMessage');
 
         });
 

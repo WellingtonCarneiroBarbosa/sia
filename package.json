@@ -27,6 +27,7 @@
         "laravel-echo": "^1.8.0",
         "node": "^14.3.0",
         "pusher-js": "^6.0.3",
-        "timepicker": "^1.13.4"
+        "timepicker": "^1.13.4",
+        "vue-chat-scroll": "^1.4.0"
     }
 }

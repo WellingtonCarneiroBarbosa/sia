@@ -8,6 +8,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VueChatScroll from 'vue-chat-scroll'
+Vue.use(VueChatScroll)
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -30,11 +33,19 @@ const app = new Vue({
 
     created() {
         this.fetchMessages();
+        Echo.private('chat-channel')
+            .listen('.message-sent', (e) => {
+                console.log(e)
+                this.messages.push({
+                    message: e.message.message,
+                    user: e.user
+                });
+            });
     },
 
     methods: {
         fetchMessages() {
-            axios.get('/messages').then(response => {
+            axios.get('/dash/chat/messages').then(response => {
                 this.messages = response.data;
             });
         },
@@ -42,17 +53,12 @@ const app = new Vue({
         addMessage(message) {
             this.messages.push(message);
 
-            axios.post('/messages', message).then(response => {
+            axios.post('/dash/chat/messages', message).then(response => {
                 console.log(response.data);
             });
-        }
+        },
+
+
+
     }
 });
-
-Echo.private('chat')
-    .listen('MessageSent', (e) => {
-        this.messages.push({
-            message: e.message.message,
-            user: e.user
-        });
-    });
