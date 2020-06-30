@@ -70,7 +70,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 <script src="{{ asset('dashboard/assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script>
-
 $(document).ready(function ($){
     $("#cpf").mask('000.000.000-00')
     $("#cep").mask('00000-000')
@@ -80,7 +79,7 @@ $(document).ready(function ($){
     $cepLabel = $("#cep-label");
     $cepMessage = $("#cep-message");
     
-    
+
     function getCep(cep) {
         var endpoint = "https://viacep.com.br/ws/" + cep + "/json/unicode/";
 
