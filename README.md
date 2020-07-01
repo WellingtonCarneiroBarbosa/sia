@@ -1,6 +1,3 @@
-<script>
-  alert('hello');
-</script>
 # Sistema Interno de Agendamento de Eventos
 Um projeto desenvolvido com _Laravel, Vue, Bootstrap e Jquery_
 <br>
