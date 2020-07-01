@@ -71,6 +71,7 @@
 
                                         
                             <div class="float-right">
+                                <br>
                                 <a class="btn btn-sm btn-primary" id="showPasswords" href="#">
                                     <span class="text-white"><i class="fa fa-eye mr-2"></i> {{ __("Show Passwords") }}</span>
                                 </a>
