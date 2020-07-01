@@ -27,16 +27,30 @@ class PasswordRule implements Rule
     public function passes($attribute, $value)
     {
         /**
+         * not allowed passwords
+         */
+        $notAllowedPasswords = [
+            '12345678', 'password'
+        ];
+
+        if (\in_array($value, $notAllowedPasswords)) {
+            return false; 
+        }
+
+        return true;
+
+        /**
          * Minimum of eight characters, at least one
          * uppercase letter, one lowercase letter and
          * one number     
          * 
-         */
+        
         if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d){8,18}$/", $value)){
             return false;
         }
 
         return true;
+         */
     }
 
     /**
@@ -46,6 +60,6 @@ class PasswordRule implements Rule
      */
     public function message()
     {
-        return Lang::get('Your password must contain lowercase and uppercase characters and numbers');
+        return Lang::get('Sorry, for security, this password is not allowed.');
     }
 }
