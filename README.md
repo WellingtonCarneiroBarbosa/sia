@@ -13,9 +13,11 @@ Para obter um login de testes entre em contato com **carneirobarbosawellington@g
 ```
 git clone https://github.com/WellingtonCarneiroBarbosa/sia
 ```
-2. Instale as dependências necessárias (você deve possuir o composer)
+2. Instale as dependências necessárias (você deve possuir o composer e npm)
 ```
 composer install
+npm install
+npm run dev
 ```
 3. Na pasta do projeto, clone o arquivo **_.env.exemple_** e renomeie para **.env**. Então, atualize com suas variáveis de ambiente. Após, crie um banco de dados com o nome configurado no **_.env_**.
 Então, gere a chave da aplicação e publique as alterações
