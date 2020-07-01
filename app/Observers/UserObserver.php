@@ -49,14 +49,17 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        $log     =
-        [
-            'user_id'        => $user->id,
-            'user_action_id' => auth()->user()->id,
-            'action'         => '2'
-        ];
+        /**Impede que o método seja utilizado caso a coluna password seja alterada */
+        if(! $schedule->isDirty($schedule->getPasswordColumn()) && count($schedule->getDirty()) != 1){
+            $log     =
+            [
+                'user_id'        => $user->id,
+                'user_action_id' => auth()->user()->id,
+                'action'         => '2'
+            ];
 
-        UserLog::create($log);
+            UserLog::create($log);
+        }
     }
 
     /**
