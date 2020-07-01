@@ -50,7 +50,7 @@ class UserObserver
     public function updated(User $user)
     {
         /**Impede que o método seja utilizado caso a coluna password seja alterada */
-        if(! $schedule->isDirty($schedule->getPasswordColumn()) && count($schedule->getDirty()) != 1){
+        if(! $user->isDirty($user->getPasswordColumn()) && count($user->getDirty()) != 1){
             $log     =
             [
                 'user_id'        => $user->id,
