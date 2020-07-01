@@ -65,7 +65,7 @@
                                 </div>
 
                                 <!-- confirmar nova senha -->
-                                <input id="password-confirm" title="{{ __("Fill this field") }}" placeholder="{{ __('Confirm Password') }}" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="confirm-password" title="{{ __("Fill this field") }}" placeholder="{{ __('Confirm Password') }}" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
 
                             </div>
 
