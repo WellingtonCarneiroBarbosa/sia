@@ -27,7 +27,16 @@ php artisan config:cache
 ```
 php artisan migrate
 ```
-5. Inicialize um servidor local
+5. Gere dados padrões para o banco de dados
+```
+php artisan db:seed
+```
+O login padrão para administrador é admin@example.org 
+Para usuário é user@example.org 
+
+Para ambos, a senha é password
+
+6. Inicialize um servidor local
 ```
 php artisan serve
 ```
