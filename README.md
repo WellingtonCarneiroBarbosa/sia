@@ -31,9 +31,10 @@ php artisan migrate
 ```
 php artisan db:seed
 ```
-O login padrão para administrador é admin@example.org 
+O login padrão para administrador é admin@example.org
+<br>
 Para usuário é user@example.org 
-
+<br>
 Para ambos, a senha é password
 
 6. Inicialize um servidor local
