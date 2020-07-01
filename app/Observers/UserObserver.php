@@ -40,7 +40,7 @@ class UserObserver
         UserLog::create($log);
 
     }
-
+   
     /**
      * Handle the user "updated" event.
      *
@@ -49,8 +49,7 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        /**Impede que o método seja utilizado caso a coluna password seja alterada */
-        if(! $user->isDirty($user->getAuthPassword())){
+        if(! $user->isDirty('password')){
             $log     =
             [
                 'user_id'        => $user->id,
