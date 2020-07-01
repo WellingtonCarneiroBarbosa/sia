@@ -69,8 +69,12 @@
 
                             </div>
 
-                            <a href="#!" class="float-right text-sm"  id="visualizarSenhas">{{ __("Show Passwords") }}</a>
-                            <label class="float-right" id="contadorPassword"></label>
+                                        
+                            <div class="float-right">
+                                <a class="btn btn-sm btn-primary" id="showPasswords" href="#">
+                                    <span class="text-white"><i class="fa fa-eye mr-2"></i> {{ __("Show Passwords") }}</span>
+                                </a>
+                            </div>
 
                         </div>
 
@@ -94,6 +98,28 @@
     </div>
 </section>
 
-<script src="{{asset('js/password/validate.min.js')}}"></script>
+@endsection
 
+
+@section('scripts')
+<script>
+    $(document).ready(function (){
+        $password = $("#password");
+        $confirmPassword = $("#confirm-password");
+
+        $showPasswords = $("#showPasswords");
+
+        $showPasswords.click(function (){
+            $type = $password.attr('type');
+
+            if($type == "password"){
+                $password.attr('type', 'text');
+                $confirmPassword.attr('type', 'text');
+            }else{
+                $password.attr('type', 'password');
+                $confirmPassword.attr('type', 'password');
+            }
+        });
+    });
+</script>
 @endsection
